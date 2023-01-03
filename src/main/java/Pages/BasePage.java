@@ -57,6 +57,12 @@ public class BasePage extends HelperFunctions {
 	@FindBy(xpath="//span[@class='ap-icon icon-enter-left-outline']")
 	private static WebElement expandButton;
 	
+	@FindBy(tagName="img")
+	private static List<WebElement> productsListImages;
+	
+	@FindBy(tagName="a")
+	private static List<WebElement> alltags;
+	
 	
 	
 	
@@ -138,7 +144,36 @@ public static void setCollapseButton() {
 	
 }
 
+public static void setAllImages()  {
+	
+	int brokenImages=0;
+	System.out.println(productsListImages.size());
+	 for (WebElement ele : productsListImages) {
+		
+		 
+		 String attr = ele.getAttribute("src");
+		    if (attr == null){
+		    	brokenImages++;
+		    	System.out.println("The number of broken images : "+brokenImages);
+		        System.out.println("Attribute does not exist");
+		        Assert.assertTrue(false);
+		    }
+
+		    else if (attr.equals("")){
+		        System.out.println("Attribute is empty string");
+		    }
+	 }}
+/*public static void setfooter()  {
+	String expectedFooterText="© 2022 PwC. All rights reserved. PwC refers to the US member firm of the PwC network or one of its subsidiaries or affiliates.";
+for(int i=0; i<alltags.size(); i++) {
+	System.out.println(alltags.get(i).getAttribute("href"));
+	System.out.println(alltags.get(i).getText());
+	alltags.get(i).click();
+	
+}
+
 
 	
 
+}*/
 }

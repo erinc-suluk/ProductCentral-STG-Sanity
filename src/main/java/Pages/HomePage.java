@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import org.apache.log4j.Logger;
 
 
 import org.openqa.selenium.JavascriptExecutor;
@@ -146,7 +147,7 @@ public class HomePage extends HelperFunctions {
 	
 
 	
-	//static Logger logger=Logger.getLogger("HomePage");
+	static Logger logger=Logger.getLogger("HomePage");
 	
 	
 	
@@ -156,7 +157,7 @@ public class HomePage extends HelperFunctions {
           if (image) {
 	         Assert.assertTrue(true);
 	      } else {
-	         //logger.error("The promotion banner does not contain an image");
+	         logger.error("The promotion banner does not contain an image");
 	      }
 		
 	}
@@ -173,7 +174,7 @@ public class HomePage extends HelperFunctions {
 		if(promotionBanner.isDisplayed()) {
 			 Assert.assertTrue(true);
 	      } else {
-	        // logger.error("The promotion banner is not visible to all users on homepage");
+	        logger.error("The promotion banner is not visible to all users on homepage");
 	      }
 		
 	}
