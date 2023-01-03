@@ -379,37 +379,8 @@ for(WebElement eachporttag: portfolioTags) {
     	
     	
     }
-    public void setDate() {
-    	sites.click();
-    	productcentral.click();
-    	us.click();
-    	en.click();
-    	HelperFunctions.staticWait(5);
-    	for(WebElement eachlink:contentOptions) {
-    		System.out.println(eachlink.getText());
-    	}
+  
     	
-    	
-    
-    
-    }
-    
-    public void setDate2() {
-    	sites.click();
-    	productcentral.click();
-    	us.click();
-    	en.click();
-    	HelperFunctions.staticWait(5);
-    	for(WebElement element: contentOptions2) {
-    		System.out.println(element.getText());
-    	}
-    }
-    	
-    	
-    
-    
-    
-    
     
     public void setCombination() {
     	sites.click();

@@ -1,13 +1,22 @@
 package Pages;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -136,6 +145,34 @@ public class ProductPage extends HelperFunctions {
 	
 	@FindBy(xpath="//a[@href='/content/dam/productcentral/en_us/products/product-4/myproducts/sample7.jpg.coredownload.inline.jpg']")
 	private WebElement resource3forProduct4;
+	
+	@FindBy(xpath="((//div[@class='cmp-for-you__tiles'])/a)[position()=1 or position()=2 or position()=3 or position()=4 or position()=5]")
+	private static List<WebElement> first5Assets;
+	
+	@FindBy(xpath="((//div[@class='cmp-for-you__tiles'])/a)[position()=6 or position()=7 or position()=8 or position()=9 or position()=10]")
+	private static List<WebElement> last5Assets;
+	
+	@FindBy(xpath="//div[@class='cmp-my-products-tile__text']")
+	private static List<WebElement> titleofAssets;
+	
+	@FindBy(xpath="//div[@class='cmp-for-you__txt']")
+	private WebElement forYouTitle;
+	
+	@FindBy(xpath="(//span[@class='cmp-tabs__tab-text'])[1]")
+	private WebElement product2Title;
+	
+	@FindBy(xpath="(//span[@class='cmp-tabs__tab-text'])[2]")
+	private WebElement product4Title;
+	
+	@FindBy(xpath="//a[@href='/content/pc/us/en/my-products.html']")
+	private WebElement myProductOnLeftNavigation;
+	
+	@FindBy(xpath="//div[@class='cmp-hero-promotion']")
+	private WebElement heroPromotion;
+	
+	
+	
+	
 	
 	
 	
@@ -409,6 +446,217 @@ public void setNotSupportMultiSelect() {
 		}
 	   
 }
+
+public void setLoadMoreButton() {
+	HelperFunctions.waitForPageToLoad(3);
+	product2.click();
+	HelperFunctions.waitForPageToLoad(3);
+	JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
+    js.executeScript("arguments[0].scrollIntoView(true);", viewMoreButton);
+      JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
+      executor.executeScript("arguments[0].click();", viewMoreButton);
+      if(viewLessButton.isDisplayed()) {
+      	for(WebElement eachAsset: first5Assets) {
+      		if(eachAsset.isDisplayed()) {
+      			Assert.assertTrue(true);
+      		}else {
+      	      	Assert.assertTrue(false);
+            }
+      	}
+      	for(WebElement eachAsset2:last5Assets) {
+      		if(eachAsset2.isDisplayed()) {
+      			Assert.assertTrue(true);
+      		}
+      	}
+      }else {
+      	Assert.assertTrue(false);
+      }
+	
+	
+}
+
+public void setClickLoadMoreButton() {
+	HelperFunctions.waitForPageToLoad(3);
+	product2.click();
+	HelperFunctions.waitForPageToLoad(3);
+	JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
+    js.executeScript("arguments[0].scrollIntoView(true);", viewMoreButton);
+      JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
+      executor.executeScript("arguments[0].click();", viewMoreButton);
+      
+      	
+      	for(WebElement eachAsset2:last5Assets) {
+      		if(eachAsset2.isDisplayed() && viewLessButton.isDisplayed()) {
+      			Assert.assertTrue(true);
+      		}else {
+      			Assert.assertTrue(false);
+      		}
+      	}
+      
+	
+	
+}
+
+public void setClickLoadLessButton() {
+	HelperFunctions.waitForPageToLoad(3);
+	product2.click();
+	HelperFunctions.waitForPageToLoad(3);
+	JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
+    js.executeScript("arguments[0].scrollIntoView(true);", viewMoreButton);
+      JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
+      executor.executeScript("arguments[0].click();", viewMoreButton);
+      
+      	
+      if(viewLessButton.isDisplayed()) {
+        	for(WebElement eachAsset: first5Assets) {
+        		if(eachAsset.isDisplayed()) {
+        			Assert.assertTrue(true);
+        		}else {
+        	      	Assert.assertTrue(false);
+              }
+        	}
+        	for(WebElement eachAsset2:last5Assets) {
+        		if(eachAsset2.isDisplayed()) {
+        			Assert.assertTrue(true);
+        		}
+        	}
+        }else {
+        	Assert.assertTrue(false);
+        }
+      
+      JavascriptExecutor executor2 = (JavascriptExecutor) Driver.getDriver();
+      executor2.executeScript("arguments[0].click();", viewLessButton);
+      
+      if(viewMoreButton.isDisplayed()) {
+      	for(WebElement eachAsset: first5Assets) {
+      		if(eachAsset.isDisplayed()) {
+      			Assert.assertTrue(true);
+      		}else {
+      	      	Assert.assertTrue(false);
+            }
+      	}
+      	for(WebElement eachAsset2:last5Assets) {
+      		if(!eachAsset2.isDisplayed()) {
+      			Assert.assertTrue(true);
+      		}
+      	}
+      }else {
+      	Assert.assertTrue(false);
+      }
+  	
+      
+	
+	
+}
+
+public void setTitleOfAssets() {
+	HelperFunctions.waitForPageToLoad(3);
+	product2.click();
+	HelperFunctions.waitForPageToLoad(3);
+	JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
+    js.executeScript("arguments[0].scrollIntoView(true);", forYouTitle);
+    int hasMoreThan3Line=0;
+    System.out.println(titleofAssets.size());
+	for(WebElement eachTitleOfAssets: titleofAssets) {
+		System.out.println(eachTitleOfAssets.getCssValue("-webkit-line-clamp"));
+		if(eachTitleOfAssets.getCssValue("-webkit-line-clamp").equals("3")) {
+			Assert.assertTrue(true);
+		}else {
+			hasMoreThan3Line++;
+			System.out.println(hasMoreThan3Line);
+			Assert.assertTrue(false);
+//			logger.error("The description is more than 6 lines");
+			
+		}
+	}
+}
+
+public void setActiveTab() {
+	HelperFunctions.waitForPageToLoad(3);
+	String s = product2Title.getCssValue("color");
+    System.out.println("Color is :" + s);
+    String s2 = product4Title.getCssValue("color");
+    System.out.println("Color is :" + s2);
+    if(s.equals("rgba(70, 70, 70, 0.7)") && s2.equals("rgba(65, 83, 133, 1)") ) {
+    	Assert.assertTrue(true);
+    }else {
+    	Assert.assertTrue(false);
+    }
+    HelperFunctions.staticWait(3);
+    product2.click();
+    HelperFunctions.staticWait(3);
+    String s3 = product2Title.getCssValue("color");
+    System.out.println("Color is :" + s3);
+    String s4 = product4Title.getCssValue("color");
+    System.out.println("Color is :" + s4);
+       
+    if(s3.equals("rgba(65, 83, 133, 1)") && s4.equals("rgba(70, 70, 70, 0.7)") ) {
+    	Assert.assertTrue(true);
+    }else {
+    	Assert.assertTrue(false);
+    }
+    
+
+}
+
+public void setFirstTabActive() {
+	HelperFunctions.waitForPageToLoad(3);
+	myProductOnLeftNavigation.click();
+	HelperFunctions.waitForPageToLoad(3);
+    String s3 = product2Title.getCssValue("color");
+    System.out.println("Color is :" + s3);
+    String s4 = product4Title.getCssValue("color");
+    System.out.println("Color is :" + s4);
+       
+    if(s3.equals("rgba(65, 83, 133, 1)") && s4.equals("rgba(70, 70, 70, 0.7)") ) {
+    	Assert.assertTrue(true);
+    }else {
+    	Assert.assertTrue(false);
+    }
+    
+
+}
+
+public void setHeroPromotion() {
+	HelperFunctions.waitForPageToLoad(3);
+	 String attr = heroPromotion.getAttribute("src");
+	    if (attr == null){
+	        System.out.println("Hero promotion is not clickable");
+	        Assert.assertTrue(true);
+	    }
+
+	    else {
+	    	System.out.println("Hero promotion is clickable");
+	    	Assert.assertTrue(false);
+	    }
+	
+
+    
+
+
+
+	
+	
+}
+
+
+
+	
+	
+	
+	
+	
+	
+	
+
+ 
+	
+	
+
+	
+	
+	
+
 	
 	
 	

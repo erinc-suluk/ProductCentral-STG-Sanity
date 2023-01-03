@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 
 
 import com.pwc.productcentral.HelperFunctions;
-
+import com.pwc.productcentral.ReadXLSdata;
 import com.pwc.productcentral.Driver;
 
 
@@ -46,12 +46,13 @@ public class LoginPageObjects extends HelperFunctions{
 	@FindBy(xpath="//div[@data-href='/content/pc/us/en/my-products/product-4.html']")
 	private WebElement loginLink2;
 	
+	ReadXLSdata read1=new ReadXLSdata();
 	
-	
-	public void setLogin() {
-		email.sendKeys("erincbaser@gmail.com");
+	public void setLogin() throws Exception {
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		email.sendKeys(read1.getCellData("DATA", 1));
 		next.click();
-		pass.sendKeys("Ege123/.");
+		pass.sendKeys(read1.getCellData("VALUE", 1));
 		submit.click();
 	    HelperFunctions.staticWait(5);
 	    JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
