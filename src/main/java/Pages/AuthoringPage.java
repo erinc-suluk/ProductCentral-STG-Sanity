@@ -323,6 +323,44 @@ public class AuthoringPage extends HelperFunctions {
 	@FindBy(xpath="//div[@title='Cloud']")
 	private WebElement cloudPackage;
 	
+	@FindBy(xpath="//img[@src='/content/pc/us/en/automation/reseller-demo.thumb.48.48.png?ck=']")
+	private WebElement resellerdemoImage;
+	
+	@FindBy(xpath="//coral-icon[@icon='globeClock']")
+	private WebElement managePublication;
+	
+	@FindBy(xpath="//button[@icon='globeStrike']")
+	private WebElement unpublish;
+	
+	@FindBy(xpath="//img[@src='/content/pc/us/en/automation/reseller-demo.thumb.48.48.png?ck=1667482422000']")
+	private WebElement resellerdemoImageforUnpublish;
+	
+	@FindBy(xpath="//button[@type='submit']")
+	private WebElement unpublishButton;
+	
+	@FindBy(xpath="//button[@variant='warning']")
+	private WebElement continueButton;
+	
+	@FindBy(xpath="//coral-columnview-preview-content[@role='presentation']")
+	private static List<WebElement> publishInformation;
+	
+	@FindBy(xpath="//div[@title='Reseller Demo']")
+	private WebElement resellerDemo;
+	
+	@FindBy(xpath="//img[@src='/content/pc/us/en/automation/reseller-demo/check-in.thumb.48.48.png?ck=']")
+	private WebElement checkinImg;
+	
+	@FindBy(xpath="//button[@trackingelement='quick publish']")
+	private WebElement quickPublish2;
+	
+	@FindBy(xpath="//button[@class='coral3-Button coral3-Button--primary']")
+	private WebElement publish2;
+	
+	@FindBy(xpath="//img[@src='/content/pc/us/en/automation/reseller-demo/microsoft-alliance.thumb.48.48.png?ck=']")
+	private WebElement microsoftImg;
+	
+	@FindBy(xpath="//img[@src='/content/pc/us/en/automation/reseller-demo/dragos-alliance.thumb.48.48.png?ck=']")
+	private WebElement dragosImg;
 	
 	
 	
@@ -1041,6 +1079,125 @@ js.executeScript("window.open()");
 	 
 	 
 	 
+ }
+ public void setUnpublishWorkflow() throws Exception {
+ 	
+ 	read1.setExcelFile("./testdata.xlsx", "QA");
+		email.sendKeys(read1.getCellData("DATA", 1));
+		next.click();
+		pass.sendKeys(read1.getCellData("VALUE", 1));
+		submit.click();
+	    HelperFunctions.staticWait(5);
+	    JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
+     js.executeScript("window.open()");
+	    ArrayList<String> tabs = new ArrayList<String>(Driver.getDriver().getWindowHandles());
+	    Driver.getDriver().switchTo().window(tabs.get(1));
+	    Driver.getDriver().get(read1.getCellData("VALUE", 17));
+	    HelperFunctions.waitForPageToLoad(5);
+	    resellerdemoImage.click();
+	    JavascriptExecutor executor4 = (JavascriptExecutor) Driver.getDriver();
+        executor4.executeScript("arguments[0].click();", resellerdemoImage);
+	    HelperFunctions.staticWait(3);
+	    JavascriptExecutor executor5 = (JavascriptExecutor) Driver.getDriver();
+        executor5.executeScript("arguments[0].click();", resellerdemoImage);
+	    managePublication.click();
+	    HelperFunctions.waitForPageToLoad(5);
+	    unpublish.click();
+	    HelperFunctions.waitForPageToLoad(5);
+	    nextButton.click();
+	    HelperFunctions.waitForPageToLoad(5);
+	    JavascriptExecutor executor6 = (JavascriptExecutor) Driver.getDriver();
+        executor6.executeScript("arguments[0].click();", resellerdemoImageforUnpublish);
+	    unpublishButton.click();
+	    HelperFunctions.staticWait(3);
+	    continueButton.click();
+	    JavascriptExecutor js2 = ((JavascriptExecutor) Driver.getDriver());
+	     js2.executeScript("window.open()");
+		    ArrayList<String> tabs2 = new ArrayList<String>(Driver.getDriver().getWindowHandles());
+		    Driver.getDriver().switchTo().window(tabs2.get(1));
+		    Driver.getDriver().get(read1.getCellData("VALUE", 17));
+		    HelperFunctions.waitForPageToLoad(5);
+	    JavascriptExecutor executor7 = (JavascriptExecutor) Driver.getDriver();
+        executor7.executeScript("arguments[0].click();", resellerdemoImage);
+        HelperFunctions.staticWait(3);
+        for(WebElement eachInfo: publishInformation) {
+        	System.out.println(eachInfo.getText());
+        	if(eachInfo.getText().contains("Not published")) {
+        		Assert.assertTrue(true);
+        	}else {
+        		Assert.assertTrue(false);
+        	}
+        }
+        JavascriptExecutor executor8 = (JavascriptExecutor) Driver.getDriver();
+        executor8.executeScript("arguments[0].click();", resellerdemoImage);
+        resellerDemo.click();
+        HelperFunctions.staticWait(3);
+        JavascriptExecutor executor9 = (JavascriptExecutor) Driver.getDriver();
+        executor9.executeScript("arguments[0].click();", checkinImg);
+        HelperFunctions.staticWait(3);
+        for(WebElement eachInfo: publishInformation) {
+        	System.out.println(eachInfo.getText());
+        	if(eachInfo.getText().contains("Not published")) {
+        		Assert.assertTrue(true);
+        	}else {
+        		Assert.assertTrue(false);
+        	}
+        }
+        
+        HelperFunctions.staticWait(3);
+        quickPublish2.click();
+        publish2.click();
+        JavascriptExecutor executor10 = (JavascriptExecutor) Driver.getDriver();
+        executor10.executeScript("arguments[0].click();", checkinImg);
+        HelperFunctions.staticWait(3);
+        JavascriptExecutor executor11 = (JavascriptExecutor) Driver.getDriver();
+        executor11.executeScript("arguments[0].click();", microsoftImg);
+        JavascriptExecutor executor12 = (JavascriptExecutor) Driver.getDriver();
+        executor12.executeScript("arguments[0].click();", microsoftImg);
+        JavascriptExecutor executor13 = (JavascriptExecutor) Driver.getDriver();
+        executor13.executeScript("arguments[0].click();", microsoftImg);
+        HelperFunctions.staticWait(3);
+        quickPublish2.click();
+        HelperFunctions.staticWait(3);
+        publish2.click();
+        JavascriptExecutor executor14 = (JavascriptExecutor) Driver.getDriver();
+        executor14.executeScript("arguments[0].click();", microsoftImg);
+        HelperFunctions.staticWait(3);
+        JavascriptExecutor executor15 = (JavascriptExecutor) Driver.getDriver();
+        executor15.executeScript("arguments[0].click();", dragosImg);
+        JavascriptExecutor executor16 = (JavascriptExecutor) Driver.getDriver();
+        executor16.executeScript("arguments[0].click();", dragosImg);
+        JavascriptExecutor executor17 = (JavascriptExecutor) Driver.getDriver();
+        executor17.executeScript("arguments[0].click();", dragosImg);
+        HelperFunctions.staticWait(3);
+        quickPublish2.click();
+        HelperFunctions.staticWait(3);
+        publish2.click();
+        JavascriptExecutor executor18 = (JavascriptExecutor) Driver.getDriver();
+        executor18.executeScript("arguments[0].click();", dragosImg);
+        HelperFunctions.staticWait(3);
+        JavascriptExecutor executor19 = (JavascriptExecutor) Driver.getDriver();
+        executor19.executeScript("arguments[0].click();", resellerdemoImage);
+        JavascriptExecutor executor20 = (JavascriptExecutor) Driver.getDriver();
+        executor20.executeScript("arguments[0].click();", resellerdemoImage);
+        JavascriptExecutor executor21 = (JavascriptExecutor) Driver.getDriver();
+        executor21.executeScript("arguments[0].click();", resellerdemoImage);
+        HelperFunctions.staticWait(3);
+        quickPublish2.click();
+        HelperFunctions.staticWait(3);
+        publish2.click();
+        HelperFunctions.staticWait(3);
+        for(WebElement eachInfo: publishInformation) {
+        	System.out.println(eachInfo.getText());
+        	if(!eachInfo.getText().contains("Not published")) {
+        		Assert.assertTrue(true);
+        	}else {
+        		Assert.assertTrue(false);
+        	}
+        }
+        
+	    
+	    
  }
     
     

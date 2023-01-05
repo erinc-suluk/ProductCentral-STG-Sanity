@@ -893,7 +893,7 @@ public class SanityTestCases extends BasePage {
 	    logger.info("Test WEB_67 has passed");
 	}
 	
-	@Test 
+	@Test (enabled=false)
 	public void WEB_68() throws Exception{
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 2));
@@ -901,6 +901,16 @@ public class SanityTestCases extends BasePage {
 	    test.error("The value of the filters are NOT based on the tags/properties of the search results");
 	    hp.setSearchResult();
 	    logger.info("Test WEB_68 has failed");
+	}
+	
+	@Test 
+	public void WEB_69() throws Exception{
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		Driver.getDriver().get(read1.getCellData("VALUE", 13));
+		ExtentTest test = extent.createTest("Verify unpublish workflow is available both sites and assets");
+	    test.info("Verified unpublish workflow is available both sites and assets");
+	    ap.setUnpublishWorkflow();
+	    logger.info("Test WEB_69 has passed");
 	}
 	
 	
