@@ -176,4 +176,21 @@ for(int i=0; i<alltags.size(); i++) {
 	
 
 }*/
+public static void setLeft() {
+	System.out.println("No of links are "+ alltags.size());  
+    
+	//checking the links fetched.
+	for(int i=0;i<alltags.size();i++)
+	{
+	    WebElement E1= alltags.get(i);
+	    String url= E1.getAttribute("href");
+	    if(url!=null) {
+	    	System.out.println(url); 
+	    	
+	    }
+	    
+	  
+	}
+}
+
 }

@@ -15,8 +15,8 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
+import Pages.AuthoringPage;
 import Pages.BasePage;
-import Pages.ChangeNavigatorPage;
 import Pages.HomePage;
 import Pages.HomePageTemplatePage;
 import Pages.LegalPage;
@@ -36,13 +36,13 @@ public class SanityTestCases extends BasePage {
 	String platform = null;
 	LoginPageObjects lpo=new LoginPageObjects();
 	HomePage hp=new HomePage();
-	ChangeNavigatorPage cnp=new ChangeNavigatorPage();
 	ProductListingPage plp=new ProductListingPage();
 	HomePageTemplatePage hpt=new HomePageTemplatePage();
 	ResellerPage rp=new ResellerPage();
 	LegalPage lp=new LegalPage();
 	SecurityPage sp=new SecurityPage();
 	ProductPage pp=new ProductPage();
+	AuthoringPage ap=new AuthoringPage();
 	
 	
 	Logger logger=Logger.getLogger("SanityTestCases");
@@ -412,13 +412,11 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_28() throws Exception{
-		   Driver.getDriver().get(ConfigurationsReader.getProperties("URL"));
-		   ExtentTest test = extent.createTest("Verify the doc categories will be based on Taxonomy document");
-	       test.info("Verified the doc categories will be based on Taxonomy document");
-	       lpo.setUsername(ConfigurationsReader.getProperties("authorUsername"));
-		   lpo.setPassword(ConfigurationsReader.getProperties("authorPass"));
-		   lpo.setSignInButton();
-		   cnp.setDocCategory();
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		Driver.getDriver().get(read1.getCellData("VALUE", 13));
+	    ExtentTest test = extent.createTest("Verify the doc categories will be based on Taxonomy document");
+	    test.info("Verified the doc categories will be based on Taxonomy document");
+		ap.setDocCategory();
 	}
 	
 	@Test (enabled=false)
@@ -636,15 +634,14 @@ public class SanityTestCases extends BasePage {
 	    logger.info("Test WEB_47 has passed");
 	}
 	
-	@Test (enabled=false)// login to my product button is not displayed in QA publisher environment
+	@Test (enabled=false)
 	public void WEB_48() throws Exception{
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify if the user is already logged in don't display 'log in to my products' link");
 	    test.info("Verified if the user is already logged in don't display 'log in to my products' link");
-	    lpo.setLogin();
-	    
-	    //logger.info("Test WEB_48 has passed");
+	    ap.setDisplayingLogintomyProductLink();
+	    logger.info("Test WEB_48 has passed");
 	}
 	
 	@Test (enabled=false)
@@ -659,14 +656,12 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_50() throws Exception{
-		 Driver.getDriver().get(ConfigurationsReader.getProperties("URL"));
-		   ExtentTest test = extent.createTest("Verify the hyperlinks in the component will be populated by the system(both title & URL)");
-	       test.info("Verified the hyperlinks in the component will be populated by the system(both title & URL)");
-	       lpo.setUsername(ConfigurationsReader.getProperties("authorUsername"));
-		   lpo.setPassword(ConfigurationsReader.getProperties("authorPass"));
-		   lpo.setSignInButton();
-		   cnp.setHyperlinks();
-		   logger.info("Test WEB_50 has passed");
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		Driver.getDriver().get(read1.getCellData("VALUE", 13));
+		ExtentTest test = extent.createTest("Verify the hyperlinks in the component will be populated by the system(both title & URL)");
+	    test.info("Verified the hyperlinks in the component will be populated by the system(both title & URL)");
+		ap.setHyperlinks();
+		logger.info("Test WEB_50 has passed");
 	}
 	
 	@Test(enabled=false)
@@ -825,8 +820,94 @@ public class SanityTestCases extends BasePage {
 	    test.info("Verified an image can be an image pattern");
 	    lpo.setLogin();
 	    BasePage.setAllImages();
-	    logger.info("Test WEB_59 has passed");
+	    logger.info("Test WEB_60 has passed");
 	}
+	
+	@Test (enabled=false)
+	public void WEB_61() throws Exception{
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		Driver.getDriver().get(read1.getCellData("VALUE", 13));
+		ExtentTest test = extent.createTest("Verify author is able to author the site map will all the links");
+	    test.info("Verified author is able to author the site map will all the links");
+	    ap.setSitemap();
+	    logger.info("Test WEB_61 has passed");
+	}
+	
+	@Test (enabled=false)
+	public void WEB_62() throws Exception{
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		Driver.getDriver().get(read1.getCellData("VALUE", 13));
+		ExtentTest test = extent.createTest("Verify author is able to hide pages from displaying within the site map");
+	    test.info("Verified author is able to hide pages from displaying within the site map");
+	    ap.setHideSitemap();
+	    logger.info("Test WEB_62 has passed");
+	}
+	
+	@Test (enabled=false)
+	public void WEB_63() throws Exception{
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		Driver.getDriver().get(read1.getCellData("VALUE", 13));
+		ExtentTest test = extent.createTest("Verify tiles are partially authorable");
+	    test.info("Verified tiles are partially authorable");
+	    ap.setTilesAuthorization();
+	    logger.info("Test WEB_63 has passed");
+	}
+	
+	@Test (enabled=false)
+	public void WEB_64() throws Exception{
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		Driver.getDriver().get(read1.getCellData("VALUE", 13));
+		ExtentTest test = extent.createTest("Verify the author is able to author the title and the description");
+	    test.info("Verified the author is able to author the title and the description");
+	    ap.setContentAuthorization();
+	    logger.info("Test WEB_64 has passed");
+	}
+	
+	@Test (enabled=false)//work on
+	public void WEB_65() throws Exception{
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		Driver.getDriver().get(read1.getCellData("VALUE", 13));
+		ExtentTest test = extent.createTest("Verify last updated date will be pulled from asset metadata");
+	    test.info("Verified last updated date is pulled from asset metadata");
+	    ap.setUpdatedDate();
+	    logger.info("Test WEB_65 has passed");
+	}
+	
+	@Test (enabled=false)//work on
+	public void WEB_66() throws Exception{
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		Driver.getDriver().get(read1.getCellData("VALUE", 13));
+		ExtentTest test = extent.createTest("Verify last updated date will also be reflected under the title");
+	    test.info("Verified last updated date is also be reflected under the title");
+	    ap.setUpdatedDate();
+	    logger.info("Test WEB_66 has passed");
+	}
+	
+	@Test (enabled=false)
+	public void WEB_67() throws Exception{
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		Driver.getDriver().get(read1.getCellData("VALUE", 13));
+		ExtentTest test = extent.createTest("Verify homepage tile component is system authored");
+	    test.info("Verified homepage tile component is system authored");
+	    ap.setHomepageTileAuthorization();
+	    logger.info("Test WEB_67 has passed");
+	}
+	
+	@Test 
+	public void WEB_68() throws Exception{
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		Driver.getDriver().get(read1.getCellData("VALUE", 2));
+		ExtentTest test = extent.createTest("Verify that the value of the filters are based on the tags/properties of the search results");
+	    test.error("The value of the filters are NOT based on the tags/properties of the search results");
+	    hp.setSearchResult();
+	    logger.info("Test WEB_68 has failed");
+	}
+	
+	
+	
+	
+	
+
 	
 	
 	

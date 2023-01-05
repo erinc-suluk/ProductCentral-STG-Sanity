@@ -1,13 +1,23 @@
 package Pages;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.apache.log4j.Logger;
-
-
+import org.apache.poi.sl.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -18,6 +28,7 @@ import org.testng.Assert;
 
 import com.pwc.productcentral.Driver;
 import com.pwc.productcentral.HelperFunctions;
+import com.pwc.productcentral.ReadXLSdata;
 
 public class HomePage extends HelperFunctions {
 	public HomePage() {
@@ -131,9 +142,23 @@ public class HomePage extends HelperFunctions {
 	@FindBy(xpath="//button[.='Next']")
 	private WebElement next;
 	
+	@FindBy(xpath="//input[@class='ap-dropdown-option-checkbox']")
+	private static List<WebElement> productCheckbox;
+	
+	@FindBy(xpath="//div[@class='cmp-search-results__card-title']")
+	private static List<WebElement> resultsTitles;
+	
+	@FindBy(xpath="//div[@class='ap-dropdown-list show']")
+	private static List<WebElement> productDropdownList2;
 	
 	
 	
+	
+	
+	
+	
+	
+	ReadXLSdata read2=new ReadXLSdata();
 	
 	
 	
@@ -418,6 +443,57 @@ public class HomePage extends HelperFunctions {
         		Assert.assertTrue(false);
         	}
         }}
+    
+   public void setSearchResult() {
+	   HelperFunctions.waitForPageToLoad(3);
+   	searchButton.click();
+   	HelperFunctions.staticWait(3);
+   	
+       searchInput.sendKeys("products");
+       searchInput.sendKeys(Keys.ENTER);
+       HelperFunctions.staticWait(3);
+       productDropdown.click();
+
+       for(int i=0; i<productCheckbox.size(); i++)
+		{
+			if(productCheckbox.get(i).isDisplayed() && productCheckbox.get(i).isEnabled())
+			{
+                 
+                  productCheckbox.get(i).click();
+			}
+		}
+       productDropdown.click();
+       HelperFunctions.staticWait(3);
+       productDropdown.click();
+       List<String> productDropdown2 = productDropdownList2
+          	    .stream() 
+          	    .map(x -> x.getText())
+          	    .collect(Collectors.toList());
+          Collections.sort(productDropdown2);
+          System.out.println(productDropdown2.toString());
+          System.out.println("----");
+        
+          HelperFunctions.staticWait(3);
+      
+       List<String> Results = resultsTitles
+          	    .stream() 
+          	    .map(x -> x.getText())
+          	    .collect(Collectors.toList());
+       Collections.sort(Results);
+       System.out.println(Results.toString());
+      
+       if(productDropdown2.toString().contains(Results.toString())) {
+    	   Assert.assertTrue(true);
+       }else {
+    	   Assert.assertTrue(false);
+       }
+       
+
+
+   }
+   
+    
+    
     
     public void setLoginToMyProductLink() {
     	HelperFunctions.waitForPageToLoad(3);
