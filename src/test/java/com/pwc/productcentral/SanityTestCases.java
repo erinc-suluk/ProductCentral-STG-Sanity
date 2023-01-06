@@ -863,23 +863,23 @@ public class SanityTestCases extends BasePage {
 	    logger.info("Test WEB_64 has passed");
 	}
 	
-	@Test (enabled=false)//work on
+	@Test (enabled=false)
 	public void WEB_65() throws Exception{
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify last updated date will be pulled from asset metadata");
 	    test.info("Verified last updated date is pulled from asset metadata");
-	    ap.setUpdatedDate();
+	    ap.setUpdatedDateFromAssets();
 	    logger.info("Test WEB_65 has passed");
 	}
 	
-	@Test (enabled=false)//work on
+	@Test (enabled=false)
 	public void WEB_66() throws Exception{
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify last updated date will also be reflected under the title");
 	    test.info("Verified last updated date is also be reflected under the title");
-	    ap.setUpdatedDate();
+	    ap.setUpdatedDateVisibility();
 	    logger.info("Test WEB_66 has passed");
 	}
 	
@@ -903,7 +903,7 @@ public class SanityTestCases extends BasePage {
 	    logger.info("Test WEB_68 has failed");
 	}
 	
-	@Test 
+	@Test (enabled=false)
 	public void WEB_69() throws Exception{
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
@@ -912,6 +912,18 @@ public class SanityTestCases extends BasePage {
 	    ap.setUnpublishWorkflow();
 	    logger.info("Test WEB_69 has passed");
 	}
+	
+	@Test 
+	public void WEB_70() throws Exception{
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		Driver.getDriver().get(read1.getCellData("VALUE", 13));
+		ExtentTest test = extent.createTest("Verify that once content is approved and published, the system will record the date of publishing");
+	    test.info("Verified that once content is approved and published, the system will record the date of publishing");
+	    ap.setUpdatedDate();
+	    logger.info("Test WEB_70 has passed");
+	}
+	
+	
 	
 	
 	
