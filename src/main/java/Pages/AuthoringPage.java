@@ -1,13 +1,18 @@
 package Pages;
 
 import java.io.FileInputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -362,9 +367,38 @@ public class AuthoringPage extends HelperFunctions {
 	@FindBy(xpath="//img[@src='/content/pc/us/en/automation/reseller-demo/dragos-alliance.thumb.48.48.png?ck=']")
 	private WebElement dragosImg;
 	
+	@FindBy(xpath="//img[@src='/content/pc/us/en/automation/homepage-demo.thumb.48.48.png?ck=']")
+	private WebElement homepagedemoImg;
+	
+	@FindBy(xpath="(//time[@role='presentation'])[2]")
+	private WebElement publishedDate;
+	
+	@FindBy(xpath="//div[@data-path='/content/pc/us/en/automation/products/cloud/offering-overview/jcr:content/root/container/container/pdfviewer']")
+	private WebElement contentEdit;
+	
+	@FindBy(xpath="//*[@id=\"coral-id-655\"]/coral-panel-content/div/div/div/div/foundation-autocomplete/div/div/span/button")
+	private WebElement contentOptions3;
+	
+	@FindBy(xpath="//img[@src='/content/dam/productcentral/general/content-pdf/PricewaterhouseCoopers2.pdf.thumb.48.48.png']")
+	private WebElement priceWaterPdf;
+	
+	@FindBy(xpath="//span[@class='cmp-pdf-highlights__pdf-info']")
+	private WebElement lastUpdatedDate;
+	
+	@FindBy(xpath="//div[@class='coral3-Card-wrapper']")
+	private static List<WebElement> pdfInfo;
+	
+	@FindBy(xpath="//img[@src='/content/dam/productcentral/general/content-pdf/PDF%20Template%20for%20AEM%20Testing.pdf.thumb.48.48.png']")
+	private WebElement pdfTemplate;
+	
+	@FindBy(xpath="/html/body/coral-dialog[2]/div[2]/form/coral-dialog-content/div/coral-tabview/coral-panelstack/coral-panel[1]/coral-panel-content/div/div/div/div/foundation-autocomplete/div/div/span/button")
+	private WebElement setIcon;
+	
+
 	
 	
 	
+	static Logger logger=Logger.getLogger("AuthoringPage");
 	
 	
 	
@@ -964,30 +998,7 @@ public class AuthoringPage extends HelperFunctions {
 	 Assert.assertEquals(expectedTitle2, actualTitle2);
 	 
 	 
- }
  
- public void setUpdatedDate() throws Exception {
-	 read1.setExcelFile("./testdata.xlsx", "QA");
-		email.sendKeys(read1.getCellData("DATA", 1));
-		next.click();
-		pass.sendKeys(read1.getCellData("VALUE", 1));
-		submit.click();
-	    HelperFunctions.staticWait(5);
-	    JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
-js.executeScript("window.open()");
-	    ArrayList<String> tabs = new ArrayList<String>(Driver.getDriver().getWindowHandles());
-	    Driver.getDriver().switchTo().window(tabs.get(1));
-	    Driver.getDriver().get(read1.getCellData("VALUE", 20));
-	    HelperFunctions.waitForPageToLoad(5);
-	    offeringOverviewPdfauth.click();
-	    settingIcon.click();
-	    ArrayList<String> tabs7 = new ArrayList<String>(Driver.getDriver().getWindowHandles());
-	    Driver.getDriver().switchTo().window(tabs7.get(1));
-	    pdfOptions.click();
-	    ArrayList<String> tabs8 = new ArrayList<String>(Driver.getDriver().getWindowHandles());
-	    Driver.getDriver().switchTo().window(tabs8.get(1));
-	    pdfImage.click();
-	    selectButton.click();
 	    
 	    
 	    
@@ -1074,6 +1085,7 @@ js.executeScript("window.open()");
 	    		Assert.assertTrue(false);
 	    	}else {
 	    		Assert.assertTrue(true);
+	    		logger.error("Login to My Products link is not displayed ");
 	    	}
 	    }
 	 
@@ -1126,6 +1138,7 @@ js.executeScript("window.open()");
         		Assert.assertTrue(true);
         	}else {
         		Assert.assertTrue(false);
+        		logger.error("Page is supposed to be unpublished but it does not show 'Not published' ");
         	}
         }
         JavascriptExecutor executor8 = (JavascriptExecutor) Driver.getDriver();
@@ -1141,6 +1154,7 @@ js.executeScript("window.open()");
         		Assert.assertTrue(true);
         	}else {
         		Assert.assertTrue(false);
+        		logger.error("Page is supposed to be unpublished but it does not show 'Not published' ");
         	}
         }
         
@@ -1199,9 +1213,135 @@ js.executeScript("window.open()");
 	    
 	    
  }
+ public void setUpdatedDate() throws Exception {
+	 	
+	 	read1.setExcelFile("./testdata.xlsx", "QA");
+			email.sendKeys(read1.getCellData("DATA", 1));
+			next.click();
+			pass.sendKeys(read1.getCellData("VALUE", 1));
+			submit.click();
+		    HelperFunctions.staticWait(5);
+		    JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
+	     js.executeScript("window.open()");
+		    ArrayList<String> tabs = new ArrayList<String>(Driver.getDriver().getWindowHandles());
+		    Driver.getDriver().switchTo().window(tabs.get(1));
+		    Driver.getDriver().get(read1.getCellData("VALUE", 17));
+		    HelperFunctions.waitForPageToLoad(5);
+		    homepagedemoImg.click();
+		    JavascriptExecutor executor1 = (JavascriptExecutor) Driver.getDriver();
+	        executor1.executeScript("arguments[0].click();", homepagedemoImg);
+	        HelperFunctions.staticWait(3);
+	        JavascriptExecutor executor2 = (JavascriptExecutor) Driver.getDriver();
+	        executor2.executeScript("arguments[0].click();", homepagedemoImg);
+		    HelperFunctions.staticWait(3);
+		    quickPublish.click();
+		    HelperFunctions.staticWait(3);
+		    publish2.click();
+		   
+		      Calendar cal = Calendar.getInstance();
+		      String month=new SimpleDateFormat("MMMMMMMMM").format(cal.getTime());
+		      System.out.println(month);
+		      String year=new SimpleDateFormat("YYYY").format(cal.getTime());
+		      System.out.println(year);
+		      String dayoftheweek=new SimpleDateFormat("EEEEE").format(cal.getTime());
+		      System.out.println(dayoftheweek);
+		      String dayoftheyear=new SimpleDateFormat("D").format(cal.getTime());
+		      System.out.println(dayoftheyear);
+		      String value = publishedDate.getAttribute("title");
+		      System.out.println(value);
+		      if(value.contains(month)&&value.contains(year)&&value.contains(dayoftheweek)&&value.contains(dayoftheyear)) {
+		    	  Assert.assertTrue(true);
+		      }else {
+		    	  Assert.assertTrue(false);
+		    	  logger.error("The date of publishing is NOT correct");
+		      }
+		     
+		      
     
     
-    
+ }
+ 
+ public void setUpdatedDateFromAssets() throws Exception {
+	 read1.setExcelFile("./testdata.xlsx", "QA");
+		email.sendKeys(read1.getCellData("DATA", 1));
+		next.click();
+		pass.sendKeys(read1.getCellData("VALUE", 1));
+		submit.click();
+	    HelperFunctions.staticWait(5);
+	    JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
+  js.executeScript("window.open()");
+	    ArrayList<String> tabs = new ArrayList<String>(Driver.getDriver().getWindowHandles());
+	    Driver.getDriver().switchTo().window(tabs.get(1));
+	    Driver.getDriver().get(read1.getCellData("VALUE", 20));
+	    HelperFunctions.waitForPageToLoad(5);
+	    contentEdit.click();
+	    HelperFunctions.staticWait(2);
+	    settingIcon.click();
+	    setIcon.click();
+	    HelperFunctions.staticWait(2);
+	    priceWaterPdf.click();
+	    HelperFunctions.staticWait(2);
+	    selectButton.click();
+	    HelperFunctions.staticWait(2);
+	    checkIcon.click();
+	    HelperFunctions.staticWait(2);
+	    previewButton2.click();
+	    HelperFunctions.staticWait(2);
+	    Driver.getDriver().switchTo().frame(0);
+	    System.out.println(lastUpdatedDate.getText());
+	    String expectedDate="Last updated 11/03/2022";
+	    Assert.assertEquals(lastUpdatedDate.getText(), expectedDate);
+	    HelperFunctions.staticWait(2);
+	    Driver.getDriver().switchTo().defaultContent();
+	    editButtonContent.click();
+	    HelperFunctions.staticWait(2);
+	    contentEdit.click();
+	    HelperFunctions.staticWait(2);
+	    settingIcon.click();
+	    setIcon.click();
+	    HelperFunctions.staticWait(2);
+        pdfTemplate.click();
+        HelperFunctions.staticWait(2);
+	    selectButton.click();
+	    HelperFunctions.staticWait(2);
+	    checkIcon.click();
+	    HelperFunctions.staticWait(2);
+	    previewButton2.click();
+	    HelperFunctions.staticWait(2);
+	    Driver.getDriver().switchTo().frame(0);
+	    System.out.println(lastUpdatedDate.getText());
+	    String expectedDate2="Last updated 12/16/2022";
+	    Assert.assertEquals(lastUpdatedDate.getText(), expectedDate2);
+	    
+ }
+ public void setUpdatedDateVisibility() throws Exception {
+	 read1.setExcelFile("./testdata.xlsx", "QA");
+		email.sendKeys(read1.getCellData("DATA", 1));
+		next.click();
+		pass.sendKeys(read1.getCellData("VALUE", 1));
+		submit.click();
+	    HelperFunctions.staticWait(5);
+	    JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
+js.executeScript("window.open()");
+	    ArrayList<String> tabs = new ArrayList<String>(Driver.getDriver().getWindowHandles());
+	    Driver.getDriver().switchTo().window(tabs.get(1));
+	    Driver.getDriver().get(read1.getCellData("VALUE", 20));
+	    HelperFunctions.waitForPageToLoad(5);
+	    previewButton2.click();
+	    Driver.getDriver().switchTo().frame(0);
+	    HelperFunctions.staticWait(2);
+	    if(lastUpdatedDate.isDisplayed()&& lastUpdatedDate.getText().contains("Last updated 12/16/2022")) {
+	    	Assert.assertTrue(true);
+	    }else {
+	    	Assert.assertTrue(false);
+	    }
+	 
+	    
+	    
+	    
+	    
+	    
+ }
     
     
     
