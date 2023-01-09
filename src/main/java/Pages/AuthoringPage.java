@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -130,6 +131,15 @@ public class AuthoringPage extends HelperFunctions {
 	
 	@FindBy(xpath="//select[@name='./documentCategory']")
 	private static List<WebElement> documentCategoryTag;
+	
+	@FindBy(xpath="(//button[@class='coral-Select-button coral-MinimalButton'])[1]")
+	private WebElement documentCategoryTag2;
+	
+	@FindBy(xpath="(//button[@class='coral-Select-button coral-MinimalButton'])[3]")
+	private WebElement productFeatureTag2;
+	
+	@FindBy(xpath="//button[@class='coral-Select-button coral-MinimalButton is-active is-above']")
+	private WebElement portfolioTag2;
 	
 	@FindBy(xpath="//select[@name='./productFeatureTag']")
 	private static List<WebElement> productFeatureTags;
@@ -393,6 +403,28 @@ public class AuthoringPage extends HelperFunctions {
 	
 	@FindBy(xpath="/html/body/coral-dialog[2]/div[2]/form/coral-dialog-content/div/coral-tabview/coral-panelstack/coral-panel[1]/coral-panel-content/div/div/div/div/foundation-autocomplete/div/div/span/button")
 	private WebElement setIcon;
+	
+	@FindBy(xpath="//img[@src='/conf/pc/settings/wcm/templates/content-page-template-product-central/thumbnail.png']")
+	private WebElement contentPageTemplate;
+	
+	@FindBy(xpath="//input[@name='./jcr:title']")
+	private WebElement titleField2;
+	
+	@FindBy(xpath="(//li[@class='coral-SelectList-item coral-SelectList-item--option'])[1]")
+	private WebElement firstOptionofDocCat;
+	
+	@FindBy(xpath="//li[.='Bookkeeping Connect']")
+	private WebElement firstOptionofProCat;
+	
+	@FindBy(xpath="//li[.='Customer engagement']")
+	private WebElement firstOptionofPortCat;
+	
+	@FindBy(xpath="(//button[@class='foundation-layout-inline2-item foundation-wizard-control coral3-Button coral3-Button--primary'])[2]")
+	private WebElement createButton2;
+	
+	@FindBy(xpath="(//button[@class='coral3-Button coral3-Button--secondary'])[6]")
+	private WebElement doneButton;
+	
 	
 
 	
@@ -1342,6 +1374,65 @@ js.executeScript("window.open()");
 	    
 	    
  }
+ public void setCatCombination() throws Exception {
+	 read1.setExcelFile("./testdata.xlsx", "QA");
+		email.sendKeys(read1.getCellData("DATA", 1));
+		next.click();
+		pass.sendKeys(read1.getCellData("VALUE", 1));
+		submit.click();
+	    HelperFunctions.staticWait(5);
+	    JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
+js.executeScript("window.open()");
+	    ArrayList<String> tabs = new ArrayList<String>(Driver.getDriver().getWindowHandles());
+	    Driver.getDriver().switchTo().window(tabs.get(1));
+	    Driver.getDriver().get(read1.getCellData("VALUE", 23));
+	    HelperFunctions.waitForPageToLoad(5);
+	    createButton.click();
+	    pageButton.click();
+	    contentPageTemplate.click();
+	    nextButton.click();
+	    HelperFunctions.waitForPageToLoad(5);
+	    titleField2.click();
+	    titleField2.sendKeys("content 3");
+	    productCentralTab.click();
+	    HelperFunctions.staticWait(3);
+	    JavascriptExecutor executor1 = (JavascriptExecutor) Driver.getDriver();
+        executor1.executeScript("arguments[0].click();", documentCategoryTag2);
+       
+	    HelperFunctions.staticWait(3);
+	    
+	    firstOptionofDocCat.click();
+	    HelperFunctions.staticWait(2);
+	    JavascriptExecutor executor2 = (JavascriptExecutor) Driver.getDriver();
+        executor2.executeScript("arguments[0].click();", productFeatureTag2);
+	    HelperFunctions.staticWait(2);
+	    JavascriptExecutor executor3 = (JavascriptExecutor) Driver.getDriver();
+        executor3.executeScript("arguments[0].click();", firstOptionofProCat);
+	    HelperFunctions.staticWait(2);
+	    JavascriptExecutor executor4 = (JavascriptExecutor) Driver.getDriver();
+        executor4.executeScript("arguments[0].click();", portfolioTag2);
+	    HelperFunctions.staticWait(2);
+	    JavascriptExecutor executor5 = (JavascriptExecutor) Driver.getDriver();
+        executor5.executeScript("arguments[0].click();", firstOptionofPortCat);
+        HelperFunctions.staticWait(2);
+        createButton2.click();
+        doneButton.click();
+	  
+	    
+	 
+	
+	   
+	  
+	   
+	 
+	 
+	    
+	    
+	    
+	    
+	    
+ }
+ 
     
     
     

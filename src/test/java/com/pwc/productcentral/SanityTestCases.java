@@ -853,13 +853,14 @@ public class SanityTestCases extends BasePage {
 	    logger.info("Test WEB_63 has passed");
 	}
 	
+
 	@Test (enabled=false)
 	public void WEB_64() throws Exception{
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
-		ExtentTest test = extent.createTest("Verify the author is able to author the title and the description");
-	    test.info("Verified the author is able to author the title and the description");
-	    ap.setContentAuthorization();
+		ExtentTest test = extent.createTest("Verify that not all products will have all categories listed on the page but some will have a combination of them");
+	    test.info("Verified that not all products will have all categories listed on the page but some will have a combination of them");
+	    ap.setCatCombination();
 	    logger.info("Test WEB_64 has passed");
 	}
 	
@@ -913,7 +914,7 @@ public class SanityTestCases extends BasePage {
 	    logger.info("Test WEB_69 has passed");
 	}
 	
-	@Test 
+	@Test (enabled=false)
 	public void WEB_70() throws Exception{
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
@@ -921,6 +922,17 @@ public class SanityTestCases extends BasePage {
 	    test.info("Verified that once content is approved and published, the system will record the date of publishing");
 	    ap.setUpdatedDate();
 	    logger.info("Test WEB_70 has passed");
+	}
+	
+
+	@Test 
+	public void WEB_71() throws Exception{
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		Driver.getDriver().get(read1.getCellData("VALUE", 13));
+		ExtentTest test = extent.createTest("Verify the author is able to author the title and the description");
+	    test.info("Verified the author is able to author the title and the description");
+	    ap.setContentAuthorization();
+	    logger.info("Test WEB_71 has passed");
 	}
 	
 	
