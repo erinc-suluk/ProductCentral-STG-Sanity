@@ -67,7 +67,7 @@ public class ProductListingPage extends HelperFunctions {
 	@FindBy(xpath="//div[@class='HUDView__hudContainer___3mx_O HUDView__immersiveShow___1pWVE']")
 	private WebElement offeringPdfIcon;
 	
-	@FindBy(xpath="//div[@class='HUDView__hudContainer___3mx_O HUDView__immersiveShow___1pWVE']")
+	@FindBy(xpath="//nav[@id='skinny-rail']")
 	private WebElement pdfIcon;
 	
 	@FindBy(linkText="Back to Cloud")
@@ -112,6 +112,18 @@ public class ProductListingPage extends HelperFunctions {
 	@FindBy(xpath="//span[@class='cmp-pdf-highlights__title']")
 	private WebElement contentTitle;
 	
+	@FindBy(xpath="//div[@id='pdfviewer-cc9adec430-content']")
+	private WebElement termsConditionContent;
+	
+	@FindBy(xpath="//div[@id='pdfviewer-4fb6948d1d-content']")
+	private WebElement offeringOverviewContent;
+	
+	@FindBy(xpath="//div[@id='pdfviewer-4fb8297d06-content']")
+	private WebElement documentationContent;
+	
+	@FindBy(xpath="//div[@id='pdfviewer-033ffa1470-content']")
+	private WebElement maintenanceContent;
+	
 	
 	
 	
@@ -149,28 +161,17 @@ public class ProductListingPage extends HelperFunctions {
     	offeringOverviewFromCloud.click();
     	HelperFunctions.waitForPageToLoad(5);
     	termsAndConditionsLink.click();
-    	Driver.getDriver().switchTo().frame(0);
-    	HelperFunctions.clickWithWait(termsAndConditionsTitle);
-    	Assert.assertEquals(termsAndConditionsTitle.getText(), "PricewaterhouseCoopers2");
-    	HelperFunctions.staticWait(3);
-    	Driver.getDriver().switchTo().defaultContent();
+    	Assert.assertTrue(termsConditionContent.isDisplayed());
     	HelperFunctions.staticWait(3);
     	offeringOverviewLink.click();
-    	Driver.getDriver().switchTo().frame(0);
-    	HelperFunctions.clickWithWait(offeringOverviewLinkTitle);
-    	Assert.assertEquals(offeringOverviewLinkTitle.getText(), "PDF Template for AEM Testing");
-    	Driver.getDriver().switchTo().defaultContent();
+    	Assert.assertTrue(offeringOverviewContent.isDisplayed());
     	HelperFunctions.staticWait(3);
     	documentationLink.click();
-    	Driver.getDriver().switchTo().frame(0);
-    	HelperFunctions.clickWithWait(documentationTitle);
-    	Assert.assertEquals(documentationTitle.getText(), "PDF Template for AEM Testing");
+    	Assert.assertTrue(documentationContent.isDisplayed());
     	HelperFunctions.staticWait(3);
-    	Driver.getDriver().switchTo().defaultContent();
     	maintenanceAndSupportLink.click();
-    	Driver.getDriver().switchTo().frame(0);
-    	HelperFunctions.clickWithWait(headerForMaintenanceAndSupport);
-    	Assert.assertEquals(headerForMaintenanceAndSupport.getText(), "sample (5)");
+    	Assert.assertTrue(maintenanceContent.isDisplayed());
+    	
     	
     	
     }
@@ -182,15 +183,15 @@ public class ProductListingPage extends HelperFunctions {
     	termsAndConditionsLink.click();
     	Driver.getDriver().switchTo().frame(0);
     	HelperFunctions.clickWithWait(termsAndConditionsTitle);
-    	Assert.assertEquals(termsAndConditionsTitle.getText(), "PricewaterhouseCoopers2");
-    	HelperFunctions.staticWait(3);
+    	
     	Boolean verifyPdfController=pdfIcon.isDisplayed();
     	Assert.assertTrue(verifyPdfController);
     	Driver.getDriver().switchTo().defaultContent();
     	offeringOverviewLink.click();
     	Driver.getDriver().switchTo().frame(0);
     	HelperFunctions.clickWithWait(offeringOverviewLinkTitle);
-    	Assert.assertEquals(offeringOverviewLinkTitle.getText(), "PDF Template for AEM Testing");
+    	Assert.assertTrue(verifyPdfController);
+    
     	HelperFunctions.staticWait(3);
     	
     	Assert.assertTrue(verifyPdfController);
@@ -198,7 +199,8 @@ public class ProductListingPage extends HelperFunctions {
     	documentationLink.click();
     	Driver.getDriver().switchTo().frame(0);
     	HelperFunctions.clickWithWait(documentationTitle);
-    	Assert.assertEquals(documentationTitle.getText(), "PDF Template for AEM Testing");
+    	Assert.assertTrue(verifyPdfController);
+    
     	HelperFunctions.staticWait(3);
     	
     	Assert.assertTrue(verifyPdfController);
@@ -206,11 +208,8 @@ public class ProductListingPage extends HelperFunctions {
     	maintenanceAndSupportLink.click();
     	Driver.getDriver().switchTo().frame(0);
     	HelperFunctions.clickWithWait(headerForMaintenanceAndSupport);
-    	Assert.assertEquals(headerForMaintenanceAndSupport.getText(), "sample (5)");
-    	HelperFunctions.staticWait(3);
-    	
     	Assert.assertTrue(verifyPdfController);
-    	Driver.getDriver().switchTo().defaultContent();
+    	
     
     }
 

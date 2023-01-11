@@ -1272,6 +1272,8 @@ js.executeScript("window.open()");
 		    quickPublish.click();
 		    HelperFunctions.staticWait(3);
 		    publish2.click();
+		    HelperFunctions.staticWait(3);
+		    
 		   
 		      Calendar cal = Calendar.getInstance();
 		      String month=new SimpleDateFormat("MMMMMMMMM").format(cal.getTime());
@@ -1424,7 +1426,7 @@ js.executeScript("window.open()");
 	    previewButton2.click();
 	    Driver.getDriver().switchTo().frame(0);
 	    HelperFunctions.staticWait(2);
-	    if(lastUpdatedDate.isDisplayed()&& lastUpdatedDate.getText().contains("Last updated 12/16/2022")) {
+	    if(lastUpdatedDate.isDisplayed()&& lastUpdatedDate.getText().contains("Last updated 01/09/2023")) {
 	    	Assert.assertTrue(true);
 	    }else {
 	    	Assert.assertTrue(false);

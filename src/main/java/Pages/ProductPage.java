@@ -173,6 +173,17 @@ public class ProductPage extends HelperFunctions {
 	@FindBy(xpath="((//div[@class='cmp-tabs__tab-search-container'])[1]//li)[position()=1]")
 	private WebElement firstProduct;
 	
+	@FindBy(xpath="//span[@class='cmp-header__cta-avatar-initials']")
+	private WebElement userInitials;
+	
+	
+	
+	
+	
+	
+	
+	ReadXLSdata read1=new ReadXLSdata();
+	
 	
 	
 	
@@ -641,12 +652,23 @@ public void setHeroPromotion() {
 	    	System.out.println("Hero promotion is clickable");
 	    	Assert.assertTrue(false);
 	    }
+
 	
+	
+}
 
-    
-
-
-
+public void setUserInitials() throws Exception {
+	read1.setExcelFile("./testdata.xlsx", "QA");
+	HelperFunctions.waitForPageToLoad(3);
+	String email=read1.getCellData("DATA", 1);
+	String firstInit=email.substring(0,1);
+	String lastInit=email.substring(email.indexOf(".")+1);
+	String lastInit2=lastInit.substring(0,1);
+	String userInitials2=userInitials.getText();
+	String firstAndLastInit=firstInit+lastInit2;
+	System.out.println(userInitials.getText());
+	System.out.println(firstInit+lastInit2);
+	Assert.assertTrue(userInitials2.equalsIgnoreCase(firstAndLastInit));
 	
 	
 }

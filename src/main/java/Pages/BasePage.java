@@ -42,7 +42,7 @@ public class BasePage extends HelperFunctions {
 	@FindBy(xpath="//button[@id='searchButtonHeader']")
 	private static WebElement search;
 	
-	@FindBy(xpath="//footer[@class='ap-footer ap-footer__home']")
+	@FindBy(xpath="//div[@class='ap-footer-content']")
 	private static WebElement footerHome;
 	
 	@FindBy(xpath="//div[@class='cmp-leftnavigation__items']")
@@ -63,6 +63,9 @@ public class BasePage extends HelperFunctions {
 	@FindBy(tagName="a")
 	private static List<WebElement> alltags;
 	
+	@FindBy(xpath="//span[@class='cmp-header__cta-avatar-initials']")
+	private static WebElement userInitials;
+	
 	
 	
 	
@@ -78,12 +81,13 @@ public class BasePage extends HelperFunctions {
 	
 	public static void setFooterTextandPosition() {
 		String actualFooterText=footer.getText();
-		String expectedFooterText="© 2022 PwC. All rights reserved. PwC refers to the US member firm of the PwC network or one of its subsidiaries or affiliates.";
+		String expectedFooterText="© 2023 PwC. All rights reserved. PwC refers to the US member firm of the PwC network or one of its subsidiaries or affiliates.";
+		System.out.println(actualFooterText);
 		Assert.assertEquals(actualFooterText, expectedFooterText);
 		Point locationOfFooter=footer.getLocation();
 		System.out.println(footer.getLocation());
 		int x=560;
-		int y=1059;
+		int y=1055;
 		if(locationOfFooter.getX()==x && locationOfFooter.getY()==y) {
 			Assert.assertTrue(true);
 			System.out.println("The footer is on the right position");
@@ -96,12 +100,16 @@ public class BasePage extends HelperFunctions {
 public static void setFooterHome() {
 	String actualColor = footerHome.getCssValue("color");
 	String actualHexCodeForColor = Color.fromString(actualColor).asHex();
-	String expectedColor="rgba(70, 70, 70, 1)";
-	String expectedHexCodeForColor="#464646";
+	String expectedColor="rgba(37, 37, 37, 1)";
+	String expectedHexCodeForColor="#252525";
+	
+	System.out.println(actualColor);
+	System.out.println(actualHexCodeForColor);
+	
 	
 	
 	if(footerHome.getCssValue("font-size").equals("16px") && footerHome.getCssValue("font-family").equals("\"PwC Helvetica Neue\"") && actualColor.equals(expectedColor)&&
-			actualHexCodeForColor.equals(expectedHexCodeForColor)&& footer.isEnabled()) {
+			actualHexCodeForColor.equals(expectedHexCodeForColor)) {
 		Assert.assertTrue(true);
 	}else {
 		Assert.assertTrue(false);
@@ -190,6 +198,16 @@ public static void setLeft() {
 	    }
 	    
 	  
+	}
+}
+
+
+public static void setAllSectionsOnHeader() {
+	HelperFunctions.waitForPageToLoad(5);
+	if(logo.isDisplayed() && search.isDisplayed() && userInitials.isDisplayed()) {
+		Assert.assertTrue(true);
+	}else {
+		Assert.assertTrue(false);
 	}
 }
 

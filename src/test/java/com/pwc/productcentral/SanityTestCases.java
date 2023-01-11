@@ -935,6 +935,28 @@ public class SanityTestCases extends BasePage {
 	    logger.info("Test WEB_71 has passed");
 	}
 	
+	@Test (enabled=false)
+	public void WEB_72() throws Exception{
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		Driver.getDriver().get(read1.getCellData("VALUE", 13));
+		ExtentTest test = extent.createTest("Verify users icons must present User's First and Last name initials of user");
+	    test.info("Verified users icons present User's First and Last name initials of user");
+	    lpo.setLogin();
+	    pp.setUserInitials();
+	    logger.info("Test WEB_72 has passed");
+	}
+	
+	@Test (enabled=false)
+	public void WEB_73() throws Exception{
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		Driver.getDriver().get(read1.getCellData("VALUE", 13));
+		ExtentTest test = extent.createTest("Verify all the sections on the header");
+	    test.info("Verified all the sections on the header");
+	    lpo.setLogin();
+	    BasePage.setAllSectionsOnHeader();
+	    logger.info("Test WEB_73 has passed");
+	}
+	
 	
 	
 	

@@ -115,9 +115,15 @@ public class LegalPage extends HelperFunctions {
 		HelperFunctions.waitForPageToLoad(3);
 		for(WebElement eachTiles: tilesComponents) {
 			System.out.println(eachTiles.getText());
-			if(eachTiles.getText().contains("Change Navigator") && eachTiles.getText().contains("Customer Link")
+			if(eachTiles.getText().contains("Azure") &&
+					eachTiles.getText().contains("Bookkeeping Connect") &&
+					eachTiles.getText().contains("Digital on Demand") &&
+					eachTiles.getText().contains("Change Navigator") && eachTiles.getText().contains("Customer Link")
 					&& eachTiles.getText().contains("Financial Wellness")
-					&& eachTiles.getText().contains("21112Ínsights Platform")) {
+					&& eachTiles.getText().contains("InsightsOfficer")
+					&& eachTiles.getText().contains("Master Data Management")
+					&& eachTiles.getText().contains("Viewpoint")
+					&& eachTiles.getText().contains("Well")) {
 				Assert.assertTrue(true);
 				
 			}else {
@@ -137,9 +143,14 @@ public class LegalPage extends HelperFunctions {
 		HelperFunctions.waitForPageToLoad(3);
 		for(WebElement eachTiles: tilesComponents) {
 			System.out.println(eachTiles.getText());
-			if(eachTiles.getText().contains("Change Navigator") && eachTiles.getText().contains("Customer Link")
+			if(eachTiles.getText().contains("Azure") && eachTiles.getText().contains("Bookkeeping Connect")
+					&& eachTiles.getText().contains("Change Navigator")
+					&& eachTiles.getText().contains("Customer Link")
+					&& eachTiles.getText().contains("Digital on Demand")
 					&& eachTiles.getText().contains("Financial Wellness")
-					&& eachTiles.getText().contains("21112Ínsights Platform")) {
+					&& eachTiles.getText().contains("Maintenance and Support")
+					&& eachTiles.getText().contains("Viewpoint")
+					&& eachTiles.getText().contains("Well")) {
 				Assert.assertTrue(true);
 				
 			}else {
