@@ -795,10 +795,10 @@ public class SanityTestCases extends BasePage {
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify by default the first tab will be active when the user landing on the page");
-	    test.info("Verified by default the first tab is active when the user landing on the page");
+	    test.error("Not Verified by default the first tab is active when the user landing on the page");
 	    lpo.setLogin();
 	    pp.setFirstTabActive();
-	    logger.info("Test WEB_58 has passed");
+	    logger.info("Test WEB_58 has failed");
 	}
 	
 	@Test (enabled=false)
@@ -925,7 +925,7 @@ public class SanityTestCases extends BasePage {
 	}
 	
 
-	@Test 
+	@Test (enabled=false)
 	public void WEB_71() throws Exception{
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));

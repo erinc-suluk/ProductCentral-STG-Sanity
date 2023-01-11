@@ -158,10 +158,10 @@ public class ProductPage extends HelperFunctions {
 	@FindBy(xpath="//div[@class='cmp-for-you__txt']")
 	private WebElement forYouTitle;
 	
-	@FindBy(xpath="(//span[@class='cmp-tabs__tab-text'])[1]")
+	@FindBy(xpath="//span[.='Product 2']")
 	private WebElement product2Title;
 	
-	@FindBy(xpath="(//span[@class='cmp-tabs__tab-text'])[2]")
+	@FindBy(xpath="//span[.='Product 4']")
 	private WebElement product4Title;
 	
 	@FindBy(xpath="//a[@href='/content/pc/us/en/my-products.html']")
@@ -169,6 +169,11 @@ public class ProductPage extends HelperFunctions {
 	
 	@FindBy(xpath="//div[@class='cmp-hero-promotion']")
 	private WebElement heroPromotion;
+	
+	@FindBy(xpath="((//div[@class='cmp-tabs__tab-search-container'])[1]//li)[position()=1]")
+	private WebElement firstProduct;
+	
+	
 	
 	
 	
@@ -603,7 +608,7 @@ public void setFirstTabActive() {
 	HelperFunctions.waitForPageToLoad(3);
 	myProductOnLeftNavigation.click();
 	HelperFunctions.waitForPageToLoad(3);
-    String s3 = product2Title.getCssValue("color");
+    /*String s3 = product2Title.getCssValue("color");
     System.out.println("Color is :" + s3);
     String s4 = product4Title.getCssValue("color");
     System.out.println("Color is :" + s4);
@@ -611,6 +616,13 @@ public void setFirstTabActive() {
     if(s3.equals("rgba(65, 83, 133, 1)") && s4.equals("rgba(70, 70, 70, 0.7)") ) {
     	Assert.assertTrue(true);
     }else {
+    	Assert.assertTrue(false);
+    }*/
+	String activeColor="rgba(65, 83, 133, 1)";
+	String fp=firstProduct.getCssValue("color");
+	if(fp.equals(activeColor)) {
+		Assert.assertTrue(true);
+	}else {
     	Assert.assertTrue(false);
     }
     

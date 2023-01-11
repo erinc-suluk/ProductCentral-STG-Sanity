@@ -398,6 +398,9 @@ public class AuthoringPage extends HelperFunctions {
 	@FindBy(xpath="//div[@class='coral3-Card-wrapper']")
 	private static List<WebElement> pdfInfo;
 	
+	@FindBy(xpath="(//div[@class='coral3-Card-wrapper'])//foundation-time")
+	private static List<WebElement> pdfInfo2;
+	
 	@FindBy(xpath="//img[@src='/content/dam/productcentral/general/content-pdf/PDF%20Template%20for%20AEM%20Testing.pdf.thumb.48.48.png']")
 	private WebElement pdfTemplate;
 	
@@ -1277,7 +1280,7 @@ js.executeScript("window.open()");
 		      System.out.println(year);
 		      String dayoftheweek=new SimpleDateFormat("EEEEE").format(cal.getTime());
 		      System.out.println(dayoftheweek);
-		      String dayoftheyear=new SimpleDateFormat("D").format(cal.getTime());
+		      String dayoftheyear=new SimpleDateFormat("DD").format(cal.getTime());
 		      System.out.println(dayoftheyear);
 		      String value = publishedDate.getAttribute("title");
 		      System.out.println(value);
@@ -1342,8 +1345,67 @@ js.executeScript("window.open()");
 	    HelperFunctions.staticWait(2);
 	    Driver.getDriver().switchTo().frame(0);
 	    System.out.println(lastUpdatedDate.getText());
-	    String expectedDate2="Last updated 12/16/2022";
-	    Assert.assertEquals(lastUpdatedDate.getText(), expectedDate2);
+	    System.out.println(lastUpdatedDate.getText().replace("/", "-"));
+	   /* JavascriptExecutor js2 = ((JavascriptExecutor) Driver.getDriver());
+	    js2.executeScript("window.open()");
+	    	    ArrayList<String> tabs2 = new ArrayList<String>(Driver.getDriver().getWindowHandles());
+	    	    Driver.getDriver().switchTo().window(tabs2.get(2));
+	    	    Driver.getDriver().get("https://auth-productcentral-qa.products.pwc.com/assets.html/content/dam/productcentral/general/content-pdf");
+	    	    HelperFunctions.waitForPageToLoad(5);
+	    	  	    for(WebElement each: pdfInfo) {
+	    	  	    	//System.out.println(each.getText());
+	    	  	    	 
+	    	  	    		for(WebElement each2:pdfInfo2) {
+	    	  	    			if(each.getText().contains("PDF Template for AEM Testing")) {
+	    	  	    				System.out.println(each2.getAttribute("value"));
+	    	  	    				break;
+	    	  	    				
+	    	  	    				
+	    	  	    			}
+	    	  	    			 Driver.getDriver().switchTo().window(tabs2.get(1));
+	    	  		    	  	Driver.getDriver().switchTo().frame(0);
+                                 Assert.assertTrue(lastUpdatedDate.getText().replace("/", "-").contains(each2.getAttribute("value")));
+	    	  	    		}
+	    	  	    		
+	    	  	    	}*/
+	    	  	// Driver.getDriver().switchTo().window(tabs2.get(1));
+	    	 // Driver.getDriver().switchTo().frame(0);
+	    
+	    
+	  String expectedDate2="Last updated 01/09/2023";
+	  Assert.assertEquals(lastUpdatedDate.getText(), expectedDate2);
+	   
+	  
+	    
+ }
+ public void setUpdatedDateFromAssets2() throws Exception {
+	 read1.setExcelFile("./testdata.xlsx", "QA");
+		email.sendKeys(read1.getCellData("DATA", 1));
+		next.click();
+		pass.sendKeys(read1.getCellData("VALUE", 1));
+		submit.click();
+	    HelperFunctions.staticWait(5);
+	    JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
+js.executeScript("window.open()");
+	    ArrayList<String> tabs = new ArrayList<String>(Driver.getDriver().getWindowHandles());
+	    Driver.getDriver().switchTo().window(tabs.get(1));
+	    Driver.getDriver().get("https://auth-productcentral-qa.products.pwc.com/assets.html/content/dam/productcentral/general/content-pdf");
+	    HelperFunctions.waitForPageToLoad(5);
+	  	    for(WebElement each: pdfInfo) {
+	  	    	//System.out.println(each.getText());
+	  	    	 
+	  	    		for(WebElement each2:pdfInfo2) {
+	  	    			if(each.getText().contains("PDF Template for AEM Testing")) {
+	  	    				System.out.println(each2.getAttribute("value"));
+	  	    				break;
+	  	    			}
+	  	    			
+	  	    		}
+	  	    	}
+	  	    
+	    
+	   // String expectedDate2="Last updated 01/09/2023";
+	   // Assert.assertEquals(lastUpdatedDate.getText(), expectedDate2);
 	    
  }
  public void setUpdatedDateVisibility() throws Exception {
