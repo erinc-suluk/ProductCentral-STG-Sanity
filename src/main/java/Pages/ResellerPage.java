@@ -21,6 +21,12 @@ public class ResellerPage extends HelperFunctions {
 	@FindBy(xpath="//a[@href='/us/en/automation/reseller-demo/check-in.html']")
 	private WebElement checkInLink;
 	
+	@FindBy(xpath="//a[@href='/us/en/automation/reseller-demo/dragos-alliance.html']")
+	private WebElement complianceLink;
+	
+	@FindBy(xpath="//a[@href='/us/en/automation/reseller-demo/microsoft-alliance.html']")
+	private WebElement microsoftAllianceLink;
+	
 	@FindBy(xpath="//div[@class='cmp-product-list__cards-container']")
 	private static List<WebElement> productList;
 	
@@ -42,12 +48,24 @@ public class ResellerPage extends HelperFunctions {
 		HelperFunctions.waitForPageTitle("Reseller Demo");
 		checkInLink.click();
 		HelperFunctions.waitForPageTitle("Check-in");
-		resellOfferingOverviewLink.click();
-		HelperFunctions.waitForPageTitle("Resell offering overview");
-		backtoCheckinBreadcrumb.click();
-		HelperFunctions.waitForPageTitle("Check-in");
+		//resellOfferingOverviewLink.click();
+		//HelperFunctions.waitForPageTitle("Resell offering overview");
+		//backtoCheckinBreadcrumb.click();
+		//HelperFunctions.waitForPageTitle("Check-in");
 		backtoResellerDemoBreadcrumb.click();
-		HelperFunctions.waitForPageTitle("Reseller Demo");}
+		HelperFunctions.waitForPageTitle("Reseller Demo");
+		complianceLink.click();
+		HelperFunctions.waitForPageTitle("Dragos Alliance");
+		backtoResellerDemoBreadcrumb.click();
+		HelperFunctions.waitForPageTitle("Reseller Demo");
+		microsoftAllianceLink.click();
+		HelperFunctions.waitForPageTitle("Microsoft Alliance");
+		backtoResellerDemoBreadcrumb.click();
+		HelperFunctions.waitForPageTitle("Reseller Demo");
+		
+		
+	
+	}
 	
 	public void setPageTitleAndProducts() {
 		HelperFunctions.waitForPageToLoad(3);

@@ -2,17 +2,33 @@ package com.pwc.productcentral;
 
 
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Set;
+
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
-
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
 import Pages.AuthoringPage;
@@ -26,6 +42,7 @@ import Pages.ProductListingPage;
 import Pages.ProductPage;
 import Pages.ResellerPage;
 import Pages.SecurityPage;
+import Pages.UMSPage;
 
 
 public class SanityTestCases extends BasePage {
@@ -43,11 +60,16 @@ public class SanityTestCases extends BasePage {
 	SecurityPage sp=new SecurityPage();
 	ProductPage pp=new ProductPage();
 	AuthoringPage ap=new AuthoringPage();
+	UMSPage ums=new UMSPage();
+	screenshotUtil ssu=new screenshotUtil();
+	private ExtentTest test;
+	
 	
 	
 	Logger logger=Logger.getLogger("SanityTestCases");
 	
 	ReadXLSdata read1=new ReadXLSdata();
+	
 	
 
 
@@ -58,20 +80,22 @@ public class SanityTestCases extends BasePage {
 		 read = new ConfigurationsReader();
 		 platform = read.getPlatform();
 		 read.platformName();
-		 htmlReporter = new ExtentHtmlReporter("Automation Report for QA.html");
+		 htmlReporter = new ExtentHtmlReporter("Sanity Automation Report for Product Central.html");
 	     extent = new ExtentReports();
 	     extent.attachReporter(htmlReporter);
+	    
 	     
 	}
-			
+		
 	@BeforeMethod
 	public void initTest() throws Exception {
+	    Driver.getDriver();
+		
 		Driver.getDriver().manage().window().maximize();
 		Driver.getDriver().manage().deleteAllCookies();
 		HelperFunctions.setWaitTime();
 		
 		
-		//Driver.getDriver().get(ConfigurationsReader.getProperties("URL"));
 	}
 	
 	
@@ -197,8 +221,8 @@ public class SanityTestCases extends BasePage {
 	public void WEB_12() throws Exception{
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 4));
-		ExtentTest test = extent.createTest("Verify PDF viewer/controls appear at the bottom of the page");
-	    test.info("PDF viewer/controls appear at the bottom of the page");
+		ExtentTest test = extent.createTest("Verify PDF viewer/controls appear at the right side of the page");
+	    test.info("PDF viewer/controls appear at the right side of the page");
 	    plp.setPdfControllers();
 		logger.info("Test WEB_12 has passed");
 	}
@@ -214,33 +238,7 @@ public class SanityTestCases extends BasePage {
 	    BasePage.setCollapseButton();
 		logger.info("Test WEB_13 has passed");
 	}
-	@Test(enabled=false)
-	public void WEB_13_1() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
-		Driver.getDriver().get(read1.getCellData("VALUE", 9));
-		ExtentTest test = extent.createTest("(Legal Page)Verify that when left navigation collapsed,only the collapsed icon will be displayed and on hover over the icon will say 'collapse'");
-	    test.info("(Legal Page)When left navigation collapsed,only the collapsed icon will be displayed and on hover over the icon will say 'collapse'");
-	    BasePage.setCollapseButton();
-		logger.info("Test WEB_13_1 has passed");
-	}
-	@Test(enabled=false)
-	public void WEB_13_2() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
-		Driver.getDriver().get(read1.getCellData("VALUE", 6));
-		ExtentTest test = extent.createTest("(Product Listing Page)Verify that when left navigation collapsed,only the collapsed icon will be displayed and on hover over the icon will say 'collapse'");
-	    test.info("(Product Listing Page)When left navigation collapsed,only the collapsed icon will be displayed and on hover over the icon will say 'collapse'");
-	    BasePage.setCollapseButton();
-		logger.info("Test WEB_13_2 has passed");
-	}
-	@Test(enabled=false)
-	public void WEB_13_3() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
-		Driver.getDriver().get(read1.getCellData("VALUE", 8));
-		ExtentTest test = extent.createTest("(Reseller Page)Verify that when left navigation collapsed,only the collapsed icon will be displayed and on hover over the icon will say 'collapse'");
-	    test.info("(Reseller Page)When left navigation collapsed,only the collapsed icon will be displayed and on hover over the icon will say 'collapse'");
-	    BasePage.setCollapseButton();
-		logger.info("Test WEB_13_3 has passed");
-	}
+
 	
 	@Test(enabled=false)
 	public void WEB_14() throws Exception{
@@ -251,33 +249,7 @@ public class SanityTestCases extends BasePage {
 	    BasePage.setLeftNavigationItems2();
 		logger.info("Test WEB_15 has passed");
 	}
-	@Test(enabled=false)
-	public void WEB_14_1() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
-		Driver.getDriver().get(read1.getCellData("VALUE", 9));
-		ExtentTest test = extent.createTest("Verify left navigation component is visible to user(Legal Page)");
-	    test.info("Left navigation component is visible to user");
-	    BasePage.setLeftNavigationItems2();
-		logger.info("Test WEB_15_1 has passed");
-	}
-	@Test(enabled=false)
-	public void WEB_14_2() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
-		Driver.getDriver().get(read1.getCellData("VALUE", 6));
-		ExtentTest test = extent.createTest("Verify left navigation component is visible to user(Product Listing Page)");
-	    test.info("Left navigation component is visible to user");
-	    BasePage.setLeftNavigationItems2();
-		logger.info("Test WEB_14_2 has passed");
-	}
-	@Test(enabled=false)
-	public void WEB_14_3() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
-		Driver.getDriver().get(read1.getCellData("VALUE", 8));
-		ExtentTest test = extent.createTest("Verify left navigation component is visible to user(Reseller Page)");
-	    test.info("Left navigation component is visible to user");
-	    BasePage.setLeftNavigationItems2();
-		logger.info("Test WEB_14_3 has passed");
-	}
+	
 	@Test(enabled=false)
 	public void WEB_15() throws Exception{
 		read1.setExcelFile("./testdata.xlsx", "QA");
@@ -339,7 +311,7 @@ public class SanityTestCases extends BasePage {
 	    BasePage.setFooterTextandPosition();
 	    logger.info("Test WEB_20 has passed");
 	}
-	@Test (enabled=false)
+	@Test(enabled=false)
 	public void WEB_21() throws Exception{
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 11));
@@ -417,9 +389,10 @@ public class SanityTestCases extends BasePage {
 	    ExtentTest test = extent.createTest("Verify the doc categories will be based on Taxonomy document");
 	    test.info("Verified the doc categories will be based on Taxonomy document");
 		ap.setDocCategory();
+		logger.info("Test WEB_28 has passed");
 	}
 	
-	@Test (enabled=false)
+	@Test(enabled=false)
 	public void WEB_29() throws Exception{
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
@@ -509,7 +482,7 @@ public class SanityTestCases extends BasePage {
 	    logger.info("Test WEB_35 has passed");
 	}
 	
-	@Test (enabled=false)
+	@Test(enabled=false)
 	public void WEB_36() throws Exception{
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
@@ -558,6 +531,7 @@ public class SanityTestCases extends BasePage {
 		Driver.getDriver().get(read1.getCellData("VALUE", 8));
 		ExtentTest test = extent.createTest("Verify that breadcrumb will contain a link of the previous page of the site and must respect the UI design");
 	    test.info("The breadcrumb contains a link of the previous page of the site and respect the UI design");
+	    test.log(Status.INFO, ""+test.addScreenCaptureFromPath(captureScreen()));
 	    rp.setBreadcrumbs();
 	    logger.info("Test WEB_40 has passed");
 	}
@@ -614,12 +588,13 @@ public class SanityTestCases extends BasePage {
 	    logger.info("Test WEB_45 has passed");
 	}
 	
-	@Test (enabled=false)
+	@Test  (enabled=false)
 	public void WEB_46() throws Exception{
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 6));
 		ExtentTest test = extent.createTest("Verify document tile can have only 2 line product name, anything more than that will be truncated(fit to size)");
-	    test.error("Document tile can have 3 line product name");
+	    test.fail("Document tile can have 3 line product name");
+	    test.log(Status.INFO, ""+test.addScreenCaptureFromPath(captureScreen()));
 	    plp.setDocumentTileLine();
 	    logger.error("Test WEB_46 has failed");
 	}
@@ -680,7 +655,8 @@ public class SanityTestCases extends BasePage {
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 14));
 		ExtentTest test = extent.createTest("Verify the product listing page does not have broken images");
-	    test.error("The product listing page has broken images");
+	    test.fail("The product listing page has broken images");
+	    test.log(Status.FAIL, ""+test.addScreenCaptureFromPath(captureScreen()));
 	    BasePage.setAllImages();
 	    logger.info("Test WEB_42 has failed");
 	}
@@ -690,6 +666,7 @@ public class SanityTestCases extends BasePage {
 		Driver.getDriver().get(read1.getCellData("VALUE", 2));
 		ExtentTest test = extent.createTest("Verify the home page does not have broken images");
 	    test.info("Verified the home page does not have broken images");
+	    test.log(Status.FAIL, ""+test.addScreenCaptureFromPath(captureScreen()));
 	    BasePage.setAllImages();
 	    logger.info("Test WEB_52_1 has passed");
 	}
@@ -699,6 +676,7 @@ public class SanityTestCases extends BasePage {
 		Driver.getDriver().get(read1.getCellData("VALUE", 8));
 		ExtentTest test = extent.createTest("Verify the reseller page does not have broken images");
 	    test.info("Verified the reseller does not have broken images");
+	    test.log(Status.FAIL, ""+test.addScreenCaptureFromPath(captureScreen()));
 	    BasePage.setAllImages();
 	    logger.info("Test WEB_52_2 has passed");
 	}
@@ -709,6 +687,7 @@ public class SanityTestCases extends BasePage {
 		Driver.getDriver().get(read1.getCellData("VALUE", 9));
 		ExtentTest test = extent.createTest("Verify the legal page does not have broken images");
 	    test.info("Verified the legal does not have broken images");
+	    test.log(Status.FAIL, ""+test.addScreenCaptureFromPath(captureScreen()));
 	    BasePage.setAllImages();
 	    logger.info("Test WEB_52_3 has passed");
 	}
@@ -719,6 +698,7 @@ public class SanityTestCases extends BasePage {
 		Driver.getDriver().get(read1.getCellData("VALUE", 11));
 		ExtentTest test = extent.createTest("Verify the security page does not have broken images");
 	    test.info("Verified the security does not have broken images");
+	    test.log(Status.FAIL, ""+test.addScreenCaptureFromPath(captureScreen()));
 	    BasePage.setAllImages();
 	    logger.info("Test WEB_52_4 has passed");
 	}
@@ -730,6 +710,7 @@ public class SanityTestCases extends BasePage {
 		ExtentTest test = extent.createTest("Verify the my product page does not have broken images");
 	    test.info("Verified the my product page does not have broken images");
 	    lpo.setLogin();
+	    test.log(Status.FAIL, ""+test.addScreenCaptureFromPath(captureScreen()));
 	    BasePage.setAllImages();
 	    logger.info("Test WEB_52_5 has passed");
 	}
@@ -745,13 +726,14 @@ public class SanityTestCases extends BasePage {
 	    logger.info("Test WEB_53 has passed");
 	}
 	
-	@Test(enabled=false)
+	@Test (enabled=false)
 	public void WEB_54() throws Exception{
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify the assets title cannot be more than 3 lines");
-	    test.error("Undefined asset title line");
+	    test.info("Verified the assets title cannot be more than 3 lines");
 	    lpo.setLogin();
+	    test.log(Status.INFO, ""+test.addScreenCaptureFromPath(captureScreen()));
 	    pp.setTitleOfAssets();
 	    logger.info("Test WEB_54 has passed");
 	}
@@ -790,13 +772,14 @@ public class SanityTestCases extends BasePage {
 	    logger.info("Test WEB_57 has passed");
 	}
 	
-	@Test (enabled=false)
+	@Test  (enabled=false)
 	public void WEB_58() throws Exception{
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify by default the first tab will be active when the user landing on the page");
-	    test.error("Not Verified by default the first tab is active when the user landing on the page");
+	    test.fail("Not Verified by default the first tab is active when the user landing on the page");
 	    lpo.setLogin();
+	    test.log(Status.INFO, ""+test.addScreenCaptureFromPath(captureScreen()));
 	    pp.setFirstTabActive();
 	    logger.info("Test WEB_58 has failed");
 	}
@@ -899,7 +882,8 @@ public class SanityTestCases extends BasePage {
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 2));
 		ExtentTest test = extent.createTest("Verify that the value of the filters are based on the tags/properties of the search results");
-	    test.error("The value of the filters are NOT based on the tags/properties of the search results");
+	    test.fail("The value of the filters are NOT based on the tags/properties of the search results");
+	    test.log(Status.FAIL, ""+test.addScreenCaptureFromPath(captureScreen()));
 	    hp.setSearchResult();
 	    logger.info("Test WEB_68 has failed");
 	}
@@ -957,6 +941,141 @@ public class SanityTestCases extends BasePage {
 	    logger.info("Test WEB_73 has passed");
 	}
 	
+	@Test (enabled=false)
+	public void WEB_74() throws Exception{
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		Driver.getDriver().get(read1.getCellData("VALUE", 13));
+		ExtentTest test = extent.createTest("Verify the scroll functionality");
+	    test.info("Verified the scroll functionality");
+	    lpo.setLogin();
+	    BasePage.setScrollFunctionality();
+	    logger.info("Test WEB_74 has passed");
+	}
+	@Test (enabled=false)
+	public void WEB_75() throws Exception{
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		Driver.getDriver().get(read1.getCellData("VALUE", 13));
+		ExtentTest test = extent.createTest("Verify responsiveness of page");
+	    test.info("Verified responsiveness of page");
+	    lpo.setLogin();
+	    BasePage.setResponsivenessOfPages();
+	    logger.info("Test WEB_75 has passed");
+	}
+	@Test  (enabled=false)
+	public void WEB_76() throws Exception{
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		Driver.getDriver().get(read1.getCellData("VALUE", 13));
+		ExtentTest test = extent.createTest("Verify the release notes must be able to manually authored");
+	    test.info("Verified the release notes must be able to manually authored");
+	    ap.setReleaseNotes();
+	    logger.info("Test WEB_76 has passed");
+	}
+	
+	@Test (enabled=false)
+	public void WEB_77() throws Exception{
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		Driver.getDriver().get(read1.getCellData("VALUE", 13));
+		ExtentTest test = extent.createTest("Verify clicking on the tab will display the product page where they can see more information about the product.");
+	    test.info("Verified clicking on the tab will display the product page where they see more information about the product.");
+	    lpo.setLogin();
+	    pp.setInfoOfProducts();
+	    logger.info("Test WEB_77 has passed");
+	}
+	
+	@Test (enabled=false)
+	public void WEB_78() throws Exception{
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		Driver.getDriver().get(read1.getCellData("VALUE", 13));
+		ExtentTest test = extent.createTest("Verify the error message position");
+	    test.info("Verified the error message position");
+	    ums.setErrorMessages();
+	    logger.info("Test WEB_78 has passed");
+	}
+	
+
+	@Test (enabled=false)
+	public void WEB_79() throws Exception{
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		Driver.getDriver().get(read1.getCellData("VALUE", 13));
+		ExtentTest test = extent.createTest("Verify users can be assigned to one product or multiple products");
+	    test.info("Verified users can be assigned to one product or multiple products");
+	    ums.setAssigningMultipleProducts();
+	    logger.info("Test WEB_79 has passed");
+	}
+	
+	@Test (enabled=false)
+	public void WEB_80() throws Exception{
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		Driver.getDriver().get(read1.getCellData("VALUE", 13));
+		ExtentTest test = extent.createTest("Verify users can be assigned to one product or multiple products");
+	    test.info("Verified users can be assigned to one product or multiple products");
+	    ums.setAdminForMultipleCompanies();
+	    logger.info("Test WEB_80 has passed");
+	}
+	
+	@Test (enabled=false)
+	public void WEB_81() throws Exception{
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		Driver.getDriver().get(read1.getCellData("VALUE", 13));
+		ExtentTest test = extent.createTest("Verify if the user selects role as Admin, then by default the user gets admin rights to all products in the company");
+	    test.info("Verified if the user selects role as Admin, then by default the user gets admin rights to all products in the company");
+	    ums.setAdminRights();
+	    logger.info("Test WEB_80 has passed");
+	}
+	
+	@Test(enabled=false)
+	public void WEB_82() throws Exception{
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		Driver.getDriver().get(read1.getCellData("VALUE", 13));
+		ExtentTest test = extent.createTest("Verify the user must be able to manually author the footer");
+	    test.info("Verified the user must be able to manually author the footer");
+	    ap.setAuthFooter();
+	    logger.info("Test WEB_82 has passed");
+	}
+	
+	@Test (enabled=false)
+	public void WEB_83() throws Exception{
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		Driver.getDriver().get(read1.getCellData("VALUE", 13));
+		ExtentTest test = extent.createTest("Verify the need technical support is responsible for providing user the technical support by navigating them to client view");
+	    test.info("Verified the need technical support is responsible for providing user the technical support by navigating them to client view");
+	    lpo.setLogin();
+	    pp.setTechnicalSupport();
+	    logger.info("Test WEB_83 has passed");
+	}
+	
+	@Test (enabled=false)
+	public void WEB_84() throws Exception{
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		Driver.getDriver().get(read1.getCellData("VALUE", 13));
+		ExtentTest test = extent.createTest("Verify the related product is responsible for displaying products which the user has access to");
+	    test.info("Verified the related product is responsible for displaying products which the user has access to");
+	    lpo.setLogin();
+	    pp.setRelatedProducts();
+	    logger.info("Test WEB_84 has passed");
+	}
+	
+	@Test(enabled=false)
+	public void WEB_85() throws Exception{
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		Driver.getDriver().get(read1.getCellData("VALUE", 13));
+		ExtentTest test = extent.createTest("Verify for you is responsible for displaying content as per the users licence");
+	    test.info("Verified for you is responsible for displaying content as per the users licence");
+	    ums.setDisplayingContentBasedOnLicence();
+	    logger.info("Test WEB_85 has passed");
+	}
+	
+	@Test (enabled=false)
+	public void WEB_86() throws Exception{
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		Driver.getDriver().get(read1.getCellData("VALUE", 13));
+		ExtentTest test = extent.createTest("Verify all resources is dedicated to all applicable product-content specific items");
+	    test.info("Verified all resources is dedicated to all applicable product-content specific items");
+	    lpo.setLogin();
+	    pp.setAllResourcesContent();
+	    logger.info("Test WEB_86 has passed");
+	}
+	
 	
 	
 	
@@ -991,11 +1110,28 @@ public class SanityTestCases extends BasePage {
 	
 	/******************************************************************************************************************************/
 	
-	
-	
-	
-	
-	@AfterSuite
+	@AfterMethod
+    public void closeTabs() {
+        String currentWindow = Driver.getDriver().getWindowHandle();
+        Set<String> allWindows = Driver.getDriver().getWindowHandles();
+        for (String window : allWindows) {
+            if (!window.equals(currentWindow)) {
+            	Driver.getDriver().switchTo().window(window);
+            	Driver.getDriver().close();
+            }
+        }
+        Driver.getDriver().switchTo().window(currentWindow);
+         }
+	public String captureScreen() throws IOException {
+		TakesScreenshot screen = (TakesScreenshot) Driver.getDriver();
+		File src = screen.getScreenshotAs(OutputType.FILE);
+		String dest =".//screenshot//"+".png";
+		File target = new File(dest);
+		FileUtils.copyFile(src, target);
+		return dest;
+		}
+
+      @AfterSuite
 	public void closingBrowser() {
 		extent.flush();
 		//Driver.closeDriver();

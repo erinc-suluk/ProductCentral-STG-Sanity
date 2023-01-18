@@ -2,7 +2,7 @@ package Pages;
 
 import java.util.List;
 
-
+import org.apache.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
@@ -66,6 +66,28 @@ public class BasePage extends HelperFunctions {
 	@FindBy(xpath="//span[@class='cmp-header__cta-avatar-initials']")
 	private static WebElement userInitials;
 	
+	@FindBy(xpath="//a[@href='/us/en/legal.html']")
+	private static WebElement legalLink;
+	
+	@FindBy(xpath="//a[@href='/us/en/products.html']")
+	private static WebElement productsLink;
+	
+	@FindBy(xpath="//a[@href='/us/en/security.html']")
+	private static WebElement securityLink;
+	
+	@FindBy(xpath="//a[@href='/us/en/compliance.html']")
+	private static WebElement complianceLink;
+	
+	@FindBy(xpath="//a[@href='/us/en/privacy0.html']")
+	private static WebElement privacyLink;
+	
+	@FindBy(xpath="//h1[@class='cmp-title__text']")
+	private static WebElement myProductsTitle;
+	
+	
+	
+	static Logger logger=Logger.getLogger("BasePage");
+	
 	
 	
 	
@@ -122,16 +144,61 @@ public static void setFooterHome() {
 public static void setLeftNavigationItems2() {
 	HelperFunctions.waitForPageToLoad(5);
 	for(WebElement items:leftNavigationItems2) {
-		System.out.println(items.getText());
-		if (items.getText().contains("Home") && items.getText().contains("Legal")&& items.getText().contains("Products")
-				&& items.getText().contains("Security")&& items.getText().contains("Compliance")
-				&& items.getText().contains("Privacy")&& items.getText().contains("Accesiblility")) {
+		if(items.isDisplayed()) {
 			Assert.assertTrue(true);
 		}else {
 			Assert.assertTrue(false);
 		}
+	
+	}
+	legalLink.click();
+	HelperFunctions.waitForPageToLoad(5);
+	for(WebElement items:leftNavigationItems2) {
+		if(items.isDisplayed()) {
+			Assert.assertTrue(true);
+		}else {
+			Assert.assertTrue(false);
+			logger.error("Left Navigation is not visible on Legal Page");
+		}}
+	productsLink.click();
+	HelperFunctions.waitForPageToLoad(5);
+	for(WebElement items:leftNavigationItems2) {
+		if(items.isDisplayed()) {
+			Assert.assertTrue(true);
+		}else {
+			Assert.assertTrue(false);
+			logger.error("Left Navigation is not visible on Product Listing Page");
+		}}
+	securityLink.click();
+	HelperFunctions.waitForPageToLoad(5);
+	for(WebElement items:leftNavigationItems2) {
+		if(items.isDisplayed()) {
+			Assert.assertTrue(true);
+		}else {
+			Assert.assertTrue(false);
+			logger.error("Left Navigation is not visible on Security Page");
+		}}
+	complianceLink.click();
+	for(WebElement items:leftNavigationItems2) {
+		if(items.isDisplayed()) {
+			Assert.assertTrue(true);
+		}else {
+			Assert.assertTrue(false);
+			logger.error("Left Navigation is not visible on Compliance Page");
+		}}
+	privacyLink.click();
+	for(WebElement items:leftNavigationItems2) {
+		if(items.isDisplayed()) {
+			Assert.assertTrue(true);
+		}else {
+			Assert.assertTrue(false);
+			logger.error("Left Navigation is not visible on Privacy Page");
+		}}
+	
+	
+	
 		
-}
+
 }
 public static void setCollapseButton() {
 	JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
@@ -149,6 +216,92 @@ public static void setCollapseButton() {
 			Assert.assertTrue(true);
 		}
 	}
+	legalLink.click();
+	HelperFunctions.waitForPageToLoad(5);
+	JavascriptExecutor executor3 = (JavascriptExecutor) Driver.getDriver();
+    executor3.executeScript("arguments[0].click();", collapseButton);
+	for(WebElement items:leftNavigationItems) {
+		if(!items.isDisplayed()) {
+			Assert.assertTrue(true);
+		}
+	}
+	HelperFunctions.staticWait(3);
+	JavascriptExecutor executor4 = (JavascriptExecutor) Driver.getDriver();
+    executor4.executeScript("arguments[0].click();", expandButton);
+	for(WebElement items:leftNavigationItems) {
+		if(items.isDisplayed()&& collapseButton.isDisplayed()) {
+			Assert.assertTrue(true);
+		}
+	}
+	productsLink.click();
+	HelperFunctions.waitForPageToLoad(5);
+	JavascriptExecutor executor5 = (JavascriptExecutor) Driver.getDriver();
+    executor5.executeScript("arguments[0].click();", collapseButton);
+	for(WebElement items:leftNavigationItems) {
+		if(!items.isDisplayed()) {
+			Assert.assertTrue(true);
+		}
+	}
+	HelperFunctions.staticWait(3);
+	JavascriptExecutor executor6 = (JavascriptExecutor) Driver.getDriver();
+    executor6.executeScript("arguments[0].click();", expandButton);
+	for(WebElement items:leftNavigationItems) {
+		if(items.isDisplayed()&& collapseButton.isDisplayed()) {
+			Assert.assertTrue(true);
+		}
+	}
+	securityLink.click();
+	HelperFunctions.waitForPageToLoad(5);
+	JavascriptExecutor executor7 = (JavascriptExecutor) Driver.getDriver();
+    executor7.executeScript("arguments[0].click();", collapseButton);
+	for(WebElement items:leftNavigationItems) {
+		if(!items.isDisplayed()) {
+			Assert.assertTrue(true);
+		}
+	}
+	HelperFunctions.staticWait(3);
+	JavascriptExecutor executor8 = (JavascriptExecutor) Driver.getDriver();
+    executor8.executeScript("arguments[0].click();", expandButton);
+	for(WebElement items:leftNavigationItems) {
+		if(items.isDisplayed()&& collapseButton.isDisplayed()) {
+			Assert.assertTrue(true);
+		}
+	}
+	complianceLink.click();
+	HelperFunctions.waitForPageToLoad(5);
+	JavascriptExecutor executor9 = (JavascriptExecutor) Driver.getDriver();
+    executor9.executeScript("arguments[0].click();", collapseButton);
+	for(WebElement items:leftNavigationItems) {
+		if(!items.isDisplayed()) {
+			Assert.assertTrue(true);
+		}
+	}
+	HelperFunctions.staticWait(3);
+	JavascriptExecutor executor10 = (JavascriptExecutor) Driver.getDriver();
+    executor10.executeScript("arguments[0].click();", expandButton);
+	for(WebElement items:leftNavigationItems) {
+		if(items.isDisplayed()&& collapseButton.isDisplayed()) {
+			Assert.assertTrue(true);
+		}
+	}
+	privacyLink.click();
+	HelperFunctions.waitForPageToLoad(5);
+	JavascriptExecutor executor11 = (JavascriptExecutor) Driver.getDriver();
+    executor11.executeScript("arguments[0].click();", collapseButton);
+	for(WebElement items:leftNavigationItems) {
+		if(!items.isDisplayed()) {
+			Assert.assertTrue(true);
+		}
+	}
+	HelperFunctions.staticWait(3);
+	JavascriptExecutor executor12 = (JavascriptExecutor) Driver.getDriver();
+    executor12.executeScript("arguments[0].click();", expandButton);
+	for(WebElement items:leftNavigationItems) {
+		if(items.isDisplayed()&& collapseButton.isDisplayed()) {
+			Assert.assertTrue(true);
+		}
+	}
+	
 	
 }
 
@@ -171,19 +324,11 @@ public static void setAllImages()  {
 		        System.out.println("Attribute is empty string");
 		    }
 	 }}
-/*public static void setfooter()  {
-	String expectedFooterText="© 2022 PwC. All rights reserved. PwC refers to the US member firm of the PwC network or one of its subsidiaries or affiliates.";
-for(int i=0; i<alltags.size(); i++) {
-	System.out.println(alltags.get(i).getAttribute("href"));
-	System.out.println(alltags.get(i).getText());
-	alltags.get(i).click();
-	
-}
+
 
 
 	
 
-}*/
 public static void setLeft() {
 	System.out.println("No of links are "+ alltags.size());  
     
@@ -209,6 +354,66 @@ public static void setAllSectionsOnHeader() {
 	}else {
 		Assert.assertTrue(false);
 	}
+}
+
+public static void setScrollFunctionality()  {
+	
+	JavascriptExecutor js = (JavascriptExecutor)Driver.getDriver();
+	js.executeScript("window.scrollBy(0,document.body.scrollHeight)", "");           
+    HelperFunctions.staticWait(3);
+    System.out.println("Scrolled down performed on My Product Page");   
+    HelperFunctions.staticWait(3);
+    legalLink.click();
+    JavascriptExecutor js2 = (JavascriptExecutor)Driver.getDriver();
+	js2.executeScript("window.scrollBy(0,document.body.scrollHeight)", "");           
+    HelperFunctions.staticWait(3);
+    System.out.println("Scrolled down performed on Legal Page");  
+    productsLink.click();
+    JavascriptExecutor js3 = (JavascriptExecutor)Driver.getDriver();
+   	js3.executeScript("window.scrollBy(0,document.body.scrollHeight)", "");           
+    HelperFunctions.staticWait(3);
+    System.out.println("Scrolled down performed on Products Page");
+    securityLink.click();
+    JavascriptExecutor js4 = (JavascriptExecutor)Driver.getDriver();
+   	js4.executeScript("window.scrollBy(0,document.body.scrollHeight)", "");           
+    HelperFunctions.staticWait(3);
+    System.out.println("Scrolled down performed on Security Page");
+ 
+	
+}
+public static void setResponsivenessOfPages()  {
+	HelperFunctions.waitForPageToLoad(3);
+	Assert.assertTrue(myProductsTitle.isDisplayed());
+	legalLink.click();
+	String actualTitleforLegalPage=Driver.getDriver().getTitle();
+	String expectedTitleforLegalPage="Legal";
+    Assert.assertEquals(actualTitleforLegalPage, expectedTitleforLegalPage);
+    HelperFunctions.staticWait(3);
+    productsLink.click();
+    HelperFunctions.waitForPageToLoad(3);
+    String actualTitleforProductsPage=Driver.getDriver().getTitle();
+	String expectedTitleforProductsPage="Products";
+	Assert.assertEquals(actualTitleforProductsPage, expectedTitleforProductsPage);
+    HelperFunctions.staticWait(3);
+    securityLink.click();
+    HelperFunctions.waitForPageToLoad(3);
+    String actualTitleforSecurityPage=Driver.getDriver().getTitle();
+	String expectedTitleforSecurityPage="Security123";
+	Assert.assertEquals(actualTitleforSecurityPage, expectedTitleforSecurityPage);
+	HelperFunctions.staticWait(3);
+	complianceLink.click();
+	HelperFunctions.waitForPageToLoad(3);
+    String actualTitleforCompliancePage=Driver.getDriver().getTitle();
+	String expectedTitleforCompliancePage="Compliance";
+	Assert.assertEquals(actualTitleforCompliancePage, expectedTitleforCompliancePage);
+	HelperFunctions.staticWait(3);
+	privacyLink.click();
+	HelperFunctions.waitForPageToLoad(3);
+    String actualTitleforPrivacyPage=Driver.getDriver().getTitle();
+	String expectedTitleforPrivacyPage="Privacy";
+	Assert.assertEquals(actualTitleforPrivacyPage, expectedTitleforPrivacyPage);
+ 
+	
 }
 
 }

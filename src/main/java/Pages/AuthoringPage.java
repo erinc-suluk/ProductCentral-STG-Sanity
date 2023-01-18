@@ -23,7 +23,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.pwc.productcentral.Driver;
@@ -428,6 +430,65 @@ public class AuthoringPage extends HelperFunctions {
 	@FindBy(xpath="(//button[@class='coral3-Button coral3-Button--secondary'])[6]")
 	private WebElement doneButton;
 	
+	@FindBy(xpath="//div[@title='Release Notes [Root]']")
+	private WebElement releaseNotes;
+	
+	@FindBy(xpath="//coral-button-label[.='Add']")
+	private WebElement addButton;
+	
+	@FindBy(xpath="//input[@name='./releaseNotes/item0/./jcr:title']")
+	private WebElement releaseTitle;
+	
+	@FindBy(xpath="//div[@data-fielddescription='Enter Release Note Description']")
+	private WebElement releaseDescription;
+	
+	@FindBy(xpath="//input[@name='./releaseNotes/item0/./cq:lastReplicated']")
+	private WebElement releaseDate;
+	
+	@FindBy(xpath="//span[@class='cmp-release-notes__card-subtitle']")
+	private WebElement releaseDateonPreview;
+	
+	@FindBy(xpath="//a[@class='cmp-release-notes__card-title']")
+	private WebElement releaseTitleonPreview;
+	
+	@FindBy(xpath="//div[@class='cmp-release-notes__card-description']")
+	private WebElement releaseDescriptiononPreview;
+	
+	@FindBy(xpath="//div[@title='Product Central Footer']")
+	private WebElement authFooter;
+	
+	@FindBy(xpath="//textarea[@name='./title']")
+	private WebElement textareaForFooter;
+	
+	@FindBy(xpath="//input[@name='./multifield/item0/./title']")
+	private WebElement privacyPolicyTitle;
+	
+	@FindBy(xpath="//foundation-autocomplete[@name='./multifield/item0/./imagepath']")
+	private WebElement privacyPolicyLink;
+	
+	@FindBy(xpath="//input[@name='./multifield/item1/./title']")
+	private WebElement termsConditionsTitle;
+	
+	@FindBy(xpath="//foundation-autocomplete[@name='./multifield/item1/./imagepath']")
+	private WebElement termsConditionsLink;
+	
+	@FindBy(xpath="//input[@name='./multifield/item2/./title']")
+	private WebElement cookieTitle;
+	
+	@FindBy(xpath="//foundation-autocomplete[@name='./multifield/item2/./imagepath']")
+	private WebElement cookieLink;
+	
+	@FindBy(xpath="//div[@class='ap-footer-content']")
+	private WebElement footerContent;
+	
+	@FindBy(xpath="//a[@href='#pageinfo-popover']")
+	private WebElement pageInfo;
+	
+	@FindBy(xpath="//button[@title='View as Published']")
+	private WebElement viewasPublish;
+	
+	
+	
 	
 
 	
@@ -681,6 +742,8 @@ public class AuthoringPage extends HelperFunctions {
         	}else {
         		Assert.assertTrue(false);
         	}
+        	
+       
         			
         			
     	
@@ -1326,7 +1389,7 @@ js.executeScript("window.open()");
 	    HelperFunctions.staticWait(2);
 	    Driver.getDriver().switchTo().frame(0);
 	    System.out.println(lastUpdatedDate.getText());
-	    String expectedDate="Last updated 11/03/2022";
+	    String expectedDate=read1.getCellData("VALUE", 33);
 	    Assert.assertEquals(lastUpdatedDate.getText(), expectedDate);
 	    HelperFunctions.staticWait(2);
 	    Driver.getDriver().switchTo().defaultContent();
@@ -1348,34 +1411,8 @@ js.executeScript("window.open()");
 	    Driver.getDriver().switchTo().frame(0);
 	    System.out.println(lastUpdatedDate.getText());
 	    System.out.println(lastUpdatedDate.getText().replace("/", "-"));
-	   /* JavascriptExecutor js2 = ((JavascriptExecutor) Driver.getDriver());
-	    js2.executeScript("window.open()");
-	    	    ArrayList<String> tabs2 = new ArrayList<String>(Driver.getDriver().getWindowHandles());
-	    	    Driver.getDriver().switchTo().window(tabs2.get(2));
-	    	    Driver.getDriver().get("https://auth-productcentral-qa.products.pwc.com/assets.html/content/dam/productcentral/general/content-pdf");
-	    	    HelperFunctions.waitForPageToLoad(5);
-	    	  	    for(WebElement each: pdfInfo) {
-	    	  	    	//System.out.println(each.getText());
-	    	  	    	 
-	    	  	    		for(WebElement each2:pdfInfo2) {
-	    	  	    			if(each.getText().contains("PDF Template for AEM Testing")) {
-	    	  	    				System.out.println(each2.getAttribute("value"));
-	    	  	    				break;
-	    	  	    				
-	    	  	    				
-	    	  	    			}
-	    	  	    			 Driver.getDriver().switchTo().window(tabs2.get(1));
-	    	  		    	  	Driver.getDriver().switchTo().frame(0);
-                                 Assert.assertTrue(lastUpdatedDate.getText().replace("/", "-").contains(each2.getAttribute("value")));
-	    	  	    		}
-	    	  	    		
-	    	  	    	}*/
-	    	  	// Driver.getDriver().switchTo().window(tabs2.get(1));
-	    	 // Driver.getDriver().switchTo().frame(0);
-	    
-	    
-	  String expectedDate2="Last updated 01/09/2023";
-	  Assert.assertEquals(lastUpdatedDate.getText(), expectedDate2);
+	    String expectedDate2=read1.getCellData("VALUE", 32);
+	    Assert.assertEquals(lastUpdatedDate.getText(), expectedDate2);
 	   
 	  
 	    
@@ -1481,20 +1518,147 @@ js.executeScript("window.open()");
         HelperFunctions.staticWait(2);
         createButton2.click();
         doneButton.click();
-	  
-	    
-	 
-	
+	  	    
+ }
+ public void setReleaseNotes() throws Exception {
+	 read1.setExcelFile("./testdata.xlsx", "QA");
+		email.sendKeys(read1.getCellData("DATA", 1));
+		next.click();
+		pass.sendKeys(read1.getCellData("VALUE", 1));
+		submit.click();
+	    HelperFunctions.staticWait(5);
+	    JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
+js.executeScript("window.open()");
+	    ArrayList<String> tabs = new ArrayList<String>(Driver.getDriver().getWindowHandles());
+	    Driver.getDriver().switchTo().window(tabs.get(1));
+	    Driver.getDriver().get(read1.getCellData("VALUE", 7));
+	    HelperFunctions.waitForPageToLoad(5);
+	    editButtonContent.click();
+	    HelperFunctions.staticWait(3);
+	    JavascriptExecutor js2 = ((JavascriptExecutor) Driver.getDriver());
+        js2.executeScript("arguments[0].scrollIntoView(true);", releaseNotes);
+        HelperFunctions.staticWait(3);
+        releaseNotes.click();
+        HelperFunctions.staticWait(3);
+        settingIcon.click();
+        HelperFunctions.staticWait(3);
+       // addButton.click();
+       // HelperFunctions.staticWait(3);
+        String title="version1";
+        releaseTitle.click();
+        releaseTitle.clear();
+        releaseTitle.sendKeys(title);
+        HelperFunctions.staticWait(3);
+        releaseDate.click();
+        releaseDate.clear();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Date date = new Date();
+        System.out.println(dateFormat.format(date));
+        releaseDate.sendKeys(dateFormat.format(date));
+        JavascriptExecutor executor3 = (JavascriptExecutor) Driver.getDriver();
+        executor3.executeScript("arguments[0].click();", releaseDescription);
+        String description="some description";
+        releaseDescription.clear();
+        releaseDescription.sendKeys(description);
+        HelperFunctions.staticWait(3);
+        checkIcon.click();
+        HelperFunctions.staticWait(3);
+        previewButton2.click();
+        HelperFunctions.staticWait(3);
+        Driver.getDriver().switchTo().frame(0);
+        JavascriptExecutor js3 = ((JavascriptExecutor) Driver.getDriver());
+        js3.executeScript("arguments[0].scrollIntoView(true);", releaseTitleonPreview);
+        HelperFunctions.staticWait(3);
+        String actualDate=releaseDateonPreview.getText();
+        String expectedDate=dateFormat.format(date);
+        Assert.assertEquals(actualDate, expectedDate);
+        HelperFunctions.staticWait(3);
+        String actualTitle=releaseTitleonPreview.getText();
+        String expectedTitle=title;
+        Assert.assertEquals(actualTitle, expectedTitle);
+        HelperFunctions.staticWait(3);
+        String actualDescription=releaseDescriptiononPreview.getText();
+        String expectedDescription=description;
+        Assert.assertEquals(actualDescription,expectedDescription);
+        
+        
+        
 	   
-	  
-	   
-	 
-	 
+	    
+ }
+ public void setAuthFooter() throws Exception {
+	 read1.setExcelFile("./testdata.xlsx", "QA");
+		email.sendKeys(read1.getCellData("DATA", 1));
+		next.click();
+		pass.sendKeys(read1.getCellData("VALUE", 1));
+		submit.click();
+	    HelperFunctions.staticWait(5);
+	    JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
+  js.executeScript("window.open()");
+	    ArrayList<String> tabs = new ArrayList<String>(Driver.getDriver().getWindowHandles());
+	    Driver.getDriver().switchTo().window(tabs.get(1));
+	    Driver.getDriver().get(read1.getCellData("VALUE", 27));
+	    HelperFunctions.waitForPageToLoad(5);
+	    JavascriptExecutor js3 = ((JavascriptExecutor) Driver.getDriver());
+        js3.executeScript("arguments[0].scrollIntoView(true);", authFooter);    
+        HelperFunctions.staticWait(3);
+        JavascriptExecutor js4 = ((JavascriptExecutor) Driver.getDriver());
+        js4.executeScript("arguments[0].scrollIntoView(true);", authFooter);   
+	    HelperFunctions.staticWait(3);
+	    authFooter.click();
+	    HelperFunctions.staticWait(3);
+	    settingIcon.click();
+	    HelperFunctions.staticWait(3);
+	    textareaForFooter.click();
+	    textareaForFooter.clear();
+	    String footer=read1.getCellData("VALUE", 31);
+	    textareaForFooter.sendKeys(footer);
+	    HelperFunctions.staticWait(3);
+	    privacyPolicyTitle.click();
+	    privacyPolicyTitle.clear();
+	    privacyPolicyTitle.sendKeys("Privacy policy");
+	    HelperFunctions.staticWait(3);
+	    checkIcon.click();
+	    HelperFunctions.staticWait(3);
+	    JavascriptExecutor js2 = ((JavascriptExecutor) Driver.getDriver());
+	    js2.executeScript("window.open()");
+	  	    ArrayList<String> tabs2 = new ArrayList<String>(Driver.getDriver().getWindowHandles());
+	  	    Driver.getDriver().switchTo().window(tabs2.get(1));
+	  	    Driver.getDriver().get(read1.getCellData("VALUE", 12));
+	  	    HelperFunctions.waitForPageToLoad(5);
+	  	  JavascriptExecutor js5 = ((JavascriptExecutor) Driver.getDriver());
+	        js5.executeScript("arguments[0].scrollIntoView(true);", footerContent); 
+	        HelperFunctions.staticWait(3);
+	        Assert.assertTrue(footerContent.getText().contains(footer));
+	        
 	    
 	    
 	    
 	    
 	    
+ 
+ 
+ 
+ }
+ 
+ public void setNeedTechnicalSupport() throws Exception {
+	 read1.setExcelFile("./testdata.xlsx", "QA");
+		email.sendKeys(read1.getCellData("DATA", 1));
+		next.click();
+		pass.sendKeys(read1.getCellData("VALUE", 1));
+		submit.click();
+	    HelperFunctions.staticWait(5);
+	    JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
+  js.executeScript("window.open()");
+	    ArrayList<String> tabs = new ArrayList<String>(Driver.getDriver().getWindowHandles());
+	    Driver.getDriver().switchTo().window(tabs.get(1));
+	    Driver.getDriver().get(read1.getCellData("VALUE", 7));
+	    HelperFunctions.waitForPageToLoad(5);
+	    
+	    
+ 
+ 
+ 
  }
  
     

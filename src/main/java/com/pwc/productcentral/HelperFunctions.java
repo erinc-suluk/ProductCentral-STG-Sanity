@@ -103,7 +103,7 @@ public class HelperFunctions{
         return flag;
     }
 
-    public void scrollToElement(WebElement element){
+    public static void scrollToElement(WebElement element){
 
         JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
         js.executeScript("arguments[0].scrollIntoView(true);", element);

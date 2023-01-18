@@ -44,7 +44,7 @@
 		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
 			<li>
                 <a href='#!'>
-                    <span class='label suite-start-time blue darken-3'>Jan 17, 2023 11:48:09 AM</span>
+                    <span class='label suite-start-time blue darken-3'>Jan 18, 2023 10:57:43 AM</span>
 				</a>
 			</li>
 			<li>
@@ -69,9 +69,7 @@
 					<i class='material-icons'>warning</i> Status
 				</a>
 				<ul id='tests-toggle' class='dropdown-content'>
-											<li status='pass'><a href='#!'>Pass <i class='material-icons green-text'>check_circle</i></a></li>
-						<li status='fail'><a href='#!'>Fail <i class='material-icons red-text'>cancel</i></a></li>
-						<li status='error'><a href='#!'>Error <i class='material-icons red-text lighten-2'>error</i></a></li>
+											<li status='fail'><a href='#!'>Fail <i class='material-icons red-text'>cancel</i></a></li>
 					<li class='divider'></li>
 					<li status='clear' clear='true'><a href='#!'>Clear Filters <i class='material-icons'>clear</i></a></li>
 				</ul>
@@ -122,10 +120,10 @@
 					<canvas id='parent-analysis' width='100' height='80'></canvas>
 				</div>
 				<div class='block text-small'>
-					<span class='tooltipped' data-position='top' data-tooltip='25%'><span class='strong'>1</span> test(s) passed</span>
+					<span class='tooltipped' data-position='top' data-tooltip='0%'><span class='strong'>0</span> test(s) passed</span>
 				</div>
 				<div class='block text-small'>
-					<span class='strong tooltipped' data-position='top' data-tooltip='50%'>2</span> test(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='25%'>1</span> others
+					<span class='strong tooltipped' data-position='top' data-tooltip='100%'>1</span> test(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
 				</div>
 			</div>
 		</div>
@@ -140,7 +138,7 @@
 					<span class='tooltipped' data-position='top' data-tooltip='0%'><span class='strong'>0</span> step(s) passed</span>
 				</div>
 				<div class='block text-small'>
-					<span class='strong tooltipped' data-position='top' data-tooltip='25%'>2</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='75%'>6</span> others
+					<span class='strong tooltipped' data-position='top' data-tooltip='100%'>2</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
 				</div>
 			</div>
 		</div>
@@ -155,59 +153,17 @@
 			<ul id='test-collection' class='test-collection'>
 				
 				
-				<li class='test displayed active  pass' status='pass' bdd='false' test-id='1'>
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='1'>
 					<div class='test-heading'>
-						<span class='test-name'>Verify that breadcrumb will contain a link of the previous page of the site and must respect the UI design</span>
-						<span class='test-time'>Jan 17, 2023 11:48:10 AM</span>
-						<span class='test-status right pass'>pass</span>
-					</div>
-					<div class='test-content hide'>
-<div class='test-time-info'>
-	<span class='label start-time'>Jan 17, 2023 11:48:10 AM</span>
-	<span class='label end-time'>Jan 17, 2023 11:48:11 AM</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+201ms</span>
-</div>
-	<div class='test-steps'>
-		<table class='bordered table-results'>
-			<thead>
-				<tr>
-					<th>Status</th>
-					<th>Timestamp</th>
-					<th>Details</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr class='log' status='info'>
-					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>11:48:10 AM</td>
-					<td class='step-details'>The breadcrumb contains a link of the previous page of the site and respect the UI design</td>
-				</tr>
-				<tr class='log' status='info'>
-					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>11:48:11 AM</td>
-					<td class='step-details'>com.aventstack.extentreports.ExtentTest@58ff8d79</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-							<ul class='screenshots'>
-								<li><img data-featherlight='.//screenshot//.png' width='10%' src='.//screenshot//.png' data-src='.//screenshot//.png'></li>
-							</ul>
-					</div>
-				</li>
-				
-				
-				<li class='test displayed active  fail' status='fail' bdd='false' test-id='2'>
-					<div class='test-heading'>
-						<span class='test-name'>Verify document tile can have only 2 line product name, anything more than that will be truncated(fit to size)</span>
-						<span class='test-time'>Jan 17, 2023 11:48:17 AM</span>
+						<span class='test-name'>Verify the product listing page does not have broken images</span>
+						<span class='test-time'>Jan 18, 2023 10:57:45 AM</span>
 						<span class='test-status right fail'>fail</span>
 					</div>
 					<div class='test-content hide'>
 <div class='test-time-info'>
-	<span class='label start-time'>Jan 17, 2023 11:48:17 AM</span>
-	<span class='label end-time'>Jan 17, 2023 11:48:17 AM</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+172ms</span>
+	<span class='label start-time'>Jan 18, 2023 10:57:45 AM</span>
+	<span class='label end-time'>Jan 18, 2023 10:57:45 AM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+260ms</span>
 </div>
 	<div class='test-steps'>
 		<table class='bordered table-results'>
@@ -221,97 +177,13 @@
 			<tbody>
 				<tr class='log' status='fail'>
 					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
-					<td class='timestamp'>11:48:17 AM</td>
-					<td class='step-details'>Document tile can have 3 line product name</td>
+					<td class='timestamp'>10:57:45 AM</td>
+					<td class='step-details'>The product listing page has broken images</td>
 				</tr>
-				<tr class='log' status='info'>
-					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>11:48:17 AM</td>
-					<td class='step-details'>com.aventstack.extentreports.ExtentTest@77bbadc</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-							<ul class='screenshots'>
-								<li><img data-featherlight='.//screenshot//.png' width='10%' src='.//screenshot//.png' data-src='.//screenshot//.png'></li>
-							</ul>
-					</div>
-				</li>
-				
-				
-				<li class='test displayed active  error' status='error' bdd='false' test-id='3'>
-					<div class='test-heading'>
-						<span class='test-name'>Verify the assets title cannot be more than 3 lines</span>
-						<span class='test-time'>Jan 17, 2023 11:48:20 AM</span>
-						<span class='test-status right error'>error</span>
-					</div>
-					<div class='test-content hide'>
-<div class='test-time-info'>
-	<span class='label start-time'>Jan 17, 2023 11:48:20 AM</span>
-	<span class='label end-time'>Jan 17, 2023 11:48:40 AM</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 0m 20s+409ms</span>
-</div>
-	<div class='test-steps'>
-		<table class='bordered table-results'>
-			<thead>
-				<tr>
-					<th>Status</th>
-					<th>Timestamp</th>
-					<th>Details</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr class='log' status='error'>
-					<td class='status error' title='error' alt='error'><i class='material-icons'>error</i></td>
-					<td class='timestamp'>11:48:20 AM</td>
-					<td class='step-details'>Undefined asset title line</td>
-				</tr>
-				<tr class='log' status='info'>
-					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>11:48:40 AM</td>
-					<td class='step-details'>com.aventstack.extentreports.ExtentTest@753aca85</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-							<ul class='screenshots'>
-								<li><img data-featherlight='.//screenshot//.png' width='10%' src='.//screenshot//.png' data-src='.//screenshot//.png'></li>
-							</ul>
-					</div>
-				</li>
-				
-				
-				<li class='test displayed active  fail' status='fail' bdd='false' test-id='4'>
-					<div class='test-heading'>
-						<span class='test-name'>Verify by default the first tab will be active when the user landing on the page</span>
-						<span class='test-time'>Jan 17, 2023 11:48:44 AM</span>
-						<span class='test-status right fail'>fail</span>
-					</div>
-					<div class='test-content hide'>
-<div class='test-time-info'>
-	<span class='label start-time'>Jan 17, 2023 11:48:44 AM</span>
-	<span class='label end-time'>Jan 17, 2023 11:49:03 AM</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 0m 18s+830ms</span>
-</div>
-	<div class='test-steps'>
-		<table class='bordered table-results'>
-			<thead>
-				<tr>
-					<th>Status</th>
-					<th>Timestamp</th>
-					<th>Details</th>
-				</tr>
-			</thead>
-			<tbody>
 				<tr class='log' status='fail'>
 					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
-					<td class='timestamp'>11:48:44 AM</td>
-					<td class='step-details'>Not Verified by default the first tab is active when the user landing on the page</td>
-				</tr>
-				<tr class='log' status='info'>
-					<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-					<td class='timestamp'>11:49:03 AM</td>
-					<td class='step-details'>com.aventstack.extentreports.ExtentTest@5d97caa4</td>
+					<td class='timestamp'>10:57:45 AM</td>
+					<td class='step-details'>com.aventstack.extentreports.ExtentTest@73c9e8e8</td>
 				</tr>
 			</tbody>
 		</table>
@@ -356,31 +228,31 @@
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Tests
-					<div class='panel-lead'>4</div>
+					<div class='panel-lead'>1</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Steps
-					<div class='panel-lead'>8</div>
+					<div class='panel-lead'>2</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Start
-					<div class='panel-lead'>Jan 17, 2023 11:48:09 AM</div>
+					<div class='panel-lead'>Jan 18, 2023 10:57:43 AM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 			 		End
-			 		<div class='panel-lead'>Jan 17, 2023 11:49:04 AM</div>
+			 		<div class='panel-lead'>Jan 18, 2023 10:57:45 AM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Time Taken
-					<div class='panel-lead'>55,273ms</div>
+					<div class='panel-lead'>2,413ms</div>
 				</div>
 			</div>
 		</div>
@@ -393,22 +265,22 @@
 
 		<script>
 			var statusGroup = {
-				passParent: 1,
-				failParent: 2,
+				passParent: 0,
+				failParent: 1,
 				fatalParent: 0,
-				errorParent: 1,
+				errorParent: 0,
 				warningParent: 0,
 				skipParent: 0,
-				exceptionsParent: 3,
+				exceptionsParent: 1,
 				
 				passChild: 0,
 				failChild: 2,
 				fatalChild: 0,
-				errorChild: 1,
+				errorChild: 0,
 				warningChild: 0,
 				skipChild: 0,
-				infoChild: 5,
-				exceptionsChild: 3,
+				infoChild: 0,
+				exceptionsChild: 2,
 				
 				passGrandChild: 0,
 				failGrandChild: 0,

@@ -186,11 +186,12 @@ public class HomePage extends HelperFunctions {
 	      }
 		
 	}
-	public void setDescriptionOfBanner() {
+	public void setDescriptionOfBanner() throws Exception {
 		HelperFunctions.waitForPageToLoad(3);
+		read2.setExcelFile("./testdata.xlsx", "QA");
 		String actual=descriptionOfPromotionBanner.getText();
-	      String expected="PwC's home for information on legal terms & conditions, security, and compliance for our licensed products.";
-		  Assert.assertEquals(actual, expected, "The promotion banner does not match with the expected text.");
+		String expected=read2.getCellData("VALUE", 29);
+		Assert.assertEquals(actual, expected, "The promotion banner does not match with the expected text.");
 	}
 	
 	
@@ -239,9 +240,12 @@ public class HomePage extends HelperFunctions {
 		
 	}
 	
-	public void setOneStopTitle() {
+	public void setOneStopTitle() throws Exception {
+		HelperFunctions.waitForPageToLoad(3);
+		read2.setExcelFile("./testdata.xlsx", "QA");
 		String actualTitle=oneStopTitle.getText();
-		String expectedTitle="One stop shop, for all your Product needs";
+		String expectedTitle=read2.getCellData("VALUE", 30);
+		
 		Assert.assertEquals(actualTitle, expectedTitle, "Actual and expected title do not match");
 	}
 	

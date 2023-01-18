@@ -12,6 +12,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -152,8 +153,11 @@ public class ProductPage extends HelperFunctions {
 	@FindBy(xpath="((//div[@class='cmp-for-you__tiles'])/a)[position()=6 or position()=7 or position()=8 or position()=9 or position()=10]")
 	private static List<WebElement> last5Assets;
 	
-	@FindBy(xpath="//div[@class='cmp-my-products-tile__text']")
+	@FindBy(xpath="//div[@class='cmp-my-products-tile__title']")
 	private static List<WebElement> titleofAssets;
+	
+	@FindBy(xpath="//div[@class='cmp-all-resources__card-title']//a")
+	private static List<WebElement> allresourcesContentLink;
 	
 	@FindBy(xpath="//div[@class='cmp-for-you__txt']")
 	private WebElement forYouTitle;
@@ -176,6 +180,39 @@ public class ProductPage extends HelperFunctions {
 	@FindBy(xpath="//span[@class='cmp-header__cta-avatar-initials']")
 	private WebElement userInitials;
 	
+	@FindBy(xpath="//div[@class='cmp-need-technical-support__text-container']")
+	private WebElement technicalSupportTitle;
+	
+	@FindBy(xpath="//div[@class='cmp-related-products__title']")
+	private WebElement relatedProductsTitle;
+	
+	@FindBy(xpath="(//div[@class='cmp-related-products__carousel-title'])[position()=1]")
+	private WebElement relatedProduct1;
+	
+	@FindBy(xpath="(//div[@class='cmp-related-products__carousel-title'])[position()=2]")
+	private WebElement relatedProduct2;
+	
+	@FindBy(xpath="//input[@id='initEmail']")
+	private WebElement email;
+	
+	@FindBy(xpath="//button[.='Next']")
+	private WebElement next;
+	
+	@FindBy(xpath="//input[@type='password']")
+	private WebElement pass;
+	
+	@FindBy(xpath="//button[.='Submit']")
+	private WebElement submit;
+	
+	@FindBy(xpath="//a[@id='loginLink']")
+	private WebElement loginLink;
+	
+	@FindBy(xpath="//div[@data-href='/content/pc/us/en/my-products/product-4.html']")
+	private WebElement loginLink2;
+	
+	@FindBy(xpath="//a[.='Go To Client View']")
+	private WebElement technicalSupportButton;
+	
 	
 	
 	
@@ -193,22 +230,22 @@ public class ProductPage extends HelperFunctions {
 	
 	
 	
-	public void setDocCategory() {
-		
-		JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
-        js.executeScript("arguments[0].scrollIntoView(true);", allResources);
-		
+	public void setDocCategory() throws Exception {
+		HelperFunctions.scrollToElement(allResources);
+		read1.setExcelFile("./testdata.xlsx", "Tag Taxonomy");
         
 		for(WebElement eachdocCat: myProductCatDropdownList) {
 			System.out.println(eachdocCat.getText());
 			
-			if(eachdocCat.getText().contains("Customer engagement") && eachdocCat.getText().contains("Operational improvement")&& eachdocCat.getText().contains("Risk mitigation")
-					&& eachdocCat.getText().contains("Strategic intelligence")&& eachdocCat.getText().contains("Workforce experience")) {
+			if(eachdocCat.getText().contains(read1.getCellData("Portfolio", 1))&&eachdocCat.getText().contains(read1.getCellData("Portfolio", 2))
+					&&eachdocCat.getText().contains(read1.getCellData("Portfolio", 3))
+					&&eachdocCat.getText().contains(read1.getCellData("Portfolio", 4))
+					&&eachdocCat.getText().contains(read1.getCellData("Portfolio", 5))){
 				
 				Assert.assertTrue(true);}else {Assert.assertTrue(false);}}
 		
 		for(WebElement eachdocCat:myProductCatDropdownList) {
-			if(eachdocCat.getText().contains("Customer engagement")) {
+			if(eachdocCat.getText().contains(read1.getCellData("Portfolio", 1))) {
 				eachdocCat.click();
 				break;
 			}
@@ -218,9 +255,8 @@ public class ProductPage extends HelperFunctions {
 	}
 	
 	public void setFooterWithoutLogin() {
-		
-		 JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
-	        js.executeScript("arguments[0].scrollIntoView(true);", footerContent);
+		HelperFunctions.scrollToElement(footerContent);
+	
 	        if(footerContent.isDisplayed() && footerLinkGroup.isEnabled() ) {
 	        	Assert.assertTrue(true);
 	        }else {
@@ -229,10 +265,10 @@ public class ProductPage extends HelperFunctions {
 	
 	}
 	
-	public void setFooterWithLogin() {
+	public void setFooterWithLogin() throws Exception {
 		
-		 JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
-	        js.executeScript("arguments[0].scrollIntoView(true);", footerContent);
+		HelperFunctions.scrollToElement(footerContent);
+		
 	        System.out.println(footerContent.getText());
 	       
 	        if(footerContent.isDisplayed() && footerLinkGroup.isDisplayed() ) {
@@ -244,34 +280,34 @@ public class ProductPage extends HelperFunctions {
 	
 	}
 	
-	public void setErrorMessage() {
+	public void setErrorMessage() throws Exception  {
+	
+	    
 		JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
         js.executeScript("window.open()");
 	    ArrayList<String> tabs = new ArrayList<String>(Driver.getDriver().getWindowHandles());
 	    Driver.getDriver().switchTo().window(tabs.get(1));
-	    Driver.getDriver().get("https://productcentral-qa.products.pwc.com/content/pc/us/en/my-products/product-3.html");
+	    read1.setExcelFile("./testdata.xlsx", "QA");
+	    Driver.getDriver().get(read1.getCellData("VALUE", 36));
 	    HelperFunctions.staticWait(5);
 	    String actualErrorTitle=errorTitle.getText();
-		String expectedErrorTitle="403- Forbidden Access";
-		
+	    String expectedErrorTitle=read1.getCellData("VALUE", 38);
 		String actualErrorDescription=errorDescription.getText();
-	    String expectedErrorDescription="You do not have access to this page. Please contact our support team for further assistance. (Link to service now where user can submit a ticket)";
-		
+		String expectedErrorDescription=read1.getCellData("VALUE", 37);
 		Assert.assertEquals(actualErrorTitle, expectedErrorTitle, "Actual and expected error title do not match");
 		Assert.assertEquals(actualErrorDescription, expectedErrorDescription, "Actual and expected error description do not match");
 	    
 		
 	}
 	
-	public void setErrorPage() {
+	public void setErrorPage() throws Exception {
 		JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
         js.executeScript("window.open()");
 	    ArrayList<String> tabs = new ArrayList<String>(Driver.getDriver().getWindowHandles());
 	    Driver.getDriver().switchTo().window(tabs.get(1));
-	    Driver.getDriver().get("https://productcentral-qa.products.pwc.com/content/pc/us/en/my-products/product-3.html");
-	    HelperFunctions.staticWait(5);
-	    
-		
+	    read1.setExcelFile("./testdata.xlsx", "QA");
+	    Driver.getDriver().get(read1.getCellData("VALUE", 36));
+	    HelperFunctions.staticWait(5); 
 		if(errorImage.isDisplayed() && errorTitle.isDisplayed() &errorDescription.isDisplayed()) {
 			Assert.assertTrue(true);
 		}else {
@@ -287,9 +323,7 @@ public void setDisplayResources() {
 	HelperFunctions.waitForPageToLoad(3);
 	product2.click();
 	HelperFunctions.waitForPageToLoad(3);
-	
-	 JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
-     js.executeScript("arguments[0].scrollIntoView(true);", allResources);
+	HelperFunctions.scrollToElement(allResources); 
      for(WebElement eachResources: first5resources) {
     	 if(eachResources.isDisplayed()) {
     		 Assert.assertTrue(true);
@@ -307,19 +341,19 @@ public void setDisplayResources() {
      }
      
     }
-public void setNewTabAssets() {
+public void setNewTabAssets() throws Exception {
 	HelperFunctions.staticWait(3);
 	product2.click();
 	HelperFunctions.staticWait(3);
-	JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
-    js.executeScript("arguments[0].scrollIntoView(true);", viewMoreButton);
+	HelperFunctions.scrollToElement(viewMoreButton); 
     HelperFunctions.staticWait(3);
     resource1forProduct2.click();
     ArrayList<String> tabs = new ArrayList<String>(Driver.getDriver().getWindowHandles());
     Driver.getDriver().switchTo().window(tabs.get(2));
     System.out.println(Driver.getDriver().getCurrentUrl());
     String actualUrl=Driver.getDriver().getCurrentUrl();
-    String expectedUrl="https://productcentral-qa.products.pwc.com/content/dam/productcentral/en_us/products/product-2/myproducts/sample10.pdf.coredownload.inline.pdf";
+    read1.setExcelFile("./testdata.xlsx", "QA");
+    String expectedUrl=read1.getCellData("VALUE", 35);
     Assert.assertEquals(actualUrl, expectedUrl);
     Driver.getDriver().close();
     Driver.getDriver().switchTo().window(tabs.get(1));
@@ -340,9 +374,7 @@ public void setTagsAccompany() {
 	HelperFunctions.staticWait(3);
 	product2.click();
 	HelperFunctions.staticWait(3);
-	JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
-    js.executeScript("arguments[0].scrollIntoView(true);", viewMoreButton);
-    
+	HelperFunctions.scrollToElement(viewMoreButton); 
     selectDropdown.click();
     
     String expected1="Technical Guide";
@@ -416,46 +448,30 @@ public void setMyProductSearch() {
 
 public void setResourcesBasedonProducts() {
 	product2.click();
-	JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
-    js.executeScript("arguments[0].scrollIntoView(true);", allResources);
-    
-   if(resource1forProduct2.isDisplayed() && resource2forProduct2.isDisplayed() && resource3forProduct2.isDisplayed() && resource4forProduct2.isDisplayed() && resource5forProduct2.isDisplayed()) {
+	HelperFunctions.scrollToElement(allResources);  
+    if(resource1forProduct2.isDisplayed() && resource2forProduct2.isDisplayed() && resource3forProduct2.isDisplayed() && resource4forProduct2.isDisplayed() && resource5forProduct2.isDisplayed()) {
 	   Assert.assertTrue(true);
    }else
 	   Assert.assertTrue(false);
-   
-   
-   
-   myProductItemOnSitemap.click();
-   HelperFunctions.waitForPageToLoad(5);
-   
-   product4.click();
-   
-   JavascriptExecutor js1 = ((JavascriptExecutor) Driver.getDriver());
-   js1.executeScript("arguments[0].scrollIntoView(true);", allResources);
     
+   myProductItemOnSitemap.click();
+   HelperFunctions.waitForPageToLoad(5); 
+   product4.click();
+   HelperFunctions.scrollToElement(allResources);
+   HelperFunctions.staticWait(3);
    if(resource1forProduct4.isDisplayed() && resource2forProduct4.isDisplayed() && resource3forProduct4.isDisplayed()) {
 	   Assert.assertTrue(true);
    }else
 	   Assert.assertTrue(false);
-    
-   
-   
-    
-  
-   
    
 }
 
 public void setNotSupportMultiSelect() {
 	product2.click();
 	HelperFunctions.waitForPageToLoad(3);
-	JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
-    js.executeScript("arguments[0].scrollIntoView(true);", viewMoreButton);
-	   documentDropdown.click();    
-	    
-	    
-		for(WebElement tags:myProductCatDropdownList) {
+	HelperFunctions.scrollToElement(viewMoreButton);
+    documentDropdown.click();    
+	    for(WebElement tags:myProductCatDropdownList) {
 			tags.click();
 			Assert.assertFalse(tags.isDisplayed());
 			
@@ -467,8 +483,7 @@ public void setLoadMoreButton() {
 	HelperFunctions.waitForPageToLoad(3);
 	product2.click();
 	HelperFunctions.waitForPageToLoad(3);
-	JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
-    js.executeScript("arguments[0].scrollIntoView(true);", viewMoreButton);
+	HelperFunctions.scrollToElement(viewMoreButton);
       JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
       executor.executeScript("arguments[0].click();", viewMoreButton);
       if(viewLessButton.isDisplayed()) {
@@ -495,8 +510,8 @@ public void setClickLoadMoreButton() {
 	HelperFunctions.waitForPageToLoad(3);
 	product2.click();
 	HelperFunctions.waitForPageToLoad(3);
-	JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
-    js.executeScript("arguments[0].scrollIntoView(true);", viewMoreButton);
+	HelperFunctions.scrollToElement(viewMoreButton);
+	
       JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
       executor.executeScript("arguments[0].click();", viewMoreButton);
       
@@ -517,8 +532,7 @@ public void setClickLoadLessButton() {
 	HelperFunctions.waitForPageToLoad(3);
 	product2.click();
 	HelperFunctions.waitForPageToLoad(3);
-	JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
-    js.executeScript("arguments[0].scrollIntoView(true);", viewMoreButton);
+	HelperFunctions.scrollToElement(viewMoreButton);
       JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
       executor.executeScript("arguments[0].click();", viewMoreButton);
       
@@ -569,8 +583,7 @@ public void setTitleOfAssets() {
 	HelperFunctions.waitForPageToLoad(3);
 	product2.click();
 	HelperFunctions.waitForPageToLoad(3);
-	JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
-    js.executeScript("arguments[0].scrollIntoView(true);", forYouTitle);
+	HelperFunctions.scrollToElement(forYouTitle);
     int hasMoreThan3Line=0;
     System.out.println(titleofAssets.size());
 	for(WebElement eachTitleOfAssets: titleofAssets) {
@@ -619,16 +632,6 @@ public void setFirstTabActive() {
 	HelperFunctions.waitForPageToLoad(3);
 	myProductOnLeftNavigation.click();
 	HelperFunctions.waitForPageToLoad(3);
-    /*String s3 = product2Title.getCssValue("color");
-    System.out.println("Color is :" + s3);
-    String s4 = product4Title.getCssValue("color");
-    System.out.println("Color is :" + s4);
-       
-    if(s3.equals("rgba(65, 83, 133, 1)") && s4.equals("rgba(70, 70, 70, 0.7)") ) {
-    	Assert.assertTrue(true);
-    }else {
-    	Assert.assertTrue(false);
-    }*/
 	String activeColor="rgba(65, 83, 133, 1)";
 	String fp=firstProduct.getCssValue("color");
 	if(fp.equals(activeColor)) {
@@ -674,6 +677,108 @@ public void setUserInitials() throws Exception {
 }
 
 
+
+public void setInfoOfProducts() {
+	HelperFunctions.waitForPageToLoad(3);
+	HelperFunctions.scrollToElement(forYouTitle);
+    System.out.println(titleofAssets.size());
+	WebElement first = titleofAssets.stream().findFirst().get();
+	System.out.println(first.getText());
+	System.out.println("----");
+	String expectedTitleFirstForYou="Transparency-Hub-Support-Guide-test.pdf";
+	Assert.assertEquals(first.getText(),expectedTitleFirstForYou);
+    HelperFunctions.staticWait(3);
+	JavascriptExecutor js2 = ((JavascriptExecutor) Driver.getDriver());
+	js2.executeScript("window.scrollBy(0,-750)", "");
+	JavascriptExecutor executor2 = (JavascriptExecutor) Driver.getDriver();
+    executor2.executeScript("arguments[0].click();", product2);
+	HelperFunctions.scrollToElement( forYouTitle);
+    WebElement first2 = titleofAssets.stream().findFirst().get();
+	System.out.println(first2.getText());
+	String expectedTitleFirst2ForYou="Automatic Contact Tracing Proximity Score Description C";
+	Assert.assertEquals(first2.getText(),expectedTitleFirst2ForYou);
+   
+   
+    
+}
+
+public void setRelatedProducts() throws Exception {
+
+	HelperFunctions.waitForPageToLoad(3);
+	HelperFunctions.scrollToElement(relatedProductsTitle);
+    HelperFunctions.staticWait(3);
+    String actualTitle=relatedProduct1.getText();
+    String expectedTitle="Hello world";
+    Assert.assertEquals(actualTitle,expectedTitle);
+    String actualTitle2=relatedProduct2.getText();
+    String expectedTitle2="Hello world";
+    Assert.assertEquals(actualTitle2,expectedTitle2);
+    JavascriptExecutor js2 = ((JavascriptExecutor) Driver.getDriver());
+	js2.executeScript("window.scrollBy(0,-750)", "");
+	JavascriptExecutor executor2 = (JavascriptExecutor) Driver.getDriver();
+    executor2.executeScript("arguments[0].click();", product2);
+    HelperFunctions.staticWait(3);
+    HelperFunctions.scrollToElement(relatedProductsTitle);
+    HelperFunctions.staticWait(3);
+    String actualTitle3=relatedProduct1.getText();
+    String expectedTitle3="Indoor Test";
+    Assert.assertEquals(actualTitle3,expectedTitle3);
+    String actualTitle4=relatedProduct2.getText();
+    String expectedTitle4="Outdoor Test";
+    Assert.assertEquals(actualTitle4,expectedTitle4);
+  
+   
+	
+	
+}
+
+public void setAllResourcesContent() {
+	product2.click();
+	 HelperFunctions.scrollToElement(allResources);
+	 String a=".pdf";
+	 String b=".png";
+	 String c=".jpg";
+	 String d=".gif";
+	 String e=".mp4";
+	 String f=".mp3";
+	 
+	 List<String> list = new ArrayList<String>();
+    for(WebElement each:allresourcesContentLink) {
+    	list.add(each.getAttribute("href").substring(each.getAttribute("href").length()-4));
+    }
+    if(list.contains(a)||list.contains(b)||list.contains(c)||list.contains(d)||list.contains(e)||list.contains(f)) {
+    	Assert.assertTrue(true);
+    }else {
+    	Assert.assertTrue(false);
+    }
+
+   
+        
+   
+   
+}
+
+public void setTechnicalSupport() throws Exception {
+	HelperFunctions.scrollToElement(technicalSupportButton);
+    HelperFunctions.staticWait(5);
+    read1.setExcelFile("./testdata.xlsx", "QA");
+    String goToClientViewLink=read1.getCellData("VALUE", 34);
+    System.out.println(technicalSupportButton.getAttribute("href"));
+    if(technicalSupportButton.getAttribute("href").equalsIgnoreCase(goToClientViewLink)) {
+    	Assert.assertTrue(true);
+    }else {
+    	Assert.assertTrue(false);
+    }
+    technicalSupportButton.click();
+    ArrayList<String> tabs2 = new ArrayList<String>(Driver.getDriver().getWindowHandles());
+    Driver.getDriver().switchTo().window(tabs2.get(2));
+    System.out.println(Driver.getDriver().getCurrentUrl());
+    Assert.assertEquals(Driver.getDriver().getCurrentUrl(), goToClientViewLink);
+  
+
+
+
+}
 
 	
 	
