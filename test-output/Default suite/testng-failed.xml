@@ -7,7 +7,7 @@
         <methods>
           <include name="closingBrowser"/>
           <include name="setUp"/>
-          <include name="WEB_52"/>
+          <include name="WEB_68"/>
           <include name="initTest"/>
           <include name="closeTabs"/>
         </methods>
