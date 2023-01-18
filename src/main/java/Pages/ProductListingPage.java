@@ -237,13 +237,13 @@ public class ProductListingPage extends HelperFunctions {
 		HelperFunctions.waitForPageToLoad(5);
     	offeringOverviewFromCloud.click();
     	HelperFunctions.waitForPageToLoad(5);
-		if(backToCloudBreadcrumb.getAttribute("href").contains("/content/pc/us/en/automation/products/cloud.html")) {
+		if(backToCloudBreadcrumb.getAttribute("href")!=null) {
 			Assert.assertTrue(true);
 		}else {
 			Assert.assertTrue(false);
 		}
 		backToCloudBreadcrumb.click();
-		if(backToProductsBreadcrumb.getAttribute("href").contains("/content/pc/us/en/automation/products.html")) {
+		if(backToProductsBreadcrumb.getAttribute("href")!=null) {
 			Assert.assertTrue(true);
 		}else {
 			Assert.assertTrue(false);

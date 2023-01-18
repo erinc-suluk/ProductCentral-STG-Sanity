@@ -233,8 +233,8 @@ public class SanityTestCases extends BasePage {
 	public void WEB_13() throws Exception{
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 2));
-		ExtentTest test = extent.createTest("(Home Page)Verify that when left navigation collapsed,only the collapsed icon will be displayed and on hover over the icon will say 'collapse'");
-	    test.info("(Home Page)When left navigation collapsed,only the collapsed icon will be displayed and on hover over the icon will say 'collapse'");
+		ExtentTest test = extent.createTest("Verify that when left navigation collapsed,only the collapsed icon will be displayed and on hover over the icon will say 'collapse'");
+	    test.info("When left navigation collapsed,only the collapsed icon will be displayed and on hover over the icon will say 'collapse'");
 	    BasePage.setCollapseButton();
 		logger.info("Test WEB_13 has passed");
 	}
@@ -244,7 +244,7 @@ public class SanityTestCases extends BasePage {
 	public void WEB_14() throws Exception{
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 2));
-		ExtentTest test = extent.createTest("Verify left navigation component is visible to user(Home Page)");
+		ExtentTest test = extent.createTest("Verify left navigation component is visible to user");
 	    test.info("Left navigation component is visible to user");
 	    BasePage.setLeftNavigationItems2();
 		logger.info("Test WEB_15 has passed");

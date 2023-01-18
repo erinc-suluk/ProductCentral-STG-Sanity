@@ -628,11 +628,12 @@ public void setActiveTab() {
 
 }
 
-public void setFirstTabActive() {
+public void setFirstTabActive() throws Exception {
 	HelperFunctions.waitForPageToLoad(3);
 	myProductOnLeftNavigation.click();
 	HelperFunctions.waitForPageToLoad(3);
-	String activeColor="rgba(65, 83, 133, 1)";
+	read1.setExcelFile("./testdata.xlsx", "QA");
+	String activeColor=read1.getCellData("VALUE", 39);
 	String fp=firstProduct.getCssValue("color");
 	if(fp.equals(activeColor)) {
 		Assert.assertTrue(true);
