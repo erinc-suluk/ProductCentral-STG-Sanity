@@ -23,13 +23,7 @@
        <include name="WEB_11"/>
        <include name="WEB_12"/>
        <include name="WEB_13"/>
-       <include name="WEB_13_1"/>
-       <include name="WEB_13_2"/>
-       <include name="WEB_13_3"/>
        <include name="WEB_14"/>
-       <include name="WEB_14_1"/>
-       <include name="WEB_14_2"/>
-       <include name="WEB_14_3"/>
        <include name="WEB_15"/>
        <include name="WEB_16"/>
        <include name="WEB_17"/>
@@ -93,6 +87,21 @@
        <include name="WEB_69"/>
        <include name="WEB_70"/>
        <include name="WEB_71"/>
+       <include name="WEB_72"/>
+       <include name="WEB_73"/>
+       <include name="WEB_74"/>
+       <include name="WEB_75"/>
+       <include name="WEB_76"/>
+       <include name="WEB_77"/>
+       <include name="WEB_78"/>
+       <include name="WEB_79"/>
+       <include name="WEB_80"/>
+       <include name="WEB_81"/>
+       <include name="WEB_82"/>
+       <include name="WEB_83"/>
+       <include name="WEB_84"/>
+       <include name="WEB_85"/>
+       <include name="WEB_86"/>
        
       </methods>
       </class>
