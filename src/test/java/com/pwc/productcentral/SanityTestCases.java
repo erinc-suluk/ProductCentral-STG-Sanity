@@ -221,8 +221,8 @@ public class SanityTestCases extends BasePage {
 	public void WEB_12() throws Exception{
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 4));
-		ExtentTest test = extent.createTest("Verify PDF viewer/controls appear at the right side of the page");
-	    test.info("PDF viewer/controls appear at the right side of the page");
+		ExtentTest test = extent.createTest("Verify PDF viewer/controls appear at  the page");
+	    test.info("PDF viewer/controls appear at the page");
 	    plp.setPdfControllers();
 		logger.info("Test WEB_12 has passed");
 	}

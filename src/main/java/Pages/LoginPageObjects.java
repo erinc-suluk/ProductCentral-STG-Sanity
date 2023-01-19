@@ -61,6 +61,9 @@ public class LoginPageObjects extends HelperFunctions{
 	    Driver.getDriver().switchTo().window(tabs.get(1));
 	    Driver.getDriver().get("https://productcentral-qa.products.pwc.com/");
 	    HelperFunctions.staticWait(5);
+	    JavascriptExecutor js2 = (JavascriptExecutor) Driver.getDriver();
+	    js2.executeScript("window.scrollBy(0,250)", "");
+	    HelperFunctions.staticWait(3);
 	    loginLink2.click();
 	    HelperFunctions.staticWait(5);
 	    

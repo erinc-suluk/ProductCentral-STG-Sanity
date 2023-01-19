@@ -487,6 +487,11 @@ public class AuthoringPage extends HelperFunctions {
 	@FindBy(xpath="//button[@title='View as Published']")
 	private WebElement viewasPublish;
 	
+	@FindBy(xpath="//button[@title='Publish Template']")
+	private WebElement publishTemplate;
+	
+
+	
 	
 	
 	
@@ -819,9 +824,6 @@ public class AuthoringPage extends HelperFunctions {
     	Assert.assertTrue(thirdPositionAuthor.getText().contains(expectedTitle3));
     	Assert.assertTrue(forthPositionAuthor.getText().contains(expectedTitle4));
     	
-    	
-    	JavascriptExecutor js2 = ((JavascriptExecutor) Driver.getDriver());
-        js2.executeScript("window.open()");
 	    ArrayList<String> tabs2 = new ArrayList<String>(Driver.getDriver().getWindowHandles());
 	    Driver.getDriver().switchTo().window(tabs2.get(1));
 	    Driver.getDriver().get(read1.getCellData("VALUE", 21));
@@ -1221,8 +1223,6 @@ js.executeScript("window.open()");
 	    unpublishButton.click();
 	    HelperFunctions.staticWait(3);
 	    continueButton.click();
-	    JavascriptExecutor js2 = ((JavascriptExecutor) Driver.getDriver());
-	     js2.executeScript("window.open()");
 		    ArrayList<String> tabs2 = new ArrayList<String>(Driver.getDriver().getWindowHandles());
 		    Driver.getDriver().switchTo().window(tabs2.get(1));
 		    Driver.getDriver().get(read1.getCellData("VALUE", 17));
@@ -1535,15 +1535,12 @@ js.executeScript("window.open()");
 	    HelperFunctions.waitForPageToLoad(5);
 	    editButtonContent.click();
 	    HelperFunctions.staticWait(3);
-	    JavascriptExecutor js2 = ((JavascriptExecutor) Driver.getDriver());
-        js2.executeScript("arguments[0].scrollIntoView(true);", releaseNotes);
+	    HelperFunctions.scrollToElement(releaseNotes);
         HelperFunctions.staticWait(3);
         releaseNotes.click();
         HelperFunctions.staticWait(3);
         settingIcon.click();
         HelperFunctions.staticWait(3);
-       // addButton.click();
-       // HelperFunctions.staticWait(3);
         String title="version1";
         releaseTitle.click();
         releaseTitle.clear();
@@ -1566,8 +1563,7 @@ js.executeScript("window.open()");
         previewButton2.click();
         HelperFunctions.staticWait(3);
         Driver.getDriver().switchTo().frame(0);
-        JavascriptExecutor js3 = ((JavascriptExecutor) Driver.getDriver());
-        js3.executeScript("arguments[0].scrollIntoView(true);", releaseTitleonPreview);
+        HelperFunctions.scrollToElement(releaseTitleonPreview);
         HelperFunctions.staticWait(3);
         String actualDate=releaseDateonPreview.getText();
         String expectedDate=dateFormat.format(date);
@@ -1599,11 +1595,9 @@ js.executeScript("window.open()");
 	    Driver.getDriver().switchTo().window(tabs.get(1));
 	    Driver.getDriver().get(read1.getCellData("VALUE", 27));
 	    HelperFunctions.waitForPageToLoad(5);
-	    JavascriptExecutor js3 = ((JavascriptExecutor) Driver.getDriver());
-        js3.executeScript("arguments[0].scrollIntoView(true);", authFooter);    
+	    HelperFunctions.scrollToElement(authFooter); 
         HelperFunctions.staticWait(3);
-        JavascriptExecutor js4 = ((JavascriptExecutor) Driver.getDriver());
-        js4.executeScript("arguments[0].scrollIntoView(true);", authFooter);   
+        HelperFunctions.scrollToElement(authFooter); 
 	    HelperFunctions.staticWait(3);
 	    authFooter.click();
 	    HelperFunctions.staticWait(3);
@@ -1611,8 +1605,8 @@ js.executeScript("window.open()");
 	    HelperFunctions.staticWait(3);
 	    textareaForFooter.click();
 	    textareaForFooter.clear();
-	    String footer=read1.getCellData("VALUE", 31);
-	    textareaForFooter.sendKeys(footer);
+	    String mockFooter=read1.getCellData("VALUE", 39);
+	    textareaForFooter.sendKeys(mockFooter);
 	    HelperFunctions.staticWait(3);
 	    privacyPolicyTitle.click();
 	    privacyPolicyTitle.clear();
@@ -1620,16 +1614,60 @@ js.executeScript("window.open()");
 	    HelperFunctions.staticWait(3);
 	    checkIcon.click();
 	    HelperFunctions.staticWait(3);
-	    JavascriptExecutor js2 = ((JavascriptExecutor) Driver.getDriver());
-	    js2.executeScript("window.open()");
+	    pageInfo.click();
+	    HelperFunctions.staticWait(3);
+	    publishTemplate.click();
+	    HelperFunctions.staticWait(3);
 	  	    ArrayList<String> tabs2 = new ArrayList<String>(Driver.getDriver().getWindowHandles());
 	  	    Driver.getDriver().switchTo().window(tabs2.get(1));
-	  	    Driver.getDriver().get(read1.getCellData("VALUE", 12));
+	  	    Driver.getDriver().get(read1.getCellData("VALUE", 40));
 	  	    HelperFunctions.waitForPageToLoad(5);
-	  	  JavascriptExecutor js5 = ((JavascriptExecutor) Driver.getDriver());
-	        js5.executeScript("arguments[0].scrollIntoView(true);", footerContent); 
+	  	    fluidForecast.click();
+	  	  HelperFunctions.staticWait(3);
+	  	   JavascriptExecutor executor1 = (JavascriptExecutor) Driver.getDriver();
+	        executor1.executeScript("arguments[0].click();", fluidForecast);
 	        HelperFunctions.staticWait(3);
-	        Assert.assertTrue(footerContent.getText().contains(footer));
+	        JavascriptExecutor executor2 = (JavascriptExecutor) Driver.getDriver();
+	        executor2.executeScript("arguments[0].click();", fluidForecast);
+	  	  HelperFunctions.staticWait(3);
+	  	  quickPublish2.click();
+	  	 HelperFunctions.staticWait(3);
+	  	 publish2.click();
+	  	 HelperFunctions.staticWait(3);
+		  	    ArrayList<String> tabs3 = new ArrayList<String>(Driver.getDriver().getWindowHandles());
+		  	    Driver.getDriver().switchTo().window(tabs3.get(1));
+		  	    Driver.getDriver().get(read1.getCellData("VALUE", 7));
+		  	    HelperFunctions.waitForPageToLoad(5);
+	  
+		  	Driver.getDriver().switchTo().frame(0);
+		  	 HelperFunctions.scrollToElement(footerContent); 
+	        HelperFunctions.staticWait(3);
+	        Assert.assertTrue(footerContent.getText().contains(mockFooter));
+	        HelperFunctions.staticWait(3);
+	 
+		  	    ArrayList<String> tabs4 = new ArrayList<String>(Driver.getDriver().getWindowHandles());
+		  	    Driver.getDriver().switchTo().window(tabs4.get(1));
+		  	    Driver.getDriver().get(read1.getCellData("VALUE", 27));
+		  	    HelperFunctions.waitForPageToLoad(5);
+		  	    HelperFunctions.scrollToElement(authFooter);
+		        HelperFunctions.staticWait(3);
+		        HelperFunctions.scrollToElement(authFooter);  
+			    HelperFunctions.staticWait(3);
+			    authFooter.click();
+			    HelperFunctions.staticWait(3);
+			    settingIcon.click();
+			    HelperFunctions.staticWait(3);
+			    textareaForFooter.click();
+			    textareaForFooter.clear();
+			    String footer=read1.getCellData("VALUE", 31);
+			    textareaForFooter.sendKeys(footer);
+			    HelperFunctions.staticWait(3);
+			    checkIcon.click();
+			    HelperFunctions.staticWait(3);
+			    pageInfo.click();
+			    HelperFunctions.staticWait(3);
+			    publishTemplate.click();
+			    HelperFunctions.staticWait(3);
 	        
 	    
 	    
