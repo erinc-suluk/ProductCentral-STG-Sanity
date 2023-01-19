@@ -90,7 +90,7 @@ public class SanityTestCases extends BasePage {
 	@BeforeMethod
 	public void initTest() throws Exception {
 	    Driver.getDriver();
-		
+	    read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().manage().window().maximize();
 		Driver.getDriver().manage().deleteAllCookies();
 		HelperFunctions.setWaitTime();
@@ -104,7 +104,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test(enabled=false)
 	public void WEB_1() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 2));
 		ExtentTest test = extent.createTest("Verify the promotion banner must contain an image");
 	    test.info("The promotion banner contains an image");
@@ -114,7 +113,6 @@ public class SanityTestCases extends BasePage {
 	}
 	@Test(enabled=false)
 	public void WEB_2() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 2));
 		ExtentTest test = extent.createTest("Verify the promotion banner must contain a description  'PwC's home for information on legal terms & conditions, security, and compliance for our licensed products.'");
 	    test.info("The promotion banner contains a description");
@@ -124,7 +122,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test(enabled=false)
 	public void WEB_3() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 2));
 		ExtentTest test = extent.createTest("Verify the promotion banner is visible to all users on homepage");
 	    test.info("The promotion banner is visible to all users on homepage");
@@ -133,7 +130,6 @@ public class SanityTestCases extends BasePage {
 	}
 	@Test (enabled=false)
 	public void WEB_4() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 4));
 		ExtentTest test = extent.createTest("Verify related links are visible to all users on content page");
 	    test.info("Related links are visible to all users on content page");
@@ -143,7 +139,6 @@ public class SanityTestCases extends BasePage {
 	}
 	@Test(enabled=false)
 	public void WEB_5() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 4));
 		ExtentTest test = extent.createTest("Verify that user is able to click the breadcrumb and navigate to the previous page(Products Page)");
 	    test.info("The user is able to click the breadcrumb and navigate to the previous page");
@@ -153,7 +148,6 @@ public class SanityTestCases extends BasePage {
 	}
 	@Test(enabled=false)
 	public void WEB_5_2() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 9));
 		ExtentTest test = extent.createTest("Verify that user is able to click the breadcrumb and navigate to the previous page(Legal Page)");
 	    test.info("The user is able to click the breadcrumb and navigate to the previous page");
@@ -162,7 +156,6 @@ public class SanityTestCases extends BasePage {
 	}
 	@Test(enabled=false)
 	public void WEB_6() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 4));
 		ExtentTest test = extent.createTest("Verify that breadcrumb contains a link");
 	    test.info("The breadcrumb contains a link");
@@ -171,7 +164,6 @@ public class SanityTestCases extends BasePage {
 	}
 	@Test(enabled=false)
 	public void WEB_7() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 2));
 		ExtentTest test = extent.createTest("Verify the user is able to view the page title and description");
 	    test.info("The user is able to view the page title and description");
@@ -180,7 +172,6 @@ public class SanityTestCases extends BasePage {
 	}
 	@Test(enabled=false)
 	public void WEB_8() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 4));
 		ExtentTest test = extent.createTest("Verify the user is able to view the related links and content");
 	    test.info("The user is able to view the related links and content");
@@ -189,7 +180,6 @@ public class SanityTestCases extends BasePage {
 	}
 	@Test(enabled=false)
 	public void WEB_9() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 4));
 		ExtentTest test = extent.createTest("Verify each link represents the content page for the product");
 	    test.info("Each link represents the content page for the product");
@@ -200,7 +190,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_10() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 2));
 		ExtentTest test = extent.createTest("Verify description can only be a maximum of 6 lines, anything more than that will be truncated");
 	    test.info("The description is not more than 6 lines");
@@ -209,7 +198,6 @@ public class SanityTestCases extends BasePage {
 	}
 	@Test (enabled=false)
 	public void WEB_11() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 2));
 		ExtentTest test = extent.createTest("Verify homepage tile is visible to all users on homepage");
 	    test.info("The homepage tile is visible to all users on homepage");
@@ -219,7 +207,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test(enabled=false)
 	public void WEB_12() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 4));
 		ExtentTest test = extent.createTest("Verify PDF viewer/controls appear at  the page");
 	    test.info("PDF viewer/controls appear at the page");
@@ -231,7 +218,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test(enabled=false)
 	public void WEB_13() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 2));
 		ExtentTest test = extent.createTest("Verify that when left navigation collapsed,only the collapsed icon will be displayed and on hover over the icon will say 'collapse'");
 	    test.info("When left navigation collapsed,only the collapsed icon will be displayed and on hover over the icon will say 'collapse'");
@@ -242,7 +228,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test(enabled=false)
 	public void WEB_14() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 2));
 		ExtentTest test = extent.createTest("Verify left navigation component is visible to user");
 	    test.info("Left navigation component is visible to user");
@@ -252,7 +237,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test(enabled=false)
 	public void WEB_15() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 2));
 		ExtentTest test = extent.createTest("Verify that when user clicks on the tile then user navigate to a hyperlink page within the tab");
 	    test.info("When user clicks on the tile then user navigate to a hyperlink page within the tab");
@@ -262,7 +246,6 @@ public class SanityTestCases extends BasePage {
 	}
 	@Test (enabled=false)
 	public void WEB_16() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 2));
 		ExtentTest test = extent.createTest("Verify that each tile will contain a title");
 	    test.info("Each tile contains a title");
@@ -271,7 +254,6 @@ public class SanityTestCases extends BasePage {
 	}
 	@Test (enabled=false)
 	public void WEB_17() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 2));
 		ExtentTest test = extent.createTest("Verify that title is like 'One stop shop, for all your Product needs' as per pre defined");
 	    test.info("The title is like 'One stop shop, for all your Product needs' as per pre defined");
@@ -283,7 +265,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test(enabled=false)
 	public void WEB_18() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 2));
 		ExtentTest test = extent.createTest("Verify the footer section size style and design should be fixed and cannot be editable");
 	    test.info("The footer section size style and design are fixed and are not been editable");
@@ -294,7 +275,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_19() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 2));
 		ExtentTest test = extent.createTest("Verify the no spelling mistake for the text on the footer section");
 	    test.info("There is no spelling mistake for the text on the footer section");
@@ -304,7 +284,6 @@ public class SanityTestCases extends BasePage {
 	}
 	@Test (enabled=false)
 	public void WEB_20() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 2));
 		ExtentTest test = extent.createTest("Verify the position of the footer");
 	    test.info("The footer is on the right position");
@@ -313,7 +292,6 @@ public class SanityTestCases extends BasePage {
 	}
 	@Test(enabled=false)
 	public void WEB_21() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 11));
 		ExtentTest test = extent.createTest("Verify that flow is same in legal for security");
 	    test.info("Verified that flow is same in legal for security");
@@ -323,7 +301,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_22() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 2));
 		ExtentTest test = extent.createTest("Verify on click of a search results the user will be navigated to the content type");
 	    test.info("On click of a search results the user is navigated to the content type");
@@ -333,7 +310,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_23() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 2));
 		ExtentTest test = extent.createTest("Verify on selection, the results are automatically sorted");
 	    test.info("Verified, the results are automatically sorted");
@@ -343,7 +319,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_24() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 6));
 		ExtentTest test = extent.createTest("Verify that on selection a result, display the relevant product on the page");
 	    test.info("Verified that on selection a result, display the relevant product on the page");
@@ -353,7 +328,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_25() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 6));
 		ExtentTest test = extent.createTest("Verify that search results are based on keywords");
 	    test.info("Verified that search results are based on keywords");
@@ -363,7 +337,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_26() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 11));
 		ExtentTest test = extent.createTest("Verify that no change to the home page or side nav");
 	    test.info("Verified that no change to the home page or side nav");
@@ -373,7 +346,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_27() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 11));
 		ExtentTest test = extent.createTest("Verify the filter will be a dropdown which will display the My products document categories matching the search results");
 	    test.info("The filter is a dropdown which displays the My products document categories matching the search results");
@@ -384,7 +356,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_28() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 	    ExtentTest test = extent.createTest("Verify the doc categories will be based on Taxonomy document");
 	    test.info("Verified the doc categories will be based on Taxonomy document");
@@ -394,7 +365,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test(enabled=false)
 	public void WEB_29() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify that message shown is 403: You do not have access to this page.Please contact our support team for further assistance.(Link to service now where user can submit a ticket)");
 	    test.info("Verified that message shown is 403: You do not have access to this page.Please contact our support team for further assistance. (Link to service now where user can submit a ticket)");
@@ -406,7 +376,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_30() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 2));
 		ExtentTest test = extent.createTest("Verify that dropdown list will display the Product & document category as per the latest Tag taxonomy document");
 	    test.info("The dropdown list displays the Product & document category as per the latest Tag taxonomy document");
@@ -417,7 +386,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test(enabled=false)
 	public void WEB_31() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 2));
 		ExtentTest test = extent.createTest("Verify the user should see different footer items if logged in");
 	    test.info("The user does not see footer link group if logged in");
@@ -427,7 +395,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test(enabled=false)
 	public void WEB_31_1() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify the user should see different footer items if logged in");
 	    test.info("The user sees footer link group if logged in");
@@ -438,7 +405,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test(enabled=false)
 	public void WEB_32() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify when the user clicks on next will display the next 5 assets of my product landing page");
 	    test.info("When the user clicks on next,the next 5 assets of my product landing page are displayed");
@@ -449,7 +415,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test(enabled=false)
 	public void WEB_33() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify when the user clicks on any item the specified asset/page must be loaded in the new tab");
 	    test.info("When the user clicks on any item the specified asset/page is loaded in the new tab");
@@ -462,7 +427,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test(enabled=false)
 	public void WEB_34() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify if user is logged in, then My Products heading in the sitemap is visible");
 	    test.info("When user is logged in,My Products heading in the sitemap is visible");
@@ -473,7 +437,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test  (enabled=false)
 	public void WEB_35() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify the tags accompany the items which are assets");
 	    test.info("Verified the tags accompany the items which are assets");
@@ -484,7 +447,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test(enabled=false)
 	public void WEB_36() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify that this page should appear to all Site Visitors that are logged in but do not have the right level of permissions to access the page");
 	    test.info("Verified that this page should appear to all Site Visitors that are logged in but do not have the right level of permissions to access the page)");
@@ -495,7 +457,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_37() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify there are 2 filters with minor differences between Global and My Products search");
 	    test.info("Verified there are 2 filters with minor differences between Global and My Products search");
@@ -506,7 +467,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_38() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify the all resources component is presenting a list of 5 assets that are relevant to the product on the product landing page");
 	    test.info("Verified the all resources component is presenting a list of 5 assets that are relevant to the product on the product landing page");
@@ -517,7 +477,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_39() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 8));
 		ExtentTest test = extent.createTest("Verify that page title is visible on page and it displays the name of the product");
 	    test.info("Verified that page title is visible on page and it displays the name of the product");
@@ -527,7 +486,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_40() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 8));
 		ExtentTest test = extent.createTest("Verify that breadcrumb will contain a link of the previous page of the site and must respect the UI design");
 	    test.info("The breadcrumb contains a link of the previous page of the site and respect the UI design");
@@ -538,7 +496,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test  (enabled=false)
 	public void WEB_41() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 9));
 		ExtentTest test = extent.createTest("Verify the content pages will be tagged accordingly");
 	    test.info("Verified the content pages are tagged accordingly");
@@ -550,7 +507,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_42() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 9));
 		ExtentTest test = extent.createTest("Verify document tile can have 3 lines of description");
 	    test.info("Verified document tiles have 3 lines of description");
@@ -560,7 +516,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_43() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 9));
 		ExtentTest test = extent.createTest("Verify display a tile per document category");
 	    test.info("Verified display a tile per document category");
@@ -570,7 +525,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test(enabled=false)
 	public void WEB_44() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 14));
 		ExtentTest test = extent.createTest("Verify that user entered keyword remains into search bar either user select suggested product name or not & submitted keyword doesn't match any result");
 	    test.info("Verified that user entered keyword remains into search bar either user select suggested product name or not & submitted keyword doesn't match any result");
@@ -580,7 +534,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_45() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 9));
 		ExtentTest test = extent.createTest("Breadcrumb must be visible to user");
 	    test.info("Verified breadcrumb is be visible to user");
@@ -590,7 +543,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test  (enabled=false)
 	public void WEB_46() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 6));
 		ExtentTest test = extent.createTest("Verify document tile can have only 2 line product name, anything more than that will be truncated(fit to size)");
 	    test.fail("Document tile can have 3 line product name");
@@ -601,7 +553,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_47() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 6));
 		ExtentTest test = extent.createTest("Verify clicking on the tile will navigate the user to the content page in the same tab");
 	    test.info("Verified clicking on the tile navigates the user to the content page in the same tab");
@@ -611,7 +562,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_48() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify if the user is already logged in don't display 'log in to my products' link");
 	    test.info("Verified if the user is already logged in don't display 'log in to my products' link");
@@ -621,7 +571,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_49() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 15));
 		ExtentTest test = extent.createTest("Verify on clicking 'login to my products' tile the user is navigated to the PC login page");
 	    test.info("Verified on clicking 'login to my products' tile the user is navigated to the PC login page");
@@ -631,7 +580,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_50() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify the hyperlinks in the component will be populated by the system(both title & URL)");
 	    test.info("Verified the hyperlinks in the component will be populated by the system(both title & URL)");
@@ -641,7 +589,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test(enabled=false)
 	public void WEB_51() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify the filter does not support multi-select");
 	    test.info("Verified the filter does not support multi-select");
@@ -652,7 +599,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_52() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 14));
 		ExtentTest test = extent.createTest("Verify the product listing page does not have broken images");
 	    test.fail("The product listing page has broken images");
@@ -662,7 +608,6 @@ public class SanityTestCases extends BasePage {
 	}
 	@Test (enabled=false)
 	public void WEB_52_1() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 2));
 		ExtentTest test = extent.createTest("Verify the home page does not have broken images");
 	    test.info("Verified the home page does not have broken images");
@@ -672,7 +617,6 @@ public class SanityTestCases extends BasePage {
 	}
 	@Test (enabled=false)
 	public void WEB_52_2() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 8));
 		ExtentTest test = extent.createTest("Verify the reseller page does not have broken images");
 	    test.info("Verified the reseller does not have broken images");
@@ -683,7 +627,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_52_3() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 9));
 		ExtentTest test = extent.createTest("Verify the legal page does not have broken images");
 	    test.info("Verified the legal does not have broken images");
@@ -694,7 +637,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_52_4() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 11));
 		ExtentTest test = extent.createTest("Verify the security page does not have broken images");
 	    test.info("Verified the security does not have broken images");
@@ -705,7 +647,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test(enabled=false)
 	public void WEB_52_5() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify the my product page does not have broken images");
 	    test.info("Verified the my product page does not have broken images");
@@ -717,7 +658,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test(enabled=false)
 	public void WEB_53() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify on click on load more, another 5 assets must be loaded");
 	    test.info("Verified on click on load more, another 5 assets are loaded");
@@ -728,7 +668,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_54() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify the assets title cannot be more than 3 lines");
 	    test.info("Verified the assets title cannot be more than 3 lines");
@@ -741,7 +680,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test(enabled=false)
 	public void WEB_55() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify the user is able to click on load more button");
 	    test.info("Verified the user is able to click on load more button");
@@ -752,7 +690,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_56() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify clicking on view less will revert this section to its original state with 5 tiles");
 	    test.info("Verified clicking on view less reverts this section to its original state with 5 tiles");
@@ -763,7 +700,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_57() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify active tab will be underlined");
 	    test.info("Verified active tab is underlined ");
@@ -774,7 +710,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test  (enabled=false)
 	public void WEB_58() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify by default the first tab will be active when the user landing on the page");
 	    test.fail("Not Verified by default the first tab is active when the user landing on the page");
@@ -786,7 +721,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_59() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify hero promotion card is static, not clickable");
 	    test.info("Verified hero promotion card is static, not clickable");
@@ -797,7 +731,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_60() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify an image can be an image pattern");
 	    test.info("Verified an image can be an image pattern");
@@ -808,7 +741,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_61() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify author is able to author the site map will all the links");
 	    test.info("Verified author is able to author the site map will all the links");
@@ -818,7 +750,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_62() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify author is able to hide pages from displaying within the site map");
 	    test.info("Verified author is able to hide pages from displaying within the site map");
@@ -828,7 +759,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_63() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify tiles are partially authorable");
 	    test.info("Verified tiles are partially authorable");
@@ -839,7 +769,6 @@ public class SanityTestCases extends BasePage {
 
 	@Test (enabled=false)
 	public void WEB_64() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify that not all products will have all categories listed on the page but some will have a combination of them");
 	    test.info("Verified that not all products will have all categories listed on the page but some will have a combination of them");
@@ -849,7 +778,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_65() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify last updated date will be pulled from asset metadata");
 	    test.info("Verified last updated date is pulled from asset metadata");
@@ -859,7 +787,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_66() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify last updated date will also be reflected under the title");
 	    test.info("Verified last updated date is also be reflected under the title");
@@ -869,7 +796,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_67() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify homepage tile component is system authored");
 	    test.info("Verified homepage tile component is system authored");
@@ -879,7 +805,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_68() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 2));
 		ExtentTest test = extent.createTest("Verify that the value of the filters are based on the tags/properties of the search results");
 	    test.fail("The value of the filters are NOT based on the tags/properties of the search results");
@@ -890,7 +815,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_69() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify unpublish workflow is available both sites and assets");
 	    test.info("Verified unpublish workflow is available both sites and assets");
@@ -900,7 +824,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_70() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify that once content is approved and published, the system will record the date of publishing");
 	    test.info("Verified that once content is approved and published, the system will record the date of publishing");
@@ -911,7 +834,6 @@ public class SanityTestCases extends BasePage {
 
 	@Test (enabled=false)
 	public void WEB_71() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify the author is able to author the title and the description");
 	    test.info("Verified the author is able to author the title and the description");
@@ -921,7 +843,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_72() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify users icons must present User's First and Last name initials of user");
 	    test.info("Verified users icons present User's First and Last name initials of user");
@@ -932,7 +853,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_73() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify all the sections on the header");
 	    test.info("Verified all the sections on the header");
@@ -943,7 +863,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_74() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify the scroll functionality");
 	    test.info("Verified the scroll functionality");
@@ -953,7 +872,6 @@ public class SanityTestCases extends BasePage {
 	}
 	@Test (enabled=false)
 	public void WEB_75() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify responsiveness of page");
 	    test.info("Verified responsiveness of page");
@@ -963,7 +881,6 @@ public class SanityTestCases extends BasePage {
 	}
 	@Test  (enabled=false)
 	public void WEB_76() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify the release notes must be able to manually authored");
 	    test.info("Verified the release notes must be able to manually authored");
@@ -973,7 +890,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_77() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify clicking on the tab will display the product page where they can see more information about the product.");
 	    test.info("Verified clicking on the tab will display the product page where they see more information about the product.");
@@ -984,7 +900,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_78() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify the error message position");
 	    test.info("Verified the error message position");
@@ -995,7 +910,6 @@ public class SanityTestCases extends BasePage {
 
 	@Test (enabled=false)
 	public void WEB_79() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify users can be assigned to one product or multiple products");
 	    test.info("Verified users can be assigned to one product or multiple products");
@@ -1005,7 +919,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_80() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify users can be assigned to one product or multiple products");
 	    test.info("Verified users can be assigned to one product or multiple products");
@@ -1015,7 +928,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_81() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify if the user selects role as Admin, then by default the user gets admin rights to all products in the company");
 	    test.info("Verified if the user selects role as Admin, then by default the user gets admin rights to all products in the company");
@@ -1025,7 +937,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test(enabled=false)
 	public void WEB_82() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify the user must be able to manually author the footer");
 	    test.info("Verified the user must be able to manually author the footer");
@@ -1035,7 +946,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_83() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify the need technical support is responsible for providing user the technical support by navigating them to client view");
 	    test.info("Verified the need technical support is responsible for providing user the technical support by navigating them to client view");
@@ -1046,7 +956,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_84() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify the related product is responsible for displaying products which the user has access to");
 	    test.info("Verified the related product is responsible for displaying products which the user has access to");
@@ -1057,7 +966,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test(enabled=false)
 	public void WEB_85() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify for you is responsible for displaying content as per the users licence");
 	    test.info("Verified for you is responsible for displaying content as per the users licence");
@@ -1067,7 +975,6 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_86() throws Exception{
-		read1.setExcelFile("./testdata.xlsx", "QA");
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify all resources is dedicated to all applicable product-content specific items");
 	    test.info("Verified all resources is dedicated to all applicable product-content specific items");
