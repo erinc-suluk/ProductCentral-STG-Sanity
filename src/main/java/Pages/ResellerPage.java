@@ -45,23 +45,23 @@ public class ResellerPage extends HelperFunctions {
 	
 	public void setBreadcrumbs() {
 		
-		HelperFunctions.waitForPageTitle("Reseller Demo");
+		HelperFunctions.waitForPageToLoad(5);
 		checkInLink.click();
-		HelperFunctions.waitForPageTitle("Check-in");
+		HelperFunctions.waitForPageToLoad(5);
 		//resellOfferingOverviewLink.click();
 		//HelperFunctions.waitForPageTitle("Resell offering overview");
 		//backtoCheckinBreadcrumb.click();
 		//HelperFunctions.waitForPageTitle("Check-in");
 		backtoResellerDemoBreadcrumb.click();
-		HelperFunctions.waitForPageTitle("Reseller Demo");
+		HelperFunctions.waitForPageToLoad(5);
 		complianceLink.click();
-		HelperFunctions.waitForPageTitle("Dragos Alliance");
+		HelperFunctions.waitForPageToLoad(5);
 		backtoResellerDemoBreadcrumb.click();
-		HelperFunctions.waitForPageTitle("Reseller Demo");
+		HelperFunctions.waitForPageToLoad(5);
 		microsoftAllianceLink.click();
-		HelperFunctions.waitForPageTitle("Microsoft Alliance");
+		HelperFunctions.waitForPageToLoad(5);
 		backtoResellerDemoBreadcrumb.click();
-		HelperFunctions.waitForPageTitle("Reseller Demo");
+		HelperFunctions.waitForPageToLoad(5);
 		
 		
 	

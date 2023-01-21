@@ -136,6 +136,7 @@ public class UMSPage extends HelperFunctions {
 		pass.sendKeys(read1.getCellData("VALUE", 1));
 		submit.click();
 		HelperFunctions.waitForPageToLoad(5);
+	
 		addUser.click();
 		HelperFunctions.staticWait(3);
 		if(emailAddress.getText().trim().isEmpty()&&firstName.getText().trim().isEmpty()&&lastName.getText().trim().isEmpty()) {
@@ -167,6 +168,7 @@ public class UMSPage extends HelperFunctions {
 		pass.sendKeys(read1.getCellData("VALUE", 1));
 		submit.click();
 		HelperFunctions.waitForPageToLoad(5);
+	
 		addUser.click();
 		HelperFunctions.staticWait(3);
 		emailAddress.click();
@@ -207,6 +209,7 @@ public class UMSPage extends HelperFunctions {
 		pass.sendKeys(read1.getCellData("VALUE", 1));
 		submit.click();
 		HelperFunctions.waitForPageToLoad(5);
+		
 		addUser.click();
 		HelperFunctions.staticWait(3);
 		emailAddress.click();
@@ -265,6 +268,7 @@ public class UMSPage extends HelperFunctions {
 		pass.sendKeys(read1.getCellData("VALUE", 1));
 		submit.click();
 		HelperFunctions.waitForPageToLoad(5);
+		
 		addUser.click();
 		HelperFunctions.staticWait(3);
 		emailAddress.click();
@@ -292,6 +296,7 @@ public class UMSPage extends HelperFunctions {
 		pass.sendKeys(read1.getCellData("VALUE", 1));
 		submit.click();
 		HelperFunctions.waitForPageToLoad(5);
+		
 		addUser.click();
 		HelperFunctions.staticWait(3);
 		String email="admin@gmail.com";

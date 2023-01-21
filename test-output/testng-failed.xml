@@ -5,9 +5,14 @@
     <classes>
       <class name="com.pwc.productcentral.SanityTestCases">
         <methods>
+          <include name="WEB_65"/>
           <include name="closingBrowser"/>
           <include name="WEB_58"/>
           <include name="setUp"/>
+          <include name="WEB_66"/>
+          <include name="WEB_52"/>
+          <include name="WEB_46"/>
+          <include name="WEB_68"/>
           <include name="initTest"/>
           <include name="closeTabs"/>
         </methods>

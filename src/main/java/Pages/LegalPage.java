@@ -65,7 +65,7 @@ public class LegalPage extends HelperFunctions {
 	
 	
 	public void setlegalTiles() {
-		HelperFunctions.waitForPageTitle("Legal");
+		HelperFunctions.waitForPageToLoad(5);
 		for(WebElement tiles:legalTiles) {
 			if(tiles.isDisplayed()) {
 				Assert.assertTrue(true);
@@ -80,7 +80,7 @@ public class LegalPage extends HelperFunctions {
 		maintenanceAndSupportBreadcrumb.click();
 		HelperFunctions.waitForPageToLoad(3);
 		backtoLegalBreadcrumb.click();
-		HelperFunctions.waitForPageTitle("Legal");
+		HelperFunctions.waitForPageToLoad(5);
 		for(WebElement tiles:legalTiles) {
 			if(tiles.isDisplayed()) {
 				Assert.assertTrue(true);
@@ -97,7 +97,7 @@ public class LegalPage extends HelperFunctions {
 		backtoLegalBreadcrumb.click();
 	}
 	public void setDescriptionOfTiles() {
-		HelperFunctions.waitForPageTitle("Legal");
+		HelperFunctions.waitForPageToLoad(5);
 		for(WebElement eachDescription: descriptionOfTiles) {
 			System.out.println(eachDescription.getCssValue("-webkit-line-clamp"));
 			if(eachDescription.getCssValue("-webkit-line-clamp").equals("3")) {
@@ -110,7 +110,7 @@ public class LegalPage extends HelperFunctions {
 	}
 	
 	public void setContentPageTags() {
-		HelperFunctions.waitForPageTitle("Legal");
+		HelperFunctions.waitForPageToLoad(5);
 		maintenanceAndSupportLink.click();
 		HelperFunctions.waitForPageToLoad(3);
 		for(WebElement eachTiles: tilesComponents) {
@@ -138,7 +138,7 @@ public class LegalPage extends HelperFunctions {
 		maintenanceAndSupportBreadcrumb.click();
 		HelperFunctions.waitForPageToLoad(3);
 		backtoLegalBreadcrumb.click();
-		HelperFunctions.waitForPageTitle("Legal");
+		HelperFunctions.waitForPageToLoad(5);
 		offeringOverviewLink.click();
 		HelperFunctions.waitForPageToLoad(3);
 		for(WebElement eachTiles: tilesComponents) {
@@ -179,7 +179,7 @@ public class LegalPage extends HelperFunctions {
 		maintenanceAndSupportLink.click();
 		Assert.assertTrue(backtoLegalBreadcrumbfromContent.isDisplayed());
 		backtoLegalBreadcrumbfromContent.click();
-		HelperFunctions.waitForPageTitle("Legal");
+		HelperFunctions.waitForPageToLoad(3);
 		offeringOverviewLink.click();
 		Assert.assertTrue(backtoLegalBreadcrumbfromContent.isDisplayed());
 		backtoLegalBreadcrumbfromContent.click();

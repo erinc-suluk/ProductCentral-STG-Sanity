@@ -55,6 +55,8 @@ public class LoginPageObjects extends HelperFunctions{
 		pass.sendKeys(read1.getCellData("VALUE", 1));
 		submit.click();
 	    HelperFunctions.staticWait(5);
+	    Driver.getDriver().navigate().refresh();
+	    HelperFunctions.waitForPageToLoad(3);
 	    JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
         js.executeScript("window.open()");
 	    ArrayList<String> tabs = new ArrayList<String>(Driver.getDriver().getWindowHandles());

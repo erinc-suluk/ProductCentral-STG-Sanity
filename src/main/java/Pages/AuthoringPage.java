@@ -1463,7 +1463,7 @@ js.executeScript("window.open()");
 	    previewButton2.click();
 	    Driver.getDriver().switchTo().frame(0);
 	    HelperFunctions.staticWait(2);
-	    if(lastUpdatedDate.isDisplayed()&& lastUpdatedDate.getText().contains("Last updated 01/09/2023")) {
+	    if(lastUpdatedDate.isDisplayed()&& lastUpdatedDate.getText().contains("Last updated 01/20/2023")) {
 	    	Assert.assertTrue(true);
 	    }else {
 	    	Assert.assertTrue(false);
@@ -1586,7 +1586,7 @@ js.executeScript("window.open()");
 	 read1.setExcelFile("./testdata.xlsx", "QA");
 		email.sendKeys(read1.getCellData("DATA", 1));
 		next.click();
-		pass.sendKeys(read1.getCellData("VALUE", 1));
+		pass.sendKeys(read1.getCellData("VALUE", 1)); 
 		submit.click();
 	    HelperFunctions.staticWait(5);
 	    JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
@@ -1605,7 +1605,7 @@ js.executeScript("window.open()");
 	    HelperFunctions.staticWait(3);
 	    textareaForFooter.click();
 	    textareaForFooter.clear();
-	    String mockFooter=read1.getCellData("VALUE", 39);
+	    String mockFooter=read1.getCellData("VALUE", 40);
 	    textareaForFooter.sendKeys(mockFooter);
 	    HelperFunctions.staticWait(3);
 	    privacyPolicyTitle.click();
@@ -1618,9 +1618,11 @@ js.executeScript("window.open()");
 	    HelperFunctions.staticWait(3);
 	    publishTemplate.click();
 	    HelperFunctions.staticWait(3);
+	    unpublishButton.click();
+	    HelperFunctions.staticWait(5);
 	  	    ArrayList<String> tabs2 = new ArrayList<String>(Driver.getDriver().getWindowHandles());
 	  	    Driver.getDriver().switchTo().window(tabs2.get(1));
-	  	    Driver.getDriver().get(read1.getCellData("VALUE", 40));
+	  	    Driver.getDriver().get(read1.getCellData("VALUE", 41));
 	  	    HelperFunctions.waitForPageToLoad(5);
 	  	    fluidForecast.click();
 	  	  HelperFunctions.staticWait(3);
@@ -1668,6 +1670,8 @@ js.executeScript("window.open()");
 			    HelperFunctions.staticWait(3);
 			    publishTemplate.click();
 			    HelperFunctions.staticWait(3);
+			    unpublishButton.click();
+			    HelperFunctions.staticWait(5);
 	        
 	    
 	    
