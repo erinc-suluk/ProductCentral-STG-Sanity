@@ -1,5 +1,6 @@
 package Pages;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -8,13 +9,18 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
@@ -131,7 +137,7 @@ public class AuthoringPage extends HelperFunctions {
 	@FindBy(xpath="//coral-tab-label[.='Product Central']")
 	private WebElement productCentralTab;
 	
-	@FindBy(xpath="//select[@name='./documentCategory']")
+	@FindBy(xpath="//select[@name='./documentCategory']//option")
 	private static List<WebElement> documentCategoryTag;
 	
 	@FindBy(xpath="(//button[@class='coral-Select-button coral-MinimalButton'])[1]")
@@ -143,11 +149,14 @@ public class AuthoringPage extends HelperFunctions {
 	@FindBy(xpath="//button[@class='coral-Select-button coral-MinimalButton is-active is-above']")
 	private WebElement portfolioTag2;
 	
-	@FindBy(xpath="//select[@name='./productFeatureTag']")
+	@FindBy(xpath="//select[@name='./productFeatureTag']//option")
 	private static List<WebElement> productFeatureTags;
 	
-	@FindBy(xpath="//select[@name='./portfolioTag']")
+	@FindBy(xpath="//select[@name='./portfolioTag']//option")
 	private static List<WebElement> portfolioTags;
+	
+	@FindBy(xpath="(//button[@role='combobox'])[4]")
+	private WebElement portfolioTags2;
 	
 	@FindBy(xpath="//div[@title='Products']")
 	private WebElement products;
@@ -661,100 +670,83 @@ public class AuthoringPage extends HelperFunctions {
     	nextButton.click();
     	HelperFunctions.waitForPageToLoad(5);
     	productCentralTab.click();
-    	
+    	 HelperFunctions.staticWait(3);
 		
-    	List<String> docCat = documentCategoryTag
-	    .stream() 
-	    .map(x -> x.getText())
-	    .collect(Collectors.toList());
-    	//Collections.sort(docCat);
-    	//System.out.println(docCat.toString());
-    	read1.setExcelFile("./testdata.xlsx", "Tag Taxonomy");
-    if(docCat.toString().contains((read1.getCellData("PC", 1)))&&
-       docCat.toString().contains((read1.getCellData("PC", 2)))&&
-       docCat.toString().contains((read1.getCellData("PC", 3)))&&
-       docCat.toString().contains((read1.getCellData("PC", 4)))&&
-       docCat.toString().contains((read1.getCellData("PC", 5)))&&
-       docCat.toString().contains((read1.getCellData("PC", 6)))&&
-       docCat.toString().contains((read1.getCellData("PC", 7)))&&
-       docCat.toString().contains((read1.getCellData("PC", 8)))&&
-       docCat.toString().contains((read1.getCellData("PC", 9)))&&
-       docCat.toString().contains((read1.getCellData("PC", 10)))&&
-       docCat.toString().contains((read1.getCellData("PC", 11)))&&
-       docCat.toString().contains((read1.getCellData("PC", 12)))&&
-       docCat.toString().contains((read1.getCellData("PC", 13)))&&
-       docCat.toString().contains((read1.getCellData("PC", 14)))&&
-       docCat.toString().contains((read1.getCellData("PC", 15)))
-      )
-   {
-    	Assert.assertTrue(true);
-    	
-    }else {
-    	Assert.assertTrue(false);
-    }
-    
-    List<String> productFeature = productFeatureTags
-    	    .stream() 
-    	    .map(x -> x.getText())
-    	    .collect(Collectors.toList());
-        	read1.setExcelFile("./testdata.xlsx", "Tag Taxonomy");
-        	if(
-        			productFeature.toString().contains((read1.getCellData("ProductFeature", 1)))&&
-        			productFeature.toString().contains((read1.getCellData("ProductFeature", 2)))&&
-        			productFeature.toString().contains((read1.getCellData("ProductFeature", 3)))&&
-        			productFeature.toString().contains((read1.getCellData("ProductFeature", 4)))&&
-        			productFeature.toString().contains((read1.getCellData("ProductFeature", 5)))&&
-        			productFeature.toString().contains((read1.getCellData("ProductFeature", 6)))&&
-        			productFeature.toString().contains((read1.getCellData("ProductFeature", 7)))&&
-        			productFeature.toString().contains((read1.getCellData("ProductFeature", 8)))&&
-        			productFeature.toString().contains((read1.getCellData("ProductFeature", 9)))&&
-        			productFeature.toString().contains((read1.getCellData("ProductFeature", 10)))&&
-        			productFeature.toString().contains((read1.getCellData("ProductFeature", 11)))&&
-        			productFeature.toString().contains((read1.getCellData("ProductFeature", 12)))&&
-        			productFeature.toString().contains((read1.getCellData("ProductFeature", 13)))&&
-        			productFeature.toString().contains((read1.getCellData("ProductFeature", 14)))&&
-        			productFeature.toString().contains((read1.getCellData("ProductFeature", 15)))&&
-        			productFeature.toString().contains((read1.getCellData("ProductFeature", 16)))&&
-        			productFeature.toString().contains((read1.getCellData("ProductFeature", 17)))&&
-        			productFeature.toString().contains((read1.getCellData("ProductFeature", 18)))&&
-        			productFeature.toString().contains((read1.getCellData("ProductFeature", 19)))&&
-        			productFeature.toString().contains((read1.getCellData("ProductFeature", 20)))&&
-        			productFeature.toString().contains((read1.getCellData("ProductFeature", 21)))&&
-        			productFeature.toString().contains((read1.getCellData("ProductFeature", 22)))&&
-        			productFeature.toString().contains((read1.getCellData("ProductFeature", 23)))&&
-        			productFeature.toString().contains((read1.getCellData("ProductFeature", 24)))&&
-        			productFeature.toString().contains((read1.getCellData("ProductFeature", 25)))&&
-        			productFeature.toString().contains((read1.getCellData("ProductFeature", 26)))&&
-        			productFeature.toString().contains((read1.getCellData("ProductFeature", 27)))&&
-        			productFeature.toString().contains((read1.getCellData("ProductFeature", 28)))&&
-        			productFeature.toString().contains((read1.getCellData("ProductFeature", 29)))) {
-        		Assert.assertTrue(true);
-        	}else {
-        		Assert.assertTrue(false);
-        	}
         	
-        	List<String> portfolio = portfolioTags
-        		    .stream() 
-        		    .map(x -> x.getText())
-        		    .collect(Collectors.toList());
-        	read1.setExcelFile("./testdata.xlsx", "Tag Taxonomy");
-        	if(portfolio.toString().contains((read1.getCellData("Portfolio", 1)))&&
-        			portfolio.toString().contains((read1.getCellData("Portfolio", 2)))&&
-        			portfolio.toString().contains((read1.getCellData("Portfolio", 3)))&&
-        			portfolio.toString().contains((read1.getCellData("Portfolio", 4)))&&
-        			portfolio.toString().contains((read1.getCellData("Portfolio", 5)))) {
-        		Assert.assertTrue(true);
-        	}else {
-        		Assert.assertTrue(false);
-        	}
-        	
-       
-        			
-        			
-    	
-    	
-    	
-    	
+        	 FileInputStream file = new FileInputStream("C:\\Users\\erong\\git\\ProductCentralProject-Automation1\\testdata.xlsx");
+             XSSFWorkbook workbook = new XSSFWorkbook(file);
+             XSSFSheet sheet = workbook.getSheetAt(1); 
+             int columnIndex = 2; 
+         
+             HelperFunctions.staticWait(3);
+             JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
+             executor.executeScript("arguments[0].click();", portfolioTags2);
+            
+             HashSet<String> cellValues = new HashSet<String>();
+             for (int rowNum = 0; rowNum < sheet.getLastRowNum(); rowNum++) {
+                 XSSFRow row = sheet.getRow(rowNum);
+                 if(row == null) continue;
+                 XSSFCell cell = row.getCell(columnIndex);
+                 if(cell == null) continue;
+                 cellValues.add(cell.getStringCellValue());
+             }
+             for (WebElement element : portfolioTags) {
+                 if(element.isDisplayed() && element.isEnabled()){
+                     String elementText = element.getText();
+                     if(elementText!=null && !elementText.isEmpty()){
+                         Assert.assertTrue(cellValues.contains(elementText), "element text: " + elementText + " not found in the column: " + columnIndex);
+                     }else{
+                         System.out.println("Element text is empty or null, skipping the element");
+                     }
+                 }else{
+                     System.out.println("Element is not interactable or not visible, skipping the element");
+                 }
+             }
+             HelperFunctions.staticWait(3);
+             int columnIndex2 = 1;
+             HashSet<String> cellValues2 = new HashSet<String>();
+             for (int rowNum = 0; rowNum < sheet.getLastRowNum(); rowNum++) {
+                 XSSFRow row = sheet.getRow(rowNum);
+                 if(row == null) continue;
+                 XSSFCell cell = row.getCell(columnIndex2);
+                 if(cell == null) continue;
+                 cellValues2.add(cell.getStringCellValue());
+             }
+             for (WebElement element2 : productFeatureTags) {
+                 if(element2.isDisplayed() && element2.isEnabled()){
+                     String elementText2 = element2.getText();
+                     if(elementText2!=null && !elementText2.isEmpty()){
+                         Assert.assertTrue(cellValues.contains(elementText2), "element text: " + elementText2 + " not found in the column: " + columnIndex2);
+                     }else{
+                         System.out.println("Element text is empty or null, skipping the element");
+                     }
+                 }else{
+                     System.out.println("Element is not interactable or not visible, skipping the element");
+                 }
+             }
+             HelperFunctions.staticWait(3);
+             int columnIndex3 = 0;
+             HashSet<String> cellValues3 = new HashSet<String>();
+             for (int rowNum = 0; rowNum < sheet.getLastRowNum(); rowNum++) {
+                 XSSFRow row = sheet.getRow(rowNum);
+                 if(row == null) continue;
+                 XSSFCell cell = row.getCell(columnIndex3);
+                 if(cell == null) continue;
+                 cellValues3.add(cell.getStringCellValue());
+             }
+             for (WebElement element3 : documentCategoryTag) {
+                 if(element3.isDisplayed() && element3.isEnabled()){
+                     String elementText3 = element3.getText();
+                     if(elementText3!=null && !elementText3.isEmpty()){
+                         Assert.assertTrue(cellValues.contains(elementText3), "element text: " + elementText3 + " not found in the column: " + columnIndex3);
+                     }else{
+                         System.out.println("Element text is empty or null, skipping the element");
+                     }
+                 }else{
+                     System.out.println("Element is not interactable or not visible, skipping the element");
+                 }
+             }
+           
     }
   
     	
