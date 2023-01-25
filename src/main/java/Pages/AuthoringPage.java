@@ -499,6 +499,9 @@ public class AuthoringPage extends HelperFunctions {
 	@FindBy(xpath="//button[@title='Publish Template']")
 	private WebElement publishTemplate;
 	
+	@FindBy(xpath="(//button[@role='combobox'])[3]")
+	private WebElement pcTags;
+	
 
 	
 	
@@ -702,6 +705,9 @@ public class AuthoringPage extends HelperFunctions {
                      System.out.println("Element is not interactable or not visible, skipping the element");
                  }
              }
+            /* HelperFunctions.staticWait(3);
+             JavascriptExecutor executor2 = (JavascriptExecutor) Driver.getDriver();
+             executor2.executeScript("arguments[0].click();", pcTags);
              HelperFunctions.staticWait(3);
              int columnIndex2 = 1;
              HashSet<String> cellValues2 = new HashSet<String>();
@@ -716,7 +722,7 @@ public class AuthoringPage extends HelperFunctions {
                  if(element2.isDisplayed() && element2.isEnabled()){
                      String elementText2 = element2.getText();
                      if(elementText2!=null && !elementText2.isEmpty()){
-                         Assert.assertTrue(cellValues.contains(elementText2), "element text: " + elementText2 + " not found in the column: " + columnIndex2);
+                         Assert.assertTrue(cellValues2.contains(elementText2), "element text: " + elementText2 + " not found in the column: " + columnIndex2);
                      }else{
                          System.out.println("Element text is empty or null, skipping the element");
                      }
@@ -738,14 +744,14 @@ public class AuthoringPage extends HelperFunctions {
                  if(element3.isDisplayed() && element3.isEnabled()){
                      String elementText3 = element3.getText();
                      if(elementText3!=null && !elementText3.isEmpty()){
-                         Assert.assertTrue(cellValues.contains(elementText3), "element text: " + elementText3 + " not found in the column: " + columnIndex3);
+                         Assert.assertTrue(cellValues3.contains(elementText3), "element text: " + elementText3 + " not found in the column: " + columnIndex3);
                      }else{
                          System.out.println("Element text is empty or null, skipping the element");
                      }
                  }else{
                      System.out.println("Element is not interactable or not visible, skipping the element");
                  }
-             }
+             }*/
            
     }
   

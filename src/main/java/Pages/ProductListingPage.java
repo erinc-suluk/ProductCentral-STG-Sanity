@@ -106,7 +106,7 @@ public class ProductListingPage extends HelperFunctions {
 	@FindBy(xpath="//div[@class='has-no-results']")
 	private WebElement noResult;
 	
-	@FindBy(xpath="//div[@class='cmp-document-tiles__entry-title']")
+	@FindBy(xpath="//div[@class='cmp-product-list__card-content']//span[2]")
 	private static List<WebElement> titleofTiles;
 	
 	@FindBy(xpath="//span[@class='cmp-pdf-highlights__title']")
@@ -132,6 +132,9 @@ public class ProductListingPage extends HelperFunctions {
 	
 	@FindBy(xpath="//div[@class='cmp-product-list__card-content']//span")
 	private static List<WebElement> cardTitle;
+	
+	@FindBy(xpath="//div[@class='cmp-product-list__cards-container']//a")
+	private static List<WebElement> productLinks;
 	
 	
 	
@@ -328,7 +331,6 @@ public class ProductListingPage extends HelperFunctions {
 	
 	public void setDocumentTileLine() {
 		HelperFunctions.waitForPageToLoad(5);
-		cloudProduct.click();
 		for(WebElement eachProductTitle: titleofTiles) {
 			System.out.println(eachProductTitle.getCssValue("-webkit-line-clamp"));
 			if(eachProductTitle.getCssValue("-webkit-line-clamp").equals("2")) {
@@ -341,11 +343,19 @@ public class ProductListingPage extends HelperFunctions {
 	}
 	public void setContentPageSameTab() {
 		HelperFunctions.waitForPageToLoad(5);
-		cloudProduct.click();
-		offeringOverviewFromCloud.click();
-		String actualTitle="Offering Overview";
-		String expectedTitle=contentTitle.getText();
-		Assert.assertEquals(actualTitle, expectedTitle, "Actual and expected title do not match");
+		for(WebElement each:productLinks) {
+			each.click();
+			break;
+		}
+		HelperFunctions.waitForPageToLoad(5);
+		 for (WebElement link : productLinks) {
+			 String hrefValue = link.getAttribute("href");
+			 link.click();
+			 String currentUrl = Driver.getDriver().getCurrentUrl();
+			 Assert.assertEquals(hrefValue, currentUrl);
+	            }
+		
+		
 	}
 	
 	

@@ -343,7 +343,7 @@ public class SanityTestCases extends BasePage {
 	    logger.info("Test WEB_26 has passed");
 	}
 	
-	@Test (enabled=false)
+	@Test(enabled=false)
 	public void WEB_27() throws Exception{
 		Driver.getDriver().get(read1.getCellData("VALUE", 11));
 		ExtentTest test = extent.createTest("Verify the filter will be a dropdown which will display the My products document categories matching the search results");
@@ -380,7 +380,7 @@ public class SanityTestCases extends BasePage {
 	    test.info("The dropdown list displays the Product & document category as per the latest Tag taxonomy document");
 	    hp.setDropdownList();
 	    hp.setDropdownList2();
-	    logger.info("Test WEB_30 has passed");
+	    logger.info("Test WEB_30 has passed");  
 	}
 	
 	@Test(enabled=false)
@@ -498,7 +498,7 @@ public class SanityTestCases extends BasePage {
 		Driver.getDriver().get(read1.getCellData("VALUE", 9));
 		ExtentTest test = extent.createTest("Verify the content pages will be tagged accordingly");
 	    test.info("Verified the content pages are tagged accordingly");
-	    lp.setContentPageTags();
+	    lp.setContentPageTags(); 
 	    logger.info("Test WEB_41 has passed");
 	}
 	

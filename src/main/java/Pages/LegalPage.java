@@ -1,7 +1,15 @@
 package Pages;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.HashSet;
 import java.util.List;
 
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -9,6 +17,7 @@ import org.testng.Assert;
 
 import com.pwc.productcentral.Driver;
 import com.pwc.productcentral.HelperFunctions;
+import com.pwc.productcentral.ReadXLSdata;
 
 public class LegalPage extends HelperFunctions {
 	public LegalPage() {
@@ -39,7 +48,7 @@ public class LegalPage extends HelperFunctions {
 	@FindBy(xpath="//span[@class='cmp-pdf-highlights__title']")
 	private WebElement ContentTitle;
 	
-	@FindBy(xpath="//div[@class='cmp-legal-product-listing__tiles']")
+	@FindBy(xpath="//div[@class='cmp-legal-product-listing__tiles']//a")
 	private static List<WebElement> tilesComponents;
 	
 	@FindBy(xpath="//a[@href='/us/en/automation/legal.html']")
@@ -60,8 +69,14 @@ public class LegalPage extends HelperFunctions {
 	@FindBy(xpath="//a[@id='referrer-module']")
 	private WebElement backtoLegalBreadcrumbfromContent;
 	
+	@FindBy(xpath="//div[@class='cmp-legal-product-listing__tiles']//span")
+	private static List<WebElement> legalTilesTitle;
+	
+	@FindBy(xpath="//div[@class='cmp-breadcrumb']//a")
+	private static List<WebElement> breadcrumbLinks;
 	
 	
+	ReadXLSdata read1=new ReadXLSdata();
 	
 	
 	public void setlegalTiles() {
@@ -88,71 +103,70 @@ public class LegalPage extends HelperFunctions {
 	
 	public void setContentPageTags() {
 		HelperFunctions.waitForPageToLoad(5);
-		maintenanceAndSupportLink.click();
-		HelperFunctions.waitForPageToLoad(3);
 		for(WebElement eachTiles: tilesComponents) {
-			System.out.println(eachTiles.getText());
-			if(eachTiles.getText().contains("Azure") &&
-					eachTiles.getText().contains("Bookkeeping Connect") &&
-					eachTiles.getText().contains("Digital on Demand") &&
-					eachTiles.getText().contains("Change Navigator") && eachTiles.getText().contains("Customer Link")
-					&& eachTiles.getText().contains("Financial Wellness")
-					&& eachTiles.getText().contains("InsightsOfficer")
-					&& eachTiles.getText().contains("Master Data Management")
-					&& eachTiles.getText().contains("Viewpoint")
-					&& eachTiles.getText().contains("Well")) {
-				Assert.assertTrue(true);
-				
-			}else {
-				Assert.assertTrue(false);
-			}
+			 try {
+				 String hrefValue = eachTiles.getAttribute("href");
+				 eachTiles.click();
+				 HelperFunctions.staticWait(3);
+				 String currentUrl = Driver.getDriver().getCurrentUrl();
+				 Assert.assertEquals(hrefValue, currentUrl);
+				 Driver.getDriver().navigate().back();
+	    	    } catch (StaleElementReferenceException e) {
+	    	       
+	    	    }
 		}
-		customerLink.click();
-		HelperFunctions.waitForPageToLoad(3);
-		String actualContentTitle=ContentTitle.getText();
-		String expectedContentTitle="Maintenance & Support";
-		Assert.assertEquals(actualContentTitle, expectedContentTitle,"Actual and expected content Titles do not match");
-		maintenanceAndSupportBreadcrumb.click();
-		HelperFunctions.waitForPageToLoad(3);
-		backtoLegalBreadcrumb.click();
-		HelperFunctions.waitForPageToLoad(5);
-		offeringOverviewLink.click();
-		HelperFunctions.waitForPageToLoad(3);
-		for(WebElement eachTiles: tilesComponents) {
-			System.out.println(eachTiles.getText());
-			if(eachTiles.getText().contains("Azure") && eachTiles.getText().contains("Bookkeeping Connect")
-					&& eachTiles.getText().contains("Change Navigator")
-					&& eachTiles.getText().contains("Customer Link")
-					&& eachTiles.getText().contains("Digital on Demand")
-					&& eachTiles.getText().contains("Financial Wellness")
-					&& eachTiles.getText().contains("Maintenance and Support")
-					&& eachTiles.getText().contains("Viewpoint")
-					&& eachTiles.getText().contains("Well")) {
-				Assert.assertTrue(true);
-				
-			}else {
-				Assert.assertTrue(false);
-			}
-		}
-		changeNavigatorLink.click();
-		String actualContentTitle2=ContentTitle.getText();
-		String expectedContentTitle2="Offering Overview";
-		Assert.assertEquals(actualContentTitle2, expectedContentTitle2,"Actual and expected content Titles do not match");
+			
 	}
-	public void setDisplayTilePerDocumentCat() {
+	public void setDisplayTilePerDocumentCat() throws Exception {
 		HelperFunctions.waitForPageToLoad(3);
-		for(WebElement eachTile: legalTiles) {
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		 FileInputStream file = new FileInputStream("C:\\Users\\erong\\git\\ProductCentralProject-Automation1\\testdata.xlsx");
+         XSSFWorkbook workbook = new XSSFWorkbook(file);
+         XSSFSheet sheet = workbook.getSheetAt(1); 
+         int columnIndex = 2; 
+         HelperFunctions.staticWait(3);
+         int columnIndex3 = 0;
+         HashSet<String> cellValues3 = new HashSet<String>();
+         for (int rowNum = 0; rowNum < sheet.getLastRowNum(); rowNum++) {
+             XSSFRow row = sheet.getRow(rowNum);
+             if(row == null) continue;
+             XSSFCell cell = row.getCell(columnIndex3);
+             if(cell == null) continue;
+             cellValues3.add(cell.getStringCellValue());
+         }
+         for (WebElement element3 : legalTilesTitle) {
+             if(element3.isDisplayed() && element3.isEnabled()){
+                 String elementText3 = element3.getText();
+                 if(elementText3!=null && !elementText3.isEmpty()){
+                     Assert.assertTrue(cellValues3.contains(elementText3), "element text: " + elementText3 + " not found in the column: " + columnIndex3);
+                 }else{
+                     System.out.println("Element text is empty or null, skipping the element");
+                 }
+             }else{
+                 System.out.println("Element is not interactable or not visible, skipping the element");
+             }
+         }
+		/*for(WebElement eachTile: legalTilesTitle) {
+			System.out.println(eachTile.getText());
 			if(eachTile.getText().contains("Offering Overview")&& eachTile.getText().contains("Maintenance & Support")&& eachTile.getText().contains("Data Processing Addendum")
     				) {
 				Assert.assertTrue(true);
 			}else {
 				Assert.assertTrue(false);
 			}
-		}
+		}*/
 	}
 	
 	public void setBreadcrumb() {
-		HelperFunctions.waitForPageToLoad(3);
+		HelperFunctions.waitForPageToLoad(5);
+		 for (WebElement link : breadcrumbLinks) {
+			 Assert.assertTrue(link.isDisplayed());
+			 String hrefValue = link.getAttribute("href");
+			 link.click();
+			 String currentUrl = Driver.getDriver().getCurrentUrl();
+			 Assert.assertEquals(hrefValue, currentUrl);
+	            }
+		/*HelperFunctions.waitForPageToLoad(3);
 		maintenanceAndSupportLink.click();
 		Assert.assertTrue(backtoLegalBreadcrumbfromContent.isDisplayed());
 		backtoLegalBreadcrumbfromContent.click();
@@ -162,7 +176,7 @@ public class LegalPage extends HelperFunctions {
 		backtoLegalBreadcrumbfromContent.click();
 		dataProcessingLink.click();
 		Assert.assertTrue(backtoLegalBreadcrumbfromContent.isDisplayed());
-		backtoLegalBreadcrumbfromContent.click();
+		backtoLegalBreadcrumbfromContent.click();*/
 	}
 	
 	

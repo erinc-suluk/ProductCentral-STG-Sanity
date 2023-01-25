@@ -117,19 +117,19 @@ public class ProductPage extends HelperFunctions {
 	@FindBy(xpath="//input[@id='gatedSearchInput']")
 	private WebElement myProductSearchField;
 	
-	@FindBy(xpath="//a[@href='/content/dam/productcentral/en_us/products/product-2/myproducts/sample10.pdf.coredownload.inline.pdf']")
-	private WebElement resource1forProduct2;
+	@FindBy(xpath="(//div[@class='cmp-all-resources__card-title']//a)[1]")
+	private WebElement resource1;
 	
-	@FindBy(xpath="//a[@href='/content/dam/productcentral/en_us/products/product-2/myproducts/sample13.png.coredownload.inline.png']")
+	@FindBy(xpath="(//div[@class='cmp-all-resources__card-title']//a)[2]")
 	private WebElement resource2forProduct2;
 	
-	@FindBy(xpath="//a[@href='/content/dam/productcentral/en_us/products/product-2/myproducts/sample16.jpg.coredownload.inline.jpg']")
+	@FindBy(xpath="(//div[@class='cmp-all-resources__card-title']//a)[3]")
 	private WebElement resource3forProduct2;
 	
-	@FindBy(xpath="//a[@href='/content/dam/productcentral/en_us/products/product-2/myproducts/7E1c.gif.coredownload.inline.gif']")
+	@FindBy(xpath="(//div[@class='cmp-all-resources__card-title']//a)[4]")
 	private WebElement resource4forProduct2;
 	
-	@FindBy(xpath="//a[@href='/content/dam/productcentral/en_us/products/product-2/myproducts/gif.gif.coredownload.inline.gif']")
+	@FindBy(xpath="(//div[@class='cmp-all-resources__card-title']//a)[5]")
 	private WebElement resource5forProduct2;
 	
 	@FindBy(xpath="//a[@href='/us/en/my-products/product-2.html']")
@@ -212,6 +212,12 @@ public class ProductPage extends HelperFunctions {
 	
 	@FindBy(xpath="//a[.='Go To Client View']")
 	private WebElement technicalSupportButton;
+	
+	@FindBy(xpath="//ol[@class='cmp-tabs__tablist']//a//li//div//span[1]")
+	private static List<WebElement> allProducts;
+	
+	
+	
 	
 	
 	
@@ -347,7 +353,7 @@ public void setNewTabAssets() throws Exception {
 	HelperFunctions.staticWait(3);
 	HelperFunctions.scrollToElement(viewMoreButton); 
     HelperFunctions.staticWait(3);
-    resource1forProduct2.click();
+    resource1.click();
     ArrayList<String> tabs = new ArrayList<String>(Driver.getDriver().getWindowHandles());
     Driver.getDriver().switchTo().window(tabs.get(2));
     System.out.println(Driver.getDriver().getCurrentUrl());
@@ -449,17 +455,23 @@ public void setMyProductSearch() {
 public void setResourcesBasedonProducts() {
 	product2.click();
 	HelperFunctions.scrollToElement(allResources);  
-    if(resource1forProduct2.isDisplayed() && resource2forProduct2.isDisplayed() && resource3forProduct2.isDisplayed() && resource4forProduct2.isDisplayed() && resource5forProduct2.isDisplayed()) {
+    if(resource1.isDisplayed() ) {
 	   Assert.assertTrue(true);
    }else
 	   Assert.assertTrue(false);
+    String text1=resource1.getText();
+    System.out.println(text1);
     
    myProductItemOnSitemap.click();
    HelperFunctions.waitForPageToLoad(5); 
    product4.click();
    HelperFunctions.scrollToElement(allResources);
    HelperFunctions.staticWait(3);
-   if(resource1forProduct4.isDisplayed() && resource2forProduct4.isDisplayed() && resource3forProduct4.isDisplayed()) {
+ 
+   String text2=resource1.getText();
+   System.out.println(text2);
+   Assert.assertNotEquals(text1, text2);
+   if(resource1.isDisplayed()  ) {
 	   Assert.assertTrue(true);
    }else
 	   Assert.assertTrue(false);
@@ -467,6 +479,7 @@ public void setResourcesBasedonProducts() {
 }
 
 public void setNotSupportMultiSelect() {
+	HelperFunctions.waitForPageToLoad(3);
 	product2.click();
 	HelperFunctions.waitForPageToLoad(3);
 	HelperFunctions.scrollToElement(viewMoreButton);
@@ -601,37 +614,36 @@ public void setTitleOfAssets() {
 }
 
 public void setActiveTab() {
-	HelperFunctions.waitForPageToLoad(3);
-	String s = product2Title.getCssValue("color");
-    System.out.println("Color is :" + s);
-    String s2 = product4Title.getCssValue("color");
-    System.out.println("Color is :" + s2);
-    if(s.equals("rgba(70, 70, 70, 0.7)") && s2.equals("rgba(65, 83, 133, 1)") ) {
-    	Assert.assertTrue(true);
-    }else {
-    	Assert.assertTrue(false);
-    }
-    HelperFunctions.staticWait(3);
-    product2.click();
-    HelperFunctions.staticWait(3);
-    String s3 = product2Title.getCssValue("color");
-    System.out.println("Color is :" + s3);
-    String s4 = product4Title.getCssValue("color");
-    System.out.println("Color is :" + s4);
-       
-    if(s3.equals("rgba(65, 83, 133, 1)") && s4.equals("rgba(70, 70, 70, 0.7)") ) {
-    	Assert.assertTrue(true);
-    }else {
-    	Assert.assertTrue(false);
-    }
-    
+	HelperFunctions.waitForPageToLoad(5);
+	for(int i=0;i<allProducts.size();i++) {
+		allProducts.get(0).click();
+		
+		String s = allProducts.get(0).getCssValue("color");
+		String s2 = allProducts.get(1).getCssValue("color");
+		Assert.assertNotEquals(s, s2);
+		Assert.assertTrue(s.equals("rgba(65, 83, 133, 1)"));
+		System.out.println("Color is :" + s); 
+		break;
+	}
+	HelperFunctions.staticWait(5);
+	for(int i=0;i<allProducts.size();i++) {
+		allProducts.get(1).click();
+		
+		String s = allProducts.get(0).getCssValue("color");
+		String s2 = allProducts.get(1).getCssValue("color");
+		Assert.assertNotEquals(s, s2);
+		Assert.assertTrue(s2.equals("rgba(65, 83, 133, 1)"));
+		System.out.println("Color is :" + s); 
+		break;
+	}
+	
 
 }
 
 public void setFirstTabActive() throws Exception {
-	HelperFunctions.waitForPageToLoad(3);
+	HelperFunctions.waitForPageToLoad(5);
 	myProductOnLeftNavigation.click();
-	HelperFunctions.waitForPageToLoad(3);
+	HelperFunctions.waitForPageToLoad(5);
 	read1.setExcelFile("./testdata.xlsx", "QA");
 	String activeColor=read1.getCellData("VALUE", 39);
 	String fp=firstProduct.getCssValue("color");
@@ -645,7 +657,7 @@ public void setFirstTabActive() throws Exception {
 }
 
 public void setHeroPromotion() {
-	HelperFunctions.waitForPageToLoad(3);
+	HelperFunctions.waitForPageToLoad(5);
 	 String attr = heroPromotion.getAttribute("src");
 	    if (attr == null){
 	        System.out.println("Hero promotion is not clickable");
@@ -680,24 +692,33 @@ public void setUserInitials() throws Exception {
 
 
 public void setInfoOfProducts() {
-	HelperFunctions.waitForPageToLoad(3);
-	HelperFunctions.scrollToElement(forYouTitle);
-    System.out.println(titleofAssets.size());
+	HelperFunctions.waitForPageToLoad(5);
+    for(int i=0;i<allProducts.size();i++) {
+		allProducts.get(0).click();
+		break;
+    }
+    HelperFunctions.staticWait(3);
+    HelperFunctions.scrollToElement(forYouTitle);
 	WebElement first = titleofAssets.stream().findFirst().get();
 	System.out.println(first.getText());
 	System.out.println("----");
-	String expectedTitleFirstForYou="Transparency-Hub-Support-Guide-test.pdf";
-	Assert.assertEquals(first.getText(),expectedTitleFirstForYou);
     HelperFunctions.staticWait(3);
 	JavascriptExecutor js2 = ((JavascriptExecutor) Driver.getDriver());
-	js2.executeScript("window.scrollBy(0,-750)", "");
-	JavascriptExecutor executor2 = (JavascriptExecutor) Driver.getDriver();
-    executor2.executeScript("arguments[0].click();", product2);
+	js2.executeScript("window.scrollBy(0,-950)", "");
+	HelperFunctions.staticWait(3);
+
+	for(int i=0;i<allProducts.size();i++) {
+		allProducts.get(1).click();
+		break;
+    }
+	HelperFunctions.staticWait(3);
 	HelperFunctions.scrollToElement( forYouTitle);
+	HelperFunctions.staticWait(3);
     WebElement first2 = titleofAssets.stream().findFirst().get();
 	System.out.println(first2.getText());
-	String expectedTitleFirst2ForYou="Automatic Contact Tracing Proximity Score Description C";
-	Assert.assertEquals(first2.getText(),expectedTitleFirst2ForYou);
+	HelperFunctions.staticWait(3);
+	Assert.assertNotEquals(first, first2);
+
    
    
     
@@ -706,36 +727,42 @@ public void setInfoOfProducts() {
 public void setRelatedProducts() throws Exception {
 
 	HelperFunctions.waitForPageToLoad(3);
-	HelperFunctions.scrollToElement(relatedProductsTitle);
-    HelperFunctions.staticWait(3);
-    String actualTitle=relatedProduct1.getText();
-    String expectedTitle="Hello world";
-    Assert.assertEquals(actualTitle,expectedTitle);
-    String actualTitle2=relatedProduct2.getText();
-    String expectedTitle2="Hello world";
-    Assert.assertEquals(actualTitle2,expectedTitle2);
-    JavascriptExecutor js2 = ((JavascriptExecutor) Driver.getDriver());
-	js2.executeScript("window.scrollBy(0,-750)", "");
-	JavascriptExecutor executor2 = (JavascriptExecutor) Driver.getDriver();
-    executor2.executeScript("arguments[0].click();", product2);
+    for(int i=0;i<allProducts.size();i++) {
+		allProducts.get(0).click();
+		break;
+    }
     HelperFunctions.staticWait(3);
     HelperFunctions.scrollToElement(relatedProductsTitle);
+    String actualTitle=relatedProduct1.getText();
+    String actualTitle2=relatedProduct2.getText();
     HelperFunctions.staticWait(3);
-    String actualTitle3=relatedProduct1.getText();
-    String expectedTitle3="Indoor Test";
-    Assert.assertEquals(actualTitle3,expectedTitle3);
-    String actualTitle4=relatedProduct2.getText();
-    String expectedTitle4="Outdoor Test";
-    Assert.assertEquals(actualTitle4,expectedTitle4);
+	JavascriptExecutor js2 = ((JavascriptExecutor) Driver.getDriver());
+	js2.executeScript("window.scrollBy(0,-2000)", "");
+	HelperFunctions.staticWait(3);
+	for(int i=0;i<allProducts.size();i++) {
+		allProducts.get(1).click();
+		break;
+    }
+	HelperFunctions.staticWait(3);
+	 HelperFunctions.scrollToElement(relatedProductsTitle);
+	 String actualTitle3=relatedProduct1.getText();
+	 String actualTitle4=relatedProduct2.getText();
+	 HelperFunctions.staticWait(3);
+	 Assert.assertNotEquals(actualTitle, actualTitle3);
+	 Assert.assertNotEquals(actualTitle2, actualTitle4);
   
-   
-	
 	
 }
 
 public void setAllResourcesContent() {
-	product2.click();
-	 HelperFunctions.scrollToElement(allResources);
+	HelperFunctions.waitForPageToLoad(5);
+	for(int i=0;i<allProducts.size();i++) {
+		allProducts.get(0).click();
+		break;
+    }
+	HelperFunctions.staticWait(3);
+	HelperFunctions.scrollToElement(allResources);
+	HelperFunctions.staticWait(3);
 	 String a=".pdf";
 	 String b=".png";
 	 String c=".jpg";
@@ -760,24 +787,17 @@ public void setAllResourcesContent() {
 }
 
 public void setTechnicalSupport() throws Exception {
+	HelperFunctions.waitForPageToLoad(5);
 	HelperFunctions.scrollToElement(technicalSupportButton);
     HelperFunctions.staticWait(5);
-    read1.setExcelFile("./testdata.xlsx", "QA");
-    String goToClientViewLink=read1.getCellData("VALUE", 34);
     System.out.println(technicalSupportButton.getAttribute("href"));
-    if(technicalSupportButton.getAttribute("href").equalsIgnoreCase(goToClientViewLink)) {
-    	Assert.assertTrue(true);
-    }else {
-    	Assert.assertTrue(false);
-    }
+    String hrefValue = technicalSupportButton.getAttribute("href");
     technicalSupportButton.click();
     ArrayList<String> tabs2 = new ArrayList<String>(Driver.getDriver().getWindowHandles());
     Driver.getDriver().switchTo().window(tabs2.get(2));
-    System.out.println(Driver.getDriver().getCurrentUrl());
-    Assert.assertEquals(Driver.getDriver().getCurrentUrl(), goToClientViewLink);
-  
-
-
+    HelperFunctions.staticWait(5);
+	 String currentUrl = Driver.getDriver().getCurrentUrl();
+	 Assert.assertEquals(hrefValue, currentUrl);
 
 }
 

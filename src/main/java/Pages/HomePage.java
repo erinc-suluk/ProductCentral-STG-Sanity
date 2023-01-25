@@ -91,7 +91,7 @@ public class HomePage extends HelperFunctions {
 	@FindBy(xpath="//div[@id='searchProductDropdown']")
 	private WebElement productDropdown;
 	
-	@FindBy(xpath="//div[@class='ap-dropdown-list show']")
+	@FindBy(xpath="//div[@class='ap-dropdown-list show']//div//label")
 	private static List<WebElement> productDropdownList;
 	
 	@FindBy(xpath="//input[@id='change-navigator']")
@@ -133,7 +133,7 @@ public class HomePage extends HelperFunctions {
 	@FindBy(xpath="//*[@id='docDropdown']/div[2]//div")
 	private static List<WebElement> catDropdownItems;
 	
-	@FindBy(xpath="(//div[@class='ap-dropdown-list show'])[2]")
+	@FindBy(xpath="(//div[@class='ap-dropdown-list show'])[2]//div//label")
 	private static List<WebElement> catDropdownList;
 	
 	@FindBy(xpath="//div[@data-href='/content/pc/us/en/my-products/product-4.html']")
@@ -156,6 +156,12 @@ public class HomePage extends HelperFunctions {
 	
 	@FindBy(xpath="//div[@class='ap-dropdown-list show']")
 	private static List<WebElement> productDropdownList2;
+	
+	@FindBy(xpath="//div[@class='cmp-pdfviewer']")
+	private WebElement pdfViewer;
+	
+	@FindBy(xpath="//div[@class='cmp-tiles__products-link']")
+	private static List<WebElement> loginToMyProductsLinks;
 	
 	
 	
@@ -406,8 +412,8 @@ public class HomePage extends HelperFunctions {
         Assert.assertEquals(documentationTitle.getText(), "Documentation");
         
         dataAppTitle.click();
-        Driver.getDriver().switchTo().frame(0);
-        if(dataAppContent.isDisplayed()) {
+        //Driver.getDriver().switchTo().frame(0);
+        if(pdfViewer.isDisplayed()) {
 			Assert.assertTrue(true);
 		}else {
 //			logger.error("Data App content is not displayed");
@@ -468,7 +474,7 @@ public class HomePage extends HelperFunctions {
                 System.out.println("Element is not interactable or not visible, skipping the element");
             }
         }
-    	HelperFunctions.staticWait(3);
+    	HelperFunctions.staticWait(3); 
     	catDropdown.click();
     	 HelperFunctions.staticWait(3);
          int columnIndex3 = 0;
@@ -548,8 +554,16 @@ public class HomePage extends HelperFunctions {
     
     
     public void setLoginToMyProductLink() {
-    	HelperFunctions.waitForPageToLoad(3);
-    	loginLink.click();
+    	HelperFunctions.waitForPageToLoad(5);
+    	 JavascriptExecutor js2 = (JavascriptExecutor) Driver.getDriver();
+ 	    js2.executeScript("window.scrollBy(0,250)", "");
+ 	   HelperFunctions.staticWait(3);
+    	for(WebElement each:loginToMyProductsLinks) {
+    		each.click();
+    		break;
+    		
+    	}
+  
     	if(pwcLogo.isDisplayed() && email.isDisplayed() && next.isDisplayed()) {
     		Assert.assertTrue(true);
     	}else {

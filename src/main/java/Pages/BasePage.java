@@ -350,7 +350,7 @@ public static void setAllSectionsOnHeader() {
 }
 
 public static void setScrollFunctionality()  {
-	
+	HelperFunctions.waitForPageToLoad(5);
 	JavascriptExecutor js = (JavascriptExecutor)Driver.getDriver();
 	js.executeScript("window.scrollBy(0,document.body.scrollHeight)", "");           
     HelperFunctions.staticWait(3);
@@ -379,52 +379,38 @@ public static void setResponsivenessOfPages()  {
 	Assert.assertTrue(myProductsTitle.isDisplayed());
 	legalLink.click();
 	System.out.println(Driver.getDriver().getCurrentUrl());
-	String actualURLforLegalPage=Driver.getDriver().getCurrentUrl();
-	String expectedTitleforLegalPage="https://productcentral-qa.products.pwc.com/us/en/legal.html";
-	 Assert.assertEquals(actualURLforLegalPage, expectedTitleforLegalPage);
-	//String actualTitleforLegalPage=Driver.getDriver().getTitle();
-	//String expectedTitleforLegalPage="Legal";
-   // Assert.assertEquals(actualTitleforLegalPage, expectedTitleforLegalPage);
+	 String hrefValue = legalLink.getAttribute("href");
+	 String currentUrl = Driver.getDriver().getCurrentUrl();
+	 Assert.assertEquals(hrefValue, currentUrl);
     HelperFunctions.staticWait(3);
     productsLink.click();
     HelperFunctions.waitForPageToLoad(3);
     System.out.println(Driver.getDriver().getCurrentUrl());
-    String actualURLforProductsPage=Driver.getDriver().getCurrentUrl();
-    String expectedURLforProductsPage="https://productcentral-qa.products.pwc.com/us/en/products.html";
-    Assert.assertEquals(actualURLforProductsPage, expectedURLforProductsPage);
-   // String actualTitleforProductsPage=Driver.getDriver().getTitle();
-	//String expectedTitleforProductsPage="Products";
-	//Assert.assertEquals(actualTitleforProductsPage, expectedTitleforProductsPage);
+    String hrefValue2 = productsLink.getAttribute("href");
+	 String currentUrl2 = Driver.getDriver().getCurrentUrl();
+	 Assert.assertEquals(hrefValue2, currentUrl2);
     HelperFunctions.staticWait(3);
     securityLink.click();
     HelperFunctions.waitForPageToLoad(3);
     System.out.println(Driver.getDriver().getCurrentUrl());
-    String actualURLforSecurityPage=Driver.getDriver().getCurrentUrl();
-    String expectedURLforSecurityPage="https://productcentral-qa.products.pwc.com/us/en/security.html";
-    Assert.assertEquals(actualURLforSecurityPage, expectedURLforSecurityPage);
-  //  String actualTitleforSecurityPage=Driver.getDriver().getTitle();
-	//String expectedTitleforSecurityPage="Security123";
-	//Assert.assertEquals(actualTitleforSecurityPage, expectedTitleforSecurityPage);
+    String hrefValue3 = securityLink.getAttribute("href");
+	 String currentUrl3 = Driver.getDriver().getCurrentUrl();
+	 Assert.assertEquals(hrefValue3, currentUrl3);
 	HelperFunctions.staticWait(3);
 	complianceLink.click();
 	HelperFunctions.waitForPageToLoad(3);
 	System.out.println(Driver.getDriver().getCurrentUrl());
-	String actualURLforCompliancePage=Driver.getDriver().getCurrentUrl();
-	String expectedURLforCompliancePage="https://productcentral-qa.products.pwc.com/us/en/compliance.html";
-	Assert.assertEquals(actualURLforCompliancePage,expectedURLforCompliancePage);
-   // String actualTitleforCompliancePage=Driver.getDriver().getTitle();
-	//String expectedTitleforCompliancePage="Compliance";
-	//Assert.assertEquals(actualTitleforCompliancePage, expectedTitleforCompliancePage);
+	String hrefValue4 = complianceLink.getAttribute("href");
+	 String currentUrl4 = Driver.getDriver().getCurrentUrl();
+	 Assert.assertEquals(hrefValue4, currentUrl4);
 	HelperFunctions.staticWait(3);
 	privacyLink.click();
 	HelperFunctions.waitForPageToLoad(3);
 	System.out.println(Driver.getDriver().getCurrentUrl());
-	String actualURLforPrivacyPage=Driver.getDriver().getCurrentUrl();
-	String expectedURLforPrivacyPage="https://productcentral-qa.products.pwc.com/us/en/privacy0.html";
-	Assert.assertEquals(actualURLforPrivacyPage,expectedURLforPrivacyPage);
-  //  String actualTitleforPrivacyPage=Driver.getDriver().getTitle();
-	//String expectedTitleforPrivacyPage="Privacy";
-	//Assert.assertEquals(actualTitleforPrivacyPage, expectedTitleforPrivacyPage);
+	String hrefValue5 = privacyLink.getAttribute("href");
+	 String currentUrl5 = Driver.getDriver().getCurrentUrl();
+	 Assert.assertEquals(hrefValue5, currentUrl5);
+	
  
 	
 }

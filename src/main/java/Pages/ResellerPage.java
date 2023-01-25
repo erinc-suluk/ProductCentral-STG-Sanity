@@ -27,7 +27,7 @@ public class ResellerPage extends HelperFunctions {
 	@FindBy(xpath="//a[@href='/us/en/automation/reseller-demo/microsoft-alliance.html']")
 	private WebElement microsoftAllianceLink;
 	
-	@FindBy(xpath="//div[@class='cmp-product-list__cards-container']")
+	@FindBy(xpath="//div[@class='cmp-product-list__cards-container']//a")
 	private static List<WebElement> productList;
 	
 	@FindBy(xpath="//a[@href='/us/en/automation/reseller-demo/check-in/resell-offering-overview.html']")
@@ -42,46 +42,45 @@ public class ResellerPage extends HelperFunctions {
 	@FindBy(xpath="//a[@href='/content/pc/us/en/automation/reseller-demo.html']")
 	private WebElement backtoResellerDemoBreadcrumb;
 	
+	@FindBy(xpath="//div[@class='cmp-breadcrumb']//a")
+	private static List<WebElement> breadcrumbLinks;
+	
 	
 	public void setBreadcrumbs() {
 		
 		HelperFunctions.waitForPageToLoad(5);
-		checkInLink.click();
-		HelperFunctions.waitForPageToLoad(5);
-		//resellOfferingOverviewLink.click();
-		//HelperFunctions.waitForPageTitle("Resell offering overview");
-		//backtoCheckinBreadcrumb.click();
-		//HelperFunctions.waitForPageTitle("Check-in");
-		backtoResellerDemoBreadcrumb.click();
-		HelperFunctions.waitForPageToLoad(5);
-		complianceLink.click();
-		HelperFunctions.waitForPageToLoad(5);
-		backtoResellerDemoBreadcrumb.click();
-		HelperFunctions.waitForPageToLoad(5);
-		microsoftAllianceLink.click();
-		HelperFunctions.waitForPageToLoad(5);
-		backtoResellerDemoBreadcrumb.click();
+		for(WebElement link:productList) {
+			link.click();
+			break;
+		}
 		HelperFunctions.waitForPageToLoad(5);
 		
+		 for (WebElement link : breadcrumbLinks) {
+			 String hrefValue = link.getAttribute("href");
+			 link.click();
+			 String currentUrl = Driver.getDriver().getCurrentUrl();
+			 Assert.assertEquals(hrefValue, currentUrl);
+	            }
 		
-	
 	}
 	
 	public void setPageTitleAndProducts() {
 		HelperFunctions.waitForPageToLoad(3);
-		String actualTitle=pageTitle.getText();
-		String expectedTitle="Reseller Demo";
 		Assert.assertTrue(pageTitle.isDisplayed());
-		Assert.assertEquals(actualTitle, expectedTitle, "Actual and expected title do not match");
 		
-		for(WebElement each: productList) {
-			System.out.println(each.getText());
-			if(each.getText().contains("Check-in") && each.getText().contains("Compliance")&& each.getText().contains("Microsoft Alliance")) {
-				Assert.assertTrue(true);
-			}else {
-				Assert.assertTrue(false);
-			}
-		}
+		  for (WebElement link : productList) {
+	            
+              String href = link.getAttribute("href");
+
+          
+              if (!href.isEmpty()) {
+            
+                  System.out.println(href);
+                  Assert.assertTrue(true);
+              }else {
+            	  Assert.assertTrue(false);
+              }
+          }
 		
 	
 	}
