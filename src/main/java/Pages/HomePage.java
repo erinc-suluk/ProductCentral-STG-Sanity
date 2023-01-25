@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,6 +17,8 @@ import org.apache.poi.sl.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.JavascriptExecutor;
@@ -436,33 +439,62 @@ public class HomePage extends HelperFunctions {
         
         
     }
-    public void setDropdownList2() {
+    public void setDropdownList2() throws Exception {
     	HelperFunctions.staticWait(3);
     	productDropdown.click();
-    	for(WebElement eachProduct: productDropdownList) {
-        	System.out.println(eachProduct.getText());
-        	if(eachProduct.getText().contains("Change Navigator")&& eachProduct.getText().contains("Financial Wellness")) {
-        		Assert.assertTrue(true);
-        	}else {
-        		Assert.assertTrue(false);
-        	}
+    	
+    	 FileInputStream file = new FileInputStream("C:\\Users\\erong\\git\\ProductCentralProject-Automation1\\testdata.xlsx");
+         XSSFWorkbook workbook = new XSSFWorkbook(file);
+         XSSFSheet sheet = workbook.getSheetAt(1); 
+    	HelperFunctions.staticWait(3);
+        int columnIndex2 = 1;
+        HashSet<String> cellValues2 = new HashSet<String>();
+        for (int rowNum = 0; rowNum < sheet.getLastRowNum(); rowNum++) {
+            XSSFRow row = sheet.getRow(rowNum);
+            if(row == null) continue;
+            XSSFCell cell = row.getCell(columnIndex2);
+            if(cell == null) continue;
+            cellValues2.add(cell.getStringCellValue());
+        }
+        for (WebElement element2 : productDropdownList) {
+            if(element2.isDisplayed() && element2.isEnabled()){
+                String elementText2 = element2.getText();
+                if(elementText2!=null && !elementText2.isEmpty()){
+                    Assert.assertTrue(cellValues2.contains(elementText2), "element text: " + elementText2 + " not found in the column: " + columnIndex2);
+                }else{
+                    System.out.println("Element text is empty or null, skipping the element");
+                }
+            }else{
+                System.out.println("Element is not interactable or not visible, skipping the element");
+            }
         }
     	HelperFunctions.staticWait(3);
     	catDropdown.click();
+    	 HelperFunctions.staticWait(3);
+         int columnIndex3 = 0;
+         HashSet<String> cellValues3 = new HashSet<String>();
+         for (int rowNum = 0; rowNum < sheet.getLastRowNum(); rowNum++) {
+             XSSFRow row = sheet.getRow(rowNum);
+             if(row == null) continue;
+             XSSFCell cell = row.getCell(columnIndex3);
+             if(cell == null) continue;
+             cellValues3.add(cell.getStringCellValue());
+         }
+         for (WebElement element3 : catDropdownList) {
+             if(element3.isDisplayed() && element3.isEnabled()){
+                 String elementText3 = element3.getText();
+                 if(elementText3!=null && !elementText3.isEmpty()){
+                     Assert.assertTrue(cellValues3.contains(elementText3), "element text: " + elementText3 + " not found in the column: " + columnIndex3);
+                 }else{
+                     System.out.println("Element text is empty or null, skipping the element");
+                 }
+             }else{
+                 System.out.println("Element is not interactable or not visible, skipping the element");
+             }
+         }
+       
         
-        for(WebElement eachCat: catDropdownList) {
-        	System.out.println(eachCat.getText());
-        	if(eachCat.getText().contains("Hosted Software Terms") && eachCat.getText().contains("Patent Marking")
-    				&& eachCat.getText().contains("SMS Terms & Acceptable Use Policy")&& eachCat.getText().contains("Offering Overview")
-    				&& eachCat.getText().contains("Maintenance & Support")&& eachCat.getText().contains("Data Processing Addendum")
-    				/*&& eachCat.getText().contains("Privacy")*/
-    				&& eachCat.getText().contains("Accessibility")&& eachCat.getText().contains("Terms & Conditions")
-    				&& eachCat.getText().contains("Documentation")) {
-        		Assert.assertTrue(true);
-        	}else {
-        		Assert.assertTrue(false);
-        	}
-        }}
+        }
     
    public void setSearchResult() {
 	   HelperFunctions.waitForPageToLoad(3);
