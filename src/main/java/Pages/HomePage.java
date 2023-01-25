@@ -323,27 +323,32 @@ public class HomePage extends HelperFunctions {
         searchInput.sendKeys(Keys.ENTER);
         HelperFunctions.staticWait(3);
         productDropdown.click();
-        changeNavigatorCheckbox.click();
+       // changeNavigatorCheckbox.click();
+        HelperFunctions.staticWait(3);
+        productDropdown.click();
         HelperFunctions.staticWait(3);
         catDropdown.click();
         for(int i=0; i<catDropdownCheckboxes.size(); i++)
 		{
 			if(catDropdownCheckboxes.get(i).isDisplayed() && catDropdownCheckboxes.get(i).isEnabled())
 			{
-                   System.out.println("Checkbox is displayed at index : " + i + " Clicking on it now");
+                  // System.out.println("Checkbox is displayed at index : " + i + " Clicking on it now");
                    catDropdownCheckboxes.get(i).click();
 			}
 		}
         HelperFunctions.staticWait(3);
         catDropdown.click();
+        HelperFunctions.staticWait(3);
         
         ArrayList<String> obtainedList = new ArrayList<>(); 
         for(WebElement we:resultList){
         	   obtainedList.add(we.getText());
+        	   //System.out.println(obtainedList);
         	}
         	ArrayList<String> sortedList = new ArrayList<>();   
         	for(String s:obtainedList){
         	sortedList.add(s);
+        	//System.out.println(sortedList);
         	}
         	Collections.sort(sortedList);
         	Assert.assertTrue(sortedList.equals(obtainedList));
