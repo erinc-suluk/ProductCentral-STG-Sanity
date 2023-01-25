@@ -146,15 +146,7 @@ public class LegalPage extends HelperFunctions {
                  System.out.println("Element is not interactable or not visible, skipping the element");
              }
          }
-		/*for(WebElement eachTile: legalTilesTitle) {
-			System.out.println(eachTile.getText());
-			if(eachTile.getText().contains("Offering Overview")&& eachTile.getText().contains("Maintenance & Support")&& eachTile.getText().contains("Data Processing Addendum")
-    				) {
-				Assert.assertTrue(true);
-			}else {
-				Assert.assertTrue(false);
-			}
-		}*/
+	
 	}
 	
 	public void setBreadcrumb() {
@@ -166,17 +158,7 @@ public class LegalPage extends HelperFunctions {
 			 String currentUrl = Driver.getDriver().getCurrentUrl();
 			 Assert.assertEquals(hrefValue, currentUrl);
 	            }
-		/*HelperFunctions.waitForPageToLoad(3);
-		maintenanceAndSupportLink.click();
-		Assert.assertTrue(backtoLegalBreadcrumbfromContent.isDisplayed());
-		backtoLegalBreadcrumbfromContent.click();
-		HelperFunctions.waitForPageToLoad(3);
-		offeringOverviewLink.click();
-		Assert.assertTrue(backtoLegalBreadcrumbfromContent.isDisplayed());
-		backtoLegalBreadcrumbfromContent.click();
-		dataProcessingLink.click();
-		Assert.assertTrue(backtoLegalBreadcrumbfromContent.isDisplayed());
-		backtoLegalBreadcrumbfromContent.click();*/
+		
 	}
 	
 	
