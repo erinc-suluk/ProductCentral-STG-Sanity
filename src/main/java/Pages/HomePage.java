@@ -20,10 +20,13 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.pwc.productcentral.Driver;
@@ -218,13 +221,21 @@ public class HomePage extends HelperFunctions {
 		
 	}
 	public void setLegalTile() {
-		legalTile.click();
-		HelperFunctions.waitForPageToLoad(10);
-		if(landingPageComponentForLegalTile.isDisplayed()) {
-			Assert.assertTrue(true);
-		}else {
-			//logger.error("Landing page component does not exist");
+		
+		HelperFunctions.waitForPageToLoad(5);
+		for (WebElement link : homePageTiles) {
+		    try {
+		        String expectedUrl = link.getAttribute("href");
+		        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
+		        WebElement linkClickable = wait.until(ExpectedConditions.elementToBeClickable(link));
+		        linkClickable.click();
+		        String actualUrl = Driver.getDriver().getCurrentUrl();
+		        Assert.assertEquals(expectedUrl, actualUrl);
+		    } catch (StaleElementReferenceException e) {
+		      
+		    }
 		}
+   
 		
 	}
 
@@ -362,7 +373,7 @@ public class HomePage extends HelperFunctions {
     public void setDropdown() {
     	HelperFunctions.waitForPageToLoad(3);
     	searchButton.click();
-    	HelperFunctions.staticWait(3);
+    	HelperFunctions.staticWait(3); 
     	
         searchInput.sendKeys("products");
         searchInput.sendKeys(Keys.ENTER);

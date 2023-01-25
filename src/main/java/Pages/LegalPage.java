@@ -45,7 +45,7 @@ public class LegalPage extends HelperFunctions {
 	@FindBy(xpath="//a[@href='/us/en/automation/legal.html']")
 	private WebElement backtoLegalBreadcrumb;
 	
-	@FindBy(xpath="//div[@class='cmp-document-tiles__entries']")
+	@FindBy(xpath="//div[@class='cmp-breadcrumb']//a")
 	private static List<WebElement> legalTiles;
 	
 	@FindBy(xpath="//div[@class='cmp-legal-product-listing__tiles']")
@@ -66,35 +66,12 @@ public class LegalPage extends HelperFunctions {
 	
 	public void setlegalTiles() {
 		HelperFunctions.waitForPageToLoad(5);
-		for(WebElement tiles:legalTiles) {
-			if(tiles.isDisplayed()) {
-				Assert.assertTrue(true);
-			}else {
-				Assert.assertTrue(false);
-			}
-		}
-		maintenanceAndSupportLink.click();
-		HelperFunctions.waitForPageToLoad(3);
-		customerLink.click();
-		HelperFunctions.waitForPageToLoad(3);
-		maintenanceAndSupportBreadcrumb.click();
-		HelperFunctions.waitForPageToLoad(3);
-		backtoLegalBreadcrumb.click();
-		HelperFunctions.waitForPageToLoad(5);
-		for(WebElement tiles:legalTiles) {
-			if(tiles.isDisplayed()) {
-				Assert.assertTrue(true);
-			}else {
-				Assert.assertTrue(false);
-			}
-		}
-		offeringOverviewLink.click();
-		HelperFunctions.waitForPageToLoad(3);
-		changeNavigatorLink.click();
-		HelperFunctions.waitForPageToLoad(3);
-		offeringOverviewBreadcrumb.click();
-		HelperFunctions.waitForPageToLoad(3);
-		backtoLegalBreadcrumb.click();
+		 for (WebElement link : legalTiles) {
+			 String hrefValue = link.getAttribute("href");
+			 link.click();
+			 String currentUrl = Driver.getDriver().getCurrentUrl();
+			 Assert.assertEquals(hrefValue, currentUrl);
+	            }
 	}
 	public void setDescriptionOfTiles() {
 		HelperFunctions.waitForPageToLoad(5);

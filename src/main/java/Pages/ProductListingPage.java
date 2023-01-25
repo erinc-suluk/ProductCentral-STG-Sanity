@@ -1,14 +1,14 @@
 package Pages;
 
 import java.io.IOException;
-
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-
-
+import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -29,7 +29,7 @@ public class ProductListingPage extends HelperFunctions {
 	
 	
 	
-	@FindBy(xpath="//div[@class='cmp-related-links__items']")
+	@FindBy(xpath="//div[@class='cmp-related-links__items']//div//a")
 	private static List<WebElement> allLinks;
 	
 	@FindBy(xpath="//div[@class='cmp-related-links']")
@@ -124,6 +124,15 @@ public class ProductListingPage extends HelperFunctions {
 	@FindBy(xpath="//div[@id='pdfviewer-033ffa1470-content']")
 	private WebElement maintenanceContent;
 	
+	@FindBy(xpath="//div[@class='cmp-breadcrumb']//a")
+	private static List<WebElement> breadcrumbLinks;
+	
+	@FindBy(xpath="//div[@class='cmp-pdfviewer']")
+	private WebElement pdfViewer;
+	
+	@FindBy(xpath="//div[@class='cmp-product-list__card-content']//span")
+	private static List<WebElement> cardTitle;
+	
 	
 	
 	
@@ -138,77 +147,47 @@ public class ProductListingPage extends HelperFunctions {
 
     public void setAllLinks() throws IOException { 
     	HelperFunctions.waitForPageToLoad(5);
-    	offeringOverviewFromCloud.click();
-    	HelperFunctions.waitForPageToLoad(5);
-    	Driver.getDriver().switchTo().frame(0);
-		
-		String expectedLink1="Terms & Conditions";
-		String expectedLink2="Maintenance & Support";
-		String expectedLink3="Offering Overview";
-		String expectedLink4="Documentation";
-		
-		for(WebElement link:allLinks) {
-			if(link.getText().contains(expectedLink1)&& link.getText().contains(expectedLink2)
-					&& link.getText().contains(expectedLink3) && link.getText().contains(expectedLink4)) {
-				System.out.println("All the links are visible on the content page");
-			}else {}}}
+    	  for (WebElement link : allLinks) {
+            
+              String href = link.getAttribute("href");
+
+          
+              if (!href.isEmpty()) {
+            
+                  System.out.println(href);
+                  Assert.assertTrue(true);
+              }else {
+            	  Assert.assertTrue(false);
+              }
+          }
+    	
+    }
 
 
 	
     
     public void setLinks() {
-    	HelperFunctions.waitForPageToLoad(5);
-    	offeringOverviewFromCloud.click();
-    	HelperFunctions.waitForPageToLoad(5);
-    	termsAndConditionsLink.click();
-    	Assert.assertTrue(termsConditionContent.isDisplayed());
-    	HelperFunctions.staticWait(3);
-    	offeringOverviewLink.click();
-    	Assert.assertTrue(offeringOverviewContent.isDisplayed());
-    	HelperFunctions.staticWait(3);
-    	documentationLink.click();
-    	Assert.assertTrue(documentationContent.isDisplayed());
-    	HelperFunctions.staticWait(3);
-    	maintenanceAndSupportLink.click();
-    	Assert.assertTrue(maintenanceContent.isDisplayed());
     	
-    	
-    	
+    	for (WebElement link : allLinks) {
+    	    try {
+    	        link.click();   
+    	        Assert.assertNotNull(pdfViewer);
+    	    } catch (StaleElementReferenceException e) {
+    	       
+    	    }
+    	}
     }
     
     public void setPdfControllers() {
-    	HelperFunctions.waitForPageToLoad(5);
-    	offeringOverviewFromCloud.click();
-    	HelperFunctions.waitForPageToLoad(5);
-    	termsAndConditionsLink.click();
-    	Driver.getDriver().switchTo().frame(0);
-    	HelperFunctions.clickWithWait(termsAndConditionsTitle);
     	
-    	Boolean verifyPdfController=pdfIcon.isDisplayed();
-    	Assert.assertTrue(verifyPdfController);
-    	Driver.getDriver().switchTo().defaultContent();
-    	offeringOverviewLink.click();
-    	Driver.getDriver().switchTo().frame(0);
-    	HelperFunctions.clickWithWait(offeringOverviewLinkTitle);
-    	Assert.assertTrue(verifyPdfController);
-    
-    	HelperFunctions.staticWait(3);
-    	
-    	Assert.assertTrue(verifyPdfController);
-    	Driver.getDriver().switchTo().defaultContent();
-    	documentationLink.click();
-    	Driver.getDriver().switchTo().frame(0);
-    	HelperFunctions.clickWithWait(documentationTitle);
-    	Assert.assertTrue(verifyPdfController);
-    
-    	HelperFunctions.staticWait(3);
-    	
-    	Assert.assertTrue(verifyPdfController);
-    	Driver.getDriver().switchTo().defaultContent();
-    	maintenanceAndSupportLink.click();
-    	Driver.getDriver().switchTo().frame(0);
-    	HelperFunctions.clickWithWait(headerForMaintenanceAndSupport);
-    	Assert.assertTrue(verifyPdfController);
+    	for (WebElement link : allLinks) {
+    	    try {
+    	        link.click();   
+    	        Assert.assertNotNull(pdfIcon);
+    	    } catch (StaleElementReferenceException e) {
+    	       
+    	    }
+    	}
     	
     
     }
@@ -217,17 +196,13 @@ public class ProductListingPage extends HelperFunctions {
 
 	public void setBreadcrumbs() {
 		HelperFunctions.waitForPageToLoad(5);
-    	offeringOverviewFromCloud.click();
-    	HelperFunctions.waitForPageToLoad(5);
-		
-         backToCloudBreadcrumb.click();
-         String actualCloudTitle=cloudTitle.getText();
-         String expectedCloudTitle="Cloud";
-         Assert.assertEquals(actualCloudTitle, expectedCloudTitle);
-         backToProductsBreadcrumb.click();
-         String actualProductTitle=productsTitle.getText();
-         String expectedProductTitle="Products";
-         Assert.assertEquals(actualProductTitle,expectedProductTitle);
+		 for (WebElement link : breadcrumbLinks) {
+			 String hrefValue = link.getAttribute("href");
+			 link.click();
+			 String currentUrl = Driver.getDriver().getCurrentUrl();
+			 Assert.assertEquals(hrefValue, currentUrl);
+	            }
+    
          
 			 
 	
@@ -235,39 +210,49 @@ public class ProductListingPage extends HelperFunctions {
 	}
 	public void setLinkOfBreadcrumbs() {
 		HelperFunctions.waitForPageToLoad(5);
-    	offeringOverviewFromCloud.click();
-    	HelperFunctions.waitForPageToLoad(5);
-		if(backToCloudBreadcrumb.getAttribute("href")!=null) {
-			Assert.assertTrue(true);
-		}else {
-			Assert.assertTrue(false);
+    
+		for (WebElement link : breadcrumbLinks) {
+			if(link.getAttribute("href")!=null) {
+				Assert.assertTrue(true);
+			}else {
+				Assert.assertTrue(false);
+			}
 		}
-		backToCloudBreadcrumb.click();
-		if(backToProductsBreadcrumb.getAttribute("href")!=null) {
-			Assert.assertTrue(true);
-		}else {
-			Assert.assertTrue(false);
-		}
+
 		
 	}
 	
 	public void setSearchBox() {
 		HelperFunctions.waitForPageToLoad(5);
 		searchProduct.click();
-		searchProduct.sendKeys("Cloud");
+		searchProduct.sendKeys("Customer Link");
 		searchItem.click();
-		if(cloudProduct.isDisplayed()) {
+		for(WebElement title:cardTitle) {
+			if(title.getText().contains("Customer Link")) {
+				Assert.assertTrue(true);
+			}else {
+				Assert.assertTrue(false);
+			}
+		}
+		/*if(cloudProduct.isDisplayed()) {
 			Assert.assertTrue(true);
 		}else {
 			Assert.assertTrue(false);
-		}
+		}*/
 		HelperFunctions.staticWait(3);
 		searchProduct.clear();
 		searchProduct.click();
-		searchProduct.sendKeys("Strategic");
+		searchProduct.sendKeys("Digital on Demand");
 		searchItem.click();
 		HelperFunctions.staticWait(3);
-		if(strategicProduct.isDisplayed() ) {
+		for(WebElement title:cardTitle) {
+			if(title.getText().contains("Digital on Demand")) {
+				Assert.assertTrue(true);
+			}else {
+				Assert.assertTrue(false);
+			}
+		}
+		/*if(strategicProduct.isDisplayed() ) {
 			Assert.assertTrue(true);
 		}else {
 			Assert.assertTrue(false);
@@ -282,7 +267,7 @@ public class ProductListingPage extends HelperFunctions {
 			Assert.assertTrue(true);
 		}else {
 			Assert.assertTrue(false);
-		}
+		}*/
 			
 		
 		

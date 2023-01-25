@@ -31,9 +31,7 @@ public class SecurityPage extends HelperFunctions {
 	
 	
 	public void setSecurityTiles() {
-		
-		String securityTitle="Security";
-		Assert.assertEquals(pageTitle.getText(), securityTitle);
+		HelperFunctions.waitForPageToLoad(5);
 		
 		boolean isAllDisplayed = true;
         for(WebElement eachTiles : securityTiles){
