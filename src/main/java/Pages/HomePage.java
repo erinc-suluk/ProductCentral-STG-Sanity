@@ -319,13 +319,13 @@ public class HomePage extends HelperFunctions {
         Assert.assertEquals(documentationTitle.getText(), "Documentation");
         
         dataAppTitle.click();
-        Driver.getDriver().switchTo().frame(0);
-        if(dataAppContent.isDisplayed()) {
-			Assert.assertTrue(true);
-		}else {
-//			logger.error("Data App content is not displayed");
-			
-		}
+  
+        if(pdfViewer.isDisplayed()) {
+    			Assert.assertTrue(true);
+    		}else {
+   			logger.error("Data App content is not displayed");
+    			
+    		}
         
         
         

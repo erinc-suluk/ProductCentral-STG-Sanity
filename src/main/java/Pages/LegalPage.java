@@ -63,13 +63,13 @@ public class LegalPage extends HelperFunctions {
 	@FindBy(xpath="//span[@class='cmp-breadcrumb__link-title']")
 	private WebElement offeringOverviewBreadcrumb;
 	
-	@FindBy(xpath="(//div[@class='cmp-document-tiles__entry-info-container'])//div[2]")
+	@FindBy(xpath="//div[@class='cmp-document-tiles__entry-desc']")
 	private static List<WebElement> descriptionOfTiles;
 	
 	@FindBy(xpath="//a[@id='referrer-module']")
 	private WebElement backtoLegalBreadcrumbfromContent;
 	
-	@FindBy(xpath="//div[@class='cmp-legal-product-listing__tiles']//span")
+	@FindBy(xpath="//div[@class='cmp-document-tiles__entry-title']")
 	private static List<WebElement> legalTilesTitle;
 	
 	@FindBy(xpath="//div[@class='cmp-breadcrumb']//a")
@@ -119,12 +119,11 @@ public class LegalPage extends HelperFunctions {
 	}
 	public void setDisplayTilePerDocumentCat() throws Exception {
 		HelperFunctions.waitForPageToLoad(3);
-		read1.setExcelFile("./testdata.xlsx", "QA");
+		//read1.setExcelFile("./testdata.xlsx", "QA");
 		 FileInputStream file = new FileInputStream("C:\\Users\\erong\\git\\ProductCentralProject-Automation1\\testdata.xlsx");
          XSSFWorkbook workbook = new XSSFWorkbook(file);
          XSSFSheet sheet = workbook.getSheetAt(1); 
-         int columnIndex = 2; 
-         HelperFunctions.staticWait(3);
+         
          int columnIndex3 = 0;
          HashSet<String> cellValues3 = new HashSet<String>();
          for (int rowNum = 0; rowNum < sheet.getLastRowNum(); rowNum++) {

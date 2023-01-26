@@ -506,7 +506,7 @@ public class SanityTestCases extends BasePage {
 	
 	@Test (enabled=false)
 	public void WEB_42() throws Exception{
-		Driver.getDriver().get(read1.getCellData("VALUE", 9));
+		Driver.getDriver().get(read1.getCellData("VALUE", 42));
 		ExtentTest test = extent.createTest("Verify document tile can have 3 lines of description");
 	    test.info("Verified document tiles have 3 lines of description");
 	    lp.setDescriptionOfTiles();
@@ -515,7 +515,7 @@ public class SanityTestCases extends BasePage {
 	
 	@Test(enabled=false)
 	public void WEB_43() throws Exception{
-		Driver.getDriver().get(read1.getCellData("VALUE", 9));
+		Driver.getDriver().get(read1.getCellData("VALUE", 42));
 		ExtentTest test = extent.createTest("Verify display a tile per document category");
 	    test.info("Verified display a tile per document category");
 	    lp.setDisplayTilePerDocumentCat();

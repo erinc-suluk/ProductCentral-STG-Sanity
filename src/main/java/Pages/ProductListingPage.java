@@ -136,6 +136,11 @@ public class ProductListingPage extends HelperFunctions {
 	@FindBy(xpath="//div[@class='cmp-product-list__cards-container']//a")
 	private static List<WebElement> productLinks;
 	
+	@FindBy(xpath="//div[@class='cmp-product-list__cards-alphabet-section']//div//a[2]")
+	private WebElement productBasedonSearch;
+	
+	
+	
 	
 	
 	
@@ -228,56 +233,68 @@ public class ProductListingPage extends HelperFunctions {
 	public void setSearchBox() {
 		HelperFunctions.waitForPageToLoad(5);
 		searchProduct.click();
-		searchProduct.sendKeys("Customer Link");
+		String str="Customer Link";
+		searchProduct.sendKeys(str);
+		HelperFunctions.staticWait(3);
 		searchItem.click();
-		for(WebElement title:cardTitle) {
-			if(title.getText().contains("Customer Link")) {
-				Assert.assertTrue(true);
-			}else {
-				Assert.assertTrue(false);
-			}
-		}
-		/*if(cloudProduct.isDisplayed()) {
+		HelperFunctions.staticWait(3);
+		System.out.println(productBasedonSearch.getAttribute("data-product-name"));
+		if(productBasedonSearch.getAttribute("data-product-name").equalsIgnoreCase(str)) {
 			Assert.assertTrue(true);
 		}else {
 			Assert.assertTrue(false);
-		}*/
+		}
+		HelperFunctions.staticWait(3);
+		searchProduct.click();
 		HelperFunctions.staticWait(3);
 		searchProduct.clear();
-		searchProduct.click();
-		searchProduct.sendKeys("Digital on Demand");
+		String str2="Digital on Demand";
+		searchProduct.sendKeys(str2);
+		HelperFunctions.staticWait(3);
 		searchItem.click();
 		HelperFunctions.staticWait(3);
-		for(WebElement title:cardTitle) {
-			if(title.getText().contains("Digital on Demand")) {
-				Assert.assertTrue(true);
-			}else {
-				Assert.assertTrue(false);
-			}
-		}
-		/*if(strategicProduct.isDisplayed() ) {
+		System.out.println(productBasedonSearch.getAttribute("data-product-name"));
+		if(productBasedonSearch.getAttribute("data-product-name").equalsIgnoreCase(str2)) {
 			Assert.assertTrue(true);
 		}else {
 			Assert.assertTrue(false);
 		}
-		HelperFunctions.staticWait(3);
-		searchProduct.clear();
-		searchProduct.click();
-		searchProduct.sendKeys("Risk");
-		searchItem.click();
-		HelperFunctions.staticWait(3);
-		if(riskProduct.isDisplayed() ) {
-			Assert.assertTrue(true);
-		}else {
-			Assert.assertTrue(false);
-		}*/
-			
+		
+		
 		
 		
 	}
 	
 	public void setSearchResult() {
 		HelperFunctions.waitForPageToLoad(5);
+		searchProduct.click();
+		String str="Cus";
+		String str2="Customer Link";
+		searchProduct.sendKeys(str);
+		HelperFunctions.staticWait(3);
+		searchItem.click();
+		HelperFunctions.staticWait(3);
+		if(productBasedonSearch.getAttribute("data-product-name").equalsIgnoreCase(str2)) {
+			Assert.assertTrue(true);
+		}else {
+			Assert.assertTrue(false);
+		}
+		HelperFunctions.staticWait(3);
+		searchProduct.click();
+		HelperFunctions.staticWait(3);
+		searchProduct.clear();
+		String str3="Dig";
+		String str4="Digital on Demand";
+		searchProduct.sendKeys(str3);
+		HelperFunctions.staticWait(3);
+		searchItem.click();
+		HelperFunctions.staticWait(3);
+		if(productBasedonSearch.getAttribute("data-product-name").equalsIgnoreCase(str4)) {
+			Assert.assertTrue(true);
+		}else {
+			Assert.assertTrue(false);
+		}
+		/*HelperFunctions.waitForPageToLoad(5);
 		searchProduct.click();
 		searchProduct.sendKeys("Cl");
 		HelperFunctions.staticWait(3);
@@ -310,7 +327,7 @@ public class ProductListingPage extends HelperFunctions {
 			Assert.assertTrue(true);
 		}else {
 			Assert.assertTrue(false);
-		}
+		}*/
 			
 		
 	}
