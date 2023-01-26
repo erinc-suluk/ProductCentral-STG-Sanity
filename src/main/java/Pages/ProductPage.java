@@ -95,7 +95,7 @@ public class ProductPage extends HelperFunctions {
 	@FindBy(xpath="//*[@id=\"listPage\"]/div/div/div[2]/div[3]")
 	private WebElement cardCat;
 	
-	@FindBy(xpath="//div[@id='tagElements']")
+	@FindBy(xpath="(//div[@class='ap-dropdown-select'])[1]")
 	private WebElement documentDropdown;
 	
 	
@@ -341,8 +341,11 @@ public void setDisplayResources() {
     		 Assert.assertTrue(false);
     	 }
      }
+     HelperFunctions.scrollToElement(nextButtonforResources);
      HelperFunctions.staticWait(3);
-     nextButtonforResources.click();
+     JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
+     executor.executeScript("arguments[0].click();", nextButtonforResources);
+    // nextButtonforResources.click();
      HelperFunctions.staticWait(3);
      for(WebElement eachResources2: last5resources) {
     	 if(eachResources2.isDisplayed()) {
@@ -461,7 +464,13 @@ public void setMyProductSearch() {
 }
 
 public void setResourcesBasedonProducts() {
-	product2.click();
+	//product2.click();
+	HelperFunctions.waitForPageToLoad(5);
+	for(int i=0;i<allProducts.size();i++) {
+		allProducts.get(0).click();
+		break;
+    }
+	HelperFunctions.staticWait(3);
 	HelperFunctions.scrollToElement(allResources);  
     if(resource1.isDisplayed() ) {
 	   Assert.assertTrue(true);
@@ -469,16 +478,22 @@ public void setResourcesBasedonProducts() {
 	   Assert.assertTrue(false);
     String text1=resource1.getText();
     System.out.println(text1);
-    
+    HelperFunctions.staticWait(3);
    myProductItemOnSitemap.click();
    HelperFunctions.waitForPageToLoad(5); 
-   product4.click();
+   for(int i=0;i<allProducts.size();i++) {
+		allProducts.get(1).click();
+		break;
+   }
+   HelperFunctions.staticWait(3);
+  // product4.click();
    HelperFunctions.scrollToElement(allResources);
    HelperFunctions.staticWait(3);
  
    String text2=resource1.getText();
    System.out.println(text2);
    Assert.assertNotEquals(text1, text2);
+   HelperFunctions.staticWait(3);
    if(resource1.isDisplayed()  ) {
 	   Assert.assertTrue(true);
    }else
@@ -487,22 +502,39 @@ public void setResourcesBasedonProducts() {
 }
 
 public void setNotSupportMultiSelect() {
+	//HelperFunctions.waitForPageToLoad(3);
+	//product2.click();
+	HelperFunctions.waitForPageToLoad(5);
+    for(int i=0;i<allProducts.size();i++) {
+		allProducts.get(0).click();
+		break;
+    }
 	HelperFunctions.waitForPageToLoad(3);
-	product2.click();
-	HelperFunctions.waitForPageToLoad(3);
-	HelperFunctions.scrollToElement(viewMoreButton);
-    documentDropdown.click();    
+	HelperFunctions.scrollToElement(documentDropdown);
+	HelperFunctions.staticWait(3);
+	JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
+    executor.executeScript("arguments[0].click();", documentDropdown);
+   // documentDropdown.click();    
 	    for(WebElement tags:myProductCatDropdownList) {
 			tags.click();
-			Assert.assertFalse(tags.isDisplayed());
+			break;
 			
 		}
+	    for(WebElement tags:myProductCatDropdownList) {
+	    	Assert.assertFalse(tags.isDisplayed());
+	    }
+	    
 	   
 }
 
 public void setLoadMoreButton() {
-	HelperFunctions.waitForPageToLoad(3);
-	product2.click();
+	//HelperFunctions.waitForPageToLoad(3);
+	//product2.click();
+	HelperFunctions.waitForPageToLoad(5);
+    for(int i=0;i<allProducts.size();i++) {
+		allProducts.get(0).click();
+		break;
+    }
 	HelperFunctions.waitForPageToLoad(3);
 	HelperFunctions.scrollToElement(viewMoreButton);
       JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
@@ -528,8 +560,13 @@ public void setLoadMoreButton() {
 }
 
 public void setClickLoadMoreButton() {
-	HelperFunctions.waitForPageToLoad(3);
-	product2.click();
+	//HelperFunctions.waitForPageToLoad(3);
+	//product2.click();
+	HelperFunctions.waitForPageToLoad(5);
+    for(int i=0;i<allProducts.size();i++) {
+		allProducts.get(0).click();
+		break;
+    }
 	HelperFunctions.waitForPageToLoad(3);
 	HelperFunctions.scrollToElement(viewMoreButton);
 	
@@ -550,8 +587,13 @@ public void setClickLoadMoreButton() {
 }
 
 public void setClickLoadLessButton() {
-	HelperFunctions.waitForPageToLoad(3);
-	product2.click();
+	//HelperFunctions.waitForPageToLoad(3);
+	//product2.click();
+	HelperFunctions.waitForPageToLoad(5);
+    for(int i=0;i<allProducts.size();i++) {
+		allProducts.get(0).click();
+		break;
+    }
 	HelperFunctions.waitForPageToLoad(3);
 	HelperFunctions.scrollToElement(viewMoreButton);
       JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
@@ -601,8 +643,12 @@ public void setClickLoadLessButton() {
 }
 
 public void setTitleOfAssets() {
-	HelperFunctions.waitForPageToLoad(3);
-	product2.click();
+	
+	HelperFunctions.waitForPageToLoad(5);
+    for(int i=0;i<allProducts.size();i++) {
+		allProducts.get(0).click();
+		break;
+    }
 	HelperFunctions.waitForPageToLoad(3);
 	HelperFunctions.scrollToElement(forYouTitle);
     int hasMoreThan3Line=0;
