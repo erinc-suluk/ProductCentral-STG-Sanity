@@ -680,7 +680,7 @@ public class AuthoringPage extends HelperFunctions {
              XSSFWorkbook workbook = new XSSFWorkbook(file);
              XSSFSheet sheet = workbook.getSheetAt(1); 
              int columnIndex = 2; 
-         
+          
              HelperFunctions.staticWait(3);
              JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
              executor.executeScript("arguments[0].click();", portfolioTags2);

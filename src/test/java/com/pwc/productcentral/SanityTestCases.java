@@ -434,7 +434,7 @@ public class SanityTestCases extends BasePage {
 	    logger.info("Test WEB_34 has passed");
 	}
 	
-	@Test  (enabled=false)
+	@Test  
 	public void WEB_35() throws Exception{
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify the tags accompany the items which are assets");

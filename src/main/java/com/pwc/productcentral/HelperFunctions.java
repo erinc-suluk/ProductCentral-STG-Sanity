@@ -141,7 +141,7 @@ public class HelperFunctions{
         waitForPageToLoad(10);
         wait.until(ExpectedConditions.visibilityOf(element));
         element.clear();
-        element.sendKeys(text);
+        element.sendKeys(text); 
         wait.until(ExpectedConditions.attributeToBe(element, "value", text));
         System.out.println("Entering text: " + text);
     }

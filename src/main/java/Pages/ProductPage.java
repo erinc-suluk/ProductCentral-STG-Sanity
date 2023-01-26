@@ -307,6 +307,7 @@ public class ProductPage extends HelperFunctions {
 	}
 	
 	public void setErrorPage() throws Exception {
+		HelperFunctions.waitForPageToLoad(5);
 		JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
         js.executeScript("window.open()");
 	    ArrayList<String> tabs = new ArrayList<String>(Driver.getDriver().getWindowHandles());
@@ -326,8 +327,11 @@ public class ProductPage extends HelperFunctions {
 	
 	
 public void setDisplayResources() {
-	HelperFunctions.waitForPageToLoad(3);
-	product2.click();
+	HelperFunctions.waitForPageToLoad(5);
+	for(int i=0;i<allProducts.size();i++) {
+		allProducts.get(0).click();
+		break;}
+	
 	HelperFunctions.waitForPageToLoad(3);
 	HelperFunctions.scrollToElement(allResources); 
      for(WebElement eachResources: first5resources) {
@@ -337,7 +341,9 @@ public void setDisplayResources() {
     		 Assert.assertTrue(false);
     	 }
      }
+     HelperFunctions.staticWait(3);
      nextButtonforResources.click();
+     HelperFunctions.staticWait(3);
      for(WebElement eachResources2: last5resources) {
     	 if(eachResources2.isDisplayed()) {
     		 Assert.assertTrue(true);
@@ -348,19 +354,21 @@ public void setDisplayResources() {
      
     }
 public void setNewTabAssets() throws Exception {
-	HelperFunctions.staticWait(3);
-	product2.click();
+
+	HelperFunctions.waitForPageToLoad(5);
+	for(int i=0;i<allProducts.size();i++) {
+		allProducts.get(0).click();
+		break;}
 	HelperFunctions.staticWait(3);
 	HelperFunctions.scrollToElement(viewMoreButton); 
     HelperFunctions.staticWait(3);
+    String hrefValue = resource1.getAttribute("href");
     resource1.click();
     ArrayList<String> tabs = new ArrayList<String>(Driver.getDriver().getWindowHandles());
     Driver.getDriver().switchTo().window(tabs.get(2));
     System.out.println(Driver.getDriver().getCurrentUrl());
-    String actualUrl=Driver.getDriver().getCurrentUrl();
-    read1.setExcelFile("./testdata.xlsx", "QA");
-    String expectedUrl=read1.getCellData("VALUE", 35);
-    Assert.assertEquals(actualUrl, expectedUrl);
+	 String currentUrl = Driver.getDriver().getCurrentUrl();
+	 Assert.assertEquals(hrefValue, currentUrl);
     Driver.getDriver().close();
     Driver.getDriver().switchTo().window(tabs.get(1));
     HelperFunctions.staticWait(3);

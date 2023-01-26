@@ -3,6 +3,7 @@ package Pages;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -45,6 +46,9 @@ public class LoginPageObjects extends HelperFunctions{
 	
 	@FindBy(xpath="//div[@data-href='/content/pc/us/en/my-products/product-4.html']")
 	private WebElement loginLink2;
+	
+	@FindBy(xpath="//div[@class='cmp-product-list__cards-container']//a")
+	private static List<WebElement> productLinks;
 	
 	ReadXLSdata read1=new ReadXLSdata();
 	
