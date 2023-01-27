@@ -332,8 +332,9 @@ public void setDisplayResources() {
 		allProducts.get(0).click();
 		break;}
 	
-	HelperFunctions.waitForPageToLoad(3);
+	HelperFunctions.waitForPageToLoad(5);
 	HelperFunctions.scrollToElement(allResources); 
+	HelperFunctions.staticWait(3);
      for(WebElement eachResources: first5resources) {
     	 if(eachResources.isDisplayed()) {
     		 Assert.assertTrue(true);
@@ -341,6 +342,7 @@ public void setDisplayResources() {
     		 Assert.assertTrue(false);
     	 }
      }
+     HelperFunctions.staticWait(3);
      HelperFunctions.scrollToElement(nextButtonforResources);
      HelperFunctions.staticWait(3);
      JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
@@ -363,18 +365,21 @@ public void setNewTabAssets() throws Exception {
 		allProducts.get(0).click();
 		break;}
 	HelperFunctions.staticWait(3);
-	HelperFunctions.scrollToElement(viewMoreButton); 
+	HelperFunctions.scrollToElement(allResources); 
     HelperFunctions.staticWait(3);
     String hrefValue = resource1.getAttribute("href");
-    resource1.click();
+    JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
+    executor.executeScript("arguments[0].click();", resource1);
+    //resource1.click();
+    HelperFunctions.staticWait(3);
     ArrayList<String> tabs = new ArrayList<String>(Driver.getDriver().getWindowHandles());
     Driver.getDriver().switchTo().window(tabs.get(2));
     System.out.println(Driver.getDriver().getCurrentUrl());
 	 String currentUrl = Driver.getDriver().getCurrentUrl();
 	 Assert.assertEquals(hrefValue, currentUrl);
-    Driver.getDriver().close();
-    Driver.getDriver().switchTo().window(tabs.get(1));
-    HelperFunctions.staticWait(3);
+   // Driver.getDriver().close();
+   // Driver.getDriver().switchTo().window(tabs.get(1));
+   // HelperFunctions.staticWait(3);
 	
 }
 

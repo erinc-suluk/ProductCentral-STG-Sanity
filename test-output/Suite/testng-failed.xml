@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite parallel="none" name="Failed suite [Suite]">
-  <listeners>
-    <listener class-name="com.pwc.productcentral.Listeners"/>
-  </listeners>
-  <test parallel="none" name="Test(failed)">
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Test(failed)">
+    <groups>
+      <run>
+        <include name="publisher"/>
+        <exclude name="author"/>
+      </run>
+    </groups>
     <classes>
       <class name="com.pwc.productcentral.SanityTestCases">
         <methods>
-          <include name="initTest"/>
-          <include name="setUp"/>
-          <include name="closingBrowser"/>
+          <include name="WEB_3"/>
           <include name="WEB_1"/>
+          <include name="WEB_2"/>
         </methods>
       </class> <!-- com.pwc.productcentral.SanityTestCases -->
     </classes>

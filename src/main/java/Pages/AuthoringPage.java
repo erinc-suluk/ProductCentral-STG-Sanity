@@ -502,6 +502,9 @@ public class AuthoringPage extends HelperFunctions {
 	@FindBy(xpath="(//button[@role='combobox'])[3]")
 	private WebElement pcTags;
 	
+	@FindBy(xpath="(//foundation-time[@type='datetime'])[1]")
+	private WebElement pdfDate;
+	
 
 	
 	
@@ -838,7 +841,7 @@ public class AuthoringPage extends HelperFunctions {
     
     
     public void setSitemap() throws Exception {
-    	
+    	HelperFunctions.waitForPageToLoad(5);
     	read1.setExcelFile("./testdata.xlsx", "QA");
 		email.sendKeys(read1.getCellData("DATA", 1));
 		next.click();
@@ -911,7 +914,7 @@ public class AuthoringPage extends HelperFunctions {
     }
     
  public void setHideSitemap() throws Exception {
-    	
+	    HelperFunctions.waitForPageToLoad(5);
     	read1.setExcelFile("./testdata.xlsx", "QA");
 		email.sendKeys(read1.getCellData("DATA", 1));
 		next.click();
@@ -925,7 +928,7 @@ public class AuthoringPage extends HelperFunctions {
 	    Driver.getDriver().get(read1.getCellData("VALUE", 17));
 	    HelperFunctions.waitForPageToLoad(5);
 	    homepageDemo.click();
-	    HelperFunctions.staticWait(3);
+	    HelperFunctions.staticWait(5);
 	    JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
         executor.executeScript("arguments[0].click();", homepageDemo);
 	    HelperFunctions.staticWait(5);
@@ -935,6 +938,7 @@ public class AuthoringPage extends HelperFunctions {
 	    properties.click();
 	    HelperFunctions.waitForPageToLoad(5);
 	    hidesitemapCheckbox.click();
+	    HelperFunctions.staticWait(5);
 	    saveAndClose.click();
 	    HelperFunctions.waitForPageToLoad(5);
 	    JavascriptExecutor executor3 = (JavascriptExecutor) Driver.getDriver();
@@ -945,18 +949,22 @@ public class AuthoringPage extends HelperFunctions {
 	    HelperFunctions.staticWait(3);
 	    JavascriptExecutor executor5 = (JavascriptExecutor) Driver.getDriver();
         executor5.executeScript("arguments[0].click();", homepageDemo);
+        HelperFunctions.staticWait(5);
 	    quickPublish.click();
+	    HelperFunctions.staticWait(5);
 	    ArrayList<String> tabs2 = new ArrayList<String>(Driver.getDriver().getWindowHandles());
 	    Driver.getDriver().switchTo().window(tabs2.get(1));
+	    HelperFunctions.staticWait(5);
 	    JavascriptExecutor executor6 = (JavascriptExecutor) Driver.getDriver();
         executor6.executeScript("arguments[0].click();",  Publish);
-	   
-	   
-	    JavascriptExecutor js2 = ((JavascriptExecutor) Driver.getDriver());
+        HelperFunctions.staticWait(5);
+        Driver.getDriver().get(read1.getCellData("VALUE", 18));
+        HelperFunctions.waitForPageToLoad(5);
+	   /* JavascriptExecutor js2 = ((JavascriptExecutor) Driver.getDriver());
         js2.executeScript("window.open()");
 	    ArrayList<String> tabs3 = new ArrayList<String>(Driver.getDriver().getWindowHandles());
 	    Driver.getDriver().switchTo().window(tabs3.get(1));
-	    Driver.getDriver().get(read1.getCellData("VALUE", 18));
+	    Driver.getDriver().get(read1.getCellData("VALUE", 18));*/
 	    String expectedContent="Homepage Demo";
 	    for(WebElement eachContent: sitemapContents) {
 	    	System.out.println(eachContent.getText());
@@ -1360,7 +1368,67 @@ js.executeScript("window.open()");
  }
  
  public void setUpdatedDateFromAssets() throws Exception {
+	 
 	 read1.setExcelFile("./testdata.xlsx", "QA");
+		email.sendKeys(read1.getCellData("DATA", 1));
+		next.click();
+		pass.sendKeys(read1.getCellData("VALUE", 1));
+		submit.click();
+	    HelperFunctions.staticWait(5);
+	    JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
+js.executeScript("window.open()");
+	    ArrayList<String> tabs = new ArrayList<String>(Driver.getDriver().getWindowHandles());
+	    Driver.getDriver().switchTo().window(tabs.get(1));
+	    Driver.getDriver().get("https://auth-productcentral-qa.products.pwc.com/assets.html/content/dam/productcentral/general/content-pdf");
+	    HelperFunctions.waitForPageToLoad(5);
+	    String originalDate = pdfDate.getAttribute("value");
+        String desiredFormat = "MM/dd/yyyy";
+        SimpleDateFormat originalSDF = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = originalSDF.parse(originalDate);
+        SimpleDateFormat desiredSDF = new SimpleDateFormat(desiredFormat);
+        String formattedDate = desiredSDF.format(date);
+        System.out.println(formattedDate);
+	    Driver.getDriver().get(read1.getCellData("VALUE", 20));
+	    HelperFunctions.waitForPageToLoad(5);
+	    contentEdit.click();
+	    HelperFunctions.staticWait(2);
+	    settingIcon.click();
+	    setIcon.click();
+	    HelperFunctions.staticWait(2);
+	    priceWaterPdf.click();
+	    HelperFunctions.staticWait(2);
+	    selectButton.click();
+	    HelperFunctions.staticWait(2);
+	    checkIcon.click();
+	    HelperFunctions.staticWait(2);
+	    previewButton2.click();
+	    HelperFunctions.staticWait(2);
+	    Driver.getDriver().switchTo().frame(0);
+	    System.out.println(lastUpdatedDate.getText());
+	    String expectedDate=read1.getCellData("VALUE", 33);
+	    Assert.assertEquals(lastUpdatedDate.getText(), expectedDate);
+	    HelperFunctions.staticWait(2);
+	    Driver.getDriver().switchTo().defaultContent();
+	    editButtonContent.click();
+	    HelperFunctions.staticWait(2);
+	    contentEdit.click();
+	    HelperFunctions.staticWait(2);
+	    settingIcon.click();
+	    setIcon.click();
+	    HelperFunctions.staticWait(2);
+        pdfTemplate.click();
+        HelperFunctions.staticWait(2);
+	    selectButton.click();
+	    HelperFunctions.staticWait(2);
+	    checkIcon.click();
+	    HelperFunctions.staticWait(2);
+	    previewButton2.click();
+	    HelperFunctions.staticWait(2);
+	    Driver.getDriver().switchTo().frame(0);
+	    String date2 = lastUpdatedDate.getText();
+	    System.out.println(date2);
+	    Assert.assertTrue(date2.contains(formattedDate));
+	 /*read1.setExcelFile("./testdata.xlsx", "QA");
 		email.sendKeys(read1.getCellData("DATA", 1));
 		next.click();
 		pass.sendKeys(read1.getCellData("VALUE", 1));
@@ -1410,7 +1478,7 @@ js.executeScript("window.open()");
 	    System.out.println(lastUpdatedDate.getText());
 	    System.out.println(lastUpdatedDate.getText().replace("/", "-"));
 	    String expectedDate2=read1.getCellData("VALUE", 32);
-	    Assert.assertEquals(lastUpdatedDate.getText(), expectedDate2);
+	    Assert.assertEquals(lastUpdatedDate.getText(), expectedDate2);*/
 	   
 	  
 	    

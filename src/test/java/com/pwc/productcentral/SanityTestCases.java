@@ -325,7 +325,7 @@ public class SanityTestCases extends BasePage {
 	    logger.info("Test WEB_24 has passed");
 	}
 	
-	@Test (enabled=false)
+	@Test(enabled=false)
 	public void WEB_25() throws Exception{
 		Driver.getDriver().get(read1.getCellData("VALUE", 6));
 		ExtentTest test = extent.createTest("Verify that search results are based on keywords");
@@ -434,7 +434,7 @@ public class SanityTestCases extends BasePage {
 	    logger.info("Test WEB_34 has passed");
 	}
 	
-	@Test  (enabled=false)
+	@Test (enabled=false)
 	public void WEB_35() throws Exception{
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify the tags accompany the items which are assets");
@@ -531,7 +531,7 @@ public class SanityTestCases extends BasePage {
 	    logger.info("Test WEB_44 has passed");
 	}
 	
-	@Test (enabled=false)
+	@Test(enabled=false)
 	public void WEB_45() throws Exception{
 		Driver.getDriver().get(read1.getCellData("VALUE", 9));
 		ExtentTest test = extent.createTest("Breadcrumb must be visible to user");
@@ -707,7 +707,7 @@ public class SanityTestCases extends BasePage {
 	    logger.info("Test WEB_57 has passed");
 	}
 	
-	@Test  (enabled=false)
+	@Test (enabled=false)
 	public void WEB_58() throws Exception{
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify by default the first tab will be active when the user landing on the page");
@@ -738,7 +738,7 @@ public class SanityTestCases extends BasePage {
 	    logger.info("Test WEB_60 has passed");
 	}
 	
-	@Test (enabled=false)
+	@Test(enabled=false)
 	public void WEB_61() throws Exception{
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify author is able to author the site map will all the links");
@@ -784,7 +784,7 @@ public class SanityTestCases extends BasePage {
 	    logger.info("Test WEB_65 has passed");
 	}
 	
-	@Test (enabled=false)
+	@Test(enabled=false)
 	public void WEB_66() throws Exception{
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify last updated date will also be reflected under the title");
@@ -878,7 +878,7 @@ public class SanityTestCases extends BasePage {
 	    BasePage.setResponsivenessOfPages();
 	    logger.info("Test WEB_75 has passed");
 	}
-	@Test  (enabled=false)
+	@Test (enabled=false)
 	public void WEB_76() throws Exception{
 		Driver.getDriver().get(read1.getCellData("VALUE", 13));
 		ExtentTest test = extent.createTest("Verify the release notes must be able to manually authored");
