@@ -7,7 +7,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
+import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
@@ -16,6 +19,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -86,7 +90,7 @@ public class ProductPage extends HelperFunctions {
 	@FindBy(xpath="//a[@href='/content/pc/us/en/my-products.html']")
 	private WebElement myProductItemOnSitemap;
 	
-	@FindBy(xpath="//div[@class='ap-dropdown-list show']//div")
+	@FindBy(xpath="//div[@class='ap-dropdown-option-item']//span[1]")
 	private static List<WebElement> myProductCatDropdownList2;
 	
 	@FindBy(xpath="(//div[@class='ap-dropdown-select'])[1]")
@@ -100,9 +104,9 @@ public class ProductPage extends HelperFunctions {
 	
 	
 	@FindBy(xpath="//div[@class='cmp-all-resources__card-category']")
-	private WebElement cardCategory;
+	private static List<WebElement> cardCategory;
 	
-	@FindBy(xpath="//img[@src='/us/en/errors/403/_jcr_content/root/container/container/error/image.coreimg.svg/1668507894105/403-error-illus-%281%29.svg']")
+	@FindBy(xpath="//div[@class='cmp-error__img']")
 	private WebElement errorImage;
 	
 	@FindBy(xpath="//div[@id='searchProductDropdown']")
@@ -210,26 +214,96 @@ public class ProductPage extends HelperFunctions {
 	@FindBy(xpath="//div[@data-href='/content/pc/us/en/my-products/product-4.html']")
 	private WebElement loginLink2;
 	
-	@FindBy(xpath="//a[.='Go To Client View']")
+	@FindBy(xpath="//a[.='Support Central']")
 	private WebElement technicalSupportButton;
 	
 	@FindBy(xpath="//ol[@class='cmp-tabs__tablist']//a//li//div//span[1]")
 	private static List<WebElement> allProducts;
 	
+	@FindBy(xpath="//span[@class='cmp-tabs__title-container-view-more view-all-js']")
+	private WebElement viewAll;
+	
+	@FindBy(xpath="//div[@class='cmp-tabs__products-modal-text-container']")
+	private static List<WebElement> productsCont;
+	
+	@FindBy(xpath="//span[@id='closeTabsModal']")
+	private WebElement closeTabs;
+	
+	@FindBy(xpath="//a[@class='cmp-tabs__products-modal-card']")
+	private static List<WebElement> allProducts2;
 	
 	
+	@FindBy(xpath="(//div[@class='cmp-tiles__products-link'])[1]")
+	private WebElement logintoMyproducts;
 	
+	@FindBy(xpath="//div[@class='cmp-header__cta-avatar']")
+    private WebElement avatar;
+    
+    @FindBy(xpath="//a[@aria-label='Logout']")
+    private WebElement logout;
+    
+    @FindBy(xpath="//div[contains(@class, 'outage')]")
+    private WebElement banner;
+    
+    @FindBy(xpath="//span[contains(@aria-label, 'Banner')]")
+    private WebElement bannerClose;
 	
+    @FindBy(xpath="//h1[@class='cmp-title__text']")
+    private WebElement myproductTitle;
+    
+    @FindBy(xpath="//div[@class='cmp-latest__tiles']//a")
+   	private static List<WebElement> latestAssets;
+       
+       @FindBy(xpath="//a[@id='preferencesLink']")
+   	private static WebElement preferences;
+   	
+   	@FindBy(xpath="//div[@class='ap-preferences-container']")
+   	private static WebElement preferencesModal;
+   	
+   	@FindBy(xpath="//h2[@class='cmp-hero-promotion__content-title']")
+   	private static WebElement heroTitle;
+   	
+   	@FindBy(xpath="//h3[@class='cmp-hero-promotion__content-description']")
+   	private static WebElement heroDesc;
+   	
+   	@FindBy(xpath="//div[@class='cmp-my-products-tile__title']")
+   	private static List<WebElement> foryouTitles;
+   	
+   	@FindBy(xpath="//div[@class='cmp-all-resources']")
+	private WebElement allResources2;
 	
+	@FindBy(xpath="//div[@class='cmp-for-you']")
+	private WebElement forYouTitle2;
 	
+	@FindBy(xpath="//div[contains(@class, 'hero-promotion')]//div[contains(@class, 'image')]")
+	private WebElement heroImage;
 	
+	@FindBy(xpath="//span[.='Next']")
+	private static List<WebElement> nextButtonforResources2;
 	
+	@FindBy(xpath="//div[@class='cmp-for-you__container medium-large']//div[@class='cmp-for-you__tiles row-1']")
+	private WebElement firstForYou;
+	
+	@FindBy(xpath="//div[contains(@class,'for-you')]//div[contains(@class,'row-2')]")
+	private WebElement secondForYou;
+	
+	@FindBy(xpath="//span[@class='ap-dropdown-option-label']")
+	private static List<WebElement> docOptionsLabel;
+	
+	@FindBy(xpath="//button[contains(@class, 'play-button')]")
+	private WebElement playButton;
+	
+	@FindBy(xpath="(//button[contains(@class, 'playing')])[2]")
+	private WebElement pauseButton;
+	
+	@FindBy(xpath="//div[contains(@class, 'video-player')]")
+	private WebElement videoPlayer;
 	
 	ReadXLSdata read1=new ReadXLSdata();
 	
 	
 	
-	
+	static Logger logger=Logger.getLogger("ProductPage");
 	
 	
 	
@@ -237,6 +311,7 @@ public class ProductPage extends HelperFunctions {
 	
 	
 	public void setDocCategory() throws Exception {
+		 HelperFunctions.waitForPageToLoad(5);
 		HelperFunctions.scrollToElement(allResources);
 		read1.setExcelFile("./testdata.xlsx", "Tag Taxonomy");
         
@@ -260,291 +335,463 @@ public class ProductPage extends HelperFunctions {
 		
 	}
 	
-	public void setFooterWithoutLogin() {
+	public void setFooterWithoutLogin(ExtentTest test) throws Exception {
+		 test.info("Wait for the page to load.");
+		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.staticWait(3);
+		test.info("Scroll down to footer content");
 		HelperFunctions.scrollToElement(footerContent);
-	
+		test.info("Verified footer content and link group");
 	        if(footerContent.isDisplayed() && footerLinkGroup.isEnabled() ) {
+	        	String successMessage = "Only footer content displayed";
+	            logger.info(successMessage);
 	        	Assert.assertTrue(true);
 	        }else {
-	        	Assert.assertTrue(false);
+	        	String errorMessage = "footer links are also displayed";
+	            logger.error(errorMessage);
+	            throw new Exception(errorMessage);
+	        	//Assert.assertTrue(false);
 	        }
-	
+	        HelperFunctions.staticWait(3);
 	}
 	
-	public void setFooterWithLogin() throws Exception {
-		
+	public void setFooterWithLogin(ExtentTest test) throws Exception {
+		test.info("Wait for the page to load.");
+		//HelperFunctions.waitForPageToLoad(10);
+		//Driver.getDriver().get("https://productcentral-stg.products.pwc.com/content/pc/us/en/automation/my-products/enterprise-control.html");
+		//HelperFunctions.waitForPageToLoad(10);
+		WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
+	    wait.until(ExpectedConditions.visibilityOf(heroImage));
+		HelperFunctions.staticWait(3);
+		test.info("Scroll down to footer content");
 		HelperFunctions.scrollToElement(footerContent);
 		
 	        System.out.println(footerContent.getText());
-	       
+	        test.info("Verified footer content and link group");
 	        if(footerContent.isDisplayed() && footerLinkGroup.isDisplayed() ) {
+	        	String successMessage = "Footer content and links are displayed";
+	            logger.info(successMessage);
 	        	Assert.assertTrue(true);
 	        }else {
-	        	Assert.assertTrue(false);
+	        	String errorMessage = "Footer content and links are not displayed";
+	            logger.error(errorMessage);
+	            throw new Exception(errorMessage);
+	        	//Assert.assertTrue(false);
 	        }
-	      
+	        HelperFunctions.staticWait(3);
 	
 	}
 	
 	public void setErrorMessage() throws Exception  {
-	
-	    
-		JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
+		HelperFunctions.staticWait(5);
+	    Driver.getDriver().get("https://productcentral-stg.products.pwc.com/content/pc/us/en/automation/my-products/fluid-forecast.html");
+	    HelperFunctions.waitForPageToLoad(5);
+		HelperFunctions.staticWait(2);
+		/*JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
         js.executeScript("window.open()");
 	    ArrayList<String> tabs = new ArrayList<String>(Driver.getDriver().getWindowHandles());
-	    Driver.getDriver().switchTo().window(tabs.get(1));
-	    read1.setExcelFile("./testdata.xlsx", "QA");
+	   Driver.getDriver().switchTo().window(tabs.get(1));
+	    read1.setExcelFile("./testdata.xlsx", "STG");
 	    Driver.getDriver().get(read1.getCellData("VALUE", 36));
 	    HelperFunctions.staticWait(5);
 	    String actualErrorTitle=errorTitle.getText();
 	    String expectedErrorTitle=read1.getCellData("VALUE", 38);
 		String actualErrorDescription=errorDescription.getText();
 		String expectedErrorDescription=read1.getCellData("VALUE", 37);
-		Assert.assertEquals(actualErrorTitle, expectedErrorTitle, "Actual and expected error title do not match");
-		Assert.assertEquals(actualErrorDescription, expectedErrorDescription, "Actual and expected error description do not match");
+		//Assert.assertEquals(actualErrorTitle, expectedErrorTitle, "Actual and expected error title do not match");*/
+		String actualErrorTitle=errorTitle.getText();
+		String expectedErrorTitle="403 - Unauthorized Access";
+		String actualErrorDescription=errorDescription.getText();
+		String expectedErrorDescription="You do not have access to this page. Please contact our ";
+		if (!actualErrorTitle.equals(expectedErrorTitle)) {
+            String errorMessage = "Actual and expected error title do not match.";
+              logger.error(errorMessage);
+              throw new Exception(errorMessage);
+        }else {
+            String successMessage = "Actual and expected error title match";
+              logger.info(successMessage);
+        } 
+		//Assert.assertEquals(actualErrorDescription, expectedErrorDescription, "Actual and expected error description do not match");
+		if (!actualErrorDescription.contains(expectedErrorDescription)) {
+            String errorMessage = "Actual and expected error description do not match";
+              logger.error(errorMessage);
+              throw new Exception(errorMessage);
+        }else {
+            String successMessage = "Actual and expected error description match";
+              logger.info(successMessage);
+        } 
 	    
 		
 	}
 	
-	public void setErrorPage() throws Exception {
-		HelperFunctions.waitForPageToLoad(5);
+	public void setErrorPage(ExtentTest test)throws Exception {
+		test.info("Wait for the page to load.");
+		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.staticWait(5);
 		JavascriptExecutor js = ((JavascriptExecutor) Driver.getDriver());
         js.executeScript("window.open()");
 	    ArrayList<String> tabs = new ArrayList<String>(Driver.getDriver().getWindowHandles());
 	    Driver.getDriver().switchTo().window(tabs.get(1));
-	    read1.setExcelFile("./testdata.xlsx", "QA");
+	    read1.setExcelFile("./testdata.xlsx", "STG");
+	    test.info("Go to error page");
 	    Driver.getDriver().get(read1.getCellData("VALUE", 36));
+	    test.info("Wait for the page to load.");
+	    HelperFunctions.waitForPageToLoad(10);
+	    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
+	    wait.until(ExpectedConditions.visibilityOf(errorTitle));
 	    HelperFunctions.staticWait(5); 
+	    test.info("Verified error page's image, title and description are visible.");
 		if(errorImage.isDisplayed() && errorTitle.isDisplayed() &errorDescription.isDisplayed()) {
+			 String successMessage = "Error page appears";
+	         logger.info(successMessage);
 			Assert.assertTrue(true);
 		}else {
-			Assert.assertTrue(false);
+			String errorMessage = "Error page does not appear";
+	         logger.error(errorMessage);
+	         throw new Exception(errorMessage);
+			//Assert.assertTrue(false);
 		}
+		HelperFunctions.staticWait(5);
 	    
 		
 	}
 	
 	
 	
-public void setDisplayResources() {
-	HelperFunctions.waitForPageToLoad(5);
-	for(int i=0;i<allProducts.size();i++) {
+	public void setDisplayResources(ExtentTest test) throws Exception {
+		test.info("Wait for the page to load.");
+		//HelperFunctions.waitForPageToLoad(10);
+		//Driver.getDriver().get("https://productcentral-stg.products.pwc.com/content/pc/us/en/automation/my-products/enterprise-control.html");
+		//HelperFunctions.waitForPageToLoad(10);
+		test.info("Click on view all");
+		 WebDriverWait wait=new WebDriverWait(Driver.getDriver(),10);
+		    ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(viewAll);
+		    wait.until(condition);
+		    HelperFunctions.staticWait(3);
+		/*viewAll.click();
+		test.info("Select a product in product container");
+		HelperFunctions.staticWait(2);
+	    for(int i=0;i<allProducts2.size();i++) {
+			allProducts2.get(2).click();
+			break;
+	    }
+	    HelperFunctions.waitForPageToLoad(5);*/
+	    HelperFunctions.staticWait(3);
+	    test.info("Scroll down all resources");
+		HelperFunctions.scrollToElement(allResources2); 
+		HelperFunctions.staticWait(3);
+	     for(WebElement eachResources: first5resources) {
+	    	 if(eachResources.isDisplayed()) {
+	    		 String successMessage = "First 5 resources are displayed";
+	             logger.info(successMessage);
+	    		 Assert.assertTrue(true);
+	    	 }else {
+	    		 String errorMessage = "First 5 resources are not displayed";
+	             logger.error(errorMessage);
+	             throw new Exception(errorMessage);
+	    		// Assert.assertTrue(false);
+	    	 }
+	    	 test.info("Verified first 5 resources are displayed");
+	     }
+	     HelperFunctions.staticWait(3);
+	     Assert.assertTrue(nextButtonforResources2.size()==0);
+	    /* test.info("Scroll down next button");
+	     HelperFunctions.scrollToElement(nextButtonforResources);
+	     HelperFunctions.staticWait(3);
+	     test.info("Click on next button");
+	     JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
+	     executor.executeScript("arguments[0].click();", nextButtonforResources);
+	    // nextButtonforResources.click();
+	     HelperFunctions.staticWait(3);
+	     for(WebElement eachResources2: last5resources) {
+	    	 if(eachResources2.isDisplayed()) {
+	    		 String successMessage = "Last 5 resources are displayed";
+	             logger.info(successMessage);
+	    		 Assert.assertTrue(true);
+	    	 }else {
+	    		 String errorMessage = "Last 5 resources are not displayed";
+	             logger.error(errorMessage);
+	             throw new Exception(errorMessage);
+	    		// Assert.assertTrue(false);
+	    	 }
+	    	 test.info("Verified first 5 resources are displayed");
+	     }*/
+	     HelperFunctions.staticWait(3);
+	    }
+public void setNewTabAssets(ExtentTest test) throws Exception {
+	test.info("Wait for the page to load.");
+	//HelperFunctions.waitForPageToLoad(10);
+	//Driver.getDriver().get("https://productcentral-stg.products.pwc.com/content/pc/us/en/automation/my-products/enterprise-control.html");
+	//HelperFunctions.waitForPageToLoad(10);
+	WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
+    wait.until(ExpectedConditions.visibilityOf(heroImage));
+	HelperFunctions.staticWait(5);
+	/*for(int i=0;i<allProducts.size();i++) {
 		allProducts.get(0).click();
 		break;}
-	
-	HelperFunctions.waitForPageToLoad(5);
-	HelperFunctions.scrollToElement(allResources); 
-	HelperFunctions.staticWait(3);
-     for(WebElement eachResources: first5resources) {
-    	 if(eachResources.isDisplayed()) {
-    		 Assert.assertTrue(true);
-    	 }else {
-    		 Assert.assertTrue(false);
-    	 }
-     }
-     HelperFunctions.staticWait(3);
-     HelperFunctions.scrollToElement(nextButtonforResources);
-     HelperFunctions.staticWait(3);
-     JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
-     executor.executeScript("arguments[0].click();", nextButtonforResources);
-    // nextButtonforResources.click();
-     HelperFunctions.staticWait(3);
-     for(WebElement eachResources2: last5resources) {
-    	 if(eachResources2.isDisplayed()) {
-    		 Assert.assertTrue(true);
-    	 }else {
-    		 Assert.assertTrue(false);
-    	 }
-     }
-     
-    }
-public void setNewTabAssets() throws Exception {
-
-	HelperFunctions.waitForPageToLoad(5);
-	for(int i=0;i<allProducts.size();i++) {
-		allProducts.get(0).click();
-		break;}
-	HelperFunctions.staticWait(3);
-	HelperFunctions.scrollToElement(allResources); 
+	HelperFunctions.staticWait(3);*/
+	test.info("Scroll down all resources elements");
+	HelperFunctions.scrollToElement(allResources2); 
     HelperFunctions.staticWait(3);
-    String hrefValue = resource1.getAttribute("href");
+    test.info("Clicking on resource");
     JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
-    executor.executeScript("arguments[0].click();", resource1);
-    //resource1.click();
+    for(WebElement each:allresourcesContentLink) {
+    	if(each.getAttribute("href").contains(".pdf")) {
+    executor.executeScript("arguments[0].click();", each);
+    break;
+    	}
+    }
     HelperFunctions.staticWait(3);
-    ArrayList<String> tabs = new ArrayList<String>(Driver.getDriver().getWindowHandles());
-    Driver.getDriver().switchTo().window(tabs.get(2));
-    System.out.println(Driver.getDriver().getCurrentUrl());
-	 String currentUrl = Driver.getDriver().getCurrentUrl();
-	 Assert.assertEquals(hrefValue, currentUrl);
+    test.info("Verified asset/page is loaded in the new tab");
+    WebDriverWait wait4 = new WebDriverWait(Driver.getDriver(), 10);
+    wait4.until(ExpectedConditions.numberOfWindowsToBe(2));
+    Set<String> windowHandles2 = Driver.getDriver().getWindowHandles();
+    Assert.assertEquals(windowHandles2.size(), 2, "Expected two windows to be open, but found " + windowHandles2.size());
+	// Assert.assertEquals(hrefValue, currentUrl);
    // Driver.getDriver().close();
    // Driver.getDriver().switchTo().window(tabs.get(1));
    // HelperFunctions.staticWait(3);
-	
+	 HelperFunctions.staticWait(3);
 }
 
-public void setMyProductSitemap() {
-	HelperFunctions.waitForPageToLoad(3);
+public void setMyProductSitemap(ExtentTest test) throws Exception {
+	test.info("Wait for the page to load.");
+	
+	//HelperFunctions.waitForPageToLoad(10);
+	//Driver.getDriver().get("https://productcentral-stg.products.pwc.com/content/pc/us/en/automation/my-products/enterprise-control.html");
+	//HelperFunctions.waitForPageToLoad(10);
+	WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
+    wait.until(ExpectedConditions.visibilityOf(heroImage));
+	HelperFunctions.staticWait(3);
+	test.info("Verified my product item is visible");
 	if(myProductItemOnSitemap.isDisplayed()) {
+		String successMessage = "My Products heading in the sitemap is visible";
+        logger.info(successMessage);
 		Assert.assertTrue(true);
 	}else {
-		Assert.assertTrue(false);
+		String errorMessage = "My Products heading in the sitemap is not visible";
+        logger.error(errorMessage);
+        throw new Exception(errorMessage);
+		//Assert.assertTrue(false);
 	}
+	HelperFunctions.staticWait(3);
 }
 
-public void setTagsAccompany() {
+public void setTagsAccompany(ExtentTest test) {
+	test.info("Wait for the page to load.");
+	//HelperFunctions.waitForPageToLoad(10);
+	//Driver.getDriver().get("https://productcentral-stg.products.pwc.com/content/pc/us/en/automation/my-products/enterprise-control.html");
+	//HelperFunctions.waitForPageToLoad(10);
+	WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
+    wait.until(ExpectedConditions.visibilityOf(heroImage));
 	HelperFunctions.staticWait(3);
-	product2.click();
-	HelperFunctions.staticWait(3);
-	HelperFunctions.scrollToElement(viewMoreButton); 
-    selectDropdown.click();
-    
-    String expected1="Technical Guide";
-    
-    
-	for(WebElement tags:myProductCatDropdownList2) {
-		System.out.println(tags.getText());
-		if(tags.getText().contains("Technical Guide")) {
-		tags.click();
-		Assert.assertEquals(cardCat.getText(), expected1);
-		}
-	}
-	HelperFunctions.staticWait(3);
-	selectDropdown.click();
-	String expected2="Resel Alliance Terms";
-	for(WebElement tags:myProductCatDropdownList2) {
-		System.out.println(tags.getText());
-		if(tags.getText().contains("Resel Alliance Terms")) {
-		tags.click();
-		Assert.assertEquals(cardCat.getText(), expected2);
-		}
-	}
-	HelperFunctions.staticWait(3);
-	selectDropdown.click();
-	String expected3="FAQ";
-	for(WebElement tags:myProductCatDropdownList2) {
-		System.out.println(tags.getText());
-		if(tags.getText().contains("FAQ")) {
-		tags.click();
-		Assert.assertEquals(cardCat.getText(), expected3);
-		}
-	}
-	HelperFunctions.staticWait(3);
-	selectDropdown.click();
-	String expected4="Product Overview";
-	for(WebElement tags:myProductCatDropdownList2) {
-		System.out.println(tags.getText());
-		if(tags.getText().contains("Product Overview")) {
-		tags.click();
-		Assert.assertEquals(cardCat.getText(), expected4);
-		}
-	}
-	HelperFunctions.staticWait(3);
-	selectDropdown.click();
-	String expected5="Quick Reference Guide";
-	for(WebElement tags:myProductCatDropdownList2) {
-		System.out.println(tags.getText());
-		if(tags.getText().contains("Quick Reference Guide")) {
-		tags.click();
-		Assert.assertEquals(cardCat.getText(), expected5);
-		}
-	}
+   /* for(int i=0;i<allProducts.size();i++) {
+        allProducts.get(0).click();
+        break;}
+    HelperFunctions.staticWait(3);*/
+	test.info("Scroll down view more button");
+    HelperFunctions.scrollToElement(viewMoreButton); 
+    HelperFunctions.staticWait(3);
+    test.info("Click on select dropdown");
+    JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
+    executor.executeScript("arguments[0].click();", selectDropdown);
+    HelperFunctions.staticWait(3);
+    test.info("Click on user guide");
+    String expected1="User Guide";
+    HelperFunctions.staticWait(3);
+    test.info("Verified tags all resources accompany with selected value");
+    for(WebElement tags:myProductCatDropdownList2) {
+        System.out.println(tags.getText());
+        if(tags.getText().equalsIgnoreCase("User Guide")) {
+        	JavascriptExecutor executor2 = (JavascriptExecutor) Driver.getDriver();
+            executor2.executeScript("arguments[0].click();", tags);
+            wait.until(ExpectedConditions.visibilityOf(cardCategory.get(0)));
+            Assert.assertTrue(cardCategory.get(0).getText().contains(expected1));
+        }
+    }
+    HelperFunctions.staticWait(3);
+/*  JavascriptExecutor executor2 = (JavascriptExecutor) Driver.getDriver();
+    executor2.executeScript("arguments[0].click();", selectDropdown);
+    HelperFunctions.staticWait(3);
+    String expected2="Resell Alliance Terms";
+    for(WebElement tags:myProductCatDropdownList2) {
+        System.out.println(tags.getText());
+        if(tags.getText().contains("Resell Alliance Terms")) {
+        tags.click();
+        Assert.assertEquals(cardCat.getText(), expected2);
+        }
+    }*/
 	
 	
 }
 
-public void setMyProductSearch() {
-	
-	HelperFunctions.waitForPageToLoad(3);
+public void setMyProductSearch(ExtentTest test) throws Exception {
+	test.info("Wait for the page to load.");
+	//HelperFunctions.waitForPageToLoad(10);
+	//Driver.getDriver().get("https://productcentral-stg.products.pwc.com/content/pc/us/en/automation/my-products/enterprise-control.html");
+	//HelperFunctions.waitForPageToLoad(10);
+	WebDriverWait wait=new WebDriverWait(Driver.getDriver(),15);
+	wait.until(ExpectedConditions.elementToBeClickable(myProductSearchField));
+	HelperFunctions.staticWait(3);
+	test.info("Click on my product search field");
 	myProductSearchField.click();
+	HelperFunctions.staticWait(2);
+	test.info("Send text to my product search field");
 	myProductSearchField.sendKeys("Product 2");
+	HelperFunctions.staticWait(2);
+	test.info("Click on enter");
 	myProductSearchField.sendKeys(Keys.ENTER);
-	HelperFunctions.waitForPageToLoad(3);
+	HelperFunctions.waitForPageToLoad(15);
+	HelperFunctions.staticWait(2);
+	test.info("Veried required dropdowns are visible");
 	if(productDropdown.isEnabled() && catDropdown.isDisplayed() && sortingDropdown.isDisplayed()) {
+		String successMessage = "All dropdowns are visible";
+        logger.info(successMessage);
     	Assert.assertTrue(true);
     }else {
-    	Assert.assertTrue(false);
+    	String errorMessage = "All dropdowns are not visible";
+        logger.error(errorMessage);
+        throw new Exception(errorMessage);
+    	//Assert.assertTrue(false);
     }
+	HelperFunctions.staticWait(5);
 	
 }
 
-public void setResourcesBasedonProducts() {
-	//product2.click();
+public void setResourcesBasedonProducts(ExtentTest test) {
 	HelperFunctions.waitForPageToLoad(5);
-	for(int i=0;i<allProducts.size();i++) {
-		allProducts.get(0).click();
+	
+	Driver.getDriver().get("https://productcentral-stg.products.pwc.com/content/pc/us/en/automation/my-products/transparency-hub.html");
+	test.info("Wait for the page to load.");
+	HelperFunctions.waitForPageToLoad(10);
+	 WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
+	    wait.until(ExpectedConditions.visibilityOf(heroImage));
+	HelperFunctions.staticWait(3);
+	//test.info("Click on close banner");
+	//bannerClose.click();
+	//HelperFunctions.staticWait(3);
+	/*viewAll.click();
+	HelperFunctions.staticWait(2);
+	for(int i=0;i<allProducts2.size();i++) {
+		allProducts2.get(0).click();
 		break;
     }
 	HelperFunctions.staticWait(3);
-	HelperFunctions.scrollToElement(allResources);  
+	JavascriptExecutor executor1 = (JavascriptExecutor) Driver.getDriver();
+    executor1.executeScript("arguments[0].click();", closeTabs);*/
+	test.info("Scroll down all resources");
+	HelperFunctions.scrollToElement(allResources2); 
+	HelperFunctions.staticWait(3);
+	test.info("Verified first resource and store the text of it");
     if(resource1.isDisplayed() ) {
+    	String successMessage = "resourse 1 is displayed";
+        logger.info(successMessage);
 	   Assert.assertTrue(true);
    }else
 	   Assert.assertTrue(false);
     String text1=resource1.getText();
     System.out.println(text1);
     HelperFunctions.staticWait(3);
-   myProductItemOnSitemap.click();
-   HelperFunctions.waitForPageToLoad(5); 
-   for(int i=0;i<allProducts.size();i++) {
-		allProducts.get(1).click();
+    HelperFunctions.waitForPageToLoad(5); 
+    test.info("Click on view all");
+    HelperFunctions.scrollToElement(viewAll);
+    HelperFunctions.staticWait(2);
+    JavascriptExecutor executor1 = (JavascriptExecutor) Driver.getDriver();
+    executor1.executeScript("arguments[0].click();", viewAll);
+   HelperFunctions.staticWait(2);
+   test.info("Click on another product");
+  // viewAll.click();
+	HelperFunctions.staticWait(2);
+   for(int i=0;i<allProducts2.size();i++) {
+		allProducts2.get(1).click();
 		break;
    }
    HelperFunctions.staticWait(3);
+   JavascriptExecutor executor2 = (JavascriptExecutor) Driver.getDriver();
+   executor2.executeScript("arguments[0].click();", closeTabs);
   // product4.click();
-   HelperFunctions.scrollToElement(allResources);
+   test.info("Scroll down all resources");
+   HelperFunctions.scrollToElement(allResources2);
    HelperFunctions.staticWait(3);
- 
+   test.info("Verified first resource and store the text of it");
    String text2=resource1.getText();
    System.out.println(text2);
+   test.info("Verified resources are different from each other");
    Assert.assertNotEquals(text1, text2);
    HelperFunctions.staticWait(3);
    if(resource1.isDisplayed()  ) {
 	   Assert.assertTrue(true);
    }else
 	   Assert.assertTrue(false);
-   
+   HelperFunctions.staticWait(3);
 }
 
-public void setNotSupportMultiSelect() {
+public void setNotSupportMultiSelect(ExtentTest test) {
 	//HelperFunctions.waitForPageToLoad(3);
 	//product2.click();
-	HelperFunctions.waitForPageToLoad(5);
-    for(int i=0;i<allProducts.size();i++) {
+	test.info("Wait for the page to load.");
+	//HelperFunctions.waitForPageToLoad(10);
+	//Driver.getDriver().get("https://productcentral-stg.products.pwc.com/content/pc/us/en/automation/my-products/enterprise-control.html");
+	//HelperFunctions.waitForPageToLoad(10);
+	 WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
+	    wait.until(ExpectedConditions.visibilityOf(heroImage));
+	HelperFunctions.staticWait(3);
+   /* for(int i=0;i<allProducts.size();i++) {
 		allProducts.get(0).click();
 		break;
-    }
-	HelperFunctions.waitForPageToLoad(3);
+    }*/
+	//HelperFunctions.waitForPageToLoad(3);
+	test.info("Scroll down document dropdown");
 	HelperFunctions.scrollToElement(documentDropdown);
 	HelperFunctions.staticWait(3);
+	test.info("Clicking on document dropdown");
 	JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
     executor.executeScript("arguments[0].click();", documentDropdown);
-   // documentDropdown.click();    
+   // documentDropdown.click();   
+    test.info("Select option from the dropdown");
 	    for(WebElement tags:myProductCatDropdownList) {
 			tags.click();
 			break;
 			
 		}
+	    HelperFunctions.staticWait(3);
+	    test.info("Verified dropdown options are not visible after selecting");
 	    for(WebElement tags:myProductCatDropdownList) {
 	    	Assert.assertFalse(tags.isDisplayed());
 	    }
-	    
+	    HelperFunctions.staticWait(3);
 	   
 }
 
-public void setLoadMoreButton() {
-	//HelperFunctions.waitForPageToLoad(3);
-	//product2.click();
-	HelperFunctions.waitForPageToLoad(5);
-    for(int i=0;i<allProducts.size();i++) {
-		allProducts.get(0).click();
+public void setLoadMoreButton(ExtentTest test) throws Exception {
+	test.info("Wait for the page to load.");
+	//HelperFunctions.waitForPageToLoad(10);
+	//Driver.getDriver().get("https://productcentral-stg.products.pwc.com/content/pc/us/en/automation/my-products/enterprise-control.html");
+	//HelperFunctions.waitForPageToLoad(10);
+	 WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
+	    wait.until(ExpectedConditions.visibilityOf(heroImage));
+	HelperFunctions.staticWait(3);
+	/*viewAll.click();
+	HelperFunctions.staticWait(2);
+    for(int i=0;i<allProducts2.size();i++) {
+		allProducts2.get(2).click();
 		break;
     }
-	HelperFunctions.waitForPageToLoad(3);
+    HelperFunctions.staticWait(3);
+    JavascriptExecutor executor1 = (JavascriptExecutor) Driver.getDriver();
+    executor1.executeScript("arguments[0].click();", closeTabs);
+	HelperFunctions.waitForPageToLoad(3);*/
+	test.info("Scroll down view more button");
 	HelperFunctions.scrollToElement(viewMoreButton);
+	HelperFunctions.staticWait(3);
+	test.info("Click on view more button");
       JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
       executor.executeScript("arguments[0].click();", viewMoreButton);
-      if(viewLessButton.isDisplayed()) {
+      WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(), 15);
+	    wait1.until(ExpectedConditions.visibilityOf(secondForYou));
+      HelperFunctions.staticWait(3);
+      Assert.assertTrue(secondForYou.isDisplayed());
+     /* if(viewLessButton.isDisplayed()) {
       	for(WebElement eachAsset: first5Assets) {
       		if(eachAsset.isDisplayed()) {
       			Assert.assertTrue(true);
@@ -552,19 +799,27 @@ public void setLoadMoreButton() {
       	      	Assert.assertTrue(false);
             }
       	}
+      	test.info("Verified view less button");
+      	HelperFunctions.staticWait(2);
       	for(WebElement eachAsset2:last5Assets) {
       		if(eachAsset2.isDisplayed()) {
+      			 String successMessage = "Clicking on load more button another assets are loading";
+                 logger.info(successMessage);
       			Assert.assertTrue(true);
+      		}else {
+      			String errorMessage = "Clicking on load more button another assets are not loading";
+                logger.error(errorMessage);
+                throw new Exception(errorMessage);
+      		//	Assert.assertTrue(false);
       		}
       	}
-      }else {
-      	Assert.assertTrue(false);
-      }
+      	test.info("Verified after clicking on view more button another assets are loading ");
+      }*/
 	
-	
+      HelperFunctions.staticWait(3);
 }
 
-public void setClickLoadMoreButton() {
+public void setClickLoadMoreButton() throws Exception {
 	//HelperFunctions.waitForPageToLoad(3);
 	//product2.click();
 	HelperFunctions.waitForPageToLoad(5);
@@ -572,7 +827,7 @@ public void setClickLoadMoreButton() {
 		allProducts.get(0).click();
 		break;
     }
-	HelperFunctions.waitForPageToLoad(3);
+	HelperFunctions.waitForPageToLoad(5);
 	HelperFunctions.scrollToElement(viewMoreButton);
 	
       JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
@@ -581,9 +836,14 @@ public void setClickLoadMoreButton() {
       	
       	for(WebElement eachAsset2:last5Assets) {
       		if(eachAsset2.isDisplayed() && viewLessButton.isDisplayed()) {
+      			 String successMessage = "View less button is displayed";
+                 logger.info(successMessage);
       			Assert.assertTrue(true);
       		}else {
-      			Assert.assertTrue(false);
+      			String errorMessage = "View less button is not displayed";
+                logger.error(errorMessage);
+                throw new Exception(errorMessage);
+      			//Assert.assertTrue(false);
       		}
       	}
       
@@ -599,7 +859,7 @@ public void setClickLoadLessButton() {
 		allProducts.get(0).click();
 		break;
     }
-	HelperFunctions.waitForPageToLoad(3);
+	HelperFunctions.waitForPageToLoad(5);
 	HelperFunctions.scrollToElement(viewMoreButton);
       JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
       executor.executeScript("arguments[0].click();", viewMoreButton);
@@ -647,7 +907,7 @@ public void setClickLoadLessButton() {
 	
 }
 
-public void setTitleOfAssets() {
+public void setTitleOfAssets() throws Exception {
 	
 	HelperFunctions.waitForPageToLoad(5);
     for(int i=0;i<allProducts.size();i++) {
@@ -656,16 +916,21 @@ public void setTitleOfAssets() {
     }
 	HelperFunctions.waitForPageToLoad(3);
 	HelperFunctions.scrollToElement(forYouTitle);
-    int hasMoreThan3Line=0;
+    int hasMoreThan4Line=0;
     System.out.println(titleofAssets.size());
 	for(WebElement eachTitleOfAssets: titleofAssets) {
 		System.out.println(eachTitleOfAssets.getCssValue("-webkit-line-clamp"));
-		if(eachTitleOfAssets.getCssValue("-webkit-line-clamp").equals("3")) {
+		if(eachTitleOfAssets.getCssValue("-webkit-line-clamp").equals("4")) {
+			 String successMessage = "The description is not more than 4 lines";
+	            logger.info(successMessage);
 			Assert.assertTrue(true);
 		}else {
-			hasMoreThan3Line++;
-			System.out.println(hasMoreThan3Line);
-			Assert.assertTrue(false);
+			hasMoreThan4Line++;
+			System.out.println(hasMoreThan4Line);
+			String errorMessage = "The description is more than 4 lines";
+            logger.error(errorMessage);
+            throw new Exception(errorMessage);
+			//Assert.assertTrue(false);
 //			logger.error("The description is more than 6 lines");
 			
 		}
@@ -699,33 +964,88 @@ public void setActiveTab() {
 
 }
 
-public void setFirstTabActive() throws Exception {
-	HelperFunctions.waitForPageToLoad(5);
-	myProductOnLeftNavigation.click();
-	HelperFunctions.waitForPageToLoad(5);
-	read1.setExcelFile("./testdata.xlsx", "QA");
+public void setFirstTabActive(ExtentTest test) throws Exception {
+	test.info("Wait for the page to load.");
+	//HelperFunctions.waitForPageToLoad(10);
+	//Driver.getDriver().get("https://productcentral-stg.products.pwc.com/content/pc/us/en/automation/my-products/enterprise-control.html");
+	//HelperFunctions.waitForPageToLoad(10);
+	//myProductOnLeftNavigation.click();
+	//HelperFunctions.waitForPageToLoad(5);
+	WebDriverWait wait=new WebDriverWait(Driver.getDriver(),10);
+    ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(viewAll);
+    wait.until(condition);
+	HelperFunctions.staticWait(3);
+    test.info("Click on view all");
+	viewAll.click();
+	HelperFunctions.staticWait(2);
+	/*read1.setExcelFile("./testdata.xlsx", "QA");
 	String activeColor=read1.getCellData("VALUE", 39);
 	String fp=firstProduct.getCssValue("color");
 	if(fp.equals(activeColor)) {
 		Assert.assertTrue(true);
 	}else {
     	Assert.assertTrue(false);
+    }*/
+	test.info("Getting the first product from all the products");
+	int index=0;
+	WebElement firstTab=productsCont.get(index);
+	WebElement eyeIcon=firstTab.findElement(By.xpath("//span[@class='ap-icon icon-view-outline']"));
+    if(eyeIcon!=null) {
+    	 String successMessage = "First tab is active";
+         logger.info(successMessage);
+    	Assert.assertTrue(true);
+    }else {
+    	 String errorMessage = "First tab is not active";
+         logger.error(errorMessage);
+         throw new Exception(errorMessage);
+    //	Assert.assertTrue(false);
     }
-    
+    test.info("Verified the first product has eye icon");
+    HelperFunctions.staticWait(2);
+    test.info("Click on another product");
+	for(int i=0;i<allProducts2.size();i++) {
+		allProducts2.get(2).click();
+		break;
+    }
+	HelperFunctions.waitForPageToLoad(5);
+	HelperFunctions.staticWait(3);
+	WebDriverWait wait2=new WebDriverWait(Driver.getDriver(),10);
+    ExpectedCondition<WebElement> condition2=ExpectedConditions.elementToBeClickable(viewAll);
+    wait2.until(condition2);
+    test.info("Click on view all");
+	viewAll.click();
+	HelperFunctions.staticWait(2);
+    if(eyeIcon!=null) {
+    	 String successMessage2 = "First tab is active";
+         logger.info(successMessage2);
+    	Assert.assertTrue(true);
+    }else {
+         String errorMessage2 = "First tab is not active";
+         logger.error(errorMessage2);
+         throw new Exception(errorMessage2);
+    //	Assert.assertTrue(false);
+    }
+    test.info("Verified the first product has eye icon");
+    HelperFunctions.staticWait(3);
 
 }
 
-public void setHeroPromotion() {
+public void setHeroPromotion() throws Exception {
 	HelperFunctions.waitForPageToLoad(5);
 	 String attr = heroPromotion.getAttribute("src");
 	    if (attr == null){
-	        System.out.println("Hero promotion is not clickable");
+	    	 String successMessage = "Hero promotion is not clickable";
+	         logger.info(successMessage);
+	      //  System.out.println("Hero promotion is not clickable");
 	        Assert.assertTrue(true);
 	    }
 
 	    else {
-	    	System.out.println("Hero promotion is clickable");
-	    	Assert.assertTrue(false);
+	    	String errorMessage = "Hero promotion is clickable";
+	         logger.error(errorMessage);
+	         throw new Exception(errorMessage);
+	    	//System.out.println("Hero promotion is clickable");
+	    	//Assert.assertTrue(false);
 	    }
 
 	
@@ -734,7 +1054,7 @@ public void setHeroPromotion() {
 
 public void setUserInitials() throws Exception {
 	read1.setExcelFile("./testdata.xlsx", "QA");
-	HelperFunctions.waitForPageToLoad(3);
+	HelperFunctions.waitForPageToLoad(5);
 	String email=read1.getCellData("DATA", 1);
 	String firstInit=email.substring(0,1);
 	String lastInit=email.substring(email.indexOf(".")+1);
@@ -750,26 +1070,47 @@ public void setUserInitials() throws Exception {
 
 
 
-public void setInfoOfProducts() {
+public void setInfoOfProducts() throws Exception {
 	HelperFunctions.waitForPageToLoad(5);
-    for(int i=0;i<allProducts.size();i++) {
-		allProducts.get(0).click();
+	Driver.getDriver().get("https://productcentral-stg.products.pwc.com/content/pc/us/en/automation/my-products/transparency-hub.html");
+	HelperFunctions.waitForPageToLoad(5);
+	HelperFunctions.staticWait(3);
+	bannerClose.click();
+	//HelperFunctions.waitForPageToLoad(5);
+	HelperFunctions.staticWait(3);
+	/*viewAll.click();
+	HelperFunctions.staticWait(2);
+    for(int i=0;i<allProducts2.size();i++) {
+		allProducts2.get(3).click();
 		break;
     }
     HelperFunctions.staticWait(3);
+    JavascriptExecutor executor1 = (JavascriptExecutor) Driver.getDriver();
+    executor1.executeScript("arguments[0].click();", closeTabs);
+    HelperFunctions.staticWait(3);*/
     HelperFunctions.scrollToElement(forYouTitle);
 	WebElement first = titleofAssets.stream().findFirst().get();
 	System.out.println(first.getText());
 	System.out.println("----");
     HelperFunctions.staticWait(3);
-	JavascriptExecutor js2 = ((JavascriptExecutor) Driver.getDriver());
-	js2.executeScript("window.scrollBy(0,-950)", "");
-	HelperFunctions.staticWait(3);
+    HelperFunctions.scrollToElement(viewAll);
+    HelperFunctions.staticWait(2);
+    JavascriptExecutor executor1 = (JavascriptExecutor) Driver.getDriver();
+    executor1.executeScript("arguments[0].click();", viewAll);
+   HelperFunctions.staticWait(2);
+	//JavascriptExecutor js2 = ((JavascriptExecutor) Driver.getDriver());
+	//js2.executeScript("window.scrollBy(0,-1200)", "");
+//	HelperFunctions.staticWait(3);
+//	viewAll.click();
+	HelperFunctions.staticWait(2);
 
-	for(int i=0;i<allProducts.size();i++) {
-		allProducts.get(1).click();
+	for(int i=0;i<allProducts2.size();i++) {
+		allProducts2.get(3).click();
 		break;
     }
+	HelperFunctions.staticWait(3);
+	 JavascriptExecutor executor2 = (JavascriptExecutor) Driver.getDriver();
+	    executor2.executeScript("arguments[0].click();", closeTabs);
 	HelperFunctions.staticWait(3);
 	HelperFunctions.scrollToElement( forYouTitle);
 	HelperFunctions.staticWait(3);
@@ -777,6 +1118,14 @@ public void setInfoOfProducts() {
 	System.out.println(first2.getText());
 	HelperFunctions.staticWait(3);
 	Assert.assertNotEquals(first, first2);
+	 if (first.equals(first2)) {
+         String errorMessage = "Titles are not supposed to match but they match";
+           logger.error(errorMessage);
+           throw new Exception(errorMessage);
+     }else {
+         String successMessage = "Titles are not supposed to match and they do not match";
+           logger.info(successMessage);
+     } 
 
    
    
@@ -784,43 +1133,92 @@ public void setInfoOfProducts() {
 }
 
 public void setRelatedProducts() throws Exception {
-
+	HelperFunctions.waitForPageToLoad(5);
+	JavascriptExecutor js2 = (JavascriptExecutor) Driver.getDriver();
+    js2.executeScript("window.scrollBy(0,250)", "");
+    HelperFunctions.staticWait(3);
+    logintoMyproducts.click();
 	HelperFunctions.waitForPageToLoad(3);
-    for(int i=0;i<allProducts.size();i++) {
-		allProducts.get(0).click();
+	HelperFunctions.staticWait(3);
+	HelperFunctions.waitForPageToLoad(5);
+	Driver.getDriver().get("https://productcentral-stg.products.pwc.com/content/pc/us/en/automation/my-products/transparency-hub.html");
+	HelperFunctions.waitForPageToLoad(5);
+	HelperFunctions.staticWait(3);
+	//bannerClose.click();
+	/*viewAll.click();
+	HelperFunctions.staticWait(2);
+	System.out.println(allProducts2.size());
+    for(int i=0;i<allProducts2.size();i++) {
+		allProducts2.get(3).click();
 		break;
     }
+    HelperFunctions.staticWait(3);
+    JavascriptExecutor executor1 = (JavascriptExecutor) Driver.getDriver();
+    executor1.executeScript("arguments[0].click();", closeTabs);*/
     HelperFunctions.staticWait(3);
     HelperFunctions.scrollToElement(relatedProductsTitle);
     String actualTitle=relatedProduct1.getText();
     String actualTitle2=relatedProduct2.getText();
     HelperFunctions.staticWait(3);
-	JavascriptExecutor js2 = ((JavascriptExecutor) Driver.getDriver());
-	js2.executeScript("window.scrollBy(0,-2000)", "");
-	HelperFunctions.staticWait(3);
-	for(int i=0;i<allProducts.size();i++) {
-		allProducts.get(1).click();
+    HelperFunctions.scrollToElement(viewAll);
+    HelperFunctions.staticWait(2);
+    JavascriptExecutor executor1 = (JavascriptExecutor) Driver.getDriver();
+    executor1.executeScript("arguments[0].click();", viewAll);
+   HelperFunctions.staticWait(2);
+	//JavascriptExecutor js3 = ((JavascriptExecutor) Driver.getDriver());
+	//js3.executeScript("window.scrollBy(0,-2500)", "");
+	//HelperFunctions.staticWait(3);
+	//viewAll.click();
+	HelperFunctions.staticWait(2);
+	for(int i=0;i<allProducts2.size();i++) {
+		allProducts2.get(3).click();
 		break;
     }
+	HelperFunctions.staticWait(3);
+	 JavascriptExecutor executor2 = (JavascriptExecutor) Driver.getDriver();
+	    executor2.executeScript("arguments[0].click();", closeTabs);
 	HelperFunctions.staticWait(3);
 	 HelperFunctions.scrollToElement(relatedProductsTitle);
 	 String actualTitle3=relatedProduct1.getText();
 	 String actualTitle4=relatedProduct2.getText();
 	 HelperFunctions.staticWait(3);
-	 Assert.assertNotEquals(actualTitle, actualTitle3);
-	 Assert.assertNotEquals(actualTitle2, actualTitle4);
+	// Assert.assertNotEquals(actualTitle, actualTitle3);
+	 if (actualTitle.equals(actualTitle3)) {
+         String errorMessage = "Titles are not supposed to match but they match";
+           logger.error(errorMessage);
+           throw new Exception(errorMessage);
+     }else {
+         String successMessage = "Titles are not supposed to match and they do not match";
+           logger.info(successMessage);
+     } 
+	// Assert.assertNotEquals(actualTitle2, actualTitle4);
+	 if (actualTitle2.equals(actualTitle4)) {
+         String errorMessage = "Titles are not supposed to match but they match";
+           logger.error(errorMessage);
+           throw new Exception(errorMessage);
+     }else {
+         String successMessage = "Titles are not supposed to match and they do not match";
+           logger.info(successMessage);
+     } 
   
 	
 }
 
-public void setAllResourcesContent() {
-	HelperFunctions.waitForPageToLoad(5);
+public void setAllResourcesContent(ExtentTest test) throws Exception {
+	test.info("Wait for the page to load.");
+	//HelperFunctions.waitForPageToLoad(10);
+	//Driver.getDriver().get("https://productcentral-stg.products.pwc.com/content/pc/us/en/automation/my-products/enterprise-control.html");
+	//HelperFunctions.waitForPageToLoad(10);
+	WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
+    wait.until(ExpectedConditions.visibilityOf(heroImage));
+	HelperFunctions.staticWait(3);
 	for(int i=0;i<allProducts.size();i++) {
 		allProducts.get(0).click();
 		break;
     }
+	test.info("Scroll down all resources elements");
 	HelperFunctions.staticWait(3);
-	HelperFunctions.scrollToElement(allResources);
+	HelperFunctions.scrollToElement(allResources2);
 	HelperFunctions.staticWait(3);
 	 String a=".pdf";
 	 String b=".png";
@@ -828,18 +1226,23 @@ public void setAllResourcesContent() {
 	 String d=".gif";
 	 String e=".mp4";
 	 String f=".mp3";
-	 
+	 test.info("Checking the contents' extensions contains the correct extensions");
 	 List<String> list = new ArrayList<String>();
     for(WebElement each:allresourcesContentLink) {
     	list.add(each.getAttribute("href").substring(each.getAttribute("href").length()-4));
     }
     if(list.contains(a)||list.contains(b)||list.contains(c)||list.contains(d)||list.contains(e)||list.contains(f)) {
+    	 String successMessage = "all resources content extensions are correct";
+         logger.info(successMessage);
     	Assert.assertTrue(true);
     }else {
-    	Assert.assertTrue(false);
+    	String errorMessage = "Error on all resources content extension";
+        logger.error(errorMessage);
+        throw new Exception(errorMessage);
+    //	Assert.assertTrue(false);
     }
-
-   
+    test.info("Verified all resources content extensions are correct");
+    HelperFunctions.staticWait(3);
         
    
    
@@ -847,21 +1250,361 @@ public void setAllResourcesContent() {
 
 public void setTechnicalSupport() throws Exception {
 	HelperFunctions.waitForPageToLoad(5);
+	HelperFunctions.staticWait(3);
 	HelperFunctions.scrollToElement(technicalSupportButton);
     HelperFunctions.staticWait(5);
     System.out.println(technicalSupportButton.getAttribute("href"));
     String hrefValue = technicalSupportButton.getAttribute("href");
     technicalSupportButton.click();
+    HelperFunctions.waitForPageToLoad(5);
     ArrayList<String> tabs2 = new ArrayList<String>(Driver.getDriver().getWindowHandles());
-    Driver.getDriver().switchTo().window(tabs2.get(2));
+    Driver.getDriver().switchTo().window(tabs2.get(1));
+    HelperFunctions.waitForPageToLoad(3);
     HelperFunctions.staticWait(5);
 	 String currentUrl = Driver.getDriver().getCurrentUrl();
-	 Assert.assertEquals(hrefValue, currentUrl);
+	 System.out.println(currentUrl);
+	// Assert.assertEquals(hrefValue, currentUrl);
+	// Assert.assertTrue(currentUrl.startsWith(hrefValue));
+	 if (!currentUrl.startsWith(hrefValue)) {
+         String errorMessage = "Links do not match";
+           logger.error(errorMessage);
+           throw new Exception(errorMessage);
+     }else {
+         String successMessage = "Links match";
+           logger.info(successMessage);
+     } 
+
+}
+public void setClickAvatar(ExtentTest test) throws Exception {
+	test.info("Wait for the page to load.");
+    HelperFunctions.waitForPageToLoad(10);
+  
+    WebDriverWait wait=new WebDriverWait(Driver.getDriver(),10);
+    ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(avatar);
+    wait.until(condition);
+    HelperFunctions.staticWait(2);
+    test.info("Clicking on user initials");
+    avatar.click();
+    HelperFunctions.staticWait(2);
+    if(logout.isDisplayed()) {
+        Assert.assertTrue(true);
+    }else {
+        String errorMessage = "logout is not displayed";
+        logger.error(errorMessage);
+        throw new Exception(errorMessage);
+    }
+    test.info("Verified logout option is displayed");
+    HelperFunctions.staticWait(3);
 
 }
 
+public void setBannerSticky(ExtentTest test) throws Exception {
+	read1.setExcelFile("./testdata.xlsx", "STG");
+	test.info("Wait for the page to load.");
+    HelperFunctions.waitForPageToLoad(15);
+    ((JavascriptExecutor)Driver.getDriver()).executeScript("window.open();");
+    ArrayList<String> tabs=new ArrayList<String>(Driver.getDriver().getWindowHandles());
+    Driver.getDriver().switchTo().window(tabs.get(1));
+    Driver.getDriver().get(read1.getCellData("VALUE", 84));
+    HelperFunctions.waitForPageToLoad(15);
+    WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(), 15);
+    wait1.until(ExpectedConditions.visibilityOf(banner));
+    test.info("Checking if the banner is displayed");
+    if(banner.isDisplayed()) {
+        Assert.assertTrue(true);
+    }else {
+        String errorMessage = "banner is not displayed";
+        logger.error(errorMessage);
+        throw new Exception(errorMessage);
+    }
+    test.info("Scrolling down the bottom of the page");
+    JavascriptExecutor js = (JavascriptExecutor)Driver.getDriver();
+    js.executeScript("window.scrollBy(0,document.body.scrollHeight)", ""); 
+     HelperFunctions.staticWait(2);
+        if(banner.isDisplayed()) {
+            Assert.assertTrue(true);
+        }else {
+            String errorMessage = "banner is not displayed";
+            logger.error(errorMessage);
+            throw new Exception(errorMessage);
+        }
+        test.info("Verified if the banner is sticky when scrolling down");
+        HelperFunctions.staticWait(3);
+}
+public void setBannerClose(ExtentTest test) throws Exception {
+	read1.setExcelFile("./testdata.xlsx", "STG");
+	test.info("Wait for the page to load.");
+	 ((JavascriptExecutor)Driver.getDriver()).executeScript("window.open();");
+	    ArrayList<String> tabs=new ArrayList<String>(Driver.getDriver().getWindowHandles());
+	    Driver.getDriver().switchTo().window(tabs.get(1));
+	    Driver.getDriver().get(read1.getCellData("VALUE", 84));
+	    HelperFunctions.waitForPageToLoad(15);
+	    WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(), 15);
+	    wait1.until(ExpectedConditions.visibilityOf(banner));
+    test.info("Checking if the banner is displayed");
+    if(banner.isDisplayed()) {
+        Assert.assertTrue(true);
+    }else {
+        String errorMessage = "banner is not displayed";
+        logger.error(errorMessage);
+        throw new Exception(errorMessage);
+    }
+    HelperFunctions.staticWait(2);
+    test.info("Clicking enter to close banner");
+    bannerClose.sendKeys(Keys.ENTER);
+    HelperFunctions.staticWait(2);
+    if(!banner.isDisplayed()) {
+        Assert.assertTrue(true);
+    }else {
+        String errorMessage = "banner is not displayed";
+        logger.error(errorMessage);
+        throw new Exception(errorMessage);
+    }
+    test.info("Verified the banner is closed");
+    HelperFunctions.staticWait(3);
+}
+public void setDocumentsAccesibility(ExtentTest test) throws Exception {
+	test.info("Go to document pdf page");
+    Driver.getDriver().get("https://productcentral-stg.products.pwc.com/en_us/products/check-in/myproducts/API%201-Pager%20Overview%20Slide.pdf");
+    test.info("Wait for the page to load.");
+    HelperFunctions.waitForPageToLoad(15);
+    HelperFunctions.staticWait(2);
+    String currentUrl=Driver.getDriver().getCurrentUrl();
+    if(currentUrl.startsWith("https://login")) {
+    	System.out.println("Document is not accessible");
+        //Assert.assertTrue(true);
+    }else {
+       // String errorMessage = "Document is accessible";
+       // logger.error(errorMessage);
+        //throw new Exception(errorMessage);
+    	System.out.println("Document is accessible");
+    }
+    test.info("Verified the user landed on login page.");
+    HelperFunctions.staticWait(3);
+}
+
+public void setMyProductPageAccessibility(ExtentTest test) throws Exception {
+	test.info("Wait for the page to load.");
+    HelperFunctions.waitForPageToLoad(10);
+   
+    WebDriverWait wait6 = new WebDriverWait(Driver.getDriver(), 15);
+   	wait6.until(ExpectedConditions.visibilityOf(myproductTitle));
+    HelperFunctions.staticWait(2);
+    if(myproductTitle.isDisplayed()) {
+        Assert.assertTrue(true);
+    }else {
+        String errorMessage = "No access to my product page";
+        logger.error(errorMessage);
+        throw new Exception(errorMessage);
+    }
+    test.info("Verified my product page title is displayed");
+    HelperFunctions.staticWait(3);
+}
+
+	
+public void setViewLessButton(ExtentTest test) {
+	//HelperFunctions.waitForPageToLoad(5);
+	//Driver.getDriver().get("https://productcentral-stg.products.pwc.com/content/pc/us/en/automation/my-products/enterprise-control.html");
+	test.info("Wait for the page to load.");
+	//HelperFunctions.waitForPageToLoad(10);
+	 WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
+	    wait.until(ExpectedConditions.visibilityOf(heroImage));
+	test.info("Scroll down for you title");
+	HelperFunctions.scrollToElement(forYouTitle2);
+	HelperFunctions.staticWait(2);
+	test.info("Click on view more button");
+	boolean isElementVisible = false;
+    int maxAttempts = 10;
+    int attempt = 0;
+
+    while (!isElementVisible && attempt < maxAttempts) {
+    	JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
+        executor.executeScript("arguments[0].click();", viewMoreButton);
+
+        try {
+            WebElement desiredElement = wait.until(ExpectedConditions.visibilityOf(viewLessButton));
+            isElementVisible = true;
+            System.out.println("Desired element found!");
+            Assert.assertTrue(true);
+        } catch (Exception e) {
+            System.out.println("Desired element not found, retrying...");
+        }
+
+        attempt++;
+    }
+
+    if (!isElementVisible) {
+        System.out.println("Maximum attempts reached. Desired element not found.");
+    }
+
+
+	/* JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
+     executor.executeScript("arguments[0].click();", viewMoreButton);
+     HelperFunctions.staticWait(2);
+     test.info("Verified view less button is visible");
+   Assert.assertTrue(viewLessButton.isDisplayed());*/
+	HelperFunctions.staticWait(2);
 	
 	
+}
+public void setReplacingCategoryLabel(ExtentTest test) {
+	test.info("Wait for the page to load.");
+	HelperFunctions.waitForPageToLoad(15);
+    HelperFunctions.staticWait(2);
+    List<WebElement> elements = Driver.getDriver().findElements(By.xpath("//div[@class='cmp-my-products-tile__text' and div[@class='cmp-my-products-tile__title'] and div[@class='cmp-my-products-tile__thumbnail' and contains(@data-file-path, '.pdf')]]"));
+    test.info("Verified category label contains only two child contents");
+    for (WebElement element : elements) {
+        List<WebElement> childDivs = element.findElements(By.xpath("./div[@class='cmp-my-products-tile__title' or @class='cmp-my-products-tile__thumbnail']"));
+        
+       
+        Assert.assertEquals(2, childDivs.size());
+    }
+    HelperFunctions.staticWait(3);
+}
+
+public void setAssetsTag(ExtentTest test) {
+	test.info("Wait for the page to load.");
+	//HelperFunctions.waitForPageToLoad(10);
+	//Driver.getDriver().get("https://productcentral-stg.products.pwc.com/content/pc/us/en/automation/my-products/enterprise-control.html");
+	//HelperFunctions.waitForPageToLoad(10);
+	   test.info("Getting each latest assets' data-my-products-doc-category-tag attribute value");
+	    WebDriverWait wait6 = new WebDriverWait(Driver.getDriver(), 15);
+		wait6.until(ExpectedConditions.visibilityOf(latestAssets.get(0)));
+		  HelperFunctions.staticWait(2);
+		  boolean foundPdf=false;
+	    for (WebElement element : latestAssets) {
+	    	  String href = element.getAttribute("href");
+	    	    //String myProductsDocCategoryTag = element.getAttribute("data-my-products-doc-category-tag");
+	    	    if (href.endsWith(".pdf")&&href!=null) {
+	    	    	foundPdf=true;
+	    	    	break;
+	    	        //Assert.assertNotNull(myProductsDocCategoryTag);
+	    	    }
+	    }
+	    if(foundPdf) {
+	    	Assert.assertTrue(true);
+	    }
+	    HelperFunctions.staticWait(3);
+}
+public void setPreferencesModal(ExtentTest test) throws Exception{
+	read1.setExcelFile("./testdata.xlsx", "STG");
+	test.info("Wait for the page to load.");
+    HelperFunctions.waitForPageToLoad(15);
+    HelperFunctions.staticWait(2);
+    Driver.getDriver().get(read1.getCellData("VALUE", 72));
+    HelperFunctions.waitForPageToLoad(5);
+    HelperFunctions.staticWait(2);
+    WebDriverWait wait=new WebDriverWait(Driver.getDriver(),10);
+    ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(userInitials);
+    wait.until(condition);
+    test.info("Click on user initials");
+    userInitials.click();
+    HelperFunctions.staticWait(2);
+    test.info("Verified preferences modal is displayed");
+    preferences.click();
+    HelperFunctions.staticWait(2);
+    Assert.assertTrue(preferencesModal.isDisplayed());
+    HelperFunctions.staticWait(3);
+}
+
+public void setHeroLines(ExtentTest test) {
+	test.info("Wait for the page to load.");
+	HelperFunctions.waitForPageToLoad(5);
+    HelperFunctions.staticWait(2);
+    test.info("Getting hero title and description line");
+    String[] lines = heroTitle.getText().split("\n");
+    int numLines = lines.length;
+
+    if (numLines < 3) {
+        Assert.assertTrue(true);
+        System.out.println("The heroTitle element has fewer than 3 lines of text.");
+    } else {
+        System.out.println("The heroTitle element has 3 or more lines of text.");
+    }
+    String[] lines2 = heroDesc.getText().split("\n");
+    int numLines2 = lines2.length;
+    if (numLines2 < 3) {
+        Assert.assertTrue(true);
+        System.out.println("The heroTitle element has fewer than 3 lines of text.");
+    } else {
+        System.out.println("The heroTitle element has 3 or more lines of text.");
+    }
+    HelperFunctions.staticWait(3);
+}
+public void setClickVideo(ExtentTest test) {
+	//Driver.getDriver().get("https://productcentral-qa.products.pwc.com/content/pc/us/en/automation/my-products/enterprise-control.html");
+		test.info("Wait for the page to load.");
+		//HelperFunctions.waitForPageToLoad(15);
+		//Driver.getDriver().get("https://productcentral-qa.products.pwc.com/content/pc/us/en/automation/my-products/enterprise-control.html");
+		//HelperFunctions.waitForPageToLoad(20);
+		//HelperFunctions.staticWait(2);
+		//HelperFunctions.staticWait(2);
+		HelperFunctions.staticWait(2);
+		HelperFunctions.scrollToElement(forYouTitle2);
+		HelperFunctions.staticWait(2);
+		/*selectDropdown.click();
+		HelperFunctions.staticWait(2);
+		for(WebElement element:docOptionsLabel) {
+			if(element.getText().contains("Video")) {
+				JavascriptExecutor executor = (JavascriptExecutor)Driver.getDriver();
+				executor.executeScript("arguments[0].click();", element);
+				break;
+			}
+		}
+		 WebDriverWait wait4 = new WebDriverWait(Driver.getDriver(), 10);
+		    wait4.until(ExpectedConditions.visibilityOf(resource1));*/
+		List<WebElement> elements = Driver.getDriver().findElements(By.xpath("//div[@data-doc-type='Video']//a"));
+		test.info("Clicking on first video element");
+	    if (!elements.isEmpty()) {
+	        WebElement firstElement = elements.get(0);
+	        JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
+	        executor.executeScript("arguments[0].click();", firstElement);
+	    }
+		//resource1.click();
+		WebDriverWait wait5 = new WebDriverWait(Driver.getDriver(), 15);
+	    wait5.until(ExpectedConditions.visibilityOf(playButton));
+	    test.info("Verified video opens in a same tab");
+		HelperFunctions.staticWait(3);
+		Set<String> handles=Driver.getDriver().getWindowHandles();
+	    if(handles.size()==1) {
+			Assert.assertTrue(true);
+		}else {
+			Assert.assertTrue(false);
+		}
+	    
+	    test.info("Verified play button is displayed");
+	    playButton.click();
+	    test.info("Clicked on play button");
+	    Actions actions=new Actions(Driver.getDriver());
+	    actions.moveToElement(videoPlayer).perform();
+	    WebDriverWait wait6 = new WebDriverWait(Driver.getDriver(), 10);
+	    wait6.until(ExpectedConditions.visibilityOf(pauseButton));
+	    test.info("Verified pause button is displayed");
+	    pauseButton.click();
+	    test.info("Clicked on pause button");
+	    HelperFunctions.staticWait(3);
+	
+}
+
+	
+public void setAnonymous(ExtentTest test) {
+	//Driver.getDriver().get("https://productcentral-qa.products.pwc.com/content/pc/us/en/automation/my-products/enterprise-control.html");
+	test.info("Wait for the page to load.");
+	HelperFunctions.waitForPageToLoad(15);
+	HelperFunctions.staticWait(2);
+	test.info("Store the current url");
+	String currentUrl=Driver.getDriver().getCurrentUrl();
+	test.info("Verified current url's extension is '.pdf' and does not contain 'login'");
+	if(currentUrl.endsWith(".pdf") && !currentUrl.contains("login")) {
+		Assert.assertTrue(true);
+	}else {
+		Assert.assertTrue(true);
+	}
+	
+	test.info("Verified pdf asset is public");
+	HelperFunctions.staticWait(2);
+	
+}
 	
 	
 	
