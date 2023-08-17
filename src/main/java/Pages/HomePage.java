@@ -515,7 +515,9 @@ public class HomePage extends HelperFunctions {
 	public void setDropdown(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
 		HelperFunctions.waitForPageToLoad(20);
+		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),10);
 		test.info("Clicking on search button");
+		wait.until(ExpectedConditions.visibilityOf(searchButton));
         searchButton.click();
         HelperFunctions.staticWait(3); 
         test.info("Send text on search button");
@@ -540,7 +542,7 @@ public class HomePage extends HelperFunctions {
         HelperFunctions.staticWait(3);
         test.info("Clicking on product dropdown");
         productDropdown.click();
-        HelperFunctions.staticWait(3);
+        wait.until(ExpectedConditions.visibilityOf(changeNavigatorCheckbox));
         test.info("Clicking on checkbox");
         changeNavigatorCheckbox.click();
         HelperFunctions.staticWait(3);
@@ -560,7 +562,7 @@ public class HomePage extends HelperFunctions {
         HelperFunctions.staticWait(3);
         test.info("Clicking on category fropdown");
         catDropdown.click();
-        HelperFunctions.staticWait(3);
+        wait.until(ExpectedConditions.visibilityOf(dataAppCheckbox));
         test.info("Clicking on data app checkbox");
         dataAppCheckbox.click();
         HelperFunctions.staticWait(3);
@@ -568,6 +570,7 @@ public class HomePage extends HelperFunctions {
         documentationCheckbox.click();
         HelperFunctions.staticWait(3);
         catDropdown.click();
+        wait.until(ExpectedConditions.visibilityOf(dataAppTitle));
         test.info("Verified texts are matching on the result table");
         if (!dataAppTitle.getText().equals("Data Processing Addendum")) {
               String errorMessage = "Texts are not matching.";
@@ -590,6 +593,7 @@ public class HomePage extends HelperFunctions {
         dataAppTitle.click();
         //Driver.getDriver().switchTo().frame(0);
         test.info("Verified content pdf is visible");
+        wait.until(ExpectedConditions.visibilityOf(pdfViewer));
         if(pdfViewer.isDisplayed()) {
             String successMessage = "pdf viewer is displayed";
             logger.info(successMessage);

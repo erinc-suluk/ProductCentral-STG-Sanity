@@ -1475,16 +1475,16 @@ public class AuthoringPage extends HelperFunctions {
 	    WebDriverWait wait=new WebDriverWait(Driver.getDriver(),10);
 	    ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(editButtonContent);
 	    wait.until(condition);
-	    HelperFunctions.staticWait(2);
+	    //HelperFunctions.staticWait(2);
 	    test.info("Click on edit");
 	    editButtonContent.click();
-	    HelperFunctions.staticWait(2);
+	    wait.until(ExpectedConditions.visibilityOf(offeringOverviewLink2auth));
 	    test.info("Click on content page title for authoring");
 	    offeringOverviewLink2auth.click();
-	    HelperFunctions.staticWait(2);
+	    wait.until(ExpectedConditions.visibilityOf(settingIcon));
 	    test.info("Click on setting");
 	    settingIcon.click();
-	    HelperFunctions.staticWait(2);
+	    wait.until(ExpectedConditions.visibilityOf(titleField));
 	  //  ArrayList<String> tabs7 = new ArrayList<String>(Driver.getDriver().getWindowHandles());
 	  //  Driver.getDriver().switchTo().window(tabs7.get(1));
 	    test.info("Click on title field");
@@ -1506,6 +1506,7 @@ public class AuthoringPage extends HelperFunctions {
       //  Driver.getDriver().switchTo().window(windowsList4.get(1));
         
         Driver.getDriver().switchTo().frame(0);
+        wait.until(ExpectedConditions.visibilityOf(contentTitle));
 	 String expectedTitle="test";
 	 String actualTitle=contentTitle.getText();
 	 test.info("Veried expected title matches with actual title");
@@ -1520,14 +1521,15 @@ public class AuthoringPage extends HelperFunctions {
      }
 	 test.info("Click on edit");
 	 Driver.getDriver().switchTo().defaultContent();
+	 wait.until(ExpectedConditions.visibilityOf(editButtonContent));
 	 editButtonContent.click();
-	 HelperFunctions.staticWait(2);
+	 wait.until(ExpectedConditions.visibilityOf(offeringOverviewLink2auth));
 	 test.info("Click on content page title for authoring");
 	 offeringOverviewLink2auth.click();
-	 HelperFunctions.staticWait(2);
+	 wait.until(ExpectedConditions.visibilityOf(settingIcon));
 	 test.info("Click on setting");
 	 settingIcon.click();
-	 HelperFunctions.staticWait(2);
+	 wait.until(ExpectedConditions.visibilityOf(titleField));
 	  //  ArrayList<String> tabs8 = new ArrayList<String>(Driver.getDriver().getWindowHandles());
 	  //  Driver.getDriver().switchTo().window(tabs7.get(1));
 	 test.info("Click on title field");
@@ -1549,6 +1551,7 @@ public class AuthoringPage extends HelperFunctions {
    //  Driver.getDriver().switchTo().window(windowsList5.get(1));
 	    test.info("Veried expected title matches with actual title");
      Driver.getDriver().switchTo().frame(0);
+     wait.until(ExpectedConditions.visibilityOf(contentTitle));
 	 String expectedTitle2="Offering Overview";
 	 String actualTitle2=contentTitle.getText();
 	// Assert.assertEquals(expectedTitle2, actualTitle2);
@@ -2449,24 +2452,24 @@ public void setCheckboxNotTicked(ExtentTest test) throws Exception {
 	   // Driver.getDriver().get("https://auth-productcentral-qa.products.pwc.com/editor.html/content/pc/us/en/automation/products/cloud/offering-overview.html");
 		//HelperFunctions.waitForPageToLoad(10);
 		
-		 WebDriverWait wait=new WebDriverWait(Driver.getDriver(),15);
+		 WebDriverWait wait=new WebDriverWait(Driver.getDriver(),20);
 		    ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(pageInfo);
 		    wait.until(condition);
-		    HelperFunctions.staticWait(3);
+		    //HelperFunctions.staticWait(3);
 		    test.info("Click on page info");
 		pageInfo.click();
-		HelperFunctions.staticWait(3);
+		wait.until(ExpectedConditions.visibilityOf(openProper));
 		test.info("Click on open properties");
 		openProper.click();
 		HelperFunctions.waitForPageToLoad(20);
-		HelperFunctions.staticWait(3);
+		wait.until(ExpectedConditions.visibilityOf(hideListing));
 		test.info("Verified hide listing checkbox not selected");
 		Assert.assertFalse( hideListing.isSelected());
 		test.info("Click on save and close");
 		saveAndClose.click();
 		test.info("Wait for the page to load.");
 		HelperFunctions.waitForPageToLoad(20);
-		HelperFunctions.staticWait(3);
+		wait.until(ExpectedConditions.visibilityOf(previewButton2));
 		 test.info("Click on preview");
 		 previewButton2.click();
 		 HelperFunctions.staticWait(2);
@@ -2476,7 +2479,7 @@ public void setCheckboxNotTicked(ExtentTest test) throws Exception {
 			//HelperFunctions.staticWait(3);
 		 test.info("Switch the iframe");
 		 Driver.getDriver().switchTo().frame(0);
-		 HelperFunctions.staticWait(2);
+		 wait.until(ExpectedConditions.visibilityOf(dft));
 			test.info("Verified 'Download Full Term Link' is displayed");
 			Assert.assertTrue( dft.isDisplayed());
 			HelperFunctions.staticWait(3);
