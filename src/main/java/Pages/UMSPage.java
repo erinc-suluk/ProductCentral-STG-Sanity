@@ -1206,12 +1206,14 @@ public class UMSPage extends HelperFunctions {
 	public void setEditProduct(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
 		HelperFunctions.waitForPageToLoad(15);
-		HelperFunctions.staticWait(3);
+		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),15);
+		wait.until(ExpectedConditions.visibilityOf(email));
+		//HelperFunctions.staticWait(3);
 		read1.setExcelFile("./testdata.xlsx", "STG");
 		email.sendKeys(read1.getCellData("VALUE", 44));
 		next.click();
 		HelperFunctions.waitForPageToLoad(15);
-		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),10);
+		
 		wait.until(ExpectedConditions.visibilityOf(addUser));
 		addUser.click();
 		HelperFunctions.staticWait(3);
@@ -1221,9 +1223,9 @@ public class UMSPage extends HelperFunctions {
 	    wait.until(ExpectedConditions.visibilityOf(searchCompany));
 	    HelperFunctions.staticWait(3);
 		productsTab.click();
-		//HelperFunctions.staticWait(15);
+		HelperFunctions.staticWait(10);
 		//WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(), 25);
-		wait.until(ExpectedConditions.visibilityOf(searchCompany));
+		//wait.until(ExpectedConditions.visibilityOf(searchCompany));
 		//searchCompany.click();
 		HelperFunctions.staticWait(2);
 		String auto="automation product1";
