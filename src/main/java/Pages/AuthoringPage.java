@@ -223,7 +223,7 @@ public class AuthoringPage extends HelperFunctions {
 	@FindBy(xpath="//button[.='Submit']")
 	private WebElement submit;
 	
-	@FindBy(xpath="//div[@data-path='/content/pc/us/en/automation/sitemapfortesting/jcr:content/root/container/container/sitemap']")
+	@FindBy(xpath="//div[contains(@title, 'Sitemap')]")
 	private WebElement sitemap;
 	
 	@FindBy(xpath="//button[@icon='wrench']")
@@ -325,7 +325,7 @@ public class AuthoringPage extends HelperFunctions {
 	@FindBy(xpath="div[@class='cmp-tiles__products-link']")
 	private static List<WebElement> loginToMyProductsLinks;
 	
-	@FindBy(xpath="/html/body/coral-dialog[2]/div[2]/form/coral-dialog-content/div/coral-tabview/coral-panelstack/coral-panel/coral-panel-content/div/div/div/div[1]/foundation-autocomplete/div/div/span/button")
+	@FindBy(xpath="//foundation-autocomplete[contains(@name, './path')]//button[contains(@title, 'Open Selection Dialog')]")
 	private WebElement checkforOptions;
 	
 
@@ -570,7 +570,7 @@ public class AuthoringPage extends HelperFunctions {
     @FindBy(xpath="(//div[@class='cmp-document-tiles__entry-title'])[1]")
    	private WebElement firstProductTile;
    	
-   	@FindBy(xpath="//div[@title='Product Tiles [Root]']")
+   	@FindBy(xpath="//div[contains(@title, 'Product Tiles')]")
    	private WebElement editTiles;
    	
    	@FindBy(xpath="(//button[@icon='moveUpDown'])[1]")
@@ -1196,21 +1196,21 @@ public class AuthoringPage extends HelperFunctions {
 		   ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(editButtonContent);
 		   wait.until(condition);
 		   editButtonContent.click();
-		   HelperFunctions.staticWait(2);
+		   //HelperFunctions.staticWait(2);
     	 WebDriverWait wait1=new WebDriverWait(Driver.getDriver(),15);
   	    ExpectedCondition<WebElement> condition1=ExpectedConditions.elementToBeClickable(sitemap);
   	    wait1.until(condition1);
   	  test.info("Clicking on sitemap");
 	    sitemap.click();
-	    HelperFunctions.staticWait(3);
+	    wait1.until(ExpectedConditions.visibilityOf(settingIcon));
 	    test.info("Clicking on settings icon");
 	    settingIcon.click();
-	    HelperFunctions.staticWait(3);
+	    wait1.until(ExpectedConditions.visibilityOf(checkforOptions));
 	    //ArrayList<String> tabs7 = new ArrayList<String>(Driver.getDriver().getWindowHandles());
 	   // Driver.getDriver().switchTo().window(tabs7.get(1));
 	    test.info("Clicking on check for the options");
 	    checkforOptions.click();
-	    HelperFunctions.staticWait(3);
+	    wait1.until(ExpectedConditions.visibilityOf(myproductImage));
 	    test.info("Clicking my product image path");
 	    myproductImage.click();
 	    HelperFunctions.staticWait(3);
@@ -1247,18 +1247,18 @@ public class AuthoringPage extends HelperFunctions {
 	    HelperFunctions.staticWait(3);
 	    test.info("Clicking on edit");
 	    editnextToPreview.click();
-	    HelperFunctions.staticWait(3);
+	    wait1.until(ExpectedConditions.visibilityOf(sitemap));
 	    test.info("Clicking on sitemap");
 	    sitemap.click();
-	    HelperFunctions.staticWait(3);
+	    wait1.until(ExpectedConditions.visibilityOf(settingIcon));
 	    test.info("Clicking on settings icon");
 	    settingIcon.click();
-	    HelperFunctions.staticWait(3);
+	    wait1.until(ExpectedConditions.visibilityOf(checkforOptions));
 	    //ArrayList<String> tabs8 = new ArrayList<String>(Driver.getDriver().getWindowHandles());
 	   // Driver.getDriver().switchTo().window(tabs8.get(1));
 	    test.info("Clicking on check for the options");
 	    checkforOptions.click();
-	    HelperFunctions.staticWait(3);
+	    wait1.until(ExpectedConditions.visibilityOf(automationImage));
 	    test.info("Clicking on automation path");
 	    automationImage.click();
 	    HelperFunctions.staticWait(3);
@@ -1299,7 +1299,7 @@ public class AuthoringPage extends HelperFunctions {
 	 test.info("Wait for the page to load.");
 	    HelperFunctions.waitForPageToLoad(10);
     	read1.setExcelFile("./testdata.xlsx", "QA");
-    	 WebDriverWait wait=new WebDriverWait(Driver.getDriver(),15);
+    	 WebDriverWait wait=new WebDriverWait(Driver.getDriver(),20);
  	    ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(homepageDemo);
  	    wait.until(condition);
  	   test.info("Clicking on homepagedemo path");
@@ -1313,14 +1313,13 @@ public class AuthoringPage extends HelperFunctions {
 	    HelperFunctions.staticWait(5);
 	    test.info("Clicking on properties");
 	    properties.click();
-	    HelperFunctions.waitForPageToLoad(5);
-	    HelperFunctions.staticWait(3);
+	    wait.until(ExpectedConditions.visibilityOf(hidesitemapCheckbox));
 	    test.info("Clicking on hide sitemap checkbox");
 	    hidesitemapCheckbox.click();
 	    HelperFunctions.staticWait(5);
 	    test.info("Clicking on save&close");
 	    saveAndClose.click();
-	    HelperFunctions.waitForPageToLoad(5);
+	    HelperFunctions.waitForPageToLoad(15);
 	    test.info("Clicking on homepagedemo path");
 	    JavascriptExecutor executor3 = (JavascriptExecutor) Driver.getDriver();
         executor3.executeScript("arguments[0].click();", homepageDemo);
@@ -1378,6 +1377,10 @@ public class AuthoringPage extends HelperFunctions {
 	 test.info("Wait for the page to load.");
 	 HelperFunctions.waitForPageToLoad(15);
 	 HelperFunctions.staticWait(3);
+	 WebDriverWait wait=new WebDriverWait(Driver.getDriver(),15);
+	 ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(editButtonContent);
+	   wait.until(condition);
+	   editButtonContent.click();
 	 read1.setExcelFile("./testdata.xlsx", "QA");
 		/*email.sendKeys(read1.getCellData("DATA", 1));
 		next.click();
@@ -1408,13 +1411,14 @@ public class AuthoringPage extends HelperFunctions {
 	    JavascriptExecutor executor5 = (JavascriptExecutor) Driver.getDriver();
         executor5.executeScript("arguments[0].click();", legalTilesAuth);
         test.info("Clicking on settings");
+        wait.until(ExpectedConditions.visibilityOf(settingIcon));
         settingIcon.click();
-        HelperFunctions.staticWait(3);
+        wait.until(ExpectedConditions.visibilityOf(legalTilesAuthFirstCheckbox));
        // ArrayList<String> tabs5 = new ArrayList<String>(Driver.getDriver().getWindowHandles());
 	   // Driver.getDriver().switchTo().window(tabs5.get(1));
         test.info("Change the tiles path");
 	    legalTilesAuthFirstCheckbox.click();
-	    HelperFunctions.staticWait(3);
+	    wait.until(ExpectedConditions.visibilityOf(dataProcessingImg));
 	  //  ArrayList<String> tabs6 = new ArrayList<String>(Driver.getDriver().getWindowHandles());
 	  //  Driver.getDriver().switchTo().window(tabs6.get(1));
 	    dataProcessingImg.click();
@@ -1439,18 +1443,21 @@ public class AuthoringPage extends HelperFunctions {
 			}
 		}
 	    HelperFunctions.staticWait(3);
+	    ExpectedCondition<WebElement> condition2=ExpectedConditions.elementToBeClickable(editButtonContent);
+		   wait.until(condition2);
+		   editButtonContent.click();
 	    test.info("Clicking on tiles for setting");
 	    JavascriptExecutor executor6 = (JavascriptExecutor) Driver.getDriver();
         executor6.executeScript("arguments[0].click();", legalTilesAuth);
-        HelperFunctions.staticWait(3);
+        wait.until(ExpectedConditions.visibilityOf(settingIcon));
         test.info("Clicking on settings");
         settingIcon.click();
-        HelperFunctions.staticWait(3);
+        wait.until(ExpectedConditions.visibilityOf(legalTilesAuthFirstCheckbox));
        // ArrayList<String> tabs7 = new ArrayList<String>(Driver.getDriver().getWindowHandles());
 	  //  Driver.getDriver().switchTo().window(tabs7.get(1));
         test.info("Change the tiles path");
 	    legalTilesAuthFirstCheckbox.click();
-	    HelperFunctions.staticWait(3);
+	    wait.until(ExpectedConditions.visibilityOf(maintenanceImg));
 	   // ArrayList<String> tabs8 = new ArrayList<String>(Driver.getDriver().getWindowHandles());
 	  //  Driver.getDriver().switchTo().window(tabs8.get(1));
 	    maintenanceImg.click();
@@ -2050,17 +2057,17 @@ js.executeScript("window.open()");
 		//HelperFunctions.staticWait(2);
 		test.info("Click on create button");
 	    createButton.click();
-	    HelperFunctions.staticWait(3);
+	    wait.until(ExpectedConditions.elementToBeClickable(pageButton));
 	    test.info("Click on create page button");
 	    pageButton.click();
-	    HelperFunctions.staticWait(3);
+	    wait.until(ExpectedConditions.elementToBeClickable(contentPageTemplate));
 	    test.info("Click on content page template");
 	    contentPageTemplate.click();
 	    HelperFunctions.staticWait(3);
 	    test.info("Click on next button");
 	    nextButton.click();
-	    HelperFunctions.waitForPageToLoad(5);
-	    HelperFunctions.staticWait(3);
+	    HelperFunctions.waitForPageToLoad(15);
+	    wait.until(ExpectedConditions.elementToBeClickable(titleField2));
 	    test.info("Click on title field");
 	    titleField2.click();
 	    HelperFunctions.staticWait(3);
@@ -2069,7 +2076,7 @@ js.executeScript("window.open()");
 	    HelperFunctions.staticWait(3);
 	    test.info("Click on product central tab");
 	    productCentralTab.click();
-	    HelperFunctions.staticWait(3);
+	    //HelperFunctions.staticWait(3);
 	    test.info("Select option from document category ");
 	    WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(), 10);
 	    JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
@@ -2079,25 +2086,53 @@ js.executeScript("window.open()");
 	    HelperFunctions.staticWait(3);
 
 	    firstOptionofDocCat.click();
-	    HelperFunctions.staticWait(3);
+	    try {
+	    	Thread.sleep(3000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
 	    test.info("Select option from product feature ");
 
 	    executor.executeScript("arguments[0].click();", productFeatureTag2);
-	    HelperFunctions.staticWait(3);
+	    try {
+	    	Thread.sleep(3000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
 	    executor.executeScript("arguments[0].click();", firstOptionofProCat);
-	    HelperFunctions.staticWait(3);
+	    try {
+	    	Thread.sleep(3000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
 	    test.info("Select option from portfolio tag");
 
 	    executor.executeScript("arguments[0].click();", portfolioTag2);
-	    HelperFunctions.staticWait(3);
+	    try {
+	    	Thread.sleep(3000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
 	    executor.executeScript("arguments[0].click();", firstOptionofPortCat);
-	    HelperFunctions.staticWait(8);
+	    try {
+	    	Thread.sleep(3000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
 	    test.info("Select option from audience tag");
 
 	    executor.executeScript("arguments[0].click();", audienceTag);
-	    HelperFunctions.staticWait(3);
+	    try {
+	    	Thread.sleep(3000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
 	    executor.executeScript("arguments[0].click();", anonyOption);
-	    HelperFunctions.staticWait(3);
+	    try {
+	    	Thread.sleep(3000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
         createButton2.click();
         WebDriverWait wait6 = new WebDriverWait(Driver.getDriver(), 10);
 	    wait6.until(ExpectedConditions.visibilityOf(doneButton));
@@ -2390,7 +2425,7 @@ js.executeScript("window.open()");
 	    WebDriverWait wait=new WebDriverWait(Driver.getDriver(),15);
 	    ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(previewButton);
 	    wait.until(condition);
-	    HelperFunctions.staticWait(2);
+	    //HelperFunctions.staticWait(2);
 	    previewButton.click();
 
 	    test.info("Switch to iframe.");
@@ -2407,15 +2442,15 @@ js.executeScript("window.open()");
 
 	    test.info("Click edit button content.");
 	    editButtonContent.click();
-	    HelperFunctions.staticWait(2);
+	    wait.until(ExpectedConditions.visibilityOf(editTiles));
 
 	    test.info("Click edit tiles.");
 	    editTiles.click();
-	    HelperFunctions.staticWait(2);
+	    wait.until(ExpectedConditions.visibilityOf(configure));
 
 	    test.info("Click configure.");
 	    configure.click();
-	    HelperFunctions.staticWait(2);
+	    wait.until(ExpectedConditions.visibilityOf(drag1));
 
 	    test.info("Reorder tiles.");
 	    Actions builder = new Actions(Driver.getDriver());
@@ -2444,11 +2479,11 @@ js.executeScript("window.open()");
 
 	    test.info("Click edit tiles.");
 	    editTiles.click();
-	    HelperFunctions.staticWait(2);
+	    wait.until(ExpectedConditions.visibilityOf(configure));
 
 	    test.info("Click configure.");
 	    configure.click();
-	    HelperFunctions.staticWait(2);
+	    wait.until(ExpectedConditions.visibilityOf(drag1));
 
 	    test.info("Reorder tiles.");
 	    Actions builder2 = new Actions(Driver.getDriver());
@@ -2505,7 +2540,7 @@ public void setPushingPageSiteAdmin(ExtentTest test) throws Exception {
 	 WebDriverWait wait=new WebDriverWait(Driver.getDriver(),15);
 	    ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(pageInfo);
 	    wait.until(condition);
-	    HelperFunctions.staticWait(2);
+	    //HelperFunctions.staticWait(2);
 	    test.info("Click on page info");
 	 pageInfo.click();
 	 HelperFunctions.staticWait(2);
@@ -2539,10 +2574,10 @@ public void setAuthorExperienceFragment(ExtentTest test) throws Exception {
 	   HelperFunctions.staticWait(2);
 	   test.info("Click on edit for privacy hub configuration");
 	   phEdit.click();
-	   HelperFunctions.staticWait(2);
+	   wait.until(ExpectedConditions.visibilityOf(configure));
 	   test.info("Click on privacy hub configuration");
 	   configure.click();
-	   HelperFunctions.staticWait(2);
+	   wait.until(ExpectedConditions.visibilityOf(pTitle));
 	  // Driver.getDriver().switchTo().frame(0);
 	   test.info("Click on privacy hub title");
 	   pTitle.click();
@@ -2559,12 +2594,12 @@ public void setAuthorExperienceFragment(ExtentTest test) throws Exception {
 	    HelperFunctions.staticWait(3);
 	    test.info("Click on page info");
 	    pageInfo.click();
-	    HelperFunctions.staticWait(3);
+	    wait.until(ExpectedConditions.visibilityOf(publishIcon));
 	    test.info("Click on publish");
 	    publishIcon.click();
 	    HelperFunctions.staticWait(3);
 	    Driver.getDriver().get("https://auth-productcentral-stg.products.pwc.com/editor.html/content/pc/us/en/automation/privacy-hub.html");
-	    HelperFunctions.waitForPageToLoad(15);
+	    HelperFunctions.waitForPageToLoad(20);
 	    previewButton.click();
 	    test.info("Switch to iframe");
 	    Driver.getDriver().switchTo().frame(0);
@@ -2603,7 +2638,7 @@ public void setCreateVariationExperienceFragment(ExtentTest test) throws Excepti
 	  // HelperFunctions.waitForPageToLoad(10);
 	   test.info("Wait for the page to load.");
 //Driver.getDriver().get("https://auth-productcentral-qa.products.pwc.com/mnt/overlay/cq/experience-fragments/content/experience-fragments/createpagewizard.html/content/experience-fragments/pc/us/en/site/experience-fragment");
-	   HelperFunctions.waitForPageToLoad(15);
+	   //HelperFunctions.waitForPageToLoad(15);
 	   test.info("Clicking on web variation page content");
 	    WebDriverWait wait3 = new WebDriverWait(Driver.getDriver(), 10);
 	    wait3.until(ExpectedConditions.visibilityOf(webVariation));
@@ -2755,23 +2790,25 @@ public void setUserWorkflowApproval(ExtentTest test) throws Exception {
 public void setBannerTextField(ExtentTest test) throws Exception {
 	 test.info("Wait for the page to load.");
 	    //Driver.getDriver().get("https://auth-productcentral-qa.products.pwc.com/editor.html/content/pc/us/en/automation/my-products/fluid-forecast.html");
-		HelperFunctions.waitForPageToLoad(10);
+		//HelperFunctions.waitForPageToLoad(10);
 		
 		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),15);
 	    ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(editButtonContent);
 	    wait.until(condition);
-	    HelperFunctions.staticWait(3);
+	    //HelperFunctions.staticWait(3);
 	    test.info("Clicking on edit button");
 		editButtonContent.click();
 		HelperFunctions.staticWait(2);
 		test.info("Clicking on the notification banner");
-		firstBanner.click();
-		HelperFunctions.staticWait(2);
+		JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
+		executor.executeScript("arguments[0].click();", firstBanner);
+		wait.until(ExpectedConditions.visibilityOf(configure));
 		test.info("Clicking on configure for the notification banner");
 		configure.click();
-		HelperFunctions.staticWait(2);
+		wait.until(ExpectedConditions.visibilityOf(bannerType));
 		test.info("Verified text for product banner and type");
 		Assert.assertTrue(bannerType.isDisplayed());
+		HelperFunctions.staticWait(2);
 		Assert.assertTrue(bannerProduct.isDisplayed());
 		HelperFunctions.staticWait(3);
 	} 
@@ -2924,9 +2961,9 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 		   ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(editButtonContent);
 		   wait.until(condition);
 		   editButtonContent.click();
-		   HelperFunctions.staticWait(3);
+		   wait.until(ExpectedConditions.visibilityOf(phFooter));
 		   phFooter.click();
-		   HelperFunctions.staticWait(2);
+		   wait.until(ExpectedConditions.visibilityOf(configure));
 		   configure.click();
 		   WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(), 15);
 		  wait1.until(ExpectedConditions.visibilityOf(footerText));
@@ -2958,12 +2995,12 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 	 public void setPrivacyHubPublishingDate() throws Exception {
 		 	
 		 // Driver.getDriver().get("https://auth-productcentral-qa.products.pwc.com/sites.html/content/pc/us/en/automation");
-			    HelperFunctions.waitForPageToLoad(10);
+			    //HelperFunctions.waitForPageToLoad(10);
 			    
 			    WebDriverWait wait=new WebDriverWait(Driver.getDriver(),10);
 			    ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(privacyHubImg);
 			    wait.until(condition);
-			    HelperFunctions.staticWait(3);
+			    //HelperFunctions.staticWait(3);
 			    privacyHubImg.click();
 			    JavascriptExecutor executor1 = (JavascriptExecutor) Driver.getDriver();
 		  executor1.executeScript("arguments[0].click();", privacyHubImg);
@@ -2972,7 +3009,7 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 		  executor2.executeScript("arguments[0].click();", privacyHubImg);
 			    HelperFunctions.staticWait(3);
 			    quickPublish2.click();
-			    HelperFunctions.staticWait(2);
+			    wait.until(ExpectedConditions.visibilityOf(publish2));
 		     publish2.click();
 		     HelperFunctions.staticWait(5);
 		  if(presentationDate.getText().contains("a few seconds ago")) {
@@ -2993,9 +3030,9 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 			wait.until(condition);
 			  HelperFunctions.staticWait(3);
 			editButtonContent.click();
-			HelperFunctions.staticWait(2);
+			wait.until(ExpectedConditions.visibilityOf(authRelated));
 			authRelated.click();
-			HelperFunctions.staticWait(2);
+			wait.until(ExpectedConditions.visibilityOf(configure));
 	        configure.click();
 	        WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(), 15);
 			  wait1.until(ExpectedConditions.visibilityOf(move1));
@@ -3006,7 +3043,7 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 	        checkIcon.click();
 			HelperFunctions.staticWait(2);
 			pageInfo.click();
-			HelperFunctions.staticWait(3);
+			wait1.until(ExpectedConditions.visibilityOf(publishIcon));
 		    publishIcon.click();
 		    HelperFunctions.staticWait(5);
 		    //Driver.getDriver().get(read1.getCellData("VALUE", 73));
@@ -3032,7 +3069,7 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 			editButtonContent.click();
 			HelperFunctions.staticWait(2);
 			authRelated.click();
-			HelperFunctions.staticWait(2);
+			wait4.until(ExpectedConditions.visibilityOf(configure));
 	        configure.click();
 	        WebDriverWait wait5 = new WebDriverWait(Driver.getDriver(), 15);
 			  wait5.until(ExpectedConditions.visibilityOf(move1));
@@ -3043,7 +3080,7 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 	        checkIcon.click();
 			HelperFunctions.staticWait(2);
 			pageInfo.click();
-			HelperFunctions.staticWait(3);
+			wait5.until(ExpectedConditions.visibilityOf(publishIcon));
 		    publishIcon.click();
 		    HelperFunctions.staticWait(5);
 		   // Driver.getDriver().get(read1.getCellData("VALUE", 73));
@@ -3167,7 +3204,7 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 		    test.info("Verified top level checkbox is there and it is selected");
 		    HelperFunctions.staticWait(3);
 		    saveAndClose.click();
-		    HelperFunctions.staticWait(20);
+		    HelperFunctions.staticWait(15);
 		    test.info("Clicked on save and close");
 		   // HelperFunctions.waitForPageToLoad(15);
 		    test.info("Go to my product page");
