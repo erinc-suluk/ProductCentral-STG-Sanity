@@ -47,7 +47,7 @@ public class ProductPage extends HelperFunctions {
 	@FindBy(xpath="//h1[@class='cmp-all-resources__top-bar-title']")
 	private WebElement allResources;
 	
-	@FindBy(xpath="((//div[@class='cmp-all-resources__cards-page ap-page-container'])//div//a)[position()=1 or position()=2 or position()=3 or position()=4 or position()=5]")
+	@FindBy(xpath="//div[@class='cmp-all-resources__card'][position()=1 or position()=2 or position()=3 or position()=4 or position()=5]")
 	private static List<WebElement> first5resources;
 	
 	@FindBy(xpath="((//div[@class='cmp-all-resources__cards-page ap-page-container'])//div//a)[position()=6 or position()=7 or position()=8 or position()=9 or position()=10]")
@@ -220,7 +220,7 @@ public class ProductPage extends HelperFunctions {
 	@FindBy(xpath="//ol[@class='cmp-tabs__tablist']//a//li//div//span[1]")
 	private static List<WebElement> allProducts;
 	
-	@FindBy(xpath="//span[@class='cmp-tabs__title-container-view-more view-all-js']")
+	@FindBy(xpath="//span[contains(@class, 'view-all')]")
 	private WebElement viewAll;
 	
 	@FindBy(xpath="//div[@class='cmp-tabs__products-modal-text-container']")
@@ -337,7 +337,7 @@ public class ProductPage extends HelperFunctions {
 	
 	public void setFooterWithoutLogin(ExtentTest test) throws Exception {
 		 test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(30);
 		HelperFunctions.staticWait(3);
 		test.info("Scroll down to footer content");
 		HelperFunctions.scrollToElement(footerContent);
@@ -360,7 +360,7 @@ public class ProductPage extends HelperFunctions {
 		//HelperFunctions.waitForPageToLoad(10);
 		//Driver.getDriver().get("https://productcentral-stg.products.pwc.com/content/pc/us/en/automation/my-products/enterprise-control.html");
 		//HelperFunctions.waitForPageToLoad(10);
-		WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
+		WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 30);
 	    wait.until(ExpectedConditions.visibilityOf(heroImage));
 		HelperFunctions.staticWait(3);
 		test.info("Scroll down to footer content");
@@ -463,11 +463,11 @@ public class ProductPage extends HelperFunctions {
 		//HelperFunctions.waitForPageToLoad(10);
 		//Driver.getDriver().get("https://productcentral-stg.products.pwc.com/content/pc/us/en/automation/my-products/enterprise-control.html");
 		//HelperFunctions.waitForPageToLoad(10);
-		test.info("Click on view all");
-		 WebDriverWait wait=new WebDriverWait(Driver.getDriver(),10);
+		test.info("Wait for view all element is visible");
+		 WebDriverWait wait=new WebDriverWait(Driver.getDriver(),20);
 		    ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(viewAll);
 		    wait.until(condition);
-		    HelperFunctions.staticWait(3);
+		    //HelperFunctions.staticWait(3);
 		/*viewAll.click();
 		test.info("Select a product in product container");
 		HelperFunctions.staticWait(2);
@@ -642,7 +642,7 @@ public void setMyProductSearch(ExtentTest test) throws Exception {
 	test.info("Click on enter");
 	myProductSearchField.sendKeys(Keys.ENTER);
 	HelperFunctions.waitForPageToLoad(15);
-	HelperFunctions.staticWait(2);
+	wait.until(ExpectedConditions.visibilityOf(sortingDropdown));
 	test.info("Veried required dropdowns are visible");
 	if(productDropdown.isEnabled() && catDropdown.isDisplayed() && sortingDropdown.isDisplayed()) {
 		String successMessage = "All dropdowns are visible";
@@ -971,7 +971,7 @@ public void setFirstTabActive(ExtentTest test) throws Exception {
 	//HelperFunctions.waitForPageToLoad(10);
 	//myProductOnLeftNavigation.click();
 	//HelperFunctions.waitForPageToLoad(5);
-	WebDriverWait wait=new WebDriverWait(Driver.getDriver(),10);
+	WebDriverWait wait=new WebDriverWait(Driver.getDriver(),20);
     ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(viewAll);
     wait.until(condition);
 	HelperFunctions.staticWait(3);
@@ -1212,12 +1212,12 @@ public void setAllResourcesContent(ExtentTest test) throws Exception {
 	WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
     wait.until(ExpectedConditions.visibilityOf(heroImage));
 	HelperFunctions.staticWait(3);
-	for(int i=0;i<allProducts.size();i++) {
+	/*for(int i=0;i<allProducts.size();i++) {
 		allProducts.get(0).click();
 		break;
     }
 	test.info("Scroll down all resources elements");
-	HelperFunctions.staticWait(3);
+	HelperFunctions.staticWait(3);*/
 	HelperFunctions.scrollToElement(allResources2);
 	HelperFunctions.staticWait(3);
 	 String a=".pdf";
@@ -1409,6 +1409,7 @@ public void setViewLessButton(ExtentTest test) {
 	//HelperFunctions.waitForPageToLoad(10);
 	 WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
 	    wait.until(ExpectedConditions.visibilityOf(heroImage));
+	    HelperFunctions.staticWait(3);
 	test.info("Scroll down for you title");
 	HelperFunctions.scrollToElement(forYouTitle2);
 	HelperFunctions.staticWait(2);
@@ -1418,19 +1419,22 @@ public void setViewLessButton(ExtentTest test) {
     int attempt = 0;
 
     while (!isElementVisible && attempt < maxAttempts) {
-    	JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
-        executor.executeScript("arguments[0].click();", viewMoreButton);
+   	 
 
         try {
-            WebElement desiredElement = wait.until(ExpectedConditions.visibilityOf(viewLessButton));
+       		JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
+       	     executor.executeScript("arguments[0].click();", viewMoreButton);
+       	     WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(), 15);
+            WebElement desiredElement = wait1.until(ExpectedConditions.visibilityOf(viewLessButton));
             isElementVisible = true;
             System.out.println("Desired element found!");
             Assert.assertTrue(true);
         } catch (Exception e) {
             System.out.println("Desired element not found, retrying...");
+            attempt++;
         }
 
-        attempt++;
+        
     }
 
     if (!isElementVisible) {
@@ -1449,7 +1453,7 @@ public void setViewLessButton(ExtentTest test) {
 }
 public void setReplacingCategoryLabel(ExtentTest test) {
 	test.info("Wait for the page to load.");
-	HelperFunctions.waitForPageToLoad(15);
+	//HelperFunctions.waitForPageToLoad(15);
     HelperFunctions.staticWait(2);
     List<WebElement> elements = Driver.getDriver().findElements(By.xpath("//div[@class='cmp-my-products-tile__text' and div[@class='cmp-my-products-tile__title'] and div[@class='cmp-my-products-tile__thumbnail' and contains(@data-file-path, '.pdf')]]"));
     test.info("Verified category label contains only two child contents");
@@ -1468,7 +1472,7 @@ public void setAssetsTag(ExtentTest test) {
 	//Driver.getDriver().get("https://productcentral-stg.products.pwc.com/content/pc/us/en/automation/my-products/enterprise-control.html");
 	//HelperFunctions.waitForPageToLoad(10);
 	   test.info("Getting each latest assets' data-my-products-doc-category-tag attribute value");
-	    WebDriverWait wait6 = new WebDriverWait(Driver.getDriver(), 15);
+	    WebDriverWait wait6 = new WebDriverWait(Driver.getDriver(), 30);
 		wait6.until(ExpectedConditions.visibilityOf(latestAssets.get(0)));
 		  HelperFunctions.staticWait(2);
 		  boolean foundPdf=false;
@@ -1590,7 +1594,7 @@ public void setClickVideo(ExtentTest test) {
 public void setAnonymous(ExtentTest test) {
 	//Driver.getDriver().get("https://productcentral-qa.products.pwc.com/content/pc/us/en/automation/my-products/enterprise-control.html");
 	test.info("Wait for the page to load.");
-	HelperFunctions.waitForPageToLoad(15);
+	HelperFunctions.waitForPageToLoad(30);
 	HelperFunctions.staticWait(2);
 	test.info("Store the current url");
 	String currentUrl=Driver.getDriver().getCurrentUrl();

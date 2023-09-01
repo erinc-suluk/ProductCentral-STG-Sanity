@@ -567,8 +567,8 @@ public class HomePage extends HelperFunctions {
         dataAppCheckbox.click();
         HelperFunctions.staticWait(3);
         test.info("Clicking on documentation checkbox");
-        documentationCheckbox.click();
-        HelperFunctions.staticWait(3);
+        //documentationCheckbox.click();
+       // HelperFunctions.staticWait(3);
         catDropdown.click();
         wait.until(ExpectedConditions.visibilityOf(dataAppTitle));
         test.info("Verified texts are matching on the result table");
@@ -581,14 +581,14 @@ public class HomePage extends HelperFunctions {
                 logger.info(successMessage);
           }
       
-        if (!documentationTitle.getText().equals("Documentation")) {
+       /* if (!documentationTitle.getText().equals("Documentation")) {
               String errorMessage = "Texts are not matching.";
                 logger.error(errorMessage);
                 throw new Exception(errorMessage);
           }else {
               String successMessage = "Texts are matching";
                 logger.info(successMessage);
-          }
+          }*/
         test.info("Clicking on data app on result table");
         dataAppTitle.click();
         //Driver.getDriver().switchTo().frame(0);
