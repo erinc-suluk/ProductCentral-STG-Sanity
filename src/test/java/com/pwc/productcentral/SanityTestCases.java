@@ -2267,7 +2267,25 @@ public class SanityTestCases extends BasePage {
 		    }
 			
 		}
+		@Test
+		public void WEB_120() throws Exception{
+			String testName = "Verify the author able to embed, copy and paste HTML code";
+		    ExtentTest test = extent.createTest(testName);
 
+		    try {
+		        Driver.getDriver().get(read1.getCellData("VALUE", 86));
+		        lpo.setLogin4();
+		        ap.setEmbedHTML(test);
+		        test.pass("Test passed");
+		    } catch (Exception e) {
+		        String screenshotPath = takeScreenshot(testName);
+		        test.fail(e, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+		    }
+		    if (test.getModel().getStatus().toString().equalsIgnoreCase("fail")) {
+		        Assert.fail("Test case failed: " + testName);
+		    }
+			
+		}
 	
 	
 	

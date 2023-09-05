@@ -156,7 +156,7 @@ public static void setHomePageTemplateElements() throws Exception {
 	    }
 	public static void setLeftNavigationItems2(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-	    HelperFunctions.waitForPageToLoad(5);
+	    HelperFunctions.waitForPageToLoad(30);
 	    for(WebElement items:leftNavigationItems2) {
 	        if(!items.isDisplayed()) {
 	             String errorMessage = "Changing to the home page or side nave";
@@ -337,8 +337,8 @@ public static void setCollapseButton() {
 
 public static void setAllImages(ExtentTest test) {
 	test.info("Wait for the page to load.");
-	HelperFunctions.waitForPageToLoad(5);
-	HelperFunctions.staticWait(5);
+	HelperFunctions.waitForPageToLoad(20);
+	//HelperFunctions.staticWait(5);
 	int brokenImages=0;
 	System.out.println(productsListImages.size());
 	for(WebElement image:productsListImages) {
@@ -448,8 +448,8 @@ public static void setLeft() {
 
 public static void setAllSectionsOnHeader(ExtentTest test) throws Exception {
 	test.info("Wait for the page to load.");
-	HelperFunctions.waitForPageToLoad(15);
-	HelperFunctions.staticWait(3);
+	WebDriverWait wait=new WebDriverWait(Driver.getDriver(),15);
+	wait.until(ExpectedConditions.visibilityOf(myProductsPageLogo));
 	test.info("Verified pwc logo, search field and user initials are visible.");
 	if(myProductsPageLogo.isDisplayed() && search.isDisplayed() && userInitials.isDisplayed()) {
 		String successMessage = "All Sections On Header are displayed";
@@ -465,9 +465,9 @@ public static void setAllSectionsOnHeader(ExtentTest test) throws Exception {
 
 public static void setScrollFunctionality(ExtentTest test)  {
 	test.info("Wait for the page to load.");
-	HelperFunctions.waitForPageToLoad(10);
-	Driver.getDriver().get("https://productcentral-stg.products.pwc.com/content/pc/us/en/automation/my-products/enterprise-control.html");
-	HelperFunctions.waitForPageToLoad(10);
+	//HelperFunctions.waitForPageToLoad(10);
+	//Driver.getDriver().get("https://productcentral-stg.products.pwc.com/content/pc/us/en/automation/my-products/enterprise-control.html");
+	//HelperFunctions.waitForPageToLoad(10);
 	JavascriptExecutor js = (JavascriptExecutor)Driver.getDriver();
 	js.executeScript("window.scrollBy(0,document.body.scrollHeight)", "");           
     HelperFunctions.staticWait(3);
@@ -607,7 +607,7 @@ public static void setLeftNavigationItems3() throws Exception {
     }}
 public static void setCollapseButtonImg(ExtentTest test) throws Exception {
 	test.info("Wait for the page to load.");
-	HelperFunctions.waitForPageToLoad(5);
+	HelperFunctions.waitForPageToLoad(30);
 	HelperFunctions.staticWait(3);
 	test.info("Clicking on collapse button");
 	JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
@@ -652,7 +652,7 @@ public static void setCollapseButtonImg(ExtentTest test) throws Exception {
 	}HelperFunctions.staticWait(3);}
 public static void setCollapseExpandButton(ExtentTest test) throws Exception {
 	test.info("Wait for the page to load.");
-	HelperFunctions.waitForPageToLoad(5);
+	HelperFunctions.waitForPageToLoad(30);
 	HelperFunctions.staticWait(3);
 	test.info("Clicking on collapse button");
 	JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();

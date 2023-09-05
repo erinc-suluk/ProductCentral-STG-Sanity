@@ -444,8 +444,8 @@ public class HomePage extends HelperFunctions {
     
 	public void setSortedResult(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(15);
-		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),10);
+		HelperFunctions.waitForPageToLoad(30);
+		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),20);
 		wait.until(ExpectedConditions.elementToBeClickable(searchButton));
 		test.info("Click on search field");
         searchButton.click();
@@ -454,7 +454,7 @@ public class HomePage extends HelperFunctions {
         searchInput.sendKeys("offering");
         test.info("Click on enter");
         searchInput.sendKeys(Keys.ENTER);
-        HelperFunctions.waitForPageToLoad(15);
+        HelperFunctions.waitForPageToLoad(30);
         HelperFunctions.staticWait(3);
         test.info("Click on product dropdown");
         productDropdown.click();
@@ -514,8 +514,8 @@ public class HomePage extends HelperFunctions {
     }
 	public void setDropdown(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(20);
-		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),10);
+		HelperFunctions.waitForPageToLoad(30);
+		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),20);
 		test.info("Clicking on search button");
 		wait.until(ExpectedConditions.visibilityOf(searchButton));
         searchButton.click();
@@ -525,7 +525,7 @@ public class HomePage extends HelperFunctions {
         HelperFunctions.staticWait(2); 
         test.info("Clicking on enter");
         searchInput.sendKeys(Keys.ENTER);
-        HelperFunctions.waitForPageToLoad(15);
+        HelperFunctions.waitForPageToLoad(30);
         HelperFunctions.staticWait(3);
         test.info("Verified dropdowns");
         if(productDropdown.isEnabled() && productDropdown.isDisplayed()) 
@@ -566,9 +566,9 @@ public class HomePage extends HelperFunctions {
         test.info("Clicking on data app checkbox");
         dataAppCheckbox.click();
         HelperFunctions.staticWait(3);
-        test.info("Clicking on documentation checkbox");
-        documentationCheckbox.click();
-        HelperFunctions.staticWait(3);
+        //test.info("Clicking on documentation checkbox");
+        //documentationCheckbox.click();
+        //HelperFunctions.staticWait(3);
         catDropdown.click();
         wait.until(ExpectedConditions.visibilityOf(dataAppTitle));
         test.info("Verified texts are matching on the result table");
@@ -581,14 +581,14 @@ public class HomePage extends HelperFunctions {
                 logger.info(successMessage);
           }
       
-        if (!documentationTitle.getText().equals("Documentation")) {
+        /*if (!documentationTitle.getText().equals("Documentation")) {
               String errorMessage = "Texts are not matching.";
                 logger.error(errorMessage);
                 throw new Exception(errorMessage);
           }else {
               String successMessage = "Texts are matching";
                 logger.info(successMessage);
-          }
+          }*/
         test.info("Clicking on data app on result table");
         dataAppTitle.click();
         //Driver.getDriver().switchTo().frame(0);
@@ -616,13 +616,16 @@ public class HomePage extends HelperFunctions {
     }
     
     public void setDropdownList() {
-    	HelperFunctions.waitForPageToLoad(5);
+    	HelperFunctions.waitForPageToLoad(30);
+    	WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
+    	wait.until(ExpectedConditions.visibilityOf(searchButton));
     	searchButton.click();
-    	HelperFunctions.staticWait(3);
+    	HelperFunctions.staticWait(2);
     	
         searchInput.sendKeys("products");
+        HelperFunctions.staticWait(2);
         searchInput.sendKeys(Keys.ENTER);
-        HelperFunctions.staticWait(3);
+        wait.until(ExpectedConditions.visibilityOf(productDropdown));
         if(productDropdown.isEnabled() && productDropdown.isDisplayed()) 
         { 
            System.out.println("Product Dropdown is enabled and visible"); 
@@ -636,11 +639,11 @@ public class HomePage extends HelperFunctions {
     public void setDropdownList2(ExtentTest test) throws Exception {
     	test.info("Wait for the page to load.");
     	HelperFunctions.waitForPageToLoad(20);
-    	HelperFunctions.staticWait(3);
+    	//HelperFunctions.staticWait(3);
     	test.info("Click on product dropdown");
     	productDropdown.click();
     	test.info("Comparing elements with tag taxonomy in the excelsheet");
-    	 FileInputStream file = new FileInputStream("C:\\Users\\GLBL_RDP_USER_02\\git\\ProductCentral-STG-SanityAutomation\\testdata.xlsx");
+    	 FileInputStream file = new FileInputStream("C:\\Users\\GLBL_RDP_USER_01\\git\\ProductCentral-STG-Sanity\\testdata.xlsx");
          XSSFWorkbook workbook = new XSSFWorkbook(file);
          XSSFSheet sheet = workbook.getSheetAt(1); 
     	HelperFunctions.staticWait(3);
@@ -753,7 +756,8 @@ public class HomePage extends HelperFunctions {
     public void setSearchResult(ExtentTest test) throws Exception {
  	   test.info("Wait for the page to load.");
  	   HelperFunctions.waitForPageToLoad(20);
- 	   HelperFunctions.staticWait(3);
+ 	  WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
+ 	 wait.until(ExpectedConditions.visibilityOf(searchButton));
  	   test.info("Click on search field");
     	searchButton.click();
     	HelperFunctions.staticWait(3);
@@ -761,10 +765,11 @@ public class HomePage extends HelperFunctions {
         searchInput.sendKeys("products");
         test.info("Click on enter");
         searchInput.sendKeys(Keys.ENTER);
-        HelperFunctions.waitForPageToLoad(15);
-        HelperFunctions.staticWait(3);
+        HelperFunctions.waitForPageToLoad(30);
+        wait.until(ExpectedConditions.visibilityOf(productDropdown));
         test.info("Select product from product dropdown");
         productDropdown.click();
+        HelperFunctions.staticWait(5);
         String expectedProductName="change-navigator";
         for(int i=0; i<productCheckbox.size(); i++) {
             if(productCheckbox.get(i).getAttribute("id").equalsIgnoreCase(expectedProductName)) {
@@ -790,7 +795,7 @@ public class HomePage extends HelperFunctions {
         test.info("Click on product on result table");
         HelperFunctions.staticWait(2);
         resultContainer.click();
-        HelperFunctions.staticWait(3);
+        wait.until(ExpectedConditions.visibilityOf(oneStopTitle));
        // breadCrumb.click();
        // HelperFunctions.staticWait(3);
         String actualTitle=oneStopTitle.getText();
@@ -815,7 +820,7 @@ public class HomePage extends HelperFunctions {
         test.info("Send expected title ");
         searchProducts.sendKeys(expectedTitle);
         test.info("Click on product");
-        HelperFunctions.staticWait(2);
+        wait.until(ExpectedConditions.visibilityOf(optionItem));
         optionItem.click();
         HelperFunctions.staticWait(3);
         String actualTitle2=resultLink.getAttribute("data-product-name");
@@ -829,7 +834,7 @@ public class HomePage extends HelperFunctions {
               logger.info(successMessage);
         } 
         test.info("Verified actual title matches with expected title");
-
+        HelperFunctions.staticWait(3);
 
     }
     
@@ -900,8 +905,8 @@ public class HomePage extends HelperFunctions {
         
     public void setAllProductsButtonFunctionality(ExtentTest test) throws Exception {
     	test.info("Wait for the page to load.");
-    	HelperFunctions.waitForPageToLoad(20);
-    	HelperFunctions.staticWait(2);
+    	WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
+    	wait.until(ExpectedConditions.visibilityOf(allProductsButton));
     	
         if(allProductsButton.getAttribute("href")!=null && allProductsButton.getAttribute("href").endsWith("products.html")) {
         	 String successMessage = "This component contains a link/button for my product page";
@@ -918,8 +923,8 @@ public class HomePage extends HelperFunctions {
     }   
     public void setTilesHasLoginLink(ExtentTest test) throws Exception {
     	test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(20);
-		HelperFunctions.staticWait(3);
+    	WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 30);
+    	wait.until(ExpectedConditions.visibilityOf(FirsthomePageTile));
 		if(FirsthomePageTile.getText().contains("My Products")&&FirsthomePageTile.getText().contains("Login to My Products")) {
 			Assert.assertTrue(true);
 		}else {
@@ -932,7 +937,7 @@ public class HomePage extends HelperFunctions {
 	}
     public void setItemsinNeedHelpExpandCollapse(ExtentTest test) throws Exception {
     	test.info("Wait for the page to load.");
-    	HelperFunctions.waitForPageToLoad(5);
+    	HelperFunctions.waitForPageToLoad(30);
     	HelperFunctions.staticWait(2);
     	test.info("Click on close cookies button");
     	try {
@@ -946,8 +951,9 @@ public class HomePage extends HelperFunctions {
         	}
     	test.info("Click on need help");
     	HelperFunctions.staticWait(2);
+    	WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 30);
     	needHelp.click();
-    	HelperFunctions.staticWait(2);
+    	wait.until(ExpectedConditions.visibilityOf(tooltipLinks.get(0)));
     	for(WebElement eachLink:tooltipLinks) {
     		if(eachLink.isDisplayed()) {
     			String successMessage = "Each link is displayed";

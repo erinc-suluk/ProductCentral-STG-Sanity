@@ -323,19 +323,19 @@ public class ProductListingPage extends HelperFunctions {
     public void setSearchBox(ExtentTest test) throws Exception {
 
     	test.info("Wait for the page to load.");
-        HelperFunctions.waitForPageToLoad(15);
+        HelperFunctions.waitForPageToLoad(30);
         test.info("Click on search product");
-        WebDriverWait wait=new WebDriverWait(Driver.getDriver(),10);
+        WebDriverWait wait=new WebDriverWait(Driver.getDriver(),20);
    		wait.until(ExpectedConditions.elementToBeClickable(searchProduct));
         searchProduct.click();
         HelperFunctions.staticWait(3);
         String str="Customer Link";
         test.info("Send text to the field");
         searchProduct.sendKeys(str);
-        HelperFunctions.staticWait(3);
+        wait.until(ExpectedConditions.visibilityOf(searchItem));
         test.info("Click on search item");
         searchItem.click();
-        HelperFunctions.staticWait(3);
+        wait.until(ExpectedConditions.visibilityOf(productBasedonSearch));
         System.out.println(productBasedonSearch.getAttribute("data-product-name"));
         if(productBasedonSearch.getAttribute("data-product-name").equalsIgnoreCase(str)) {
              String successMessage = "Texts are matching";
@@ -379,19 +379,19 @@ public class ProductListingPage extends HelperFunctions {
 	
     public void setSearchResult(ExtentTest test) throws Exception {
     	test.info("Wait for the page to load.");
-        HelperFunctions.waitForPageToLoad(15);
+        HelperFunctions.waitForPageToLoad(30);
         test.info("Click on search product");
-        WebDriverWait wait=new WebDriverWait(Driver.getDriver(),10);
+        WebDriverWait wait=new WebDriverWait(Driver.getDriver(),20);
 		wait.until(ExpectedConditions.elementToBeClickable(searchProduct));
         searchProduct.click();
         String str="Cus";
         String str2="Customer Link";
         test.info("Send text partially to the field");
         searchProduct.sendKeys(str);
-        HelperFunctions.staticWait(3);
+        wait.until(ExpectedConditions.visibilityOf(searchItem));
         test.info("Click on search item");
         searchItem.click();
-        HelperFunctions.staticWait(3);
+        wait.until(ExpectedConditions.visibilityOf(productBasedonSearch));
         if(productBasedonSearch.getAttribute("data-product-name").equalsIgnoreCase(str2)) {
              String successMessage = "Texts are matching";
                 logger.info(successMessage);
@@ -433,14 +433,15 @@ public class ProductListingPage extends HelperFunctions {
 	
 	public void setSearchBarKeywordforNegativeTest(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(30);
 		test.info("Clcik on product search bar");
-		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),10);
+		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),20);
 		wait.until(ExpectedConditions.elementToBeClickable(productSearchBar));
 		productSearchBar.click();
 		test.info("SEnd random text to the search field");
 		Faker faker=new Faker();
 		productSearchBar.sendKeys(faker.name().firstName());
+		wait.until(ExpectedConditions.visibilityOf(noResult));
 		if(noResult.isDisplayed() && noResult.getText().contains("Nothing matches your results")) {
 			String successMessage = "Result contains Nothing matches your results";
             logger.info(successMessage);
@@ -476,7 +477,7 @@ public class ProductListingPage extends HelperFunctions {
 	}
 	public void setContentPageSameTab(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(30);
 		test.info("Click on a product");
 		 WebDriverWait wait3 = new WebDriverWait(Driver.getDriver(), 10);
  		wait3.until(ExpectedConditions.visibilityOf(productLinks.get(0)));
@@ -484,7 +485,7 @@ public class ProductListingPage extends HelperFunctions {
 			each.click();
 			break;
 		}
-		HelperFunctions.waitForPageToLoad(5);
+		HelperFunctions.waitForPageToLoad(30);
 		 for (WebElement link : productLinks) {
 			 String hrefValue = link.getAttribute("href");
 			 link.click();
@@ -525,7 +526,7 @@ public class ProductListingPage extends HelperFunctions {
     }
 	public void setRelatedLinkSize(ExtentTest test) {
 		test.info("Wait for the page to load.");
-        HelperFunctions.waitForPageToLoad(15);
+        HelperFunctions.waitForPageToLoad(30);
         HelperFunctions.staticWait(2);
         test.info("Resize window's dimension");
          int width = Driver.getDriver().manage().window().getSize().getWidth();
@@ -534,7 +535,7 @@ public class ProductListingPage extends HelperFunctions {
           
             if (width < 1300) {
               WebElement dropdown = Driver.getDriver().findElement(By.xpath("//div[@class='ap-dropdown-select']"));
-              WebDriverWait wait3 = new WebDriverWait(Driver.getDriver(), 10);
+              WebDriverWait wait3 = new WebDriverWait(Driver.getDriver(), 20);
         		wait3.until(ExpectedConditions.visibilityOf(dropdown));
               if (dropdown.isDisplayed()) {
                   System.out.println("The Related links components have been converted to a drop-down menu.");
@@ -581,12 +582,12 @@ public class ProductListingPage extends HelperFunctions {
 		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),10);
 		wait.until(ExpectedConditions.elementToBeClickable(allProducts.get(1)));
 		allProducts.get(1).click();
-		HelperFunctions.waitForPageToLoad(5);
+		HelperFunctions.waitForPageToLoad(15);
 		test.info("Clicking on a tile");
 		WebDriverWait wait2=new WebDriverWait(Driver.getDriver(),10);
 		wait2.until(ExpectedConditions.elementToBeClickable(titleofElements.get(0)));
 		titleofElements.get(0).click();
-		HelperFunctions.waitForPageToLoad(5);
+		HelperFunctions.waitForPageToLoad(15);
 		WebDriverWait wait3 = new WebDriverWait(Driver.getDriver(), 10);
 		wait3.until(ExpectedConditions.visibilityOf(contentElements2));
 		Assert.assertTrue(contentElements2.isDisplayed());
@@ -596,15 +597,15 @@ public class ProductListingPage extends HelperFunctions {
 	}
 	public void setProductTitleandDescriptionVisibility(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(30);
 		//HelperFunctions.staticWait(3);
-		WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+		WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
 		wait.until(ExpectedConditions.visibilityOf(breadcrumb));
 		breadcrumb.click();
 		List<String> titles = new ArrayList<String>();
 		List<String> descriptions = new ArrayList<String>();
 		test.info("Store product titles");
-		WebDriverWait wait3 = new WebDriverWait(Driver.getDriver(), 10);
+		WebDriverWait wait3 = new WebDriverWait(Driver.getDriver(), 20);
 		wait3.until(ExpectedConditions.visibilityOf(productTitles.get(0)));
 		for (WebElement titleElement : productTitles) {
 		    if (titleElement.isDisplayed()) {
@@ -616,7 +617,7 @@ public class ProductListingPage extends HelperFunctions {
 		    }
 		}
 		HelperFunctions.staticWait(2);
-		test.info("Store product descroption");
+		test.info("Store product description");
 		for (WebElement descElement : productDescriptions) {
 		    if (descElement.isDisplayed()) {
 		        descriptions.add(descElement.getText());
@@ -661,10 +662,10 @@ public class ProductListingPage extends HelperFunctions {
 	}
 	public void setUpgradePDF(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(30);
 		//HelperFunctions.staticWait(2);
 		test.info("Click on a product");
-		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),10);
+		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),20);
 		wait.until(ExpectedConditions.elementToBeClickable(allProducts.get(1)));
 		allProducts.get(1).click();
 		HelperFunctions.waitForPageToLoad(15);
@@ -717,18 +718,18 @@ public class ProductListingPage extends HelperFunctions {
 		HelperFunctions.waitForPageToLoad(15);
 		//HelperFunctions.staticWait(2);
 		test.info("Click on a product");
-		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),10);
+		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
 		wait.until(ExpectedConditions.elementToBeClickable(allProducts.get(1)));
 		allProducts.get(1).click();
-        HelperFunctions.waitForPageToLoad(3);
+        //HelperFunctions.waitForPageToLoad(3);
         test.info("Click on a tile");
-        WebDriverWait wait2=new WebDriverWait(Driver.getDriver(),10);
-		wait2.until(ExpectedConditions.elementToBeClickable(titleofElements.get(0)));
+        //WebDriverWait wait2=new WebDriverWait(Driver.getDriver(),10);
+		wait.until(ExpectedConditions.elementToBeClickable(titleofElements.get(0)));
         titleofElements.get(0).click();
-        HelperFunctions.waitForPageToLoad(3);
-        HelperFunctions.staticWait(1);
-        WebDriverWait wait3 = new WebDriverWait(Driver.getDriver(), 10);
-		wait3.until(ExpectedConditions.visibilityOf(contentTitle));
+        //HelperFunctions.waitForPageToLoad(3);
+        //HelperFunctions.staticWait(1);
+        //WebDriverWait wait3 = new WebDriverWait(Driver.getDriver(), 10);
+		wait.until(ExpectedConditions.visibilityOf(contentTitle));
         if(contentTitle.isDisplayed()) {
         	 Assert.assertTrue(true);
         }else {
@@ -739,17 +740,17 @@ public class ProductListingPage extends HelperFunctions {
         test.info("Verified content page is open");
         HelperFunctions.staticWait(2);
         test.info("Click on breadcrumb on content page");
-        WebDriverWait wait4=new WebDriverWait(Driver.getDriver(),10);
-		wait4.until(ExpectedConditions.elementToBeClickable(breadcrumb));
+        //WebDriverWait wait4=new WebDriverWait(Driver.getDriver(),10);
+		wait.until(ExpectedConditions.elementToBeClickable(breadcrumb));
         breadcrumb.click();
-        HelperFunctions.waitForPageToLoad(3);
+        HelperFunctions.waitForPageToLoad(30);
         test.info("Click on breadcrumb");
         WebDriverWait wait5=new WebDriverWait(Driver.getDriver(),10);
       	wait5.until(ExpectedConditions.elementToBeClickable(breadcrumb));
         breadcrumb.click();
-        HelperFunctions.waitForPageToLoad(3);
-        WebDriverWait wait6 = new WebDriverWait(Driver.getDriver(), 10);
-		wait6.until(ExpectedConditions.visibilityOf(allProducts.get(0)));
+        //HelperFunctions.waitForPageToLoad(3);
+        //WebDriverWait wait6 = new WebDriverWait(Driver.getDriver(), 10);
+		wait5.until(ExpectedConditions.visibilityOf(allProducts.get(0)));
         Assert.assertTrue(allProducts.get(0).isDisplayed());
         test.info("Verified first url is open");
         HelperFunctions.staticWait(3);
