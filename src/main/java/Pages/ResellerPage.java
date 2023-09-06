@@ -80,7 +80,7 @@ public class ResellerPage extends HelperFunctions {
 	
 	public void setPageTitleAndProducts(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(20);
+		HelperFunctions.waitForPageToLoad(30);
 		test.info("Verified page title");
 		Assert.assertTrue(pageTitle.isDisplayed());
 		test.info("Get href value of each product");

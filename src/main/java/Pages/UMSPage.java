@@ -361,18 +361,17 @@ public class UMSPage extends HelperFunctions {
 	}
 	public void setAssigningMultipleProducts(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(5);
+		HelperFunctions.waitForPageToLoad(30);
 		HelperFunctions.staticWait(3);
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		email.sendKeys(read1.getCellData("VALUE", 44));
+		HelperFunctions.staticWait(2);
 		next.click();
-	//	pass.sendKeys(read1.getCellData("VALUE", 1));
-	//	submit.click();
-		HelperFunctions.waitForPageToLoad(5);
-		HelperFunctions.staticWait(3);
+		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
+		wait.until(ExpectedConditions.visibilityOf(addUser));
 		test.info("Click on add user");
 		addUser.click();
-		HelperFunctions.staticWait(3);
+		wait.until(ExpectedConditions.visibilityOf(emailAddress));
 		test.info("Click on email address and send email");
 		emailAddress.click();
 		Faker faker = new Faker();
@@ -390,12 +389,12 @@ public class UMSPage extends HelperFunctions {
 		HelperFunctions.staticWait(2);
 		test.info("Click on select user dropdown and select user label");
 		selectUserLevel.click();
-		HelperFunctions.staticWait(2);
+		wait.until(ExpectedConditions.visibilityOf(userLabel));
 		userLabel.click();
 		HelperFunctions.staticWait(3);
 		test.info("Click on select product dropdown");
 		selectProducts.click();
-		HelperFunctions.staticWait(2);
+		wait.until(ExpectedConditions.visibilityOf(checkBoxes.get(0)));
 		test.info("Click on first checkbox");
 		checkBoxes.get(0).click();
 		HelperFunctions.staticWait(2);
@@ -533,19 +532,17 @@ public class UMSPage extends HelperFunctions {
 	
 	public void setAdminRights(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(5);
+		HelperFunctions.waitForPageToLoad(30);
 		HelperFunctions.staticWait(3);
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		email.sendKeys(read1.getCellData("VALUE", 44));
+		HelperFunctions.staticWait(2);
 		next.click();
-	//	pass.sendKeys(read1.getCellData("VALUE", 1));
-	//	submit.click();
-		HelperFunctions.waitForPageToLoad(15);
-		HelperFunctions.staticWait(3);
+		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
+		wait.until(ExpectedConditions.visibilityOf(addUser));
 		test.info("Click on add user");
 		addUser.click();
-		WebDriverWait wait2 = new WebDriverWait(Driver.getDriver(), 10);
-		wait2.until(ExpectedConditions.visibilityOf(emailAddress));
+		wait.until(ExpectedConditions.visibilityOf(emailAddress));
 		test.info("Click on email field");
 		emailAddress.click();
 		Faker faker = new Faker();
@@ -689,21 +686,17 @@ public class UMSPage extends HelperFunctions {
 	    }
 	public void setMandatoryFieldError(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(30);
 		HelperFunctions.staticWait(3);
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		email.sendKeys(read1.getCellData("VALUE", 44));
-		next.click();
-		HelperFunctions.waitForPageToLoad(15);
 		HelperFunctions.staticWait(2);
+		next.click();
+		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
+		wait.until(ExpectedConditions.visibilityOf(addUser));
 		test.info("Click on add user");
 		addUser.click();
-		HelperFunctions.staticWait(3);
-		/*if(emailAddress.getText().trim().isEmpty()&&firstName.getText().trim().isEmpty()&&lastName.getText().trim().isEmpty()) {
-			boolean a=saveButton.getAttribute("aria-disabled").equals("true");
-			Assert.assertTrue(a);
-		}*/
-		HelperFunctions.staticWait(2);
+		wait.until(ExpectedConditions.visibilityOf(emailAddress));
 		test.info("Click on email field");
 		emailAddress.click();
 		test.info("Send email to email field");
@@ -760,17 +753,17 @@ public class UMSPage extends HelperFunctions {
 	}
 	public void setUsernameEmailVisibility(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(30);
 		HelperFunctions.staticWait(3);
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		email.sendKeys(read1.getCellData("VALUE", 44));
-		next.click();
-		HelperFunctions.waitForPageToLoad(15);
 		HelperFunctions.staticWait(2);
+		next.click();
+		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
+		wait.until(ExpectedConditions.visibilityOf(addUser));
 		test.info("Click on add user");
 		addUser.click();
-		WebDriverWait wait2 = new WebDriverWait(Driver.getDriver(), 10);
-		wait2.until(ExpectedConditions.visibilityOf(emailAddress));
+		wait.until(ExpectedConditions.visibilityOf(emailAddress));
 		Faker faker=new Faker();
 		//String mockEmail="tes987t1234@gmail.com";
 		test.info("Click on email field");
@@ -800,13 +793,13 @@ public class UMSPage extends HelperFunctions {
 		test.info("Click on select user dropdown");
 		selectUserLevel.click();
 		//WebDriverWait wait2 = new WebDriverWait(Driver.getDriver(), 10);
-		wait2.until(ExpectedConditions.visibilityOf(userLabel));
+		wait.until(ExpectedConditions.visibilityOf(userLabel));
 		test.info("Click on user ");
 		userLabel.click();
 		HelperFunctions.staticWait(3);
 		test.info("Click on select product dropdown");
 		selectProducts.click();
-		wait2.until(ExpectedConditions.visibilityOf(checkBoxes.get(0)));
+		wait.until(ExpectedConditions.visibilityOf(checkBoxes.get(0)));
 		test.info("Click on product checkbox");
 		checkBoxes.get(0).click();
 		HelperFunctions.staticWait(3);
@@ -822,9 +815,9 @@ public class UMSPage extends HelperFunctions {
          //  JavascriptExecutor executor2 = (JavascriptExecutor) Driver.getDriver();
          //  executor2.executeScript("arguments[0].click();", firstCompanyUsers);
        	test.info("Click on first company users");
-        WebDriverWait wait=new WebDriverWait(Driver.getDriver(),10);
+        WebDriverWait wait2=new WebDriverWait(Driver.getDriver(),10);
         try {
-      		wait.until(ExpectedConditions.elementToBeClickable( firstCompanyUsers));
+      		wait2.until(ExpectedConditions.elementToBeClickable( firstCompanyUsers));
       		actions.moveToElement(firstCompanyUsers, 5,5).click().perform();
         }catch(ElementClickInterceptedException e) {
         	e.printStackTrace();
@@ -854,13 +847,14 @@ public class UMSPage extends HelperFunctions {
 	}
 	public void setDialogTitle(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(30);
 		HelperFunctions.staticWait(3);
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		email.sendKeys(read1.getCellData("VALUE", 44));
-		next.click();
-		HelperFunctions.waitForPageToLoad(15);
 		HelperFunctions.staticWait(2);
+		next.click();
+		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
+		wait.until(ExpectedConditions.visibilityOf(firstCompanyUsers));
 		test.info("Click on first company users");
 		firstCompanyUsers.click();
 		HelperFunctions.staticWait(2);
@@ -881,13 +875,14 @@ public class UMSPage extends HelperFunctions {
 	}
 	public void setVerifyCompanyTitle(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(30);
 		HelperFunctions.staticWait(3);
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		email.sendKeys(read1.getCellData("VALUE", 44));
-		next.click();
-		HelperFunctions.waitForPageToLoad(15);
 		HelperFunctions.staticWait(2);
+		next.click();
+		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
+		wait.until(ExpectedConditions.visibilityOf(firstCompanyUsers));
 		test.info("Click on first company users");
            JavascriptExecutor executor2 = (JavascriptExecutor) Driver.getDriver();
            executor2.executeScript("arguments[0].click();", firstCompanyUsers);
@@ -898,19 +893,20 @@ public class UMSPage extends HelperFunctions {
 	}
 	public void setCancelAddUser(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(30);
 		HelperFunctions.staticWait(3);
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		email.sendKeys(read1.getCellData("VALUE", 44));
-		next.click();
-		HelperFunctions.waitForPageToLoad(15);
 		HelperFunctions.staticWait(2);
+		next.click();
+		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
+		wait.until(ExpectedConditions.visibilityOf(addUser));
 		test.info("Click on add user");
         addUser.click();
-        HelperFunctions.staticWait(2);
+        wait.until(ExpectedConditions.visibilityOf(cancelButtonAddUser));
         test.info("Click on cancel button");
         cancelButtonAddUser.click();
-        HelperFunctions.staticWait(3);
+        wait.until(ExpectedConditions.visibilityOf(UMSTitle));
         Assert.assertTrue(UMSTitle.isDisplayed());
         test.info("Verified UMS title");
         HelperFunctions.staticWait(2);
@@ -918,19 +914,21 @@ public class UMSPage extends HelperFunctions {
 	}
 	public void setCancelAddUser2(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(30);
 		HelperFunctions.staticWait(3);
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		email.sendKeys(read1.getCellData("VALUE", 44));
-		next.click();
-		HelperFunctions.waitForPageToLoad(15);
 		HelperFunctions.staticWait(2);
+		next.click();
+		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
+		wait.until(ExpectedConditions.visibilityOf(addUser));
 		test.info("Click on add user");
-        addUser.click();
+		addUser.click();
+		wait.until(ExpectedConditions.visibilityOf(cancelButtonAddUser));
         HelperFunctions.staticWait(2);
         test.info("Click on cancel button");
         cancelButtonAddUser.click();
-        HelperFunctions.staticWait(3);
+        wait.until(ExpectedConditions.visibilityOf(UMSTitle));
         Assert.assertTrue(UMSTitle.isDisplayed());
         test.info("Verified UMS title");
         HelperFunctions.staticWait(2);
@@ -938,18 +936,17 @@ public class UMSPage extends HelperFunctions {
 	}
 	public void setSaveButton(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(30);
 		HelperFunctions.staticWait(3);
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		email.sendKeys(read1.getCellData("VALUE", 44));
-		next.click();
-		HelperFunctions.waitForPageToLoad(15);
 		HelperFunctions.staticWait(2);
+		next.click();
+		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
+		wait.until(ExpectedConditions.visibilityOf(addUser));
 		test.info("Click on add user");
 		addUser.click();
-		//HelperFunctions.staticWait(3);
-		WebDriverWait wait2 = new WebDriverWait(Driver.getDriver(), 10);
-		wait2.until(ExpectedConditions.visibilityOf(emailAddress));
+		wait.until(ExpectedConditions.visibilityOf(emailAddress));
 		String mockEmail="te321st1234@gmail.com";
 		test.info("Click on email field");
 		emailAddress.click();
@@ -1028,16 +1025,17 @@ public class UMSPage extends HelperFunctions {
 	}
 	public void setUserNeedsSelectProduct(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(30);
 		HelperFunctions.staticWait(3);
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		email.sendKeys(read1.getCellData("VALUE", 44));
-		next.click();
-		HelperFunctions.waitForPageToLoad(15);
 		HelperFunctions.staticWait(2);
-		HelperFunctions.waitForPageToLoad(5);
+		next.click();
+		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
+		wait.until(ExpectedConditions.visibilityOf(addUser));
 		test.info("Click on add user");
 		addUser.click();
+		wait.until(ExpectedConditions.visibilityOf(emailAddress));
 		HelperFunctions.staticWait(3);
 		Faker faker=new Faker();
 		test.info("Click on email field");
@@ -1059,7 +1057,7 @@ public class UMSPage extends HelperFunctions {
 		HelperFunctions.staticWait(2);
 		test.info("Click on select user dropdown");
 		selectUserLevel.click();
-		HelperFunctions.staticWait(2);
+		wait.until(ExpectedConditions.visibilityOf(userLabel));
 		test.info("Click on user");
 		userLabel.click();
 		HelperFunctions.staticWait(2);
@@ -1067,7 +1065,7 @@ public class UMSPage extends HelperFunctions {
 		saveButton2.click();
 		// JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
         // executor.executeScript("arguments[0].click();", saveButton);
-         HelperFunctions.staticWait(3);
+		wait.until(ExpectedConditions.visibilityOf(emailError));
          String expectedErrorMessage="Product selection is required";
          if(emailError.isDisplayed()&&emailError.getText().contains(expectedErrorMessage)) {
         	 Assert.assertTrue(true);
@@ -1081,17 +1079,17 @@ public class UMSPage extends HelperFunctions {
 	}
 	public void setUserAlreadyExist(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(30);
 		HelperFunctions.staticWait(3);
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		email.sendKeys(read1.getCellData("VALUE", 44));
-		next.click();
-		HelperFunctions.waitForPageToLoad(15);
 		HelperFunctions.staticWait(2);
+		next.click();
+		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
+		wait.until(ExpectedConditions.visibilityOf(addUser));
 		test.info("Click on add user");
 		addUser.click();
-		WebDriverWait wait2 = new WebDriverWait(Driver.getDriver(), 10);
-		wait2.until(ExpectedConditions.visibilityOf(emailAddress));
+		wait.until(ExpectedConditions.visibilityOf(emailAddress));
 		String email="erinc.suluk@net-effect.com";
 		test.info("Click on email field");
 		emailAddress.click();
@@ -1108,16 +1106,17 @@ public class UMSPage extends HelperFunctions {
 	}
 	public void setSaveButtonActivation(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(30);
 		HelperFunctions.staticWait(3);
 		read1.setExcelFile("./testdata.xlsx", "QA");
 		email.sendKeys(read1.getCellData("VALUE", 44));
-		next.click();
-		HelperFunctions.waitForPageToLoad(15);
 		HelperFunctions.staticWait(2);
+		next.click();
+		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
+		wait.until(ExpectedConditions.visibilityOf(addUser));
 		test.info("Click on add user");
 		addUser.click();
-		HelperFunctions.staticWait(3);
+		wait.until(ExpectedConditions.visibilityOf(emailAddress));
 		String mockEmail1="abcd@hotmail.com";
 		String mockEmail2="abcd@gft.com";
 		String mockEmail3="abcd@gmail.com";
@@ -1154,19 +1153,21 @@ public class UMSPage extends HelperFunctions {
 	}
 	public void setSC_AccountID(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(10);
+		HelperFunctions.waitForPageToLoad(30);
 		HelperFunctions.staticWait(3);
 		read1.setExcelFile("./testdata.xlsx", "STG");
 		email.sendKeys(read1.getCellData("VALUE", 44));
 		next.click();
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(40);
+		WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+		wait.until(ExpectedConditions.visibilityOf(addUser));
 		addUser.click();
 		HelperFunctions.staticWait(3);
 		Driver.getDriver().get(read1.getCellData("VALUE", 77));
 		//Driver.getDriver().get("https://ums-productcentral-qa.pwc.com/ums");
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(40);
 		test.info("Wait for search company visibility");
-	    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+	    
 	    wait.until(ExpectedConditions.visibilityOf(searchCompany));
 		searchCompany.click();
 		test.info("Clicked on search company and search company automation");
@@ -1205,21 +1206,21 @@ public class UMSPage extends HelperFunctions {
 	}
 	public void setEditProduct(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(15);
-		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),15);
+		HelperFunctions.waitForPageToLoad(30);
+		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
 		wait.until(ExpectedConditions.visibilityOf(email));
 		//HelperFunctions.staticWait(3);
 		read1.setExcelFile("./testdata.xlsx", "STG");
 		email.sendKeys(read1.getCellData("VALUE", 44));
 		next.click();
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(40);
 		
 		wait.until(ExpectedConditions.visibilityOf(addUser));
 		addUser.click();
 		HelperFunctions.staticWait(3);
 		Driver.getDriver().get(read1.getCellData("VALUE", 77));
 		//Driver.getDriver().get("https://ums-productcentral-qa.pwc.com/ums");
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(30);
 	    wait.until(ExpectedConditions.visibilityOf(searchCompany));
 	    HelperFunctions.staticWait(3);
 		productsTab.click();
@@ -1258,18 +1259,20 @@ public class UMSPage extends HelperFunctions {
 	}
 	public void setAddFeature(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(10);
+		HelperFunctions.waitForPageToLoad(30);
 		HelperFunctions.staticWait(3);
 		read1.setExcelFile("./testdata.xlsx", "STG");
 		email.sendKeys(read1.getCellData("VALUE", 44));
 		next.click();
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(30);
+		WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
+		wait.until(ExpectedConditions.visibilityOf(addUser));
 		addUser.click();
 		HelperFunctions.staticWait(3);
 		Driver.getDriver().get(read1.getCellData("VALUE", 77));
 		//Driver.getDriver().get("https://ums-productcentral-qa.pwc.com/ums");
-		HelperFunctions.waitForPageToLoad(15);
-	    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+		HelperFunctions.waitForPageToLoad(30);
+	    //WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
 	    wait.until(ExpectedConditions.visibilityOf(searchCompany));
 	    HelperFunctions.staticWait(3);
 		productsTab.click();
@@ -1315,18 +1318,20 @@ public class UMSPage extends HelperFunctions {
 	}
 	public void setResetResult(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(10);
+		HelperFunctions.waitForPageToLoad(30);
 		HelperFunctions.staticWait(3);
 		read1.setExcelFile("./testdata.xlsx", "STG");
 		email.sendKeys(read1.getCellData("VALUE", 44));
 		next.click();
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(30);
+		WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
+		wait.until(ExpectedConditions.visibilityOf(addUser));
 		addUser.click();
 		HelperFunctions.staticWait(3);
 		Driver.getDriver().get(read1.getCellData("VALUE", 77));
 		//Driver.getDriver().get("https://ums-productcentral-qa.pwc.com/ums");
-		HelperFunctions.waitForPageToLoad(15);
-	    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+		HelperFunctions.waitForPageToLoad(40);
+	    //WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
 	    wait.until(ExpectedConditions.visibilityOf(searchCompany));
 		searchCompany.click();
 		String auto="Company Automation";
@@ -1348,18 +1353,20 @@ public class UMSPage extends HelperFunctions {
 	}
 	public void setSingleSelectProductDropdown(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(10);
+		HelperFunctions.waitForPageToLoad(30);
 		HelperFunctions.staticWait(3);
 		read1.setExcelFile("./testdata.xlsx", "STG");
 		email.sendKeys(read1.getCellData("VALUE", 44));
 		next.click();
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(30);
+		WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
+		wait.until(ExpectedConditions.visibilityOf(addUser));
 		addUser.click();
 		HelperFunctions.staticWait(3);
 		Driver.getDriver().get(read1.getCellData("VALUE", 77));
 		//Driver.getDriver().get("https://ums-productcentral-qa.pwc.com/ums");
-		HelperFunctions.waitForPageToLoad(15);
-		WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 40);
+		HelperFunctions.waitForPageToLoad(40);
+		//WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 40);
 	    wait.until(ExpectedConditions.visibilityOf(firstResult));
 	    //Actions action=new Actions(Driver.getDriver());
 	    //action.doubleClick(selectProductdropdown);
@@ -1381,19 +1388,21 @@ public class UMSPage extends HelperFunctions {
 	}
 	public void setDownloadCompanyReport(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(10);
+		HelperFunctions.waitForPageToLoad(30);
 		HelperFunctions.staticWait(3);
 		read1.setExcelFile("./testdata.xlsx", "STG");
 		email.sendKeys(read1.getCellData("VALUE", 44));
 		next.click();
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(30);
+		WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
+		wait.until(ExpectedConditions.visibilityOf(addUser));
 		addUser.click();
 		HelperFunctions.staticWait(3);
 		Driver.getDriver().get(read1.getCellData("VALUE", 77));
 		//Driver.getDriver().get("https://ums-productcentral-qa.pwc.com/ums");
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(40);
 		test.info("Wait for search company visibility");
-		WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+		//WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
 	    wait.until(ExpectedConditions.visibilityOf(searchCompany));
 	    Assert.assertTrue(downloadLink.isDisplayed());
 	    test.info("Verified download link is displayed");
@@ -1425,19 +1434,22 @@ public class UMSPage extends HelperFunctions {
 	}
 	public void setAddNewCompany(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(10);
+		HelperFunctions.waitForPageToLoad(30);
 		HelperFunctions.staticWait(3);
 		read1.setExcelFile("./testdata.xlsx", "STG");
 		email.sendKeys(read1.getCellData("VALUE", 44));
+		HelperFunctions.staticWait(2);
 		next.click();
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(30);
+		WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
+		wait.until(ExpectedConditions.visibilityOf(addUser));
 		addUser.click();
 		HelperFunctions.staticWait(3);
 		Driver.getDriver().get(read1.getCellData("VALUE", 77));
 		//Driver.getDriver().get("https://ums-productcentral-qa.pwc.com/ums");
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(40);
 		test.info("Wait for search company visibility");
-	    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 40);
+	    //WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 40);
 	    wait.until(ExpectedConditions.visibilityOf(firstResult));
 	    Assert.assertTrue(addNewCompanyButton.isDisplayed());
 	    addNewCompanyButton.click();
@@ -1450,12 +1462,13 @@ public class UMSPage extends HelperFunctions {
 	}
 	public void setLockedSymbolVisibility(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(10);
+		HelperFunctions.waitForPageToLoad(30);
 		HelperFunctions.staticWait(3);
 		read1.setExcelFile("./testdata.xlsx", "STG");
 		email.sendKeys(read1.getCellData("VALUE", 44));
+		HelperFunctions.staticWait(2);
 		next.click();
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(30);
 		WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
 	    wait.until(ExpectedConditions.visibilityOf(lockedSymbol));
 	    Assert.assertTrue(lockedSymbol.isDisplayed());
@@ -1465,13 +1478,14 @@ public class UMSPage extends HelperFunctions {
 	
 	public void setLockedSymbolNotEditable(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(10);
+		HelperFunctions.waitForPageToLoad(30);
 		HelperFunctions.staticWait(3);
 		read1.setExcelFile("./testdata.xlsx", "STG");
 		email.sendKeys(read1.getCellData("VALUE", 44));
+		HelperFunctions.staticWait(2);
 		next.click();
-		HelperFunctions.waitForPageToLoad(15);
-		WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+		HelperFunctions.waitForPageToLoad(30);
+		WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
 	    wait.until(ExpectedConditions.visibilityOf(lockedSymbol));
 	    String expectedValue=addUserLocked.getAttribute("aria-disabled");
 	    Assert.assertTrue(expectedValue.contains("true"));
@@ -1485,18 +1499,21 @@ public class UMSPage extends HelperFunctions {
 	}
 	public void setAllToggle(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(10);
+		HelperFunctions.waitForPageToLoad(20);
 		HelperFunctions.staticWait(3);
 		read1.setExcelFile("./testdata.xlsx", "STG");
 		email.sendKeys(read1.getCellData("VALUE", 44));
+		HelperFunctions.staticWait(2);
 		next.click();
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(30);
+		WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
+	    wait.until(ExpectedConditions.visibilityOf(addUser));
 		addUser.click();
 		HelperFunctions.staticWait(3);
 		Driver.getDriver().get(read1.getCellData("VALUE", 77));
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(40);
 		test.info("Wait for search company visibility");
-	    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+	    //WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
 	    wait.until(ExpectedConditions.visibilityOf(superDropdowns.get(0)));
 	    String expected=superDropdowns.get(0).getText();
 	    String actual="All";
@@ -1505,18 +1522,21 @@ public class UMSPage extends HelperFunctions {
 	}
 	public void setDigitalMIM(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(10);
+		HelperFunctions.waitForPageToLoad(30);
 		HelperFunctions.staticWait(3);
 		read1.setExcelFile("./testdata.xlsx", "STG");
 		email.sendKeys(read1.getCellData("VALUE", 44));
+		HelperFunctions.staticWait(2);
 		next.click();
-		HelperFunctions.waitForPageToLoad(15);
+		HelperFunctions.waitForPageToLoad(30);
+		WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
+	    wait.until(ExpectedConditions.visibilityOf(addUser));
 		addUser.click();
 		HelperFunctions.staticWait(3);
 		Driver.getDriver().get(read1.getCellData("VALUE", 77));
 		//Driver.getDriver().get("https://ums-productcentral-qa.pwc.com/ums");
-		HelperFunctions.waitForPageToLoad(15);
-	    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+		HelperFunctions.waitForPageToLoad(40);
+	    //WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
 	    wait.until(ExpectedConditions.visibilityOf(searchCompany));
 	    HelperFunctions.staticWait(3);
 		productsTab.click();
@@ -1539,18 +1559,21 @@ public class UMSPage extends HelperFunctions {
 	}
 	public void setMandatoryProductSCs(ExtentTest test) throws Exception {
 		test.info("Wait for the page to load.");
-		HelperFunctions.waitForPageToLoad(10);
+		HelperFunctions.waitForPageToLoad(30);
 		HelperFunctions.staticWait(3);
 		read1.setExcelFile("./testdata.xlsx", "STG");
 		email.sendKeys(read1.getCellData("VALUE", 44));
+		HelperFunctions.staticWait(2);
 		next.click();
 		HelperFunctions.waitForPageToLoad(15);
+		WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
+	    wait.until(ExpectedConditions.visibilityOf(addUser));
 		addUser.click();
 		HelperFunctions.staticWait(3);
 		Driver.getDriver().get(read1.getCellData("VALUE", 77));
 		//Driver.getDriver().get("https://ums-productcentral-qa.pwc.com/ums");
-		HelperFunctions.waitForPageToLoad(15);
-	    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+		HelperFunctions.waitForPageToLoad(40);
+	    //WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
 	    wait.until(ExpectedConditions.visibilityOf(searchCompany));
 	    HelperFunctions.staticWait(3);
 		productsTab.click();
