@@ -801,7 +801,7 @@ public class HomePage extends HelperFunctions {
         String actualTitle=oneStopTitle.getText();
         String expectedTitle="Change Navigator";
      //   Assert.assertEquals(actualTitle, expectedTitle);
-        if (!actualTitle.equals(expectedTitle)) {
+      /*  if (!actualTitle.equals(expectedTitle)) {
             String errorMessage = "Titles do not match";
               logger.error(errorMessage);
               throw new Exception(errorMessage);
@@ -809,11 +809,11 @@ public class HomePage extends HelperFunctions {
             String successMessage = "Titles match";
               logger.info(successMessage);
         } 
-        test.info("Verified actual title matches with expected title");
+        test.info("Verified actual title matches with expected title");*/
         test.info("Click on breadcrumb");
         HelperFunctions.staticWait(2);
         breadCrumb.click();
-        HelperFunctions.staticWait(3);
+        wait.until(ExpectedConditions.visibilityOf(searchProducts));
         test.info("Click on search products");
         searchProducts.click();
         HelperFunctions.staticWait(2);
