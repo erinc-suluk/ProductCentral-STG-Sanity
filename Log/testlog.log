@@ -1451,3 +1451,55 @@
 2023-09-07 23:19:53,683 - HomePage -INFO - Titles match
 2023-09-07 23:22:55,313 - HomePage -INFO - Product names match
 2023-09-07 23:23:06,043 - HomePage -INFO - Titles match
+2023-09-08 22:53:13,052 - ProductPage -INFO - Only footer content displayed
+2023-09-08 22:53:39,366 - ProductPage -INFO - Footer content and links are displayed
+2023-09-08 22:55:57,574 - ProductPage -INFO - My Products heading in the sitemap is visible
+2023-09-08 22:57:01,391 - ProductPage -INFO - Error page appears
+2023-09-08 22:57:37,572 - ProductPage -INFO - All dropdowns are visible
+2023-09-08 22:58:11,936 - AuthoringPage -INFO - Page is unpublished 
+2023-09-08 22:58:15,389 - AuthoringPage -INFO - Publish info contains unpublished 
+2023-09-08 22:58:57,464 - AuthoringPage -INFO - The date of publishing is correct
+2023-09-08 22:59:23,472 - BasePage -INFO - All Sections On Header are displayed
+2023-09-08 23:03:21,651 - HomePage -INFO - LoginToMyProductLink elements are displayed
+2023-09-08 23:05:28,492 - ProductPage -INFO - First 5 resources are displayed
+2023-09-08 23:05:28,505 - ProductPage -INFO - First 5 resources are displayed
+2023-09-08 23:05:28,518 - ProductPage -INFO - First 5 resources are displayed
+2023-09-08 23:05:28,530 - ProductPage -INFO - First 5 resources are displayed
+2023-09-08 23:05:28,542 - ProductPage -INFO - First 5 resources are displayed
+2023-09-08 23:06:19,932 - HomePage -INFO - Product names match
+2023-09-08 23:07:08,862 - ResellerPage -INFO - Page title displays the name of the product
+2023-09-08 23:07:08,868 - ResellerPage -INFO - Page title displays the name of the product
+2023-09-08 23:07:08,875 - ResellerPage -INFO - Page title displays the name of the product
+2023-09-08 23:07:08,881 - ResellerPage -INFO - Page title displays the name of the product
+2023-09-08 23:07:08,888 - ResellerPage -INFO - Page title displays the name of the product
+2023-09-08 23:07:08,894 - ResellerPage -INFO - Page title displays the name of the product
+2023-09-08 23:07:08,899 - ResellerPage -INFO - Page title displays the name of the product
+2023-09-08 23:07:08,905 - ResellerPage -INFO - Page title displays the name of the product
+2023-09-08 23:07:08,911 - ResellerPage -INFO - Page title displays the name of the product
+2023-09-08 23:07:08,918 - ResellerPage -INFO - Page title displays the name of the product
+2023-09-08 23:07:26,000 - LegalPage -INFO - Document tiles are equal 3 lines
+2023-09-08 23:07:26,014 - LegalPage -INFO - Document tiles are equal 3 lines
+2023-09-08 23:07:26,026 - LegalPage -INFO - Document tiles are equal 3 lines
+2023-09-08 23:07:26,041 - LegalPage -INFO - Document tiles are equal 3 lines
+2023-09-08 23:07:26,053 - LegalPage -INFO - Document tiles are equal 3 lines
+2023-09-08 23:07:26,066 - LegalPage -INFO - Document tiles are equal 3 lines
+2023-09-08 23:07:26,079 - LegalPage -INFO - Document tiles are equal 3 lines
+2023-09-08 23:07:26,091 - LegalPage -INFO - Document tiles are equal 3 lines
+2023-09-08 23:07:26,104 - LegalPage -INFO - Document tiles are equal 3 lines
+2023-09-08 23:07:26,116 - LegalPage -INFO - Document tiles are equal 3 lines
+2023-09-08 23:07:34,607 - ProductListingPage -INFO - Result contains Nothing matches your results
+2023-09-08 23:08:01,458 - HomePage -INFO - This component contains a link/button for my product page
+2023-09-08 23:15:52,332 - ProductPage -INFO - First tab is active
+2023-09-08 23:16:02,042 - ProductPage -INFO - First tab is active
+2023-09-08 23:17:21,017 - BasePage -INFO - The collapse button is displayed
+2023-09-08 23:19:39,445 - HomePage -INFO - Each link is displayed
+2023-09-08 23:19:39,457 - HomePage -INFO - Each link is displayed
+2023-09-08 23:19:43,523 - HomePage -INFO - Each link is not displayed
+2023-09-08 23:19:43,534 - HomePage -INFO - Each link is not displayed
+2023-09-08 23:20:07,970 - ProductPage -INFO - all resources content extensions are correct
+2023-09-08 23:20:27,847 - ProductListingPage -INFO - Texts are matching
+2023-09-08 23:20:33,216 - ProductListingPage -INFO - Texts are matching
+2023-09-08 23:20:57,388 - HomePage -INFO - Product Dropdown is enabled and visible
+2023-09-08 23:21:03,558 - HomePage -INFO - Category Dropdown is enabled and visible
+2023-09-08 23:21:12,821 - HomePage -INFO - Texts are matching
+2023-09-08 23:21:15,763 - HomePage -INFO - pdf viewer is displayed
