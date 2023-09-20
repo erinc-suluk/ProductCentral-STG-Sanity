@@ -1504,13 +1504,13 @@ public class AuthoringPage extends HelperFunctions {
 	    //HelperFunctions.staticWait(2);
 	    test.info("Click on edit");
 	    editButtonContent.click();
-	    wait.until(ExpectedConditions.visibilityOf(offeringOverviewLink2auth));
+	    wait.until(ExpectedConditions.elementToBeClickable(offeringOverviewLink2auth));
 	    test.info("Click on content page title for authoring");
 	    offeringOverviewLink2auth.click();
-	    wait.until(ExpectedConditions.visibilityOf(settingIcon));
+	    wait.until(ExpectedConditions.elementToBeClickable(settingIcon));
 	    test.info("Click on setting");
 	    settingIcon.click();
-	    wait.until(ExpectedConditions.visibilityOf(titleField));
+	    wait.until(ExpectedConditions.elementToBeClickable(titleField));
 	  //  ArrayList<String> tabs7 = new ArrayList<String>(Driver.getDriver().getWindowHandles());
 	  //  Driver.getDriver().switchTo().window(tabs7.get(1));
 	    test.info("Click on title field");
@@ -1547,12 +1547,12 @@ public class AuthoringPage extends HelperFunctions {
      }
 	 test.info("Click on edit");
 	 Driver.getDriver().switchTo().defaultContent();
-	 wait.until(ExpectedConditions.visibilityOf(editButtonContent));
+	 wait.until(ExpectedConditions.elementToBeClickable(editButtonContent));
 	 editButtonContent.click();
-	 wait.until(ExpectedConditions.visibilityOf(offeringOverviewLink2auth));
+	 wait.until(ExpectedConditions.elementToBeClickable(offeringOverviewLink2auth));
 	 test.info("Click on content page title for authoring");
 	 offeringOverviewLink2auth.click();
-	 wait.until(ExpectedConditions.visibilityOf(settingIcon));
+	 wait.until(ExpectedConditions.elementToBeClickable(settingIcon));
 	 test.info("Click on setting");
 	 settingIcon.click();
 	 wait.until(ExpectedConditions.visibilityOf(titleField));
@@ -1590,7 +1590,7 @@ public class AuthoringPage extends HelperFunctions {
          logger.info(successMessage);
      }
 	 
-	 HelperFunctions.staticWait(2);
+	 HelperFunctions.staticWait(3);
  
 	    
 	    
@@ -2979,12 +2979,12 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 		   ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(editButtonContent);
 		   wait.until(condition);
 		   editButtonContent.click();
-		   wait.until(ExpectedConditions.visibilityOf(phFooter));
+		   wait.until(ExpectedConditions.elementToBeClickable(phFooter));
 		   phFooter.click();
-		   wait.until(ExpectedConditions.visibilityOf(configure));
+		   wait.until(ExpectedConditions.elementToBeClickable(configure));
 		   configure.click();
 		   WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(), 30);
-		  wait1.until(ExpectedConditions.visibilityOf(footerText));
+		  wait1.until(ExpectedConditions.elementToBeClickable(footerText));
 		   HelperFunctions.staticWait(3);
 		   footerText.click();
 		   HelperFunctions.staticWait(1);
@@ -2994,9 +2994,9 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 		   footerText.sendKeys(mockName);
 		   HelperFunctions.staticWait(3);
 		   checkIcon.click();
-		    HelperFunctions.staticWait(3);
+		    HelperFunctions.staticWait(5);
 		    pageInfo.click();
-		    HelperFunctions.staticWait(3);
+		    wait1.until(ExpectedConditions.elementToBeClickable(publishIcon));
 		    publishIcon.click();
 		    HelperFunctions.staticWait(3);
 		   // Driver.getDriver().get("https://productcentral-stg.products.pwc.com/content/experience-fragments/productcentral/us/en/site/experience-fragment/footer.html");
