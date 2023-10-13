@@ -36,6 +36,7 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
+
 import Pages.AuthoringPage;
 import Pages.BasePage;
 import Pages.HomePage;
@@ -2289,6 +2290,47 @@ public class SanityTestCases extends BasePage {
 		        Driver.getDriver().get(read1.getCellData("VALUE", 86));
 		        lpo.setLogin4();
 		        ap.setEmbedHTML(test);
+		        test.pass("WEB_119 passed");
+		    } catch (Exception e) {
+		        String screenshotPath = takeScreenshot(testName);
+		        test.fail(e, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+		    }
+		    if (test.getModel().getStatus().toString().equalsIgnoreCase("fail")) {
+		        Assert.fail("Test case failed: " + testName);
+		    }
+			
+		}
+		
+		@Test
+		public void WEB_121() throws Exception{
+			String testName = "Verify that author is able to configure the link to open in same or new window";
+		
+		    ExtentTest test = extent.createTest(testName);
+
+		    try {
+		        Driver.getDriver().get(read1.getCellData("VALUE", 87));
+		        lpo.setLogin4();
+		        ap.setLatestTabs();
+		        test.pass("WEB_119 passed");
+		    } catch (Exception e) {
+		        String screenshotPath = takeScreenshot(testName);
+		        test.fail(e, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+		    }
+		    if (test.getModel().getStatus().toString().equalsIgnoreCase("fail")) {
+		        Assert.fail("Test case failed: " + testName);
+		    }
+			
+		}
+		@Test
+		public void WEB_122() throws Exception{
+			String testName = "Verify that on clicking 'Customize cookie settings' link cookies preference window is opening";
+		
+		    ExtentTest test = extent.createTest(testName);
+
+		    try {
+		        Driver.getDriver().get(read1.getCellData("VALUE", 73));
+		        //lpo.setLogin4();
+		        ap.setCustomizeCookies();
 		        test.pass("WEB_119 passed");
 		    } catch (Exception e) {
 		        String screenshotPath = takeScreenshot(testName);

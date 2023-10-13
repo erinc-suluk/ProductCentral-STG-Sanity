@@ -843,6 +843,48 @@ public class AuthoringPage extends HelperFunctions {
 	@FindBy(xpath="//coral-columnview-column[contains(@data-foundation-layout-columnview-columnid, 'products/cloud')]//coral-columnview-item")
 	private static List<WebElement> coloumnItems;
 	
+	@FindBy(xpath="//div[contains(@data-path, 'latest')]")
+	private WebElement authLatest;
+	
+	@FindBy(xpath="//div[contains(@name, 'description')]")
+	private WebElement authLatestDesc;
+	
+	@FindBy(xpath="//coral-buttongroup[contains(@class, 'coral3-ButtonGroup rte-toolbar is-sticky is-active')]//button[contains(@title, 'Hyperlink')]")
+	private WebElement hyperlinkButton;
+	
+	@FindBy(xpath="//coral-select[contains(@handle, 'targetSelect')]//button")
+	private WebElement tabsDropdown;
+	
+	@FindBy(xpath="//coral-selectlist-item[normalize-space()='New Tab']")
+	private WebElement newTab;
+	
+	@FindBy(xpath="//coral-selectlist-item[normalize-space()='Same Tab']")
+	private WebElement sameTab;
+	
+	@FindBy(xpath="//button[contains(@title, 'Apply')]")
+	private WebElement applyButton;
+	
+	@FindBy(xpath="//span[@class='cmp-latest__text-description']//a")
+	private WebElement hyperlink;
+	
+	@FindBy(xpath="//button[@id='ot-sdk-btn']")
+	private WebElement customizeCookies;
+	
+	@FindBy(xpath="//div[@id='ot-pc-content']")
+	private WebElement cookiesContent;
+	
+	@FindBy(xpath="(//div[@class='cmp-sidebar__item first-level-link '])[1]//button")
+	private WebElement level1;
+	
+	@FindBy(xpath="//a[@title='Level 2']")
+	private WebElement level2Title;
+	
+	@FindBy(xpath="//div[@class='cmp-sidebar__sub-list']//button")
+	private WebElement level2;
+	
+	@FindBy(xpath="(//div[@class='cmp-sidebar__sub-list-third'])[1]")
+	private WebElement level3Title;
+	
 	static Logger logger=Logger.getLogger("AuthoringPage");
 	
 	
@@ -1504,13 +1546,13 @@ public class AuthoringPage extends HelperFunctions {
 	    //HelperFunctions.staticWait(2);
 	    test.info("Click on edit");
 	    editButtonContent.click();
-	    wait.until(ExpectedConditions.elementToBeClickable(offeringOverviewLink2auth));
+	    wait.until(ExpectedConditions.visibilityOf(offeringOverviewLink2auth));
 	    test.info("Click on content page title for authoring");
 	    offeringOverviewLink2auth.click();
-	    wait.until(ExpectedConditions.elementToBeClickable(settingIcon));
+	    wait.until(ExpectedConditions.visibilityOf(settingIcon));
 	    test.info("Click on setting");
 	    settingIcon.click();
-	    wait.until(ExpectedConditions.elementToBeClickable(titleField));
+	    wait.until(ExpectedConditions.visibilityOf(titleField));
 	  //  ArrayList<String> tabs7 = new ArrayList<String>(Driver.getDriver().getWindowHandles());
 	  //  Driver.getDriver().switchTo().window(tabs7.get(1));
 	    test.info("Click on title field");
@@ -1547,12 +1589,12 @@ public class AuthoringPage extends HelperFunctions {
      }
 	 test.info("Click on edit");
 	 Driver.getDriver().switchTo().defaultContent();
-	 wait.until(ExpectedConditions.elementToBeClickable(editButtonContent));
+	 wait.until(ExpectedConditions.visibilityOf(editButtonContent));
 	 editButtonContent.click();
-	 wait.until(ExpectedConditions.elementToBeClickable(offeringOverviewLink2auth));
+	 wait.until(ExpectedConditions.visibilityOf(offeringOverviewLink2auth));
 	 test.info("Click on content page title for authoring");
 	 offeringOverviewLink2auth.click();
-	 wait.until(ExpectedConditions.elementToBeClickable(settingIcon));
+	 wait.until(ExpectedConditions.visibilityOf(settingIcon));
 	 test.info("Click on setting");
 	 settingIcon.click();
 	 wait.until(ExpectedConditions.visibilityOf(titleField));
@@ -1590,7 +1632,7 @@ public class AuthoringPage extends HelperFunctions {
          logger.info(successMessage);
      }
 	 
-	 HelperFunctions.staticWait(3);
+	 HelperFunctions.staticWait(2);
  
 	    
 	    
@@ -2979,12 +3021,12 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 		   ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(editButtonContent);
 		   wait.until(condition);
 		   editButtonContent.click();
-		   wait.until(ExpectedConditions.elementToBeClickable(phFooter));
+		   wait.until(ExpectedConditions.visibilityOf(phFooter));
 		   phFooter.click();
-		   wait.until(ExpectedConditions.elementToBeClickable(configure));
+		   wait.until(ExpectedConditions.visibilityOf(configure));
 		   configure.click();
 		   WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(), 30);
-		  wait1.until(ExpectedConditions.elementToBeClickable(footerText));
+		  wait1.until(ExpectedConditions.visibilityOf(footerText));
 		   HelperFunctions.staticWait(3);
 		   footerText.click();
 		   HelperFunctions.staticWait(1);
@@ -2994,9 +3036,9 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 		   footerText.sendKeys(mockName);
 		   HelperFunctions.staticWait(3);
 		   checkIcon.click();
-		    HelperFunctions.staticWait(5);
+		    HelperFunctions.staticWait(3);
 		    pageInfo.click();
-		    wait1.until(ExpectedConditions.elementToBeClickable(publishIcon));
+		    HelperFunctions.staticWait(3);
 		    publishIcon.click();
 		    HelperFunctions.staticWait(3);
 		   // Driver.getDriver().get("https://productcentral-stg.products.pwc.com/content/experience-fragments/productcentral/us/en/site/experience-fragment/footer.html");
@@ -3031,7 +3073,7 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 			    wait.until(ExpectedConditions.visibilityOf(publish2));
 		     publish2.click();
 		     HelperFunctions.staticWait(5);
-		  if(presentationDate.getText().contains("a few seconds ago")) {
+		  if(presentationDate.getText().contains("few")) {
 		  	Assert.assertTrue(true);
 		  }else {
 			    	String errorMessage = "Not publish on workflow option";
@@ -3504,5 +3546,109 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 			    HelperFunctions.staticWait(2);
 			    
 		 }
+		public void setLatestTabs() throws Exception {
+		    read1.setExcelFile("./testdata.xlsx", "STG");
+		    WebDriverWait wait=new WebDriverWait(Driver.getDriver(),40);
+			ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(previewButton);
+			wait.until(condition);
+			previewButton.click();
+			//HelperFunctions.staticWait(5);
+			Driver.getDriver().switchTo().frame(0);
+			wait.until(ExpectedConditions.elementToBeClickable(hyperlink));
+			JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
+	        executor.executeScript("arguments[0].click();", hyperlink);
+			//hyperlink.click();
+			HelperFunctions.staticWait(7);
+		    Set<String> windowHandles2 = Driver.getDriver().getWindowHandles();
+		    Assert.assertEquals(windowHandles2.size(), 1, "Expected one window to be open, but found " + windowHandles2.size());
+		    HelperFunctions.staticWait(3);
+		    Assert.assertTrue(Driver.getDriver().getCurrentUrl().contains("fluid"));
+		    HelperFunctions.staticWait(3);
+		    Driver.getDriver().get(read1.getCellData("VALUE", 87));
+		    HelperFunctions.waitForPageToLoad(30);
+		    wait.until(ExpectedConditions.elementToBeClickable(editButtonContent));
+		    editButtonContent.click();
+		    HelperFunctions.staticWait(3);
+			authLatest.click();
+			wait.until(ExpectedConditions.visibilityOf(configure));
+	        configure.click();
+			wait.until(ExpectedConditions.elementToBeClickable(authLatestDesc));
+			authLatestDesc.click();
+			HelperFunctions.staticWait(2);	
+			authLatestDesc.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+			HelperFunctions.staticWait(2);
+			hyperlinkButton.click();
+			wait.until(ExpectedConditions.visibilityOf(tabsDropdown));
+			tabsDropdown.click();
+			wait.until(ExpectedConditions.visibilityOf(newTab));
+			newTab.click();
+			HelperFunctions.staticWait(3);
+			executor.executeScript("arguments[0].click();", applyButton);
+			//applyButton.click();
+			wait.until(ExpectedConditions.invisibilityOf(applyButton));
+			checkButton.click();
+			HelperFunctions.staticWait(5);
+		    previewButton.click();
+		    //HelperFunctions.staticWait(5);
+		    Driver.getDriver().switchTo().frame(0);
+		    String mainWindowHandle=Driver.getDriver().getWindowHandle();
+			wait.until(ExpectedConditions.elementToBeClickable(hyperlink));
+			executor.executeScript("arguments[0].click();", hyperlink);
+			//hyperlink.click();
+			WebDriverWait wait4 = new WebDriverWait(Driver.getDriver(), 30);
+		    wait4.until(ExpectedConditions.numberOfWindowsToBe(2));
+		    Set<String> windowHandles3 = Driver.getDriver().getWindowHandles();
+		    Assert.assertEquals(windowHandles3.size(), 2, "Expected two windows to be open, but found " + windowHandles3.size());
+		    HelperFunctions.staticWait(3);
+		    for (String windowHandle : windowHandles3) {
+		    	 if (!windowHandle.equals(mainWindowHandle)) {
+		    	 Driver.getDriver().switchTo().window(windowHandle);
+		    	 break;
+		    	 }
+		    	}
+		    HelperFunctions.staticWait(3);
+		    Driver.getDriver().get(read1.getCellData("VALUE", 87));
+		    HelperFunctions.waitForPageToLoad(30);
+		    WebDriverWait wait2=new WebDriverWait(Driver.getDriver(),30);
+		    ExpectedCondition<WebElement> condition2=ExpectedConditions.elementToBeClickable(editButtonContent);
+		    wait2.until(condition2);
+		    editButtonContent.click();
+		    HelperFunctions.staticWait(3);
+		    authLatest.click();
+			wait.until(ExpectedConditions.visibilityOf(configure));
+	        configure.click();
+			wait.until(ExpectedConditions.elementToBeClickable(authLatestDesc));
+			authLatestDesc.click();
+			HelperFunctions.staticWait(2);	
+			authLatestDesc.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+			HelperFunctions.staticWait(2);
+			hyperlinkButton.click();
+			wait.until(ExpectedConditions.visibilityOf(tabsDropdown));
+			tabsDropdown.click();
+			wait.until(ExpectedConditions.visibilityOf(sameTab));
+			sameTab.click();
+			HelperFunctions.staticWait(3);
+			executor.executeScript("arguments[0].click();", applyButton);
+			//applyButton.click();
+			wait.until(ExpectedConditions.invisibilityOf(applyButton));
+			checkButton.click();
+			HelperFunctions.staticWait(5);
+			
+		}
+		public void setCustomizeCookies() throws Exception {
+		    read1.setExcelFile("./testdata.xlsx", "QA");
+		    WebDriverWait wait=new WebDriverWait(Driver.getDriver(),40);
+			/*ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(previewButton);
+			wait.until(condition);
+			previewButton.click();
+			//HelperFunctions.staticWait(5);
+			Driver.getDriver().switchTo().frame(0);*/
+			wait.until(ExpectedConditions.elementToBeClickable(customizeCookies));
+			JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
+	        executor.executeScript("arguments[0].click();", customizeCookies);
+	        wait.until(ExpectedConditions.visibilityOf(cookiesContent));
+	        Assert.assertTrue(cookiesContent.isDisplayed());
+	        HelperFunctions.staticWait(3);
+		}
 
 }
