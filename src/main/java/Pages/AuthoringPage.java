@@ -1422,6 +1422,7 @@ public class AuthoringPage extends HelperFunctions {
     }
  
  public void setTilesAuthorization(ExtentTest test) throws Exception {
+	 read1.setExcelFile("./testdata.xlsx", "QA");
 	 test.info("Wait for the page to load.");
 	// HelperFunctions.waitForPageToLoad(15);
 	 //HelperFunctions.staticWait(3);
@@ -1429,7 +1430,7 @@ public class AuthoringPage extends HelperFunctions {
 	 ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(editButtonContent);
 	   wait.until(condition);
 	   editButtonContent.click();
-	 read1.setExcelFile("./testdata.xlsx", "QA");
+	 
 		/*email.sendKeys(read1.getCellData("DATA", 1));
 		next.click();
 		pass.sendKeys(read1.getCellData("VALUE", 1));
@@ -3612,6 +3613,10 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 		    WebDriverWait wait2=new WebDriverWait(Driver.getDriver(),30);
 		    ExpectedCondition<WebElement> condition2=ExpectedConditions.elementToBeClickable(editButtonContent);
 		    wait2.until(condition2);
+		    editButtonContent.click();
+		    HelperFunctions.staticWait(3);
+		    previewButton.click();
+		    HelperFunctions.staticWait(3);
 		    editButtonContent.click();
 		    HelperFunctions.staticWait(3);
 		    authLatest.click();

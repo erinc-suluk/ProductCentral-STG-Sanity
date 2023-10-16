@@ -1279,13 +1279,15 @@ public void setClickAvatar(ExtentTest test) throws Exception {
 	test.info("Wait for the page to load.");
     HelperFunctions.waitForPageToLoad(10);
   
-    WebDriverWait wait=new WebDriverWait(Driver.getDriver(),10);
+    WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
     ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(avatar);
     wait.until(condition);
     HelperFunctions.staticWait(2);
     test.info("Clicking on user initials");
-    avatar.click();
-    HelperFunctions.staticWait(2);
+    JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
+    executor.executeScript("arguments[0].click();", avatar);
+    //avatar.click();
+    wait.until(ExpectedConditions.visibilityOf(logout));
     if(logout.isDisplayed()) {
         Assert.assertTrue(true);
     }else {

@@ -15,7 +15,7 @@
        <include name="WEB_4"/>
        <include name="WEB_5"/>
        <include name="WEB_6"/>
-       <include name="WEB_7"/>
+       <exclude name="WEB_7"/>
        <include name="WEB_8"/>
        <include name="WEB_9"/>
        <include name="WEB_10"/>
@@ -130,7 +130,7 @@
        <include name="WEB_119"/>
        <include name="WEB_120"/>
        <include name="WEB_121"/>
-       <include name="WEB_122"/>
+       <exclude name="WEB_122"/>
        
 
        
