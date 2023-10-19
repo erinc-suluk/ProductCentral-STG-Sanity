@@ -34,6 +34,9 @@ public class LoginPageObjects extends HelperFunctions{
 	@FindBy(xpath="//input[@id='initEmail']")
 	private WebElement email;
 	
+	@FindBy(xpath="//input[@id='userEmail']")
+	private WebElement email2;
+	
 	@FindBy(xpath="//button[.='Next']")
 	private WebElement next;
 	
@@ -42,6 +45,9 @@ public class LoginPageObjects extends HelperFunctions{
 	
 	@FindBy(xpath="//button[.='Submit']")
 	private WebElement submit;
+	
+	@FindBy(xpath="//input[@value='Submit']")
+	private WebElement submit2;
 	
 	@FindBy(xpath="//a[@id='loginLink']")
 	private WebElement loginLink;
@@ -168,20 +174,22 @@ public class LoginPageObjects extends HelperFunctions{
 	}
 	public void setLogin2() throws Exception {
 		HelperFunctions.waitForPageToLoad(30);
-		HelperFunctions.staticWait(3);
+		HelperFunctions.staticWait(5);
 		JavascriptExecutor js2 = (JavascriptExecutor) Driver.getDriver();
 	    js2.executeScript("window.scrollBy(0,250)", "");
 	    HelperFunctions.staticWait(3);
 	    JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
 	     executor.executeScript("arguments[0].click();", logintoMyproducts);
 		HelperFunctions.waitForPageToLoad(30);
-		HelperFunctions.staticWait(3);
 		read1.setExcelFile("./testdata.xlsx", "QA");
+		email2.sendKeys(read1.getCellData("VALUE", 44));
+		HelperFunctions.staticWait(3);
+		submit2.click();
+		HelperFunctions.waitForPageToLoad(60);
 		email.sendKeys(read1.getCellData("VALUE", 44));
 		HelperFunctions.staticWait(3);
 		next.click();
-		HelperFunctions.waitForPageToLoad(60);
-		//HelperFunctions.staticWait(3);
+		HelperFunctions.waitForPageToLoad(90);
 		
 	    
 	}
@@ -250,7 +258,7 @@ public class LoginPageObjects extends HelperFunctions{
 		email.sendKeys(read1.getCellData("VALUE", 44));
 		HelperFunctions.staticWait(3);
 		next.click();
-	    HelperFunctions.waitForPageToLoad(60);
+	    HelperFunctions.waitForPageToLoad(90);
 	    //HelperFunctions.staticWait(3);
 	
 	    

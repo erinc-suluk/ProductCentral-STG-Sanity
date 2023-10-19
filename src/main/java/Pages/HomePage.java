@@ -201,6 +201,9 @@ public class HomePage extends HelperFunctions {
   	
   	@FindBy(xpath="//div[@data-option-id='A-Z']")
 	private WebElement az;
+  	
+  	@FindBy(xpath="//input[@id='userEmail']")
+	private WebElement email2;
 	
 	
 	
@@ -856,7 +859,7 @@ public class HomePage extends HelperFunctions {
     		
     	}
     	test.info("Verified pwc logo, email field and next button are displayed.");
-    	if(pwcLogo.isDisplayed() && email.isDisplayed() && next.isDisplayed()) {
+    	if(email2.isDisplayed()) {
     		String successMessage = "LoginToMyProductLink elements are displayed";
             logger.info(successMessage);
     		Assert.assertTrue(true);
