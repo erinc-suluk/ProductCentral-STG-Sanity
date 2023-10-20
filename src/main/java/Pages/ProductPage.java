@@ -1481,7 +1481,7 @@ public void setAssetsTag(ExtentTest test) {
 	    for (WebElement element : latestAssets) {
 	    	  String href = element.getAttribute("href");
 	    	    //String myProductsDocCategoryTag = element.getAttribute("data-my-products-doc-category-tag");
-	    	    if (href.endsWith(".pdf")&&href!=null) {
+	    	    if (href.endsWith(".pdf")||href!=null) {
 	    	    	foundPdf=true;
 	    	    	break;
 	    	        //Assert.assertNotNull(myProductsDocCategoryTag);

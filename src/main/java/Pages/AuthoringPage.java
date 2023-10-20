@@ -1240,15 +1240,27 @@ public class AuthoringPage extends HelperFunctions {
     	test.info("Wait for the page to load.");
     	//HelperFunctions.waitForPageToLoad(10);
     	read1.setExcelFile("./testdata.xlsx", "QA");
+    	JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
     	 WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
-		   ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(editButtonContent);
-		   wait.until(condition);
+		   //ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(editButtonContent);
+		   //wait.until(condition);
+    	 js.executeScript("arguments[0].click();", pageInfo);
+  	    try {
+  	    	Thread.sleep(3000);
+  	    }catch(InterruptedException e) {
+  	    	e.printStackTrace();
+  	    }
 		   editButtonContent.click();
 		   //HelperFunctions.staticWait(2);
     	 WebDriverWait wait1=new WebDriverWait(Driver.getDriver(),15);
-  	    ExpectedCondition<WebElement> condition1=ExpectedConditions.elementToBeClickable(sitemap);
-  	    wait1.until(condition1);
+  	    //ExpectedCondition<WebElement> condition1=ExpectedConditions.elementToBeClickable(sitemap);
+  	   // wait1.until(condition1);
   	  test.info("Clicking on sitemap");
+  	try {
+	    	Thread.sleep(3000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
 	    sitemap.click();
 	    wait1.until(ExpectedConditions.visibilityOf(settingIcon));
 	    test.info("Clicking on settings icon");
@@ -1276,6 +1288,12 @@ public class AuthoringPage extends HelperFunctions {
 	    checkIcon.click();
 	    HelperFunctions.staticWait(3);
 	    test.info("Clicking on preview");
+	    js.executeScript("arguments[0].click();", pageInfo);
+  	    try {
+  	    	Thread.sleep(3000);
+  	    }catch(InterruptedException e) {
+  	    	e.printStackTrace();
+  	    }
 	    previewButton2.click();
 	    HelperFunctions.staticWait(3);
 	    test.info("Verified the contents have relevant title ");
@@ -1294,6 +1312,12 @@ public class AuthoringPage extends HelperFunctions {
 	    }
 	    HelperFunctions.staticWait(3);
 	    test.info("Clicking on edit");
+	    js.executeScript("arguments[0].click();", pageInfo);
+  	    try {
+  	    	Thread.sleep(3000);
+  	    }catch(InterruptedException e) {
+  	    	e.printStackTrace();
+  	    }
 	    editnextToPreview.click();
 	    wait1.until(ExpectedConditions.visibilityOf(sitemap));
 	    test.info("Clicking on sitemap");
@@ -1321,6 +1345,12 @@ public class AuthoringPage extends HelperFunctions {
 	    HelperFunctions.staticWait(3);
 	    checkIcon.click();
 	    HelperFunctions.staticWait(3);
+	    js.executeScript("arguments[0].click();", pageInfo);
+  	    try {
+  	    	Thread.sleep(3000);
+  	    }catch(InterruptedException e) {
+  	    	e.printStackTrace();
+  	    }
 	    previewButton2.click();
 	    HelperFunctions.staticWait(3);
 	    test.info("Verified the contents have relevant title ");
@@ -1347,9 +1377,11 @@ public class AuthoringPage extends HelperFunctions {
 	 test.info("Wait for the page to load.");
 	    //HelperFunctions.waitForPageToLoad(10);
     	read1.setExcelFile("./testdata.xlsx", "QA");
-    	 WebDriverWait wait=new WebDriverWait(Driver.getDriver(),20);
- 	    ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(homepageDemo);
- 	    wait.until(condition);
+    	JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+    	HelperFunctions.staticWait(5);
+    	 WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
+ 	    //ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(homepageDemo);
+ 	    //wait.until(condition);
  	   test.info("Clicking on homepagedemo path");
 	    homepageDemo.click();
 	    HelperFunctions.staticWait(5);
@@ -1401,7 +1433,13 @@ public class AuthoringPage extends HelperFunctions {
         edit.click();
         ArrayList<String> tabs2 = new ArrayList<String>(Driver.getDriver().getWindowHandles());
         Driver.getDriver().switchTo().window(tabs2.get(1));
-        HelperFunctions.waitForPageToLoad(5);
+        HelperFunctions.waitForPageToLoad(60);
+        js.executeScript("arguments[0].click();", pageInfo);
+  	    try {
+  	    	Thread.sleep(3000);
+  	    }catch(InterruptedException e) {
+  	    	e.printStackTrace();
+  	    }
         previewButton2.click();
         test.info("Verified title has been hidden in sitemap");
         String expectedContent="Homepage Demo";
@@ -1425,10 +1463,16 @@ public class AuthoringPage extends HelperFunctions {
 	 test.info("Wait for the page to load.");
 	// HelperFunctions.waitForPageToLoad(15);
 	 //HelperFunctions.staticWait(3);
+	 JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
 	 WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
-	 wait.until(ExpectedConditions.visibilityOf(pageInfo));
-	    pageInfo.click();
-	    HelperFunctions.staticWait(3);
+	 //wait.until(ExpectedConditions.visibilityOf(pageInfo));
+	    //pageInfo.click();
+	 js.executeScript("arguments[0].click();", pageInfo);
+	    try {
+	    	Thread.sleep(3000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
 	 //ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(editButtonContent);
 	   //wait.until(condition);
 	   editButtonContent.click();
@@ -1498,8 +1542,12 @@ public class AuthoringPage extends HelperFunctions {
 	    //ExpectedCondition<WebElement> condition2=ExpectedConditions.elementToBeClickable(editButtonContent);
 		   //wait.until(condition2);
 	    //wait.until(ExpectedConditions.visibilityOf(pageInfo));
-	    pageInfo.click();
-	    HelperFunctions.staticWait(3);
+	    js.executeScript("arguments[0].click();", pageInfo);
+  	    try {
+  	    	Thread.sleep(3000);
+  	    }catch(InterruptedException e) {
+  	    	e.printStackTrace();
+  	    }
 		   editButtonContent.click();
 	    test.info("Clicking on tiles for setting");
 	    JavascriptExecutor executor6 = (JavascriptExecutor) Driver.getDriver();
@@ -1545,10 +1593,16 @@ public class AuthoringPage extends HelperFunctions {
 	 read1.setExcelFile("./testdata.xlsx", "QA");
 	 test.info("Wait for the page to load.");
 	    //HelperFunctions.waitForPageToLoad(10);
-	   
+	 JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
 	    WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
-	    ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(editButtonContent);
-	    wait.until(condition);
+	    //ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(editButtonContent);
+	    //wait.until(condition);
+	    js.executeScript("arguments[0].click();", pageInfo);
+  	    try {
+  	    	Thread.sleep(3000);
+  	    }catch(InterruptedException e) {
+  	    	e.printStackTrace();
+  	    }
 	    //HelperFunctions.staticWait(2);
 	    test.info("Click on edit");
 	    editButtonContent.click();
@@ -1573,6 +1627,12 @@ public class AuthoringPage extends HelperFunctions {
 	    test.info("Click on check icon");
 	    checkIcon.click();
 	    HelperFunctions.staticWait(3);
+	    js.executeScript("arguments[0].click();", pageInfo);
+  	    try {
+  	    	Thread.sleep(3000);
+  	    }catch(InterruptedException e) {
+  	    	e.printStackTrace();
+  	    }
 	    test.info("Click on preview");
 	    previewButton2.click();
 	  //  Set<String> allWindows4=Driver.getDriver().getWindowHandles();
@@ -1595,6 +1655,12 @@ public class AuthoringPage extends HelperFunctions {
      }
 	 test.info("Click on edit");
 	 Driver.getDriver().switchTo().defaultContent();
+	 js.executeScript("arguments[0].click();", pageInfo);
+	    try {
+	    	Thread.sleep(3000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
 	 wait.until(ExpectedConditions.visibilityOf(editButtonContent));
 	 editButtonContent.click();
 	 wait.until(ExpectedConditions.visibilityOf(offeringOverviewLink2auth));
@@ -1619,6 +1685,12 @@ public class AuthoringPage extends HelperFunctions {
 	    checkIcon.click();
 	    HelperFunctions.staticWait(3);
 	    test.info("Click on preview");
+	    js.executeScript("arguments[0].click();", pageInfo);
+	    try {
+	    	Thread.sleep(3000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
 	    previewButton2.click();
 	  //  Set<String> allWindows5=Driver.getDriver().getWindowHandles();
    //  List<String> windowsList5=new ArrayList<>(allWindows5);
@@ -2482,12 +2554,18 @@ js.executeScript("window.open()");
 	    test.info("Wait for the page to load.");
 	    //HelperFunctions.waitForPageToLoad(10);
 	   
-
+	    JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
 	    test.info("Click preview button.");
 	    WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
-	    wait.until(ExpectedConditions.visibilityOf(pageInfo));
-	    pageInfo.click();
-	    HelperFunctions.staticWait(3);
+	    //wait.until(ExpectedConditions.visibilityOf(pageInfo));
+	    //pageInfo.click();
+	    js.executeScript("arguments[0].click();", pageInfo);
+	    //pageInfo.click();
+	    try {
+	    	Thread.sleep(3000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
 	    //ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(previewButton);
 	    //wait.until(condition);
 	    //HelperFunctions.staticWait(2);
@@ -2504,8 +2582,13 @@ js.executeScript("window.open()");
 
 	    test.info("Switch back to default content.");
 	    Driver.getDriver().switchTo().defaultContent();
-	    pageInfo.click();
-	    HelperFunctions.staticWait(3);
+	    js.executeScript("arguments[0].click();", pageInfo);
+	    //pageInfo.click();
+	    try {
+	    	Thread.sleep(3000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
 	    test.info("Click edit button content.");
 	    editButtonContent.click();
 	    wait.until(ExpectedConditions.visibilityOf(editTiles));
@@ -2526,8 +2609,13 @@ js.executeScript("window.open()");
 	    test.info("Click check icon.");
 	    checkIcon.click();
 	    HelperFunctions.staticWait(4);
-	    pageInfo.click();
-	    HelperFunctions.staticWait(3);
+	    js.executeScript("arguments[0].click();", pageInfo);
+	    //pageInfo.click();
+	    try {
+	    	Thread.sleep(3000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
 	    test.info("Click preview button.");
 	    previewButton.click();
 
@@ -2540,8 +2628,13 @@ js.executeScript("window.open()");
 
 	    test.info("Switch back to default content.");
 	    Driver.getDriver().switchTo().defaultContent();
-	    pageInfo.click();
-	    HelperFunctions.staticWait(3);
+	    js.executeScript("arguments[0].click();", pageInfo);
+	    //pageInfo.click();
+	    try {
+	    	Thread.sleep(3000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
 	    test.info("Click edit button content.");
 	    editButtonContent.click();
 
@@ -2938,7 +3031,7 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 	     executor4.executeScript("arguments[0].click();", legalPageImg);
 	     wait.until(ExpectedConditions.visibilityOf(presentationDate));
 	     test.info("Verified the page has been published a few seconds ago");
-	     if(presentationDate.getText().equalsIgnoreCase("few")) {
+	     if(presentationDate.getText().contains("few")) {
 	         Assert.assertTrue(true);
 	     }else {
 	         String errorMessage = "Not publish on workflow option";
@@ -3562,13 +3655,26 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 		public void setLatestTabs() throws Exception {
 		    read1.setExcelFile("./testdata.xlsx", "STG");
 		    WebDriverWait wait=new WebDriverWait(Driver.getDriver(),40);
-			ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(previewButton);
-			wait.until(condition);
+		    try {
+		    	Thread.sleep(3000);
+		    }catch(InterruptedException e) {
+		    	e.printStackTrace();
+		    }
+			  JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
+			//HelperFunctions.waitForPageToLoad(15);
+		    //WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(), 60);
+		    executor.executeScript("arguments[0].click();", pageInfo);
+		    try {
+		    	Thread.sleep(3000);
+		    }catch(InterruptedException e) {
+		    	e.printStackTrace();
+		    }
 			previewButton.click();
+			
 			//HelperFunctions.staticWait(5);
 			Driver.getDriver().switchTo().frame(0);
 			wait.until(ExpectedConditions.elementToBeClickable(hyperlink));
-			JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
+			//JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
 	        executor.executeScript("arguments[0].click();", hyperlink);
 			//hyperlink.click();
 			HelperFunctions.staticWait(7);
@@ -3578,8 +3684,18 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 		    Assert.assertTrue(Driver.getDriver().getCurrentUrl().contains("fluid"));
 		    HelperFunctions.staticWait(3);
 		    Driver.getDriver().get(read1.getCellData("VALUE", 87));
-		    HelperFunctions.waitForPageToLoad(30);
-		    wait.until(ExpectedConditions.elementToBeClickable(editButtonContent));
+		    HelperFunctions.waitForPageToLoad(60);
+		    //wait.until(ExpectedConditions.elementToBeClickable(editButtonContent));
+		    executor.executeScript("arguments[0].click();", pageInfo);
+		    try {
+		    	Thread.sleep(3000);
+		    }catch(InterruptedException e) {
+		    	e.printStackTrace();
+		    }
+		    editButtonContent.click();
+		    HelperFunctions.staticWait(3);
+		    previewButton.click();
+		    HelperFunctions.staticWait(3);
 		    editButtonContent.click();
 		    HelperFunctions.staticWait(3);
 			authLatest.click();
@@ -3622,9 +3738,24 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 		    HelperFunctions.staticWait(3);
 		    Driver.getDriver().get(read1.getCellData("VALUE", 87));
 		    HelperFunctions.waitForPageToLoad(30);
-		    WebDriverWait wait2=new WebDriverWait(Driver.getDriver(),30);
-		    ExpectedCondition<WebElement> condition2=ExpectedConditions.elementToBeClickable(editButtonContent);
-		    wait2.until(condition2);
+		    try {
+		    	Thread.sleep(3000);
+		    }catch(InterruptedException e) {
+		    	e.printStackTrace();
+		    }
+		    executor.executeScript("arguments[0].click();", pageInfo);
+		    try {
+		    	Thread.sleep(3000);
+		    }catch(InterruptedException e) {
+		    	e.printStackTrace();
+		    }
+		    //WebDriverWait wait2=new WebDriverWait(Driver.getDriver(),30);
+		    //ExpectedCondition<WebElement> condition2=ExpectedConditions.elementToBeClickable(editButtonContent);
+		    //wait2.until(condition2);
+		    editButtonContent.click();
+		    HelperFunctions.staticWait(3);
+		    previewButton.click();
+		    HelperFunctions.staticWait(3);
 		    editButtonContent.click();
 		    HelperFunctions.staticWait(3);
 		    authLatest.click();
