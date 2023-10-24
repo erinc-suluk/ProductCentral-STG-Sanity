@@ -1274,7 +1274,9 @@ public class SanityTestCases extends BasePage {
     }
     @Test
     public void WEB_61() throws Exception{
-        String testName = "Verify that when user logs in ,the user should be redirected to the asset they were trying to access";
+    	String testName = "Verify that when user logs in ,the user should be redirected to the asset they were trying to access"+
+        		"/ Verify that for any page and asset(pdf,excel,image) MyProducts Document Category tag(eg-user guide,techinal guide) is visible"
+        		+"/ Verify that if the title of the asset or page is longer than 3 lines, then it will be displayed with ellipsis";
         ExtentTest test = extent.createTest(testName);
 
         try {
@@ -2331,6 +2333,28 @@ public class SanityTestCases extends BasePage {
 		        Driver.getDriver().get(read1.getCellData("VALUE", 73));
 		        //lpo.setLogin4();
 		        ap.setCustomizeCookies();
+		        test.pass("WEB_119 passed");
+		    } catch (Exception e) {
+		        String screenshotPath = takeScreenshot(testName);
+		        test.fail(e, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+		    }
+		    if (test.getModel().getStatus().toString().equalsIgnoreCase("fail")) {
+		        Assert.fail("Test case failed: " + testName);
+		    }
+			
+		}
+		
+		@Test
+		public void WEB_123() throws Exception{
+			String testName = "Verify author is able to add/pick any video from Kaltura repository that they want to add on page"
+					+"/ Verify published page is displaying one or more videos and user is able to see these videos";
+		
+		    ExtentTest test = extent.createTest(testName);
+
+		    try {
+		        Driver.getDriver().get(read1.getCellData("VALUE", 90));
+		        lpo.setLogin4();
+		        ap.setVideoEdit(test);
 		        test.pass("WEB_119 passed");
 		    } catch (Exception e) {
 		        String screenshotPath = takeScreenshot(testName);

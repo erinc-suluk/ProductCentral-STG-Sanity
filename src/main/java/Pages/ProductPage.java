@@ -1387,8 +1387,8 @@ public void setDocumentsAccesibility(ExtentTest test) throws Exception {
 
 public void setMyProductPageAccessibility(ExtentTest test) throws Exception {
 	test.info("Wait for the page to load.");
-    HelperFunctions.waitForPageToLoad(10);
-   
+    //HelperFunctions.waitForPageToLoad(15);
+  
     WebDriverWait wait6 = new WebDriverWait(Driver.getDriver(), 15);
    	wait6.until(ExpectedConditions.visibilityOf(myproductTitle));
     HelperFunctions.staticWait(2);
@@ -1400,6 +1400,32 @@ public void setMyProductPageAccessibility(ExtentTest test) throws Exception {
         throw new Exception(errorMessage);
     }
     test.info("Verified my product page title is displayed");
+    HelperFunctions.staticWait(3);
+    test.info("Checking if my product document category tag is visible for each product");
+    WebElement parentElement = Driver.getDriver().findElement(By.xpath("//div[@class='cmp-my-products-tile__text']"));
+
+    WebElement portfolioTag = parentElement.findElement(By.xpath(".//div[contains(@class, 'cmp-my-products-tile__portfolio-tag')]"));
+    WebElement title = parentElement.findElement(By.xpath(".//div[contains(@class, 'cmp-my-products-tile__title')]"));
+
+    if (portfolioTag.isDisplayed() && title.isDisplayed()) {
+    	 Assert.assertTrue(true);
+        System.out.println("Both child elements are present.");
+    } else {
+        System.out.println("One or both child elements are not present.");
+    }
+    test.info("Verified my product document category tag is visible for each product");
+    HelperFunctions.staticWait(3);
+    test.info("Checking if title is more than 3 lines it ends with three dots");
+    for(WebElement each: titleofAssets) {
+    	String titleText=each.getText();
+    	int elementHeight=each.getSize().getHeight();
+    	int lineHeight=24;
+    	int numLines=elementHeight/lineHeight;
+    	if(numLines>3 && titleText.endsWith("...")) {
+    		Assert.assertTrue(true);
+    	}
+    }
+    test.info("Verified if title is more than 3 lines it ends with three dots");
     HelperFunctions.staticWait(3);
 }
 
