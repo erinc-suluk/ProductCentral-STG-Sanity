@@ -2585,6 +2585,8 @@ js.executeScript("window.open()");
 	        test.info("Click on check icon");
 	        checkIcon.click();
 	        HelperFunctions.staticWait(3);
+	        Driver.getDriver().navigate().refresh();
+	        HelperFunctions.waitForPageToLoad(60);
 	        test.info("Click on preview banner");
 	        try {
 	   	    	Thread.sleep(3000);

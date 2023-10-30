@@ -1499,6 +1499,11 @@ public void setAssetsTag(ExtentTest test) {
 	//HelperFunctions.waitForPageToLoad(10);
 	//Driver.getDriver().get("https://productcentral-stg.products.pwc.com/content/pc/us/en/automation/my-products/enterprise-control.html");
 	//HelperFunctions.waitForPageToLoad(10);
+	try {
+    	Thread.sleep(5000);
+    }catch(InterruptedException e) {
+    	e.printStackTrace();
+    }
 	   test.info("Getting each latest assets' data-my-products-doc-category-tag attribute value");
 	    WebDriverWait wait6 = new WebDriverWait(Driver.getDriver(), 30);
 		wait6.until(ExpectedConditions.visibilityOf(latestAssets.get(0)));
