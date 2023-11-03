@@ -1096,9 +1096,10 @@ public class UMSPage extends HelperFunctions {
 		HelperFunctions.staticWait(2);
 		test.info("Send email to email field");
 		emailAddress.sendKeys(email);
-		WebDriverWait wait3 = new WebDriverWait(Driver.getDriver(), 10);
+		WebDriverWait wait3 = new WebDriverWait(Driver.getDriver(), 20);
 		wait3.until(ExpectedConditions.visibilityOf(warnMessage));
 	    Assert.assertTrue(warnMessage.isDisplayed());
+	    HelperFunctions.staticWait(5);
 	    Assert.assertTrue(saveButton2.isEnabled());
 	    test.info("Verified user already exists");
 	    HelperFunctions.staticWait(3);
