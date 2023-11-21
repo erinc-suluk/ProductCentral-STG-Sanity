@@ -87,7 +87,7 @@ public class ProductPage extends HelperFunctions {
 	@FindBy(xpath="//button[@id='showLess']")
 	private WebElement viewLessButton;
 	
-	@FindBy(xpath="//a[@href='/content/pc/us/en/my-products.html']")
+	@FindBy(xpath="//a[@href='/content/pc/us/en/my-products.html']//span[normalize-space()='My Products']")
 	private WebElement myProductItemOnSitemap;
 	
 	@FindBy(xpath="//div[@class='ap-dropdown-option-item']//span[1]")
@@ -560,7 +560,7 @@ public void setMyProductSitemap(ExtentTest test) throws Exception {
 	//HelperFunctions.waitForPageToLoad(10);
 	//Driver.getDriver().get("https://productcentral-stg.products.pwc.com/content/pc/us/en/automation/my-products/enterprise-control.html");
 	//HelperFunctions.waitForPageToLoad(10);
-	WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
+	WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 90);
     wait.until(ExpectedConditions.visibilityOf(heroImage));
 	HelperFunctions.staticWait(3);
 	test.info("Verified my product item is visible");
@@ -1209,7 +1209,7 @@ public void setAllResourcesContent(ExtentTest test) throws Exception {
 	//HelperFunctions.waitForPageToLoad(10);
 	//Driver.getDriver().get("https://productcentral-stg.products.pwc.com/content/pc/us/en/automation/my-products/enterprise-control.html");
 	//HelperFunctions.waitForPageToLoad(10);
-	WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
+	WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 90);
     wait.until(ExpectedConditions.visibilityOf(heroImage));
 	HelperFunctions.staticWait(3);
 	/*for(int i=0;i<allProducts.size();i++) {

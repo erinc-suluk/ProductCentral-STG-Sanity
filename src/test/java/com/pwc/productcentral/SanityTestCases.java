@@ -2365,6 +2365,26 @@ public class SanityTestCases extends BasePage {
 		    }
 			
 		}
+		@Test
+		public void WEB_124() throws Exception{
+			String testName = "Verify that as a user able to see the search box on the pages created using my product+ template";
+		
+		    ExtentTest test = extent.createTest(testName);
+
+		    try {
+		        Driver.getDriver().get(read1.getCellData("VALUE", 41));
+		        lpo.setLogin4();
+		        ap.setMyProductPageSearch(test);
+		        test.pass("WEB_119 passed");
+		    } catch (Exception e) {
+		        String screenshotPath = takeScreenshot(testName);
+		        test.fail(e, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+		    }
+		    if (test.getModel().getStatus().toString().equalsIgnoreCase("fail")) {
+		        Assert.fail("Test case failed: " + testName);
+		    }
+			
+		}
 	
 	
 	
