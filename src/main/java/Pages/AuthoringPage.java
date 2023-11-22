@@ -1227,6 +1227,7 @@ public class AuthoringPage extends HelperFunctions {
     public void setHyperlinks(ExtentTest test)  throws Exception {
    	 test.info("Wait for the page to load.");
    	read1.setExcelFile("./testdata.xlsx", "QA");
+   	HelperFunctions.staticWait(5);
    	/*read1.setExcelFile("./testdata.xlsx", "QA");
 		email.sendKeys(read1.getCellData("DATA", 1));
 		next.click();
@@ -1275,7 +1276,8 @@ public class AuthoringPage extends HelperFunctions {
 	    Driver.getDriver().switchTo().window(tabs2.get(1));
 	    test.info("Go to the publish page");
 	    Driver.getDriver().get(read1.getCellData("VALUE", 21));
-	    HelperFunctions.waitForPageToLoad(3);
+	    HelperFunctions.waitForPageToLoad(60);
+	    HelperFunctions.staticWait(5);
 	    test.info("Verified all contents' position match with the system");
 	    Assert.assertTrue(firstTitle.getText().contains(expectedTitle));
 	    Assert.assertTrue(secondTitle.getText().contains(expectedTitle2));
@@ -1291,7 +1293,8 @@ public class AuthoringPage extends HelperFunctions {
     
     public void setSitemap(ExtentTest test) throws Exception {
     	test.info("Wait for the page to load.");
-    	//HelperFunctions.waitForPageToLoad(10);
+    	HelperFunctions.waitForPageToLoad(10);
+    	HelperFunctions.staticWait(3);
     	read1.setExcelFile("./testdata.xlsx", "QA");
     	JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
     	 WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
@@ -1331,12 +1334,25 @@ public class AuthoringPage extends HelperFunctions {
 	    wait1.until(ExpectedConditions.visibilityOf(myproductImage));
 	    test.info("Clicking my product image path");
 	    myproductImage.click();
-	    HelperFunctions.staticWait(3);
+	    try {
+	    	Thread.sleep(3000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
 	    JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
         executor.executeScript("arguments[0].click();", myproductImage);
+        try {
+	    	Thread.sleep(3000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
         JavascriptExecutor executor2 = (JavascriptExecutor) Driver.getDriver();
         executor2.executeScript("arguments[0].click();", myproductImage);
-        HelperFunctions.staticWait(3);
+        try {
+	    	Thread.sleep(3000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
         test.info("Clicking on select button");
         JavascriptExecutor executor3 = (JavascriptExecutor) Driver.getDriver();
         executor3.executeScript("arguments[0].click();", selectButton);
@@ -1344,7 +1360,11 @@ public class AuthoringPage extends HelperFunctions {
 	    HelperFunctions.staticWait(3);
 	    test.info("Clicking on check icon");
 	    checkIcon.click();
-	    HelperFunctions.staticWait(3);
+	    try {
+	    	Thread.sleep(5000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
 	    test.info("Clicking on preview");
 	    js.executeScript("arguments[0].click();", pageInfo);
   	    try {
@@ -1368,7 +1388,11 @@ public class AuthoringPage extends HelperFunctions {
 	    	//	Assert.assertTrue(false);
 	    	}
 	    }
-	    HelperFunctions.staticWait(3);
+	    try {
+	    	Thread.sleep(5000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
 	    test.info("Clicking on edit");
 	    js.executeScript("arguments[0].click();", pageInfo);
   	    try {
@@ -1391,18 +1415,35 @@ public class AuthoringPage extends HelperFunctions {
 	    wait1.until(ExpectedConditions.visibilityOf(automationImage));
 	    test.info("Clicking on automation path");
 	    automationImage.click();
-	    HelperFunctions.staticWait(3);
+	    try {
+	    	Thread.sleep(3000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
 	    JavascriptExecutor executor4 = (JavascriptExecutor) Driver.getDriver();
         executor4.executeScript("arguments[0].click();", automationImage);
+        try {
+	    	Thread.sleep(3000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
         JavascriptExecutor executor5 = (JavascriptExecutor) Driver.getDriver();
         executor5.executeScript("arguments[0].click();", automationImage);
-        HelperFunctions.staticWait(3);
+        try {
+	    	Thread.sleep(3000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
         JavascriptExecutor executor6 = (JavascriptExecutor) Driver.getDriver();
         executor6.executeScript("arguments[0].click();", selectButton);
         test.info("Clicking on check icon");
 	    HelperFunctions.staticWait(3);
 	    checkIcon.click();
-	    HelperFunctions.staticWait(3);
+	    try {
+	    	Thread.sleep(5000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
 	    js.executeScript("arguments[0].click();", pageInfo);
   	    try {
   	    	Thread.sleep(3000);
@@ -1433,7 +1474,8 @@ public class AuthoringPage extends HelperFunctions {
     
  public void setHideSitemap(ExtentTest test) throws Exception {
 	 test.info("Wait for the page to load.");
-	    //HelperFunctions.waitForPageToLoad(10);
+	    HelperFunctions.waitForPageToLoad(10);
+	 HelperFunctions.staticWait(3);
     	read1.setExcelFile("./testdata.xlsx", "QA");
     	JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
     	try {
@@ -1446,13 +1488,25 @@ public class AuthoringPage extends HelperFunctions {
  	    //wait.until(condition);
  	   test.info("Clicking on homepagedemo path");
 	    homepageDemo.click();
-	    HelperFunctions.staticWait(5);
+	    try {
+  	    	Thread.sleep(3000);
+  	    }catch(InterruptedException e) {
+  	    	e.printStackTrace();
+  	    }
 	    JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
         executor.executeScript("arguments[0].click();", homepageDemo);
-	    HelperFunctions.staticWait(5);
+        try {
+  	    	Thread.sleep(3000);
+  	    }catch(InterruptedException e) {
+  	    	e.printStackTrace();
+  	    }
 	    JavascriptExecutor executor2 = (JavascriptExecutor) Driver.getDriver();
         executor2.executeScript("arguments[0].click();", homepageDemo);
-	    HelperFunctions.staticWait(5);
+        try {
+  	    	Thread.sleep(3000);
+  	    }catch(InterruptedException e) {
+  	    	e.printStackTrace();
+  	    }
 	    test.info("Clicking on properties");
 	    properties.click();
 	    wait.until(ExpectedConditions.visibilityOf(hidesitemapCheckbox));
@@ -1461,33 +1515,66 @@ public class AuthoringPage extends HelperFunctions {
 	    HelperFunctions.staticWait(5);
 	    test.info("Clicking on save&close");
 	    saveAndClose.click();
-	    HelperFunctions.waitForPageToLoad(30);
+	    HelperFunctions.waitForPageToLoad(90);
+	    try {
+  	    	Thread.sleep(3000);
+  	    }catch(InterruptedException e) {
+  	    	e.printStackTrace();
+  	    }
 	    test.info("Clicking on homepagedemo path");
 	    JavascriptExecutor executor3 = (JavascriptExecutor) Driver.getDriver();
         executor3.executeScript("arguments[0].click();", homepageDemo);
-	    HelperFunctions.staticWait(3);
+        try {
+  	    	Thread.sleep(3000);
+  	    }catch(InterruptedException e) {
+  	    	e.printStackTrace();
+  	    }
 	    JavascriptExecutor executor4 = (JavascriptExecutor) Driver.getDriver();
         executor4.executeScript("arguments[0].click();", homepageDemo);
-	    HelperFunctions.staticWait(3);
+        try {
+  	    	Thread.sleep(3000);
+  	    }catch(InterruptedException e) {
+  	    	e.printStackTrace();
+  	    }
 	    JavascriptExecutor executor5 = (JavascriptExecutor) Driver.getDriver();
         executor5.executeScript("arguments[0].click();", homepageDemo);
-        HelperFunctions.staticWait(5);
+        try {
+  	    	Thread.sleep(3000);
+  	    }catch(InterruptedException e) {
+  	    	e.printStackTrace();
+  	    }
         test.info("Clicking on sitemap path");
         JavascriptExecutor executor7 = (JavascriptExecutor) Driver.getDriver();
         executor7.executeScript("arguments[0].click();",  sitemapImg);
         HelperFunctions.staticWait(5);
         test.info("Clicking on quick publish");
         quickPublish.click();
-          HelperFunctions.staticWait(5);
+        try {
+  	    	Thread.sleep(5000);
+  	    }catch(InterruptedException e) {
+  	    	e.printStackTrace();
+  	    }
           JavascriptExecutor executor6 = (JavascriptExecutor) Driver.getDriver();
         executor6.executeScript("arguments[0].click();",  publish2);
-        HelperFunctions.staticWait(3);
+        try {
+  	    	Thread.sleep(3000);
+  	    }catch(InterruptedException e) {
+  	    	e.printStackTrace();
+  	    }
         JavascriptExecutor executor11 = (JavascriptExecutor) Driver.getDriver();
         executor11.executeScript("arguments[0].click();", homepageDemo);
-        HelperFunctions.staticWait(3);
+        try {
+  	    	Thread.sleep(3000);
+  	    }catch(InterruptedException e) {
+  	    	e.printStackTrace();
+  	    }
         JavascriptExecutor executor8 = (JavascriptExecutor) Driver.getDriver();
         executor8.executeScript("arguments[0].click();",  sitemapImg);
-        HelperFunctions.staticWait(3);
+        try {
+  	    	Thread.sleep(3000);
+  	    }catch(InterruptedException e) {
+  	    	e.printStackTrace();
+  	    }
         JavascriptExecutor executor9 = (JavascriptExecutor) Driver.getDriver();
         executor9.executeScript("arguments[0].click();",  sitemapImg);
         HelperFunctions.staticWait(3);
@@ -1496,6 +1583,12 @@ public class AuthoringPage extends HelperFunctions {
         ArrayList<String> tabs2 = new ArrayList<String>(Driver.getDriver().getWindowHandles());
         Driver.getDriver().switchTo().window(tabs2.get(1));
         HelperFunctions.waitForPageToLoad(60);
+        HelperFunctions.staticWait(3);
+        try {
+  	    	Thread.sleep(5000);
+  	    }catch(InterruptedException e) {
+  	    	e.printStackTrace();
+  	    }
         js.executeScript("arguments[0].click();", pageInfo);
   	    try {
   	    	Thread.sleep(3000);
@@ -1523,8 +1616,8 @@ public class AuthoringPage extends HelperFunctions {
  
  public void setTilesAuthorization(ExtentTest test) throws Exception {
 	 test.info("Wait for the page to load.");
-	// HelperFunctions.waitForPageToLoad(15);
-	 //HelperFunctions.staticWait(3);
+	 HelperFunctions.waitForPageToLoad(15);
+	 HelperFunctions.staticWait(3);
 	 JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
 	 WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
 	 //wait.until(ExpectedConditions.visibilityOf(pageInfo));
@@ -1590,7 +1683,7 @@ public class AuthoringPage extends HelperFunctions {
 	    HelperFunctions.staticWait(3);
 	    test.info("Clicking on check icon");
 	    checkIcon.click();
-	    HelperFunctions.staticWait(3);
+	    HelperFunctions.staticWait(5);
 	    test.info("Verified tiles have changed after changing the path");
 	    for(WebElement eachTile: legalTiles) {
 			if(eachTile.getText().contains("Offering Overview")&& eachTile.getText().contains("Data Processing Addendum")&& eachTile.getText().contains("Data Processing Addendum")
@@ -1605,7 +1698,11 @@ public class AuthoringPage extends HelperFunctions {
 			//	Assert.assertTrue(false);
 			}
 		}
-	    HelperFunctions.staticWait(3);
+	    try {
+	    	Thread.sleep(5000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
 	    //ExpectedCondition<WebElement> condition2=ExpectedConditions.elementToBeClickable(editButtonContent);
 		   //wait.until(condition2);
 	    //wait.until(ExpectedConditions.visibilityOf(pageInfo));
@@ -1636,6 +1733,11 @@ public class AuthoringPage extends HelperFunctions {
 	    HelperFunctions.staticWait(3);
 	    test.info("Clicking on check icon");
 	    checkIcon.click();
+	    try {
+	    	Thread.sleep(3000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
 	    test.info("Verified tiles have changed after changing the path again");
 	    for(WebElement eachTile: legalTiles) {
 			if(eachTile.getText().contains("Offering Overview")&& eachTile.getText().contains("Maintenance & Support")&& eachTile.getText().contains("Data Processing Addendum")
@@ -1659,7 +1761,12 @@ public class AuthoringPage extends HelperFunctions {
  public void setContentAuthorization(ExtentTest test) throws Exception {
 	 read1.setExcelFile("./testdata.xlsx", "QA");
 	 test.info("Wait for the page to load.");
-	    //HelperFunctions.waitForPageToLoad(10);
+	    HelperFunctions.waitForPageToLoad(10);
+	 try {
+	    	Thread.sleep(5000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
 	 JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
 	    WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
 	    //ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(editButtonContent);
@@ -1693,7 +1800,11 @@ public class AuthoringPage extends HelperFunctions {
 	    HelperFunctions.staticWait(3);
 	    test.info("Click on check icon");
 	    checkIcon.click();
-	    HelperFunctions.staticWait(3);
+	    try {
+	    	Thread.sleep(5000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
 	    js.executeScript("arguments[0].click();", pageInfo);
   	    try {
   	    	Thread.sleep(3000);
@@ -1722,6 +1833,11 @@ public class AuthoringPage extends HelperFunctions {
      }
 	 test.info("Click on edit");
 	 Driver.getDriver().switchTo().defaultContent();
+	 try {
+	    	Thread.sleep(3000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
 	 js.executeScript("arguments[0].click();", pageInfo);
 	    try {
 	    	Thread.sleep(3000);
@@ -1750,7 +1866,11 @@ public class AuthoringPage extends HelperFunctions {
 	    HelperFunctions.staticWait(3);
 	    test.info("Click on check icon");
 	    checkIcon.click();
-	    HelperFunctions.staticWait(3);
+	    try {
+	    	Thread.sleep(5000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
 	    test.info("Click on preview");
 	    js.executeScript("arguments[0].click();", pageInfo);
 	    try {
@@ -2265,7 +2385,8 @@ js.executeScript("window.open()");
  }
  public void setCatCombination(ExtentTest test) throws Exception {
 	 test.info("Wait for the page to load.");
-	 //HelperFunctions.waitForPageToLoad(10);
+	 HelperFunctions.waitForPageToLoad(10);
+	 HelperFunctions.staticWait(5);
 	 read1.setExcelFile("./testdata.xlsx", "QA");
 	/*	email.sendKeys(read1.getCellData("DATA", 1));
 		next.click();
@@ -2610,6 +2731,7 @@ js.executeScript("window.open()");
     // Driver.getDriver().get("https://auth-productcentral-stg.products.pwc.com/editor.html/content/pc/us/en/automation/my-products/fluid-forecast.html");
      test.info("Wait for the page to load.");
     // HelperFunctions.waitForPageToLoad(10);
+     //HelperFunctions.staticWait(3);
      WebDriverWait wait=new WebDriverWait(Driver.getDriver(),15);
 	   //ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(editButtonContent);
 	   //wait.until(condition);
@@ -2617,9 +2739,10 @@ js.executeScript("window.open()");
      try {
 	    	Thread.sleep(5000);
 	    }catch(InterruptedException e) {
+	    	js.executeScript("arguments[0].click();", pageInfo);
 	    	e.printStackTrace();
 	    }
-	 js.executeScript("arguments[0].click();", pageInfo);
+	 
 	    try {
 	    	Thread.sleep(3000);
 	    }catch(InterruptedException e) {
@@ -2647,12 +2770,13 @@ js.executeScript("window.open()");
 	        HelperFunctions.staticWait(2);
 	        test.info("Click on check icon");
 	        checkIcon.click();
-	        HelperFunctions.staticWait(3);
+	        HelperFunctions.staticWait(5);
 	        Driver.getDriver().navigate().refresh();
 	        HelperFunctions.waitForPageToLoad(60);
+	        HelperFunctions.staticWait(5);
 	        test.info("Click on preview banner");
 	        try {
-	   	    	Thread.sleep(3000);
+	   	    	Thread.sleep(5000);
 	   	    }catch(InterruptedException e) {
 	   	    	e.printStackTrace();
 	   	    }
@@ -2681,7 +2805,7 @@ js.executeScript("window.open()");
  }
  public void setReorderTiles(ExtentTest test) throws Exception {
 	    test.info("Wait for the page to load.");
-	    //HelperFunctions.waitForPageToLoad(10);
+	    HelperFunctions.staticWait(5);
 	    try {
 	    	Thread.sleep(5000);
 	    }catch(InterruptedException e) {
@@ -2695,7 +2819,7 @@ js.executeScript("window.open()");
 	    js.executeScript("arguments[0].click();", pageInfo);
 	    //pageInfo.click();
 	    try {
-	    	Thread.sleep(5000);
+	    	Thread.sleep(3000);
 	    }catch(InterruptedException e) {
 	    	e.printStackTrace();
 	    }
@@ -2715,6 +2839,11 @@ js.executeScript("window.open()");
 
 	    test.info("Switch back to default content.");
 	    Driver.getDriver().switchTo().defaultContent();
+	    try {
+	    	Thread.sleep(3000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
 	    js.executeScript("arguments[0].click();", pageInfo);
 	    //pageInfo.click();
 	    try {
@@ -2765,6 +2894,11 @@ js.executeScript("window.open()");
 
 	    test.info("Switch back to default content.");
 	    Driver.getDriver().switchTo().defaultContent();
+	    try {
+	    	Thread.sleep(3000);
+	    }catch(InterruptedException e) {
+	    	e.printStackTrace();
+	    }
 	    js.executeScript("arguments[0].click();", pageInfo);
 	    //pageInfo.click();
 	    try {
@@ -2800,7 +2934,7 @@ public void setCheckboxNotTicked(ExtentTest test) throws Exception {
 	 test.info("Wait for the page to load.");
 	   // Driver.getDriver().get("https://auth-productcentral-qa.products.pwc.com/editor.html/content/pc/us/en/automation/products/cloud/offering-overview.html");
 		//HelperFunctions.waitForPageToLoad(10);
-		
+	 HelperFunctions.staticWait(5);
 		 WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
 		   // ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(pageInfo);
 		    //wait.until(condition);
@@ -2811,6 +2945,7 @@ public void setCheckboxNotTicked(ExtentTest test) throws Exception {
 			 try {
 		   	    	Thread.sleep(5000);
 		   	    }catch(InterruptedException e) {
+		   	    	
 		   	    	e.printStackTrace();
 		   	    }
 			    test.info("Click on page info");
@@ -2826,6 +2961,7 @@ public void setCheckboxNotTicked(ExtentTest test) throws Exception {
 		saveAndClose.click();
 		test.info("Wait for the page to load.");
 		HelperFunctions.waitForPageToLoad(90);
+		HelperFunctions.staticWait(3);
 		try {
    	    	Thread.sleep(5000);
    	    }catch(InterruptedException e) {
@@ -2858,7 +2994,7 @@ public void setPushingPageSiteAdmin(ExtentTest test) throws Exception {
 	 test.info("Wait for the page to load.");
   //Driver.getDriver().get("https://auth-productcentral-qa.products.pwc.com/editor.html/content/pc/us/en/automation/legal.html");
 	 HelperFunctions.waitForPageToLoad(30);
-	
+	 HelperFunctions.staticWait(5);
 	 WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
 	    //ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(pageInfo);
 	    //wait.until(condition);
@@ -2869,10 +3005,11 @@ public void setPushingPageSiteAdmin(ExtentTest test) throws Exception {
 		 try {
 	   	    	Thread.sleep(5000);
 	   	    }catch(InterruptedException e) {
+	   	    	
 	   	    	e.printStackTrace();
 	   	    }
 		    test.info("Click on page info");
-		    js.executeScript("arguments[0].click();", pageInfo);
+		    js.executeScript("arguments[0].click();", pageInfo); 
 	 //pageInfo.click();
 	 wait.until(ExpectedConditions.visibilityOf(publishInfoonPage));
 	 test.info("Getting the publish info before publishing");
@@ -2882,6 +3019,7 @@ public void setPushingPageSiteAdmin(ExtentTest test) throws Exception {
   HelperFunctions.staticWait(2);
   Driver.getDriver().navigate().refresh();
   HelperFunctions.waitForPageToLoad(60);
+  HelperFunctions.staticWait(5);
   test.info("Click on page info");
   //JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
 
@@ -2904,6 +3042,7 @@ public void setPushingPageSiteAdmin(ExtentTest test) throws Exception {
 public void setAuthorExperienceFragment(ExtentTest test) throws Exception {
 	   //HelperFunctions.waitForPageToLoad(5);
 	   test.info("Wait for the page to load.");
+	   HelperFunctions.staticWait(5);
 //Driver.getDriver().get("https://auth-productcentral-qa.products.pwc.com/editor.html/content/experience-fragments/pc/us/en/site/experience-fragment/master.html");
 	  // HelperFunctions.waitForPageToLoad(10);
 	   WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
@@ -2914,10 +3053,11 @@ public void setAuthorExperienceFragment(ExtentTest test) throws Exception {
 		 try {
 	   	    	Thread.sleep(5000);
 	   	    }catch(InterruptedException e) {
+	   	     js.executeScript("arguments[0].click();", pageInfo);
 	   	    	e.printStackTrace();
 	   	    }
 		    test.info("Click on page info");
-		    js.executeScript("arguments[0].click();", pageInfo);
+		   
 		    try {
 	   	    	Thread.sleep(3000);
 	   	    }catch(InterruptedException e) {
@@ -2946,10 +3086,10 @@ public void setAuthorExperienceFragment(ExtentTest test) throws Exception {
 	   HelperFunctions.staticWait(1);
 	   test.info("Click on check icon");
 	   checkIcon.click();
-	    HelperFunctions.staticWait(3);
+	    //HelperFunctions.staticWait(3);
 	    test.info("Click on page info");
 	    try {
-   	    	Thread.sleep(5000);
+   	    	Thread.sleep(10000);
    	    }catch(InterruptedException e) {
    	    	e.printStackTrace();
    	    }
@@ -2961,6 +3101,7 @@ public void setAuthorExperienceFragment(ExtentTest test) throws Exception {
 	    HelperFunctions.staticWait(3);
 	    Driver.getDriver().get("https://auth-productcentral-stg.products.pwc.com/editor.html/content/pc/us/en/automation/privacy-hub.html");
 	    HelperFunctions.waitForPageToLoad(60);
+	    HelperFunctions.staticWait(3);
 	    try {
    	    	Thread.sleep(5000);
    	    }catch(InterruptedException e) {
@@ -3011,7 +3152,8 @@ public void setCreateVariationExperienceFragment(ExtentTest test) throws Excepti
 	  // HelperFunctions.waitForPageToLoad(10);
 	   test.info("Wait for the page to load.");
 //Driver.getDriver().get("https://auth-productcentral-qa.products.pwc.com/mnt/overlay/cq/experience-fragments/content/experience-fragments/createpagewizard.html/content/experience-fragments/pc/us/en/site/experience-fragment");
-	   //HelperFunctions.waitForPageToLoad(15);
+	   HelperFunctions.waitForPageToLoad(15);
+	   HelperFunctions.staticWait(3);
 	   test.info("Clicking on web variation page content");
 	    WebDriverWait wait3 = new WebDriverWait(Driver.getDriver(), 30);
 	   // wait3.until(ExpectedConditions.visibilityOf(webVariation));
@@ -3037,7 +3179,8 @@ public void setCreateVariationExperienceFragment(ExtentTest test) throws Excepti
     wait3.until(ExpectedConditions.visibilityOf(doneButton));
     test.info("Clicking on done button");
     doneButton.click();
-    HelperFunctions.waitForPageToLoad(30);
+    HelperFunctions.waitForPageToLoad(90);
+    HelperFunctions.staticWait(3);
     wait3.until(ExpectedConditions.visibilityOf(webVariationContent));
     test.info("Verified the content has ben created");
     Assert.assertTrue(webVariationContent.isDisplayed());
@@ -3178,7 +3321,7 @@ public void setBannerTextField(ExtentTest test) throws Exception {
 	 test.info("Wait for the page to load.");
 	    //Driver.getDriver().get("https://auth-productcentral-qa.products.pwc.com/editor.html/content/pc/us/en/automation/my-products/fluid-forecast.html");
 		//HelperFunctions.waitForPageToLoad(10);
-		
+	    HelperFunctions.staticWait(5);
 		WebDriverWait wait=new WebDriverWait(Driver.getDriver(),15);
 	    //ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(editButtonContent);
 	    //wait.until(condition);
@@ -3379,18 +3522,17 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 	 public void setPrivacyFooterCopyWrite() throws Exception {
 		  // HelperFunctions.waitForPageToLoad(5);
 		//Driver.getDriver().get("https://auth-productcentral-qa.products.pwc.com/editor.html/content/experience-fragments/pc/us/en/site/experience-fragment/footer.html");
-		   //HelperFunctions.waitForPageToLoad(10);
+		   HelperFunctions.waitForPageToLoad(10);
 		   WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
-		   //ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(editButtonContent);
-		   //wait.until(condition);
 		   JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
 
 			 try {
-		   	    	Thread.sleep(5000);
+		   	    	Thread.sleep(10000);
 		   	    }catch(InterruptedException e) {
+		   	    	js.executeScript("arguments[0].click();", pageInfo);
 		   	    	e.printStackTrace();
 		   	    }
-			    js.executeScript("arguments[0].click();", pageInfo);
+			    
 			    try {
 		   	    	Thread.sleep(3000);
 		   	    }catch(InterruptedException e) {
@@ -3412,7 +3554,11 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 		   footerText.sendKeys(mockName);
 		   HelperFunctions.staticWait(3);
 		   checkIcon.click();
-		    HelperFunctions.staticWait(3);
+		   try {
+	   	    	Thread.sleep(10000);
+	   	    }catch(InterruptedException e) {
+	   	    	e.printStackTrace();
+	   	    }
 		    js.executeScript("arguments[0].click();", pageInfo);
 		    try {
 	   	    	Thread.sleep(3000);
@@ -3426,7 +3572,7 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 		   // WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(), 15);
 		 //  wait1.until(ExpectedConditions.visibilityOf(footerCopywrite));
 		    try {
-	   	    	Thread.sleep(3000);
+	   	    	Thread.sleep(5000);
 	   	    }catch(InterruptedException e) {
 	   	    	e.printStackTrace();
 	   	    }
@@ -3447,14 +3593,14 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 		 	
 		 // Driver.getDriver().get("https://auth-productcentral-qa.products.pwc.com/sites.html/content/pc/us/en/automation");
 			    //HelperFunctions.waitForPageToLoad(10);
-			    
 			    WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
 			    //ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(privacyHubImg);
 			    //wait.until(condition);
 			    //HelperFunctions.staticWait(3);
 			    try {
-		   	    	Thread.sleep(5000);
+		   	    	Thread.sleep(10000);
 		   	    }catch(InterruptedException e) {
+		   	    	
 		   	    	e.printStackTrace();
 		   	    }
 			    privacyHubImg.click();
@@ -3465,7 +3611,11 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 		   	    }
 			    JavascriptExecutor executor1 = (JavascriptExecutor) Driver.getDriver();
 		  executor1.executeScript("arguments[0].click();", privacyHubImg);
-		  HelperFunctions.staticWait(3);
+		  try {
+	   	    	Thread.sleep(3000);
+	   	    }catch(InterruptedException e) {
+	   	    	e.printStackTrace();
+	   	    }
 		  JavascriptExecutor executor2 = (JavascriptExecutor) Driver.getDriver();
 		  executor2.executeScript("arguments[0].click();", privacyHubImg);
 			    HelperFunctions.staticWait(3);
@@ -3485,7 +3635,7 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 	 public void setRelatedLinksAuthoringandRearrangeRelated() throws Exception {
 		 read1.setExcelFile("./testdata.xlsx", "STG");
 		// HelperFunctions.waitForPageToLoad(10);
-		  
+		 HelperFunctions.staticWait(5);
 		    WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
 			//ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(editButtonContent);
 			//wait.until(condition);
@@ -3495,9 +3645,10 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 			 try {
 		   	    	Thread.sleep(5000);
 		   	    }catch(InterruptedException e) {
+		   	     js.executeScript("arguments[0].click();", pageInfo);
 		   	    	e.printStackTrace();
 		   	    }
-			    js.executeScript("arguments[0].click();", pageInfo);
+			   
 			    try {
 		   	    	Thread.sleep(3000);
 		   	    }catch(InterruptedException e) {
@@ -3516,16 +3667,20 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 		    HelperFunctions.staticWait(2);
 	        checkIcon.click();
 	        try {
-	   	    	Thread.sleep(3000);
+	   	    	Thread.sleep(10000);
 	   	    }catch(InterruptedException e) {
 	   	    	e.printStackTrace();
 	   	    }
 		    js.executeScript("arguments[0].click();", pageInfo);
-			wait1.until(ExpectedConditions.visibilityOf(publishIcon));
+			/*wait1.until(ExpectedConditions.visibilityOf(publishIcon));
 		    publishIcon.click();
-		    HelperFunctions.staticWait(5);
+		    try {
+	   	    	Thread.sleep(5000);
+	   	    }catch(InterruptedException e) {
+	   	    	e.printStackTrace();
+	   	    }
 		    
-		    js.executeScript("arguments[0].click();", pageInfo);
+		    js.executeScript("arguments[0].click();", pageInfo);*/
 		    try {
 	   	    	Thread.sleep(3000);
 	   	    }catch(InterruptedException e) {
@@ -3551,6 +3706,11 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 		    WebDriverWait wait4=new WebDriverWait(Driver.getDriver(),10);
 			//ExpectedCondition<WebElement> condition2=ExpectedConditions.elementToBeClickable(editButtonContent);
 			//wait4.until(condition2);
+		    try {
+	   	    	Thread.sleep(3000);
+	   	    }catch(InterruptedException e) {
+	   	    	e.printStackTrace();
+	   	    }
 		    js.executeScript("arguments[0].click();", pageInfo);
 		    try {
 	   	    	Thread.sleep(3000);
@@ -3569,12 +3729,20 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 			builder2.dragAndDrop(move1, move3).build().perform();
 		    HelperFunctions.staticWait(2);
 	        checkIcon.click();
-			HelperFunctions.staticWait(3);
-			pageInfo.click();
-			wait5.until(ExpectedConditions.visibilityOf(publishIcon));
-		    publishIcon.click();
-		    HelperFunctions.staticWait(5);
+	        try {
+	   	    	Thread.sleep(10000);
+	   	    }catch(InterruptedException e) {
+	   	    	e.printStackTrace();
+	   	    }
 		    js.executeScript("arguments[0].click();", pageInfo);
+			/*wait5.until(ExpectedConditions.visibilityOf(publishIcon));
+		    publishIcon.click();
+		    try {
+	   	    	Thread.sleep(5000);
+	   	    }catch(InterruptedException e) {
+	   	    	e.printStackTrace();
+	   	    }
+		    js.executeScript("arguments[0].click();", pageInfo);*/
 		    try {
 	   	    	Thread.sleep(3000);
 	   	    }catch(InterruptedException e) {
@@ -3633,7 +3801,7 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 	 public void setAddingBulletList() throws Exception {
 		 read1.setExcelFile("./testdata.xlsx", "QA");
 		 //HelperFunctions.waitForPageToLoad(10);
-		  
+		 HelperFunctions.staticWait(5);
 		    WebDriverWait wait=new WebDriverWait(Driver.getDriver(),60);
 			//ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(editButtonContent);
 			//wait.until(condition);
@@ -3642,9 +3810,10 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 			 try {
 		   	    	Thread.sleep(5000);
 		   	    }catch(InterruptedException e) {
+		   	    	js.executeScript("arguments[0].click();", pageInfo);
 		   	    	e.printStackTrace();
 		   	    }
-			    js.executeScript("arguments[0].click();", pageInfo);
+			    
 			    try {
 		   	    	Thread.sleep(3000);
 		   	    }catch(InterruptedException e) {
@@ -3659,7 +3828,8 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 			//HelperFunctions.staticWait(2); 
 			//WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(), 10);
 			wait.until(ExpectedConditions.visibilityOf(phTextArea));
-			phTextArea.click();
+			js.executeScript("arguments[0].click();", phTextArea);
+			//phTextArea.click();
 			//WebDriverWait wait2 = new WebDriverWait(Driver.getDriver(), 10);
 			wait.until(ExpectedConditions.visibilityOf(bulletOptionsButton));
 			bulletOptionsButton.click();
@@ -3698,7 +3868,7 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 	   	    	e.printStackTrace();
 	   	    }
 	 	    test.info("Clicking on child page path");
-	 	    childPageImg.click();
+	 	   childPageImg.click();
 	 	   try {
 	  	    	Thread.sleep(3000);
 	  	    }catch(InterruptedException e) {
@@ -3706,7 +3876,11 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 	  	    }
 		    JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
 	        executor.executeScript("arguments[0].click();", childPageImg);
-		    HelperFunctions.staticWait(5);
+	        try {
+	  	    	Thread.sleep(3000);
+	  	    }catch(InterruptedException e) {
+	  	    	e.printStackTrace();
+	  	    }
 		    JavascriptExecutor executor2 = (JavascriptExecutor) Driver.getDriver();
 	        executor2.executeScript("arguments[0].click();", childPageImg);
 		    HelperFunctions.staticWait(5);
@@ -3764,9 +3938,10 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 			 try {
 		   	    	Thread.sleep(5000);
 		   	    }catch(InterruptedException e) {
+		   	     js.executeScript("arguments[0].click();", pageInfo);
 		   	    	e.printStackTrace();
 		   	    }
-			    js.executeScript("arguments[0].click();", pageInfo);
+			   
 			    try {
 		   	    	Thread.sleep(3000);
 		   	    }catch(InterruptedException e) {
@@ -3924,6 +4099,7 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 			read1.setExcelFile("./testdata.xlsx", "STG");
 			test.info("Wait for the page to load.");
 		    HelperFunctions.waitForPageToLoad(30);
+		    //HelperFunctions.staticWait(5);
 		    WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(), 30);
 		    //wait1.until(ExpectedConditions.visibilityOf(pageInfo));
 		    //pageInfo.click();
@@ -3932,9 +4108,10 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 			 try {
 		   	    	Thread.sleep(10000);
 		   	    }catch(InterruptedException e) {
+		   	  
 		   	    	e.printStackTrace();
 		   	    }
-			    js.executeScript("arguments[0].click();", pageInfo);
+			   js.executeScript("arguments[0].click();", pageInfo);
 		    wait1.until(ExpectedConditions.visibilityOf(viewasPublish));
 		    viewasPublish.click();	    
 		    //((JavascriptExecutor)Driver.getDriver()).executeScript("window.open();");
@@ -3969,6 +4146,7 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 			read1.setExcelFile("./testdata.xlsx", "STG");
 			test.info("Wait for the page to load.");
 			HelperFunctions.waitForPageToLoad(30);
+			HelperFunctions.staticWait(5);
 		    WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(), 30);
 		    //wait1.until(ExpectedConditions.visibilityOf(pageInfo));
 		    //pageInfo.click();
@@ -3977,9 +4155,10 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 			 try {
 		   	    	Thread.sleep(5000);
 		   	    }catch(InterruptedException e) {
+		   	    	
 		   	    	e.printStackTrace();
 		   	    }
-			    js.executeScript("arguments[0].click();", pageInfo);
+			 js.executeScript("arguments[0].click();", pageInfo);
 		    wait1.until(ExpectedConditions.visibilityOf(viewasPublish));
 		    viewasPublish.click();
 			 //((JavascriptExecutor)Driver.getDriver()).executeScript("window.open();");
@@ -4015,7 +4194,7 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 			 read1.setExcelFile("./testdata.xlsx", "QA");
 			 test.info("Wait for the page to load.");
 			    //HelperFunctions.waitForPageToLoad(10);
-			    
+			 HelperFunctions.staticWait(5);
 			    WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
 			    //ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(editButtonContent);
 			    //wait.until(condition);
@@ -4024,9 +4203,10 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 				 try {
 			   	    	Thread.sleep(5000);
 			   	    }catch(InterruptedException e) {
+			   	    	js.executeScript("arguments[0].click();", pageInfo);
 			   	    	e.printStackTrace();
 			   	    }
-				    js.executeScript("arguments[0].click();", pageInfo);
+				    
 				    try {
 			   	    	Thread.sleep(3000);
 			   	    }catch(InterruptedException e) {
@@ -4050,7 +4230,7 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 			    HelperFunctions.staticWait(2);
 			    checkIcon.click();
 			    try {
-		   	    	Thread.sleep(5000);
+		   	    	Thread.sleep(10000);
 		   	    }catch(InterruptedException e) {
 		   	    	e.printStackTrace();
 		   	    }
@@ -4076,15 +4256,18 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 		public void setLatestTabs() throws Exception {
 		    read1.setExcelFile("./testdata.xlsx", "STG");
 		    WebDriverWait wait=new WebDriverWait(Driver.getDriver(),40);
+		    JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
+		    //HelperFunctions.staticWait(5);
 		    try {
-		    	Thread.sleep(3000);
+		    	Thread.sleep(5000);
 		    }catch(InterruptedException e) {
+		    	executor.executeScript("arguments[0].click();", pageInfo);
 		    	e.printStackTrace();
 		    }
-			  JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
+			
 			//HelperFunctions.waitForPageToLoad(15);
 		    //WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(), 60);
-		    executor.executeScript("arguments[0].click();", pageInfo);
+		    
 		    try {
 		    	Thread.sleep(3000);
 		    }catch(InterruptedException e) {
@@ -4094,7 +4277,7 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 			
 			//HelperFunctions.staticWait(5);
 			Driver.getDriver().switchTo().frame(0);
-			wait.until(ExpectedConditions.elementToBeClickable(hyperlink));
+			wait.until(ExpectedConditions.visibilityOf(hyperlink));
 			//JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
 	        executor.executeScript("arguments[0].click();", hyperlink);
 			//hyperlink.click();
@@ -4106,6 +4289,11 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 		    HelperFunctions.staticWait(3);
 		    Driver.getDriver().get(read1.getCellData("VALUE", 87));
 		    HelperFunctions.waitForPageToLoad(60);
+		    try {
+		    	Thread.sleep(5000);
+		    }catch(InterruptedException e) {
+		    	e.printStackTrace();
+		    }
 		    //wait.until(ExpectedConditions.elementToBeClickable(editButtonContent));
 		    executor.executeScript("arguments[0].click();", pageInfo);
 		    try {
@@ -4122,7 +4310,7 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 			authLatest.click();
 			wait.until(ExpectedConditions.visibilityOf(configure));
 	        configure.click();
-			wait.until(ExpectedConditions.elementToBeClickable(authLatestDesc));
+			wait.until(ExpectedConditions.visibilityOf(authLatestDesc));
 			authLatestDesc.click();
 			HelperFunctions.staticWait(2);	
 			authLatestDesc.sendKeys(Keys.chord(Keys.CONTROL, "a"));
@@ -4142,7 +4330,7 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 		    //HelperFunctions.staticWait(5);
 		    Driver.getDriver().switchTo().frame(0);
 		    String mainWindowHandle=Driver.getDriver().getWindowHandle();
-			wait.until(ExpectedConditions.elementToBeClickable(hyperlink));
+			wait.until(ExpectedConditions.visibilityOf(hyperlink));
 			executor.executeScript("arguments[0].click();", hyperlink);
 			//hyperlink.click();
 			WebDriverWait wait4 = new WebDriverWait(Driver.getDriver(), 30);
@@ -4158,9 +4346,9 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 		    	}
 		    HelperFunctions.staticWait(3);
 		    Driver.getDriver().get(read1.getCellData("VALUE", 87));
-		    HelperFunctions.waitForPageToLoad(30);
+		    HelperFunctions.waitForPageToLoad(90);
 		    try {
-		    	Thread.sleep(3000);
+		    	Thread.sleep(5000);
 		    }catch(InterruptedException e) {
 		    	e.printStackTrace();
 		    }
@@ -4182,7 +4370,7 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 		    authLatest.click();
 			wait.until(ExpectedConditions.visibilityOf(configure));
 	        configure.click();
-			wait.until(ExpectedConditions.elementToBeClickable(authLatestDesc));
+			wait.until(ExpectedConditions.visibilityOf(authLatestDesc));
 			authLatestDesc.click();
 			HelperFunctions.staticWait(2);	
 			authLatestDesc.sendKeys(Keys.chord(Keys.CONTROL, "a"));
@@ -4218,17 +4406,20 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 		public void setVideoEdit(ExtentTest test) throws Exception {
 			 read1.setExcelFile("./testdata.xlsx", "QA");
 			 test.info("Wait for the page to load.");
+			 //HelperFunctions.staticWait(5);
+			    JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
 			    //HelperFunctions.waitForPageToLoad(10);
 			 try {
-			    	Thread.sleep(3000);
+			    	Thread.sleep(5000);
 			    }catch(InterruptedException e) {
+			    	executor.executeScript("arguments[0].click();", pageInfo);
 			    	e.printStackTrace();
 			    }
 			    WebDriverWait wait=new WebDriverWait(Driver.getDriver(),40);
 				//ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(previewButton);
 				//wait.until(condition);
-			    JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
-			    executor.executeScript("arguments[0].click();", pageInfo);
+		
+			    
 			    try {
 			    	Thread.sleep(3000);
 			    }catch(InterruptedException e) {
@@ -4257,7 +4448,11 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 			    HelperFunctions.staticWait(2);
 			    test.info("Click on check button");
 			    checkButton.click();
-				HelperFunctions.staticWait(5);
+			    try {
+			    	Thread.sleep(10000);
+			    }catch(InterruptedException e) {
+			    	e.printStackTrace();
+			    }
 				test.info("Click on view as published");
 			
 			    executor.executeScript("arguments[0].click();", pageInfo);
@@ -4283,7 +4478,7 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 			 test.info("Wait for the page to load.");
 			 HelperFunctions.waitForPageToLoad(20);
 			 read1.setExcelFile("./testdata.xlsx", "STG");
-			   
+			 HelperFunctions.staticWait(5);
 			    WebDriverWait wait=new WebDriverWait(Driver.getDriver(),60);
 				//wait.until(ExpectedConditions.elementToBeClickable(createButton));
 			    try {
@@ -4373,6 +4568,7 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 		        ArrayList<String> tabs=new ArrayList<String>(Driver.getDriver().getWindowHandles());
 			    Driver.getDriver().switchTo().window(tabs.get(1));
 			    HelperFunctions.waitForPageToLoad(60);
+			    HelperFunctions.staticWait(3);
 			    try {
 			    	Thread.sleep(5000);
 			    }catch(InterruptedException e) {
@@ -4402,6 +4598,7 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 		        test.info("Go to AEM page");
 		        Driver.getDriver().get(read1.getCellData("VALUE", 41));
 		        HelperFunctions.waitForPageToLoad(60);
+		        HelperFunctions.staticWait(3);
 		        try {
 			    	Thread.sleep(3000);
 			    }catch(InterruptedException e) {
