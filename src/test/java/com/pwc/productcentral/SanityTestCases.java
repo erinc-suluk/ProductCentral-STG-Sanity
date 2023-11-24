@@ -807,7 +807,8 @@ public class SanityTestCases extends BasePage {
 	
 	@Test
 	public void WEB_35() throws Exception{
-		String testName = "Verify display a tile per document category";
+		String testName = "Verify display a tile per document category"
+				+"/Verify that Resell Alliances tile's title is changed to Resell Alliance Terms";
         ExtentTest test = extent.createTest(testName);
 
         try {
@@ -1235,7 +1236,10 @@ public class SanityTestCases extends BasePage {
     }
 	@Test
     public void WEB_58() throws Exception{
-        String testName = "Verify end user is able to close the banner using keyboard";
+		String testName = "Verify end user is able to close the banner using keyboard"
+        		+"/Verify that automated banners are displayed on the My Products and My products+pages"
+        		+"/Verify that UMS outage or degradation notifications are displayed in AEM notifications banner on my product pages"
+        		+"/Verify that when user reloads/refresh the page the closed banner should not appear";
         ExtentTest test = extent.createTest(testName);
 
         try {
@@ -1295,7 +1299,8 @@ public class SanityTestCases extends BasePage {
     }
     @Test
     public void WEB_62() throws Exception{
-        String testName = "Verify that within the modal an eyeball icon is displayed in the product that matches the Site Visitor's current MyProduct product page";
+    	 String testName = "Verify that within the modal an eyeball icon is displayed in the product that matches the Site Visitor's current MyProduct product page"
+         		+"/Verify system status indicators are visible in the hero component and MyProduct modal window.";
         ExtentTest test = extent.createTest(testName);
 
         try {
@@ -2207,7 +2212,8 @@ public class SanityTestCases extends BasePage {
 		@Test
 		public void WEB_116() throws Exception{
 			String testName = "Verify'Digital MIM Supported' field support only boolean values and by default it is set as true"
-					+"/ Verify PwC super admin is able to add product";
+					+"/ Verify PwC super admin is able to add product"
+					+"/Verify when products are digital MIM supported then each product must be visible either Green, Yellow or Red system indicators.";
 	        ExtentTest test = extent.createTest(testName);
 
 	        try {
@@ -2347,7 +2353,8 @@ public class SanityTestCases extends BasePage {
 		@Test
 		public void WEB_123() throws Exception{
 			String testName = "Verify author is able to add/pick any video from Kaltura repository that they want to add on page"
-					+"/ Verify published page is displaying one or more videos and user is able to see these videos";
+					+"/ Verify published page is displaying one or more videos and user is able to see these videos"
+					+"Verify that as a user able to see the search box on the pages created using my product+ template";
 		
 		    ExtentTest test = extent.createTest(testName);
 
@@ -2365,26 +2372,7 @@ public class SanityTestCases extends BasePage {
 		    }
 			
 		}
-		@Test
-		public void WEB_124() throws Exception{
-			String testName = "Verify that as a user able to see the search box on the pages created using my product+ template";
 		
-		    ExtentTest test = extent.createTest(testName);
-
-		    try {
-		        Driver.getDriver().get(read1.getCellData("VALUE", 41));
-		        lpo.setLogin4();
-		        ap.setMyProductPageSearch(test);
-		        test.pass("WEB_119 passed");
-		    } catch (Exception e) {
-		        String screenshotPath = takeScreenshot(testName);
-		        test.fail(e, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
-		    }
-		    if (test.getModel().getStatus().toString().equalsIgnoreCase("fail")) {
-		        Assert.fail("Test case failed: " + testName);
-		    }
-			
-		}
 	
 	
 	

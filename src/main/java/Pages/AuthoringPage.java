@@ -2935,7 +2935,7 @@ public void setCheckboxNotTicked(ExtentTest test) throws Exception {
 	   // Driver.getDriver().get("https://auth-productcentral-qa.products.pwc.com/editor.html/content/pc/us/en/automation/products/cloud/offering-overview.html");
 		//HelperFunctions.waitForPageToLoad(10);
 	 HelperFunctions.staticWait(5);
-		 WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
+		 WebDriverWait wait=new WebDriverWait(Driver.getDriver(),90);
 		   // ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(pageInfo);
 		    //wait.until(condition);
 		    //HelperFunctions.staticWait(3);
@@ -2953,7 +2953,7 @@ public void setCheckboxNotTicked(ExtentTest test) throws Exception {
 		wait.until(ExpectedConditions.visibilityOf(openProper));
 		test.info("Click on open properties");
 		openProper.click();
-		HelperFunctions.waitForPageToLoad(20);
+		HelperFunctions.waitForPageToLoad(90);
 		wait.until(ExpectedConditions.visibilityOf(hideListing));
 		test.info("Verified hide listing checkbox not selected");
 		Assert.assertFalse( hideListing.isSelected());
@@ -4189,6 +4189,19 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 		    }
 		    test.info("Verified the banner is closed");
 		    HelperFunctions.staticWait(3);
+		    test.info("Refresh the page to observe if the banner exists");
+		    Driver.getDriver().navigate().refresh();
+		    HelperFunctions.waitForPageToLoad(60);
+		    HelperFunctions.staticWait(3);
+		    if(!banner2.isDisplayed()) {
+		        Assert.assertTrue(true);
+		    }else {
+		        String errorMessage = "banner is not displayed";
+		        logger.error(errorMessage);
+		        throw new Exception(errorMessage);
+		    }
+		    test.info("Verified closed banner does not appear when user refresh the page");
+		    HelperFunctions.staticWait(3);
 		}
 		public void setEmbedHTML(ExtentTest test) throws Exception {
 			 read1.setExcelFile("./testdata.xlsx", "QA");
@@ -4470,7 +4483,10 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 				    test.info("Wait for visibility of menu items");
 				    wait.until(ExpectedConditions.visibilityOf(videoPlayers.get(0)));
 				    Assert.assertTrue(videoPlayers.size()>2);
+				    HelperFunctions.staticWait(3);
 				    test.info("Verified one or more videos appear on the page");
+				    Assert.assertTrue(searchInput.isDisplayed());
+				    test.info("Verified search input is displayed");
 				    HelperFunctions.staticWait(3);
 			    
 		}
@@ -4624,7 +4640,8 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 			    	e.printStackTrace();
 			    }
 		        test.info("Click on delete");
-		        delete.click();
+		        executor1.executeScript("arguments[0].click();", delete);
+		        //delete.click();
 		        wait2.until(ExpectedConditions.visibilityOf(delete2));
 		        delete2.click();
 		        HelperFunctions.staticWait(5);

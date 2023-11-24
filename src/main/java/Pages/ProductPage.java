@@ -299,6 +299,18 @@ public class ProductPage extends HelperFunctions {
 	@FindBy(xpath="//div[contains(@class, 'video-player')]")
 	private WebElement videoPlayer;
 	
+	@FindBy(xpath="//li[@id='labelAvailable']//span[@class='status-dot available']")
+	private WebElement statusAvailable;
+	
+	@FindBy(xpath="//li[@id='labelOutage']//span[@class='status-dot outage']")
+	private WebElement statusOutage;
+	
+	@FindBy(xpath="//li[@id='labelDegradation']//span[@class='status-dot degradation']")
+	private WebElement statusInterrupted;
+	
+	@FindBy(xpath="//span[contains(@class, 'ap-icon cmp-hero-promotion__status-icon')]")
+	private WebElement statusIcon;
+	
 	ReadXLSdata read1=new ReadXLSdata();
 	
 	
@@ -788,8 +800,10 @@ public void setLoadMoreButton(ExtentTest test) throws Exception {
       JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
       executor.executeScript("arguments[0].click();", viewMoreButton);
       WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(), 15);
-	    wait1.until(ExpectedConditions.visibilityOf(secondForYou));
+	    //wait1.until(ExpectedConditions.visibilityOf(secondForYou));
       HelperFunctions.staticWait(3);
+	    HelperFunctions.scrollToElement(secondForYou);
+      HelperFunctions.staticWait(2);
       Assert.assertTrue(secondForYou.isDisplayed());
      /* if(viewLessButton.isDisplayed()) {
       	for(WebElement eachAsset: first5Assets) {
@@ -966,17 +980,27 @@ public void setActiveTab() {
 
 public void setFirstTabActive(ExtentTest test) throws Exception {
 	test.info("Wait for the page to load.");
-	//HelperFunctions.waitForPageToLoad(10);
-	//Driver.getDriver().get("https://productcentral-stg.products.pwc.com/content/pc/us/en/automation/my-products/enterprise-control.html");
+	//HelperFunctions.waitForPageToLoad(15);
+	//Driver.getDriver().get("https://productcentral-qa.products.pwc.com/content/pc/us/en/automation/my-products/enterprise-control.html");
 	//HelperFunctions.waitForPageToLoad(10);
 	//myProductOnLeftNavigation.click();
 	//HelperFunctions.waitForPageToLoad(5);
-	WebDriverWait wait=new WebDriverWait(Driver.getDriver(),20);
-    ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(viewAll);
+	WebDriverWait wait=new WebDriverWait(Driver.getDriver(),60);
+    ExpectedCondition<WebElement> condition=ExpectedConditions.visibilityOf(viewAll);
     wait.until(condition);
-	HelperFunctions.staticWait(3);
+    //HelperFunctions.staticWait(3);
     test.info("Click on view all");
 	viewAll.click();
+	wait.until(ExpectedConditions.visibilityOf(productsCont.get(2)));
+	HelperFunctions.staticWait(2);
+	//Assert.assertTrue(statusOutage.isDisplayed());
+	//test.info("Verified status indicator label for outage is displayed");
+	//HelperFunctions.staticWait(2);
+	Assert.assertTrue(statusInterrupted.isDisplayed());
+	test.info("Verified status indicator label for interrupted is displayed");
+	HelperFunctions.staticWait(2);
+	Assert.assertTrue(statusAvailable.isDisplayed());
+	test.info("Verified status indicator label for available is displayed");
 	HelperFunctions.staticWait(2);
 	/*read1.setExcelFile("./testdata.xlsx", "QA");
 	String activeColor=read1.getCellData("VALUE", 39);
@@ -1002,19 +1026,31 @@ public void setFirstTabActive(ExtentTest test) throws Exception {
     }
     test.info("Verified the first product has eye icon");
     HelperFunctions.staticWait(2);
-    test.info("Click on another product");
-	for(int i=0;i<allProducts2.size();i++) {
+    test.info("Click on change navigator product");
+    String targetValue="customer-link";
+    for(WebElement element:allProducts2 ) {
+    	if(element.getAttribute("data-product-id").equals(targetValue)) {
+    		element.click();
+    		break;
+    	}
+    }
+	/*for(int i=0;i<allProducts2.size();i++) {
 		allProducts2.get(2).click();
 		break;
-    }
-	HelperFunctions.waitForPageToLoad(5);
-	HelperFunctions.staticWait(3);
-	WebDriverWait wait2=new WebDriverWait(Driver.getDriver(),10);
-    ExpectedCondition<WebElement> condition2=ExpectedConditions.elementToBeClickable(viewAll);
+    }*/
+	HelperFunctions.waitForPageToLoad(60);
+	//HelperFunctions.staticWait(3);
+	test.info("Wait for view all visibility");
+	WebDriverWait wait2=new WebDriverWait(Driver.getDriver(),30);
+    ExpectedCondition<WebElement> condition2=ExpectedConditions.visibilityOf(viewAll);
     wait2.until(condition2);
+    HelperFunctions.staticWait(2);
+    Assert.assertTrue(statusIcon.isDisplayed());
+    HelperFunctions.staticWait(2);
+    test.info("Verified status icon is displayed on hero promotion");
     test.info("Click on view all");
 	viewAll.click();
-	HelperFunctions.staticWait(2);
+	HelperFunctions.staticWait(3);
     if(eyeIcon!=null) {
     	 String successMessage2 = "First tab is active";
          logger.info(successMessage2);
@@ -1026,7 +1062,7 @@ public void setFirstTabActive(ExtentTest test) throws Exception {
     //	Assert.assertTrue(false);
     }
     test.info("Verified the first product has eye icon");
-    HelperFunctions.staticWait(3);
+    HelperFunctions.staticWait(5);
 
 }
 
