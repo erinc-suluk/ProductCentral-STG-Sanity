@@ -1301,11 +1301,12 @@ public class AuthoringPage extends HelperFunctions {
 		   //ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(editButtonContent);
 		   //wait.until(condition);
     	 try {
-   	    	Thread.sleep(5000);
+   	    	Thread.sleep(10000);
    	    }catch(InterruptedException e) {
+   	    	js.executeScript("arguments[0].click();", pageInfo);
    	    	e.printStackTrace();
    	    }
-    	 js.executeScript("arguments[0].click();", pageInfo);
+    	 
   	    try {
   	    	Thread.sleep(3000);
   	    }catch(InterruptedException e) {
@@ -1361,12 +1362,13 @@ public class AuthoringPage extends HelperFunctions {
 	    test.info("Clicking on check icon");
 	    checkIcon.click();
 	    try {
-	    	Thread.sleep(5000);
+	    	Thread.sleep(7000);
 	    }catch(InterruptedException e) {
+	    	 js.executeScript("arguments[0].click();", pageInfo);
 	    	e.printStackTrace();
 	    }
 	    test.info("Clicking on preview");
-	    js.executeScript("arguments[0].click();", pageInfo);
+	   
   	    try {
   	    	Thread.sleep(3000);
   	    }catch(InterruptedException e) {
@@ -1440,11 +1442,12 @@ public class AuthoringPage extends HelperFunctions {
 	    HelperFunctions.staticWait(3);
 	    checkIcon.click();
 	    try {
-	    	Thread.sleep(5000);
+	    	Thread.sleep(10000);
 	    }catch(InterruptedException e) {
+	    	  js.executeScript("arguments[0].click();", pageInfo);
 	    	e.printStackTrace();
 	    }
-	    js.executeScript("arguments[0].click();", pageInfo);
+	  
   	    try {
   	    	Thread.sleep(3000);
   	    }catch(InterruptedException e) {
@@ -1479,7 +1482,7 @@ public class AuthoringPage extends HelperFunctions {
     	read1.setExcelFile("./testdata.xlsx", "QA");
     	JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
     	try {
-  	    	Thread.sleep(5000);
+  	    	Thread.sleep(7000);
   	    }catch(InterruptedException e) {
   	    	e.printStackTrace();
   	    }
@@ -1585,7 +1588,7 @@ public class AuthoringPage extends HelperFunctions {
         HelperFunctions.waitForPageToLoad(60);
         HelperFunctions.staticWait(3);
         try {
-  	    	Thread.sleep(5000);
+  	    	Thread.sleep(7000);
   	    }catch(InterruptedException e) {
   	    	e.printStackTrace();
   	    }
@@ -1623,11 +1626,12 @@ public class AuthoringPage extends HelperFunctions {
 	 //wait.until(ExpectedConditions.visibilityOf(pageInfo));
 	    //pageInfo.click();
 	 try {
-	    	Thread.sleep(5000);
+	    	Thread.sleep(7000);
 	    }catch(InterruptedException e) {
+	    	js.executeScript("arguments[0].click();", pageInfo);
 	    	e.printStackTrace();
 	    }
-	 js.executeScript("arguments[0].click();", pageInfo);
+	 
 	    try {
 	    	Thread.sleep(5000);
 	    }catch(InterruptedException e) {
@@ -1699,14 +1703,15 @@ public class AuthoringPage extends HelperFunctions {
 			}
 		}
 	    try {
-	    	Thread.sleep(5000);
+	    	Thread.sleep(7000);
 	    }catch(InterruptedException e) {
+	    	 js.executeScript("arguments[0].click();", pageInfo);
 	    	e.printStackTrace();
 	    }
 	    //ExpectedCondition<WebElement> condition2=ExpectedConditions.elementToBeClickable(editButtonContent);
 		   //wait.until(condition2);
 	    //wait.until(ExpectedConditions.visibilityOf(pageInfo));
-	    js.executeScript("arguments[0].click();", pageInfo);
+	   
   	    try {
   	    	Thread.sleep(3000);
   	    }catch(InterruptedException e) {
@@ -1734,7 +1739,7 @@ public class AuthoringPage extends HelperFunctions {
 	    test.info("Clicking on check icon");
 	    checkIcon.click();
 	    try {
-	    	Thread.sleep(3000);
+	    	Thread.sleep(7000);
 	    }catch(InterruptedException e) {
 	    	e.printStackTrace();
 	    }
@@ -2806,17 +2811,19 @@ js.executeScript("window.open()");
  public void setReorderTiles(ExtentTest test) throws Exception {
 	    test.info("Wait for the page to load.");
 	    HelperFunctions.staticWait(5);
+	    JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
 	    try {
-	    	Thread.sleep(5000);
+	    	Thread.sleep(10000);
 	    }catch(InterruptedException e) {
+	    	js.executeScript("arguments[0].click();", pageInfo);
 	    	e.printStackTrace();
 	    }
-	    JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+	   
 	    test.info("Click preview button.");
 	    WebDriverWait wait=new WebDriverWait(Driver.getDriver(),30);
 	    //wait.until(ExpectedConditions.visibilityOf(pageInfo));
 	    //pageInfo.click();
-	    js.executeScript("arguments[0].click();", pageInfo);
+	    
 	    //pageInfo.click();
 	    try {
 	    	Thread.sleep(3000);
@@ -2842,9 +2849,10 @@ js.executeScript("window.open()");
 	    try {
 	    	Thread.sleep(3000);
 	    }catch(InterruptedException e) {
+	    	js.executeScript("arguments[0].click();", pageInfo);
 	    	e.printStackTrace();
 	    }
-	    js.executeScript("arguments[0].click();", pageInfo);
+	    
 	    //pageInfo.click();
 	    try {
 	    	Thread.sleep(3000);
@@ -2871,7 +2879,7 @@ js.executeScript("window.open()");
 	    test.info("Click check icon.");
 	    checkIcon.click();
 	    try {
-	    	Thread.sleep(5000);
+	    	Thread.sleep(7000);
 	    }catch(InterruptedException e) {
 	    	e.printStackTrace();
 	    }
@@ -2897,9 +2905,10 @@ js.executeScript("window.open()");
 	    try {
 	    	Thread.sleep(3000);
 	    }catch(InterruptedException e) {
+	    	js.executeScript("arguments[0].click();", pageInfo);
 	    	e.printStackTrace();
 	    }
-	    js.executeScript("arguments[0].click();", pageInfo);
+	    
 	    //pageInfo.click();
 	    try {
 	    	Thread.sleep(3000);
@@ -2928,7 +2937,7 @@ js.executeScript("window.open()");
 
 	    test.info("Click check icon.");
 	    checkIcon.click();
-	    HelperFunctions.staticWait(5);
+	    HelperFunctions.staticWait(7);
 	}
 public void setCheckboxNotTicked(ExtentTest test) throws Exception {
 	 test.info("Wait for the page to load.");
