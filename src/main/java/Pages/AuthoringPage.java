@@ -3,6 +3,8 @@ package Pages;
 import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -932,6 +934,27 @@ public class AuthoringPage extends HelperFunctions {
 	
 	@FindBy(xpath="//coral-button-label[.='Delete']")
 	private WebElement delete2;
+	
+	@FindBy(xpath="//coral-selectlist-item[@value='/var/workflow/models/pc-express-publish-workflow-schedule/aem-express-publish-workflow-schedule']")
+	private WebElement scheduleWorkflow;
+	
+	@FindBy(xpath="//coral-datepicker[@name='futureScheduledTime']//input[@is='coral-textfield']")
+	private WebElement dateArea;
+	
+	@FindBy(xpath="(//span[normalize-space()='Waiting to be published'])[1]")
+	private WebElement waitingPublish;
+	
+	@FindBy(xpath="(//coral-button-label[normalize-space()='Close'])[3]")
+	private WebElement closeButton;
+	
+	@FindBy(xpath="//coral-dialog-header[normalize-space()='Success']")
+	private WebElement success;
+	
+	@FindBy(xpath="//button[@aria-label='More actions']")
+	private WebElement moreActions;
+	
+	@FindBy(xpath="//coral-list-item-content[@class='coral3-BasicList-item-content']//span[normalize-space()='ctrl+s']")
+	private WebElement saveAction;
 	
 	static Logger logger=Logger.getLogger("AuthoringPage");
 	
@@ -4655,5 +4678,118 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 		        delete2.click();
 		        HelperFunctions.staticWait(5);
 		 }
+		public void setAssetSchedule(ExtentTest test) throws Exception {
+		 	
+		     read1.setExcelFile("./testdata.xlsx", "STG");
+			 test.info("Wait for the page to load.");
+			    //HelperFunctions.waitForPageToLoad(15);
+			  //  HelperFunctions.staticWait(3);
+			   // test.info("Clicking on security image path");
+			 WebDriverWait wait=new WebDriverWait(Driver.getDriver(),60);
+			    //ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(selectAll);
+			    //wait.until(condition);
+			 try {
+		   	    	Thread.sleep(5000);
+		   	    }catch(InterruptedException e) {
+		   	    	e.printStackTrace();
+		   	    }
+			    //securityImg.click();
+			    selectAll.click();
+			    WebDriverWait wait0 = new WebDriverWait(Driver.getDriver(), 10);
+			    wait0.until(ExpectedConditions.visibilityOf(createButton3));
+			    test.info("Clicking on create button");
+			    createButton3.click();
+			    test.info("Clicking on workflow");
+			    WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(), 10);
+			    wait1.until(ExpectedConditions.visibilityOf(workflowIcon));
+			    workflowIcon.click(); 
+			    test.info("Clicking on workflow dropdown");
+			    WebDriverWait wait2 = new WebDriverWait(Driver.getDriver(), 10);
+			    wait2.until(ExpectedConditions.visibilityOf(workflowDropdown));
+			    workflowDropdown.click();
+			    wait2.until(ExpectedConditions.visibilityOf(scheduleWorkflow));
+			    test.info("Choosing schedule workflow");
+			    scheduleWorkflow.click();
+			    HelperFunctions.staticWait(3); 
+			    test.info("Entering the workflow title");
+			    workflowTitle.click();
+			    HelperFunctions.staticWait(2); 
+			    workflowTitle.sendKeys("Testing");
+			    HelperFunctions.staticWait(2);
+			    test.info("Clicking on start button");
+			    start.click();
+			    test.info("Clicking on proceed");
+			    WebDriverWait wait3 = new WebDriverWait(Driver.getDriver(), 10);
+			    wait3.until(ExpectedConditions.visibilityOf(proceed));
+			    proceed.click();
+			    HelperFunctions.staticWait(4);
+			    test.info("Go to aem inbox");
+			    Driver.getDriver().get(read1.getCellData("VALUE", 83));
+			    //HelperFunctions.waitForPageToLoad(20);
+			    WebDriverWait wait5 = new WebDriverWait(Driver.getDriver(), 20);
+			    wait5.until(ExpectedConditions.visibilityOf(assignedTask));
+			    test.info("Clicking on first task");
+			    assignedTask.click();
+			    HelperFunctions.staticWait(2);
+			    test.info("Clicking on complete button");
+			    completeButton2.click();
+			    test.info("Selecting a group");
+			    WebDriverWait wait6 = new WebDriverWait(Driver.getDriver(), 20);
+			    wait6.until(ExpectedConditions.visibilityOf(dateArea));
+			    dateArea.click();
+			    HelperFunctions.staticWait(2);
+			    LocalDateTime futureDateTime=LocalDateTime.now().plusMinutes(2);
+			    String datePattern="MMM dd,yyyy HH:mm";
+			    DateTimeFormatter formatter=DateTimeFormatter.ofPattern(datePattern);
+			    String formattedDateTime=futureDateTime.format(formatter);
+			    dateArea.sendKeys(formattedDateTime);
+			    HelperFunctions.staticWait(2);
+			    test.info("Clicking on ok button");
+			    selectOk.click();
+			    HelperFunctions.staticWait(10);
+			    test.info("Refresh the page");
+			    Driver.getDriver().navigate().refresh();
+			    HelperFunctions.waitForPageToLoad(90);
+			    HelperFunctions.staticWait(2);
+			    Assert.assertTrue(waitingPublish.isDisplayed());
+			    test.info("Verified waiting to be published text is displayed");
+			   
+		        HelperFunctions.staticWait(5);
+			    
+			    
+			   
+			  
+		}
+		public void setGenericContent(ExtentTest test) throws Exception {
+		 	
+		     read1.setExcelFile("./testdata.xlsx", "STG");
+			 test.info("Wait for the page to load.");
+			    //HelperFunctions.waitForPageToLoad(15);
+			  //  HelperFunctions.staticWait(3);
+			   // test.info("Clicking on security image path");
+			 WebDriverWait wait=new WebDriverWait(Driver.getDriver(),60);
+			    //ExpectedCondition<WebElement> condition=ExpectedConditions.elementToBeClickable(selectAll);
+			    //wait.until(condition);
+			 try {
+		   	    	Thread.sleep(10000);
+		   	    }catch(InterruptedException e) {
+		   	    	e.printStackTrace();
+		   	    }
+			    //securityImg.click();
+			    moreActions.click();
+			    WebDriverWait wait0 = new WebDriverWait(Driver.getDriver(), 10);
+			    wait0.until(ExpectedConditions.visibilityOf(saveAction));
+			    test.info("Clicking on save");
+			    saveAction.click();
+			    HelperFunctions.staticWait(5);
+			    test.info("Clicking on quick publish");
+			    //WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(), 10);
+			    //wait1.until(ExpectedConditions.visibilityOf(workflowIcon));
+			    quickPublish2.click(); 
+			    wait0.until(ExpectedConditions.visibilityOf(success));
+			    HelperFunctions.staticWait(3);
+			    closeButton.click();
+			    HelperFunctions.staticWait(5);
+		}
 
 }

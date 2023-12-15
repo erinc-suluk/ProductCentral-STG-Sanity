@@ -311,6 +311,15 @@ public class ProductPage extends HelperFunctions {
 	@FindBy(xpath="//span[contains(@class, 'ap-icon cmp-hero-promotion__status-icon')]")
 	private WebElement statusIcon;
 	
+	@FindBy(xpath="(//div[@class='cmp-search-results__card-title'])[1]")
+	private WebElement firstProductonSearch;
+	
+	@FindBy(xpath="//button[@id='searchButtonHeader']")
+	private WebElement searchButton;
+	
+	@FindBy(xpath="//input[@id='globalSearchInput']")
+	private WebElement searchInput;
+	
 	ReadXLSdata read1=new ReadXLSdata();
 	
 	
@@ -1704,6 +1713,92 @@ public void setAnonymous(ExtentTest test) {
 	test.info("Verified pdf asset is public");
 	HelperFunctions.staticWait(2);
 	
+}
+public void setGenericCheck(ExtentTest test) throws Exception {
+	test.info("Wait for the page to load.");
+	//HelperFunctions.waitForPageToLoad(15);
+	//Driver.getDriver().get("https://productcentral-qa.products.pwc.com/content/pc/us/en/automation/my-products/enterprise-control.html");
+	//HelperFunctions.waitForPageToLoad(10);
+	//myProductOnLeftNavigation.click();
+	//HelperFunctions.waitForPageToLoad(5);
+	HelperFunctions.staticWait(5);
+	WebDriverWait wait=new WebDriverWait(Driver.getDriver(),60);
+    //ExpectedCondition<WebElement> condition=ExpectedConditions.visibilityOf(viewAll);
+    //wait.until(condition);
+    //HelperFunctions.staticWait(3);
+    test.info("Click on view all");
+	viewAll.click();
+	wait.until(ExpectedConditions.visibilityOf(productsCont.get(2)));
+	HelperFunctions.staticWait(2);
+    test.info("Click on check in product");
+    String targetValue="transparency-hub";
+    for(WebElement element:allProducts2 ) {
+    	if(element.getAttribute("data-product-id").equals(targetValue)) {
+    		element.click();
+    		break;
+    	}
+    }
+	
+	HelperFunctions.waitForPageToLoad(60);
+	//HelperFunctions.staticWait(3);
+	test.info("Wait for view all visibility");
+	WebDriverWait wait2=new WebDriverWait(Driver.getDriver(),30);
+    ExpectedCondition<WebElement> condition2=ExpectedConditions.visibilityOf(viewAll);
+    wait2.until(condition2);
+    HelperFunctions.staticWait(2);
+    String firstAsset=latestAssets.get(0).getAttribute("href");
+    String expectedValue="Guide";
+    Assert.assertTrue(firstAsset.contains(expectedValue));
+    test.info("Verified first latest asset contains User Guide which was just updated on assets");
+    HelperFunctions.staticWait(2);
+    String firstAssetForYou=first5Assets.get(0).getAttribute("href");
+    Assert.assertTrue(firstAssetForYou.contains(expectedValue));
+    test.info("Verified first for you asset contains User Guide which was just updated on assets");
+    HelperFunctions.staticWait(2);
+    String firstAssetAllResources=allresourcesContentLink.get(0).getAttribute("href");
+    Assert.assertTrue(firstAssetAllResources.contains(expectedValue));
+    test.info("Verified first all resources asset contains User Guide which was just updated on assets");
+    HelperFunctions.staticWait(5);
+    test.info("Click on first latest asset");
+    latestAssets.get(0).click();
+    HelperFunctions.staticWait(3);
+    test.info("Go to the new tab");
+    ArrayList<String> tabs=new ArrayList<String>(Driver.getDriver().getWindowHandles());
+    Driver.getDriver().switchTo().window(tabs.get(1));
+    //Driver.getDriver().get(read1.getCellData("VALUE", 84));
+    HelperFunctions.waitForPageToLoad(60);
+    String actualUrl=Driver.getDriver().getCurrentUrl();
+    Assert.assertTrue(actualUrl.contains(expectedValue));
+    test.info("Verified current url contains expected value");
+    HelperFunctions.staticWait(5);
+    test.info("Switch to first tab");
+    Driver.getDriver().switchTo().window(tabs.get(0));
+    HelperFunctions.staticWait(5);
+    test.info("Click on my product field and send pdf title");
+    myProductSearchField.click();
+    HelperFunctions.staticWait(2);
+    myProductSearchField.sendKeys("Transparency Hub Release 4.2 User Guide");
+    HelperFunctions.staticWait(2);
+    myProductSearchField.sendKeys(Keys.ENTER);
+	HelperFunctions.waitForPageToLoad(90);
+	test.info("Wait for first product visibility on my product search page");
+	wait.until(ExpectedConditions.visibilityOf(firstProductonSearch));
+	Assert.assertTrue(firstProductonSearch.getText().contains(expectedValue));
+	test.info("Verified first product contains expected pdf title on my product search page");
+	HelperFunctions.staticWait(3);
+	test.info("Click on global search button and send partially pdf title");
+    searchButton.click();
+    HelperFunctions.staticWait(2);
+    searchInput.sendKeys("Transparency Hub Release 4.2 User Guide");
+    HelperFunctions.staticWait(2);
+    searchInput.sendKeys(Keys.ENTER);
+    HelperFunctions.waitForPageToLoad(90);
+    test.info("Wait for first product visibility on global search page");
+	wait.until(ExpectedConditions.visibilityOf(firstProductonSearch));
+	Assert.assertTrue(firstProductonSearch.getText().contains(expectedValue));
+	test.info("Verified first product contains expected pdf title on global search page");
+	HelperFunctions.staticWait(3);
+    
 }
 	
 	

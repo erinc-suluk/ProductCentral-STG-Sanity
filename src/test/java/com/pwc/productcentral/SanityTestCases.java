@@ -2373,6 +2373,49 @@ public class SanityTestCases extends BasePage {
 			
 		}
 		
+		@Test
+		public void WEB_126() throws Exception{
+			String testName = "Verify that if schedule is in future then workflow will hold the page/asset until publish date/time is reached";
+	        ExtentTest test = extent.createTest(testName);
+
+	        try {
+	            Driver.getDriver().get(read1.getCellData("VALUE", 82));
+	            lpo.setLogin4();
+	            ap.setAssetSchedule(test);
+	            test.pass("WEB_99 passed");
+	        } catch (Exception e) {
+	            String screenshotPath = takeScreenshot(testName);
+	            test.fail(e, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+	        }
+	        if (test.getModel().getStatus().toString().equalsIgnoreCase("fail")) {
+	            Assert.fail("Test case failed: " + testName);
+	        }
+			
+		}
+		@Test
+		public void WEB_127() throws Exception{
+			String testName = "Verify user is able to view generic content"
+					+"/ Verify the following components will get impacted for personalization.";
+	        ExtentTest test = extent.createTest(testName);
+
+	        try {
+	            Driver.getDriver().get(read1.getCellData("VALUE", 91));
+	            lpo.setLogin4();
+	            ap.setGenericContent(test);
+	            Driver.getDriver().get(read1.getCellData("VALUE", 15));
+	            lpo.setLogin5();
+	            pp.setGenericCheck(test);
+	            test.pass("WEB_99 passed");
+	        } catch (Exception e) {
+	            String screenshotPath = takeScreenshot(testName);
+	            test.fail(e, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+	        }
+	        if (test.getModel().getStatus().toString().equalsIgnoreCase("fail")) {
+	            Assert.fail("Test case failed: " + testName);
+	        }
+			
+		}
+		
 	
 	
 	

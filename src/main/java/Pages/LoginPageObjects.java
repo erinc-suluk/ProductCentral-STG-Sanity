@@ -263,6 +263,23 @@ public class LoginPageObjects extends HelperFunctions{
 	
 	    
 	}
+	public void setLogin5() throws Exception {
+		HelperFunctions.waitForPageToLoad(30);
+		HelperFunctions.staticWait(5);
+		JavascriptExecutor js2 = (JavascriptExecutor) Driver.getDriver();
+	    js2.executeScript("window.scrollBy(0,250)", "");
+	    HelperFunctions.staticWait(3);
+	    JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
+	     executor.executeScript("arguments[0].click();", logintoMyproducts);
+		HelperFunctions.waitForPageToLoad(30);
+		read1.setExcelFile("./testdata.xlsx", "QA");
+		email2.sendKeys(read1.getCellData("VALUE", 44));
+		HelperFunctions.staticWait(3);
+		submit2.click();
+		HelperFunctions.waitForPageToLoad(90);
+		
+	    
+	}
 	
 	
 	
