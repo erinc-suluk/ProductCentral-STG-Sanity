@@ -587,7 +587,7 @@ public class AuthoringPage extends HelperFunctions {
    	@FindBy(xpath="//coral-button-label[normalize-space()='Open Properties']")
    	private WebElement openProper;
    	
-   	@FindBy(xpath="//div[@class='cmp-related-links__download']//span[@class='cmp-related-links__download-text'][normalize-space()='Download Full Terms']")
+   	@FindBy(xpath="//div[@class='cmp-related-links__download']//span[@class='cmp-related-links__download-text']")
    	private WebElement dft;
    	
    	@FindBy(xpath="//coral-checkbox[@name='./hideListingPages']")

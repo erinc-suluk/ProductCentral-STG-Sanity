@@ -182,10 +182,10 @@ public class LoginPageObjects extends HelperFunctions{
 	     executor.executeScript("arguments[0].click();", logintoMyproducts);
 		HelperFunctions.waitForPageToLoad(30);
 		read1.setExcelFile("./testdata.xlsx", "QA");
-		email2.sendKeys(read1.getCellData("VALUE", 44));
-		HelperFunctions.staticWait(3);
-		submit2.click();
-		HelperFunctions.waitForPageToLoad(60);
+		//email2.sendKeys(read1.getCellData("VALUE", 44));
+		//HelperFunctions.staticWait(3);
+		//submit2.click();
+		//HelperFunctions.waitForPageToLoad(60);
 		email.sendKeys(read1.getCellData("VALUE", 44));
 		HelperFunctions.staticWait(3);
 		next.click();
