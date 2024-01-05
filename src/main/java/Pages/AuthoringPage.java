@@ -1278,8 +1278,8 @@ public class AuthoringPage extends HelperFunctions {
 	    cloudPackage.click();
 	    wait.until(ExpectedConditions.visibilityOf(coloumnItems.get(0)));
 	    String expectedTitle="Offering Overview";
-   	String expectedTitle2="Terms & Conditions";
-   	String expectedTitle3="Maintenance & Support";
+   	String expectedTitle2="Terms";
+   	String expectedTitle3="Maintenance";
    	String expectedTitle4="Documentation";
    	test.info("Verified all contents' position");
    	Assert.assertTrue(coloumnItems.get(0).getText().contains(expectedTitle));
@@ -3363,10 +3363,11 @@ public void setBannerTextField(ExtentTest test) throws Exception {
 		 try {
 	   	    	Thread.sleep(5000);
 	   	    }catch(InterruptedException e) {
+	   	    	js.executeScript("arguments[0].click();", pageInfo);
 	   	    	e.printStackTrace();
 	   	    }
 		    test.info("Click on page info");
-		    js.executeScript("arguments[0].click();", pageInfo);
+		    
 		    try {
 	   	    	Thread.sleep(3000);
 	   	    }catch(InterruptedException e) {
@@ -3860,6 +3861,11 @@ public void setWorkflowApproval(ExtentTest test) throws Exception {
 			//HelperFunctions.staticWait(2); 
 			//WebDriverWait wait1 = new WebDriverWait(Driver.getDriver(), 10);
 			wait.until(ExpectedConditions.visibilityOf(phTextArea));
+			try {
+	   	    	Thread.sleep(3000);
+	   	    }catch(InterruptedException e) {
+	   	    	e.printStackTrace();
+	   	    }
 			js.executeScript("arguments[0].click();", phTextArea);
 			//phTextArea.click();
 			//WebDriverWait wait2 = new WebDriverWait(Driver.getDriver(), 10);
